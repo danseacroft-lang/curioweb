@@ -346,7 +346,7 @@ body.dark .hero-art:after{background:linear-gradient(180deg,rgba(8,10,15,.02),rg
   :root{--cw-content:calc(100% - 28px)}
   header{padding:14px 14px 22px;min-height:390px}
   .top-meta{margin-bottom:52px}
-  .hero-art{top:50px;right:-170px;width:620px;height:360px;opacity:.42}
+  .hero-art{top:0!important;right:-170px;width:620px;height:360px;opacity:.42}
   h1{max-width:560px;font-size:clamp(48px,14vw,70px);line-height:.92}
   .hero{font-size:15px;max-width:500px}
   .controls{max-width:none;margin:0 14px;grid-template-columns:1fr 1fr;gap:8px;padding:0 0 14px;background:transparent;position:relative}
@@ -815,7 +815,7 @@ header{padding:22px 0 30px;min-height:430px;position:relative;overflow:visible}
 .hero-copy{position:relative;z-index:2;max-width:760px;margin:0}
 .hero-copy h1{margin:0 0 22px;max-width:760px}
 .hero{max-width:760px;margin:0}
-.hero-art{z-index:0!important;pointer-events:none!important;right:-20px;width:min(760px,58vw)}
+.hero-art{z-index:0!important;pointer-events:none!important;top:0!important;right:-20px;width:min(760px,58vw)}
 body.dark .hero-art{opacity:.28!important;filter:saturate(.55) brightness(.38) contrast(1.02)!important}
 
 /* Search/action row: one clean row, one shared baseline, no gradient band. */
