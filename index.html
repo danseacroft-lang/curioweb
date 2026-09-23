@@ -1058,7 +1058,7 @@ header{min-height:455px;overflow:visible}
 body.dark .hero-art{opacity:.58!important;filter:saturate(.62) brightness(.62) contrast(1.04)}
 </style>
 <style id="curio-12-3-6-recovery">
-/* 12.3.6 recovery pass: preserve stable interaction layer while restoring the polished 12.3 visual language. */
+/* 12.3.7 recovery pass: preserve stable interaction layer while restoring the polished 12.3 visual language. */
 html{box-sizing:border-box;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}*,*:before,*:after{box-sizing:inherit}
 body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;font-kerning:normal}
 .logo{justify-self:center;width:58px;height:58px;display:grid;place-items:center;color:#11151c}
@@ -1082,7 +1082,60 @@ body.dark .suggest-box::before,body.dark .adult-modal::before,body.dark .mobile-
 @media(prefers-reduced-motion:reduce){.suggest-box::before,.suggest-box::after,.adult-modal::before,.adult-modal::after,.mobile-sheet-inner::before,.mobile-sheet-inner::after,.issue-panel::before,.issue-panel::after{transition:none}.logo:hover .logo-mark{transform:none}.fact-next:hover{transform:none}}
 @media(max-width:700px){.logo{width:50px;height:50px}.logo-mark{width:50px;height:50px}.logo-mark svg{width:42px;height:42px}}
 </style>
-</head><body data-curioweb-version="12.3.6">
+
+<style id="curio-12-3-7-category-popup-pass">
+.category-picker-wrap{width:var(--cw-shell);max-width:var(--cw-shell);margin:0 auto 18px;display:flex;align-items:center;gap:14px;position:relative;z-index:20}
+.category-picker-wrap label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7b8493;white-space:nowrap}
+.category-select-shell{position:relative;display:flex;align-items:center;min-width:240px;flex:0 1 320px}
+.category-select-shell>span:first-child{position:absolute;left:14px;color:#7483aa;font-size:12px;pointer-events:none;z-index:2}
+#categorySelect{appearance:none;-webkit-appearance:none;width:100%;height:46px;padding:0 42px;background:rgba(255,255,255,.62);border:0;border-radius:16px;color:#202631;font-size:13px;font-weight:750;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 10px 28px rgba(35,47,66,.07);backdrop-filter:blur(18px) saturate(135%);-webkit-backdrop-filter:blur(18px) saturate(135%);transition:box-shadow .2s ease,transform .2s ease,background .2s ease}
+#categorySelect:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 14px 34px rgba(35,47,66,.10)}
+#categorySelect:focus{box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 0 0 4px rgba(98,121,255,.12),0 14px 34px rgba(35,47,66,.10)}
+.category-chevron{position:absolute;right:14px;color:#7d8796;font-size:17px;pointer-events:none}
+body.dark .category-picker-wrap label{color:#929bad}
+body.dark #categorySelect{background:rgba(20,24,33,.72);color:#f4f6fa;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 30px rgba(0,0,0,.2)}
+body.dark #categorySelect option{background:#151922;color:#f4f6fa}
+
+/* Centered liquid-glass issue reporter. */
+.issue-panel{position:fixed;inset:0;width:auto;z-index:2100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(225,231,240,.52);border:0;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:none}
+.issue-panel.open{display:flex}
+.issue-inner{position:relative;width:min(560px,100%);margin:0;padding:25px;border-radius:28px;background:rgba(255,255,255,.86);border:1px solid rgba(24,31,42,.10);box-shadow:0 30px 100px rgba(20,30,45,.20),inset 0 1px 0 rgba(255,255,255,.98);overflow:hidden;isolation:isolate;--popup-x:50%;--popup-y:50%;--popup-shine:50%;backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%)}
+.issue-inner:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:inherit;background:radial-gradient(circle at var(--popup-x) var(--popup-y),rgba(255,255,255,.48),rgba(255,255,255,.18) 13%,transparent 40%),linear-gradient(125deg,rgba(255,255,255,.20),transparent 35%,rgba(255,255,255,.10) 68%,transparent);mix-blend-mode:screen;opacity:.78}
+.issue-inner:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:inherit;background:linear-gradient(105deg,transparent 34%,transparent 43%,rgba(255,255,255,.30) 50%,transparent 57%,transparent 66%);background-size:220% 100%;background-position:var(--popup-shine) 0;mix-blend-mode:screen;opacity:.32}
+.issue-inner>*{position:relative;z-index:1}
+body.dark .issue-panel{background:rgba(3,4,8,.72)}
+body.dark .issue-inner{background:linear-gradient(145deg,rgba(30,34,46,.95),rgba(14,16,23,.96));border-color:rgba(255,255,255,.10);color:#f5f7fb}
+body.dark .issue-inner:before{background:radial-gradient(circle at var(--popup-x) var(--popup-y),rgba(150,125,255,.24),transparent 42%)}
+body.dark .issue-row input{background:#0d1016;color:#fff;border-color:#292e3a}
+
+/* All Curio modal surfaces share the same polished glass language. */
+.suggest-box,.adult-modal,.mobile-sheet-inner,.issue-inner{backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%)}
+.suggest-box,.adult-modal,.mobile-sheet-inner{box-shadow:0 30px 100px rgba(20,30,45,.20),inset 0 1px 0 rgba(255,255,255,.98)}
+
+@media(max-width:720px){
+  .category-picker-wrap{width:calc(100% - 32px);max-width:calc(100% - 32px);margin-bottom:14px;display:block}
+  .category-picker-wrap label{display:block;margin:0 0 7px 4px}
+  .category-select-shell{min-width:0;width:100%}
+}
+@media(prefers-reduced-motion:reduce){#categorySelect,.issue-inner:before,.issue-inner:after{transition:none}}
+</style>
+<style id="curio-12-3-9-tile-actions">
+.card{display:flex;flex-direction:column}
+.card-link{flex:1;min-height:0}
+.card-foot{margin-top:0;padding:10px 14px 13px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid rgba(24,31,42,.055);background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.32))}
+.card-open-label{font-size:9px;font-weight:800;color:#778294;letter-spacing:.01em}
+.card-actions{min-width:0}
+.card-more-btn{height:30px;padding:0 10px;border-radius:10px;border:1px solid rgba(24,31,42,.08);background:rgba(255,255,255,.48);color:#687487;font-size:9px;font-weight:800;cursor:pointer;transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+.card-more-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.86);box-shadow:0 8px 18px rgba(40,52,75,.09)}
+body.dark .card-foot{border-top-color:rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.05))}
+body.dark .card-open-label{color:#9ba4b6}
+body.dark .card-more-btn{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.10);color:#cbd2df}
+@media(max-width:560px){.card-more-btn{padding:0 8px;font-size:8px}.card-foot{padding-left:12px;padding-right:12px}}
+</style>
+<style id="curio-12-3-8-share-and-navigation">
+.controls{align-items:start!important}.search-stack{min-width:0;display:flex;flex-direction:column;gap:9px}.search-stack .category-picker-wrap{width:100%;max-width:none;margin:0;display:flex;align-items:center;gap:10px}.search-stack .category-picker-wrap label{font-size:9px;letter-spacing:.08em}.search-stack .category-select-shell{min-width:0;flex:1}.search-stack #categorySelect{height:40px;border-radius:14px;font-size:12px;padding-left:40px}.card-actions{display:flex;align-items:center;gap:6px;flex:0 0 auto}.share-btn,.fav-btn{width:30px;height:30px;border-radius:10px;border:1px solid rgba(24,31,42,.08);background:rgba(255,255,255,.58);display:grid;place-items:center;padding:0;color:#596578;font-size:13px;font-weight:800;cursor:pointer;transition:transform .18s ease,background .18s ease,box-shadow .18s ease}.share-btn:hover,.fav-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.88);box-shadow:0 8px 18px rgba(40,52,75,.10)}body.dark .share-btn,body.dark .fav-btn{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.10);color:#d2d8e5}.share-overlay{position:fixed;inset:0;z-index:2300;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(225,231,240,.54);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.share-overlay.open{display:flex}.share-box{position:relative;width:min(560px,100%);padding:25px;border-radius:28px;background:rgba(255,255,255,.86);border:1px solid rgba(24,31,42,.10);box-shadow:0 30px 100px rgba(20,30,45,.20),inset 0 1px 0 rgba(255,255,255,.98);overflow:hidden;isolation:isolate;--popup-x:50%;--popup-y:50%;--popup-shine:50%;backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%)}.share-box:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:inherit;background:radial-gradient(circle at var(--popup-x) var(--popup-y),rgba(255,255,255,.48),rgba(255,255,255,.18) 13%,transparent 40%),linear-gradient(125deg,rgba(255,255,255,.20),transparent 35%,rgba(255,255,255,.10) 68%,transparent);mix-blend-mode:screen;opacity:.78}.share-box:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:inherit;background:linear-gradient(105deg,transparent 34%,transparent 43%,rgba(255,255,255,.30) 50%,transparent 57%,transparent 66%);background-size:220% 100%;background-position:var(--popup-shine) 0;mix-blend-mode:screen;opacity:.32}.share-box>*{position:relative;z-index:1}.share-sub{margin:0 0 16px;color:#6f7888;font-size:12px;line-height:1.5}.share-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.share-grid button{min-height:76px;border:1px solid rgba(24,31,42,.08);border-radius:15px;background:rgba(255,255,255,.58);color:#202631;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:800;cursor:pointer;transition:transform .18s ease,background .18s ease,box-shadow .18s ease}.share-grid button:hover{transform:translateY(-2px);background:rgba(255,255,255,.90);box-shadow:0 12px 25px rgba(35,47,66,.10)}.share-grid button>span{font-size:11px}.share-grid button>small{font-size:8px;color:#858e9d;font-weight:650}.share-grid button:first-child{background:linear-gradient(145deg,rgba(237,241,255,.92),rgba(255,255,255,.68))}body.dark .share-overlay{background:rgba(3,4,8,.72)}body.dark .share-box{background:linear-gradient(145deg,rgba(30,34,46,.95),rgba(14,16,23,.96));border-color:rgba(255,255,255,.10);color:#f5f7fb}body.dark .share-sub{color:#9ba4b6}body.dark .share-grid button{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.10);color:#f4f6fa}body.dark .share-grid button:first-child{background:linear-gradient(145deg,rgba(69,66,112,.40),rgba(255,255,255,.06))}body.dark .share-grid button>small{color:#9199aa}@media(max-width:850px){.share-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){.controls{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px}.controls .search-stack{grid-column:1/-1}.search-stack .category-picker-wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center}.search-stack .category-picker-wrap label{margin:0}.search-stack #categorySelect{height:42px}.controls>button{min-width:0}.share-box{padding:20px;border-radius:24px}}@media(prefers-reduced-motion:reduce){.share-box:before,.share-box:after,.share-grid button,.share-btn,.fav-btn{transition:none}}
+</style>
+</head><body data-curioweb-version="12.3.9">
 <div class="issue-panel" id="issuePanel">
 <div class="issue-inner">
 <div class="issue-head"><div class="issue-title">Report an issue</div><button aria-label="Close issue reporter" class="issue-close" id="issueClose" type="button">×</button></div>
@@ -1103,12 +1156,16 @@ body.dark .suggest-box::before,body.dark .adult-modal::before,body.dark .mobile-
 </div>
 <div aria-hidden="true" class="hero-art"></div><div class="hero-copy"><h1>Go where the internet gets interesting.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></div></header>
 <div class="controls">
+<div class="search-stack">
 <div class="search-wrap"><span aria-hidden="true" class="search-icon">⌕</span><input aria-label="Search CurioWeb" id="q" placeholder="Search sites, topics or tags…"/></div>
+<div class="category-picker-wrap" aria-label="Browse categories">
+<label for="categorySelect">Browse by category</label>
+<div class="category-select-shell"><span aria-hidden="true">◉</span><select id="categorySelect" aria-label="Choose a CurioWeb category"></select><span class="category-chevron" aria-hidden="true">⌄</span></div>
+</div></div>
 <button class="primary" id="random">🎲 <span>Surprise me</span></button>
 <button id="suggestOpen">💡 <span>Suggest a website</span></button>
 <button id="fav">☆ <span>Favourites</span></button>
 </div>
-<div class="chips" id="chips"></div>
 <div class="home-layout">
 <main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
 <aside aria-label="CurioWeb information" class="side-tiles">
@@ -1196,9 +1253,12 @@ body.dark .suggest-box::before,body.dark .adult-modal::before,body.dark .mobile-
 <div id="infoContent"></div>
 </div>
 </div>
+<div aria-hidden="true" aria-labelledby="shareTitle" aria-modal="true" class="share-overlay" id="shareOverlay" role="dialog"><div class="share-box"><div class="suggest-head"><h2 id="shareTitle">Share this Curio</h2><button aria-label="Close" class="suggest-close" id="shareClose" type="button">×</button></div><p class="share-sub" id="shareSub">Send this rabbit hole to someone.</p><div class="share-grid"><button type="button" data-share-action="native">⌁<span>Share</span><small>More options</small></button><button type="button" data-share-action="whatsapp">◔<span>WhatsApp</span><small>Open WhatsApp</small></button><button type="button" data-share-action="facebook">f<span>Facebook</span><small>Open Facebook</small></button><button type="button" data-share-action="messenger">●<span>Messenger</span><small>Open Messenger</small></button><button type="button" data-share-action="messages">▹<span>Messages</span><small>iMessage / SMS</small></button><button type="button" data-share-action="x">𝕏<span>X</span><small>Open X</small></button><button type="button" data-share-action="email">✉<span>Email</span><small>New message</small></button><button type="button" data-share-action="copy">⧉<span>Copy link</span><small id="shareCopyStatus">Copy to clipboard</small></button></div></div></div>
 <script>
 const sites=[{"name": "Neal.fun", "url": "https://neal.fun/", "cat": "Interactive", "desc": "Polished experiments, games and rabbit holes.", "tags": "interactive,fun,science,games"}, {"name": "Radio Garden", "url": "https://radio.garden/", "cat": "Explore", "desc": "Spin the globe and listen to live radio from around the world.", "tags": "radio,world,travel,audio"}, {"name": "WindowSwap", "url": "https://www.window-swap.com/", "cat": "Explore", "desc": "Look through windows around the world via recordings made by strangers.", "tags": "travel,calm,world,video"}, {"name": "The Useless Web", "url": "https://theuselessweb.com/", "cat": "Weird", "desc": "One button. One gloriously pointless website.", "tags": "random,weird,funny"}, {"name": "Pointer Pointer", "url": "https://pointerpointer.com/", "cat": "Weird", "desc": "Move your cursor and find a photograph pointing exactly at it.", "tags": "weird,interactive,funny"}, {"name": "Atlas Obscura", "url": "https://www.atlasobscura.com/", "cat": "Rabbit Holes", "desc": "Hidden places, strange history and fascinating things.", "tags": "history,travel,weird,places"}, {"name": "Marginalia Search", "url": "https://search.marginalia.nu/", "cat": "Discover", "desc": "Search the older, stranger and text heavy web.", "tags": "search,small web,old web"}, {"name": "Every Noise at Once", "url": "https://everynoise.com/", "cat": "Music", "desc": "Explore a huge map of music genres.", "tags": "music,discovery,audio"}, {"name": "Zoomquilt", "url": "https://zoomquilt.org/", "cat": "Art", "desc": "An endlessly zooming collaborative painting.", "tags": "art,visual,weird,calm"}, {"name": "This Is Sand", "url": "https://thisissand.com/", "cat": "Creative", "desc": "Pour digital sand and make satisfying landscapes.", "tags": "creative,art,calm"}, {"name": "Patatap", "url": "https://patatap.com/", "cat": "Creative", "desc": "Turn your keyboard into a tiny audiovisual instrument.", "tags": "music,creative,interactive"}, {"name": "Earth Nullschool", "url": "https://earth.nullschool.net/", "cat": "Science", "desc": "Watch weather and atmospheric conditions move across Earth.", "tags": "science,weather,earth,data"}, {"name": "The True Size Of", "url": "https://www.thetruesize.com/", "cat": "Learn", "desc": "Drag countries around a map and compare their apparent size.", "tags": "maps,geography,learning"}, {"name": "100,000 Stars", "url": "https://stars.chromeexperiments.com/", "cat": "Space", "desc": "Explore a beautiful interactive visualisation of nearby stars.", "tags": "space,science,stars,visual"}, {"name": "Infinite Craft", "url": "https://neal.fun/infinite-craft/", "cat": "Games", "desc": "Combine ideas and discover an absurd number of things.", "tags": "game,crafting,rabbit hole"}, {"name": "Wikipedia Random", "url": "https://en.wikipedia.org/wiki/Special:Random", "cat": "Rabbit Holes", "desc": "One click and Wikipedia decides what you learn next.", "tags": "random,learning,history"}, {"name": "Photopea", "url": "https://www.photopea.com/", "cat": "Useful", "desc": "A powerful image editor that runs entirely in your browser.", "tags": "design,image,useful,creative"}, {"name": "Radiooooo", "url": "https://radiooooo.com/", "cat": "Music", "desc": "Choose a country and decade, then hear music from that place and time.", "tags": "music,history,world"}, {"name": "The Pudding", "url": "https://pudding.cool/", "cat": "Data", "desc": "Beautiful interactive stories built from data.", "tags": "data,journalism,interactive"}, {"name": "FlightRadar24", "url": "https://www.flightradar24.com/", "cat": "Explore", "desc": "Watch aircraft move around the world in real time.", "tags": "aviation,maps,world,live"}, {"name": "Cat Bounce", "url": "https://cat-bounce.com/", "cat": "Weird", "desc": "Bouncing cats. That is the entire concept.", "tags": "weird,funny,pointless"}, {"name": "Endless Horse", "url": "https://endless.horse/", "cat": "Weird", "desc": "Scroll a horse that refuses to end.", "tags": "weird,scroll,funny"}, {"name": "Long Doge Challenge", "url": "https://longdogechallenge.com/", "cat": "Weird", "desc": "Keep scrolling. The doge keeps getting longer.", "tags": "weird,scroll,funny"}, {"name": "Eel Slap", "url": "https://eelslap.com/", "cat": "Weird", "desc": "Slap an eel across a surprisingly satisfying screen.", "tags": "weird,funny,pointless"}, {"name": "Falling Falling", "url": "https://fallingfalling.com/", "cat": "Weird", "desc": "A hypnotic little falling experiment.", "tags": "weird,visual,calm"}, {"name": "Koalas to the Max", "url": "https://koalastothemax.com/", "cat": "Weird", "desc": "Move your cursor and reveal a hidden picture.", "tags": "weird,interactive,calm"}, {"name": "Sandspiel", "url": "https://sandspiel.club/", "cat": "Games", "desc": "A falling sand physics playground.", "tags": "physics,sandbox,creative"}, {"name": "Orb.Farm", "url": "https://orb.farm/", "cat": "Games", "desc": "Build and watch a tiny aquatic ecosystem.", "tags": "simulation,science,calm"}, {"name": "Little Alchemy 2", "url": "https://littlealchemy2.com/", "cat": "Games", "desc": "Combine elements into hundreds of discoveries.", "tags": "game,crafting,rabbit hole"}, {"name": "OpenGuessr", "url": "https://openguessr.com/", "cat": "Games", "desc": "Explore street views and guess where you are.", "tags": "geography,game,travel"}, {"name": "Internet Roadtrip", "url": "https://neal.fun/internet-roadtrip/", "cat": "Explore", "desc": "Take a communal road trip through the internet.", "tags": "travel,interactive,nealfun"}, {"name": "FutureMe", "url": "https://www.futureme.org/", "cat": "Rabbit Holes", "desc": "Write a letter to your future self.", "tags": "future,writing,curious"}, {"name": "The Internet Map", "url": "https://internet-map.net/", "cat": "Explore", "desc": "Visualise the web as a giant map of domains.", "tags": "internet,maps,visual"}, {"name": "MapCrunch", "url": "https://www.mapcrunch.com/", "cat": "Explore", "desc": "Drop into a random street view somewhere on Earth.", "tags": "maps,travel,random"}, {"name": "MyNoise", "url": "https://mynoise.net/", "cat": "Chill", "desc": "Generate layered ambient sounds and noise.", "tags": "audio,calm,ambient"}, {"name": "A Soft Murmur", "url": "https://asoftmurmur.com/", "cat": "Chill", "desc": "Mix gentle environmental sounds.", "tags": "audio,calm,ambient"}, {"name": "Noisli", "url": "https://www.noisli.com/", "cat": "Chill", "desc": "Create a personalised background soundscape.", "tags": "audio,focus,calm"}, {"name": "Drive & Listen", "url": "https://driveandlisten.herokuapp.com/", "cat": "Explore", "desc": "Drive through cities while listening to local radio.", "tags": "travel,video,radio"}, {"name": "HORG", "url": "https://occlusionresearch.org/", "cat": "Rabbit Holes", "desc": "A serious taxonomy of plastic bread bag clips.", "tags": "weird,science,history"}, {"name": "The Brick Bible", "url": "https://thebrickbible.com/", "cat": "Rabbit Holes", "desc": "Biblical stories recreated with LEGO photography.", "tags": "lego,history,art"}, {"name": "The Deep Sea", "url": "https://neal.fun/deep-sea/", "cat": "Science", "desc": "Scroll down through the depths of the ocean.", "tags": "ocean,science,depth"}, {"name": "The Size of Space", "url": "https://neal.fun/size-of-space/", "cat": "Space", "desc": "Zoom through an enormous scale of the universe.", "tags": "space,science,scale"}, {"name": "Space Elevator", "url": "https://neal.fun/space-elevator/", "cat": "Space", "desc": "Ride an imaginary elevator from Earth into space.", "tags": "space,interactive,science"}, {"name": "Universe Sandbox", "url": "https://universesandbox.com/", "cat": "Space", "desc": "Play with gravity, planets and cosmic systems.", "tags": "space,simulation,science"}, {"name": "Stellarium Web", "url": "https://stellarium-web.org/", "cat": "Space", "desc": "Explore a detailed interactive night sky.", "tags": "space,stars,astronomy"}, {"name": "NASA Eyes", "url": "https://eyes.nasa.gov/", "cat": "Space", "desc": "Explore NASA missions and the solar system in 3D.", "tags": "space,nasa,science"}, {"name": "Scale of the Universe", "url": "https://scaleofuniverse.com/", "cat": "Science", "desc": "Explore the universe from tiny particles to galaxies.", "tags": "science,scale,space"}, {"name": "Windy", "url": "https://www.windy.com/", "cat": "Science", "desc": "Explore global weather, wind and atmospheric maps.", "tags": "weather,maps,science"}, {"name": "Ventusky", "url": "https://www.ventusky.com/", "cat": "Science", "desc": "Watch weather systems move across the globe.", "tags": "weather,maps,science"}, {"name": "MarineTraffic", "url": "https://www.marinetraffic.com/", "cat": "Explore", "desc": "Track ships moving across the world's oceans.", "tags": "ships,maps,live,world"}, {"name": "EarthCam", "url": "https://www.earthcam.com/", "cat": "Explore", "desc": "Peek at live webcams from around the world.", "tags": "webcams,travel,live"}, {"name": "Virtual Vacation", "url": "https://www.virtualvacation.us/", "cat": "Explore", "desc": "Take virtual trips through real places.", "tags": "travel,video,world"}, {"name": "Chrome Music Lab", "url": "https://musiclab.chromeexperiments.com/", "cat": "Creative", "desc": "Play with simple musical experiments in your browser.", "tags": "music,creative,interactive"}, {"name": "Silk", "url": "https://silk.com/", "cat": "Creative", "desc": "Draw flowing generative art with your cursor.", "tags": "art,creative,generative"}, {"name": "Weave Silk", "url": "https://weavesilk.com/", "cat": "Creative", "desc": "Create symmetrical glowing silk drawings.", "tags": "art,creative,visual"}, {"name": "Blobmaker", "url": "https://www.blobmaker.app/", "cat": "Creative", "desc": "Generate strange custom SVG blobs.", "tags": "design,creative,random"}, {"name": "Coolors", "url": "https://coolors.co/", "cat": "Useful", "desc": "Generate and explore colour palettes.", "tags": "design,colour,useful"}, {"name": "Remove.bg", "url": "https://www.remove.bg/", "cat": "Useful", "desc": "Remove image backgrounds in seconds.", "tags": "image,tool,useful"}, {"name": "Archive.org", "url": "https://archive.org/", "cat": "Rabbit Holes", "desc": "Explore an enormous archive of books, music, software and the old web.", "tags": "archive,history,web"}, {"name": "Wayback Machine", "url": "https://web.archive.org/", "cat": "Rabbit Holes", "desc": "Travel through snapshots of websites from the past.", "tags": "archive,history,old web"}, {"name": "Library of Babel", "url": "https://libraryofbabel.info/", "cat": "Rabbit Holes", "desc": "Explore a fictional library containing every possible text.", "tags": "books,random,philosophy"}, {"name": "Radio Atlas", "url": "https://radioatlas.org/", "cat": "Music", "desc": "Listen to radio documentaries and unusual audio journeys.", "tags": "audio,documentary,world"}, {"name": "Information is Beautiful", "url": "https://informationisbeautiful.net/", "cat": "Data", "desc": "Explore visual explanations of complex subjects.", "tags": "data,design,learning"}, {"name": "Gapminder", "url": "https://www.gapminder.org/tools/", "cat": "Data", "desc": "Explore global development data interactively.", "tags": "data,world,science"}, {"name": "Our World in Data", "url": "https://ourworldindata.org/", "cat": "Data", "desc": "Explore huge collections of global data and charts.", "tags": "data,science,world"}], cats=["All",...new Set(sites.map(x=>x.cat)),"Adult"];let cat="All",onlyFav=false,favs=JSON.parse(localStorage.getItem("cwFavs")||"[]");
-const q=document.getElementById("q"),grid=document.getElementById("grid"),chips=document.getElementById("chips"),count=document.getElementById("count");
+const q=document.getElementById("q"),grid=document.getElementById("grid"),categorySelect=document.getElementById("categorySelect"),count=document.getElementById("count");
+categorySelect.innerHTML=cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
+categorySelect.addEventListener("change",()=>{cat=categorySelect.value;if(cat==="Adult"){openAdult();return;}draw();});
 function esc(x){return x.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 const visualIcons={
   "The Useless Web":"✦","EarthCam":"◫","NASA Eyes":"◉","WindowSwap":"⌗","Stellarium Web":"✧",
@@ -1215,7 +1275,8 @@ function visualClass(name){
   let n=0; for(let i=0;i<name.length;i++) n=(n+name.charCodeAt(i)*(i+1))%12;
   return "visual-"+n;
 }
-function draw(){chips.innerHTML=cats.map(c=>`<button class="chip ${c==cat?"active":""}" onclick="${c==='Adult'?'openAdult()':'cat=\''+c+'\';draw()'}">${c}</button>`).join("");
+function draw(){
+categorySelect.value=cat;
 let s=sites.filter(x=>(cat=="All"||x.cat==cat)&&(!onlyFav||favs.includes(x.name))&&(!q.value||[x.name,x.cat,x.desc,x.tags].join(" ").toLowerCase().includes(q.value.toLowerCase()))); if(cat==="Adult") s=[];
 count.textContent=s.length+" "+(s.length==1?"site":"sites")+" found";
 grid.innerHTML=cat==='Adult'?'<div class="empty">Adult Curios are locked. Solve the riddle to unlock the section. No links have been added yet.</div>':s.length?s.map(x=>`<article class="card">
@@ -1225,10 +1286,13 @@ grid.innerHTML=cat==='Adult'?'<div class="empty">Adult Curios are locked. Solve 
       <div class="card-kicker">${esc(x.cat)}</div>
       <h2>${esc(x.name)}</h2>
       <p>${esc(x.desc)}</p>
-      <div class="card-foot"><span>Explore ↗</span><button type="button" class="fav-btn" aria-label="Favourite ${esc(x.name)}" onclick="event.preventDefault();event.stopPropagation();toggle('${x.name.replace(/'/g,"\\'")}')">${favs.includes(x.name)?"★":"☆"}</button></div>
     </div>
   </a>
-</article>`).join(""):'<div class="empty">Nothing here. Try another search or category.</div>'}
+  <div class="card-foot"><span class="card-open-label">Open site ↗</span><div class="card-actions"><button type="button" class="card-more-btn" data-more-category="${esc(x.cat)}" aria-label="Show more ${esc(x.cat)} sites" title="More like this">More like this</button><button type="button" class="share-btn" data-share-name="${esc(x.name)}" data-share-url="${esc(x.url)}" aria-label="Share ${esc(x.name)}" title="Share ${esc(x.name)}">↗</button><button type="button" class="fav-btn" aria-label="Favourite ${esc(x.name)}" data-fav-name="${esc(x.name)}">${favs.includes(x.name)?"★":"☆"}</button></div></div>
+</article>`).join(''):'<div class="empty">Nothing here. Try another search or category.</div>'
+grid.querySelectorAll('[data-fav-name]').forEach(btn=>btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();toggle(btn.dataset.favName)}));
+grid.querySelectorAll('[data-share-name]').forEach(btn=>btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openShare(btn.dataset.shareName,btn.dataset.shareUrl)}));
+grid.querySelectorAll('[data-more-category]').forEach(btn=>btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();cat=btn.dataset.moreCategory;categorySelect.value=cat;draw();window.scrollTo({top:document.querySelector('.controls')?.getBoundingClientRect().top+window.scrollY-18,behavior:'smooth'});}));
 function toggle(n){favs=favs.includes(n)?favs.filter(x=>x!=n):[...favs,n];localStorage.setItem("cwFavs",JSON.stringify(favs));draw()}
 q.oninput=draw;document.getElementById("fav").onclick=()=>{onlyFav=!onlyFav;draw()};
 const wormholeOverlay=document.getElementById("wormholeOverlay");
@@ -1248,6 +1312,7 @@ document.getElementById("random").onclick=()=>{
     surpriseBusy=false;
   },2600);
 };
+}
 draw();
 
 // Curio Glass pointer response
@@ -1315,7 +1380,7 @@ function closeInfo(){infoOverlay.classList.remove("open")}
 
 suggestOverlay.addEventListener("click",e=>{if(e.target===suggestOverlay)closeSuggest()});
 infoOverlay.addEventListener("click",e=>{if(e.target===infoOverlay)closeInfo()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSuggest();closeInfo()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSuggest();closeInfo();closeShare();issuePanel?.classList.remove("open");closeAdult?.()}});
 document.getElementById("suggestOpen").onclick=openSuggest;
 
 // Update 8: UK clock
@@ -1350,12 +1415,8 @@ const issueClose = document.getElementById("issueClose");
 const issueNote = document.getElementById("issueNote");
 
 issueClose.onclick=()=>issuePanel.classList.remove("open");
-issueOpen.onclick = () => {
-  issuePanel.classList.toggle("open");
-  if(issuePanel.classList.contains("open")){
-    setTimeout(()=>issueInput.focus(),50);
-  }
-};
+issuePanel.addEventListener("click",e=>{if(e.target===issuePanel)issuePanel.classList.remove("open")});
+issueOpen.onclick = openIssue;
 issueSubmit.onclick = () => {
   if(!issueInput.value.trim()){
     issueInput.focus();
@@ -1434,7 +1495,7 @@ document.querySelectorAll("[data-mobile]").forEach(btn=>btn.addEventListener("cl
   const action=btn.dataset.mobile;
   if(action==="home")window.scrollTo({top:0,behavior:"smooth"});
   if(action==="search"){document.getElementById("q").focus();window.scrollTo({top:document.querySelector(".controls").offsetTop-10,behavior:"smooth"})}
-  if(action==="categories")document.getElementById("chips").scrollIntoView({behavior:"smooth",block:"start"});
+  if(action==="categories"){const picker=document.getElementById("categorySelect");picker?.focus();picker?.showPicker?.();}
   if(action==="favourites")document.getElementById("fav").click();
   if(action==="more")openMobileSheet();
 }));
@@ -1473,20 +1534,36 @@ function renderConspiracy(){const item=conspiracyCollection[conspiracyIndex%cons
 renderConspiracy();
 // Curio 12.3.3 interactive Did You Know tile
 const factCollection=[
- {title:"Honey never really spoils.",copy:"Archaeologists have found ancient honey that remained edible after thousands of years. Its low water content and acidic chemistry make it a very unfriendly place for most microbes.",meta:"A sweet little bit of science hiding in your kitchen cupboard."},
- {title:"Octopuses have three hearts.",copy:"Two hearts pump blood through the gills, while a third sends it around the rest of the body. When an octopus swims, the main heart actually stops beating.",meta:"Evolution apparently decided one heart was far too ordinary."},
- {title:"A day on Venus is longer than its year.",copy:"Venus takes about 243 Earth days to rotate once, but only about 225 Earth days to orbit the Sun. So Venus completes a trip around the Sun before finishing one full rotation.",meta:"Space is wonderfully bad at following the rules we expect."},
- {title:"Bananas are berries. Strawberries are not.",copy:"Botanically, bananas qualify as berries because they develop from a single flower with one ovary. Strawberries are aggregate fruits formed from many tiny flower ovaries.",meta:"Fruit taxonomy is considerably stranger than the supermarket suggests."},
- {title:"Sharks are older than trees.",copy:"Shark ancestors were swimming in Earth’s oceans hundreds of millions of years ago, before the first true trees appeared. They have been around for an astonishingly long time.",meta:"Somebody forgot to tell the sharks that prehistory was supposed to end."},
- {title:"Wombat poo is cube shaped.",copy:"Wombats produce distinctive cube shaped droppings. Their intestines compress the material into blocks, which helps the wombats mark territory without the pieces rolling away.",meta:"Nature occasionally gets weirdly specific about geometry."}
+ {title:"There may be more trees on Earth than stars in the Milky Way.",copy:"Earth is estimated to have around three trillion trees, while the Milky Way is thought to contain roughly 100 to 400 billion stars. Both numbers are estimates, but the comparison is wonderfully counterintuitive.",meta:"A reminder that our planet is packed with more life than it looks from space."},
+ {title:"A teaspoon of neutron star matter would be unbelievably heavy.",copy:"Neutron stars pack more mass than the Sun into a sphere only about the size of a city. Their matter is so dense that even a tiny amount would weigh an extraordinary amount on Earth.",meta:"The universe has a few places where physics gets properly ridiculous."},
+ {title:"Octopuses have three hearts and blue blood.",copy:"Two hearts pump blood through the gills, while a third pumps it around the body. Their blood is blue because it uses copper based hemocyanin to carry oxygen.",meta:"Evolution apparently decided one heart and red blood were far too conventional."},
+ {title:"Some tardigrades can survive the vacuum of space.",copy:"Tardigrades, sometimes called water bears, can enter a dried out state called cryptobiosis. Experiments have shown that some can survive extreme conditions that would be fatal to most animals.",meta:"Tiny, bizarre and ridiculously tough."},
+ {title:"A day on Venus is longer than its year.",copy:"Venus takes about 243 Earth days to rotate once, but only about 225 Earth days to orbit the Sun. It completes its trip around the Sun before completing one rotation.",meta:"The solar system is under no obligation to make intuitive sense."},
+ {title:"Lightning can be hotter than the surface of the Sun.",copy:"The air inside a lightning channel can briefly reach roughly 30,000 kelvin, several times hotter than the Sun's visible surface. That rapid heating makes the surrounding air expand explosively, producing thunder.",meta:"A storm cloud can briefly create temperatures hotter than a star's surface."},
+ {title:"Crows can recognise individual human faces.",copy:"Research has shown that some crows can remember and distinguish human faces and can behave differently toward people they associate with a threat.",meta:"Your local crow may have a better memory than you give it credit for."},
+ {title:"The Moon is slowly moving away from Earth.",copy:"The Moon drifts away from Earth by about 3.8 centimetres per year on average. Tidal interactions transfer angular momentum from Earth's rotation into the Moon's orbit.",meta:"Even the Moon is quietly changing its address."},
+ {title:"There are lakes hidden beneath Antarctica.",copy:"Radar and other measurements have revealed hundreds of subglacial lakes beneath the Antarctic ice sheet. Some are connected by channels and can fill and drain beneath kilometres of ice.",meta:"There is an entire hidden watery world underneath the ice."},
+ {title:"Sharks are older than trees.",copy:"Shark ancestors appeared hundreds of millions of years ago, long before the first forests as we know them. They have survived multiple mass extinction events and kept evolving.",meta:"Some animals really did get here absurdly early."}
 ];
 let factIndex=Math.floor(Math.random()*factCollection.length);
 function renderFact(){const item=factCollection[factIndex%factCollection.length];const t=document.getElementById("factTitle"),c=document.getElementById("factCopy"),m=document.getElementById("factMeta");if(t)t.textContent=item.title;if(c)c.textContent=item.copy;if(m)m.textContent=item.meta;}
 renderFact();
 document.getElementById("factNext")?.addEventListener("click",()=>{factIndex=(factIndex+1)%factCollection.length;renderFact();});
 
+// 12.3.8 share system: native sharing plus direct app/web targets.
+const shareOverlay=document.getElementById("shareOverlay"),shareBox=document.querySelector("#shareOverlay .share-box"),shareSub=document.getElementById("shareSub"),shareClose=document.getElementById("shareClose");
+let activeShare={name:"",url:""};
+function openShare(name,url){activeShare={name,url};shareSub.textContent=`Share “${name}” with someone.`;const st=document.getElementById("shareCopyStatus");if(st)st.textContent="Copy to clipboard";shareOverlay.classList.add("open");shareOverlay.setAttribute("aria-hidden","false");}
+function closeShare(){shareOverlay.classList.remove("open");shareOverlay.setAttribute("aria-hidden","true");}
+function sharePayload(){return {title:`${activeShare.name} · CurioWeb`,text:`${activeShare.name} — ${activeShare.url}`,url:activeShare.url}}
+async function nativeShare(){if(navigator.share){try{await navigator.share(sharePayload());return true}catch(e){if(e?.name==='AbortError')return true}}return false}
+function openExternal(url){window.open(url,"_blank","noopener,noreferrer")}
+function launchAppOrWeb(appUrl,webUrl){const mobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);if(!mobile){openExternal(webUrl);return}let hidden=false;const onHide=()=>{hidden=true};document.addEventListener('visibilitychange',onHide,{once:true});window.location.href=appUrl;setTimeout(()=>{if(!hidden)openExternal(webUrl)},900);}
+async function performShare(action){const text=encodeURIComponent(`${activeShare.name} — ${activeShare.url}`),url=encodeURIComponent(activeShare.url);if(action==='native'){await nativeShare();return}if(action==='whatsapp'){launchAppOrWeb(`whatsapp://send?text=${text}`,`https://wa.me/?text=${text}`);return}if(action==='facebook'){openExternal(`https://www.facebook.com/sharer/sharer.php?u=${url}`);return}if(action==='messenger'){launchAppOrWeb(`fb-messenger://share/?link=${url}`,`https://www.facebook.com/dialog/send?link=${url}`);return}if(action==='messages'){window.location.href=`sms:&body=${text}`;return}if(action==='x'){openExternal(`https://x.com/intent/post?text=${text}`);return}if(action==='email'){window.location.href=`mailto:?subject=${encodeURIComponent(activeShare.name+" · CurioWeb")}&body=${text}`;return}if(action==='copy'){try{await navigator.clipboard.writeText(activeShare.url)}catch(e){const ta=document.createElement('textarea');ta.value=activeShare.url;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}document.getElementById("shareCopyStatus").textContent="Copied ✓";}}
+shareClose?.addEventListener('click',closeShare);shareOverlay?.addEventListener('click',e=>{if(e.target===shareOverlay)closeShare()});document.querySelectorAll('[data-share-action]').forEach(btn=>btn.addEventListener('click',()=>performShare(btn.dataset.shareAction)));shareBox?.addEventListener('pointermove',e=>{const r=shareBox.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*100,y=(e.clientY-r.top)/r.height*100;shareBox.style.setProperty('--popup-x',`${x}%`);shareBox.style.setProperty('--popup-y',`${y}%`);shareBox.style.setProperty('--popup-shine',`${x}%`)},{passive:true});shareBox?.addEventListener('pointerleave',()=>{shareBox.style.setProperty('--popup-x','50%');shareBox.style.setProperty('--popup-y','50%');shareBox.style.setProperty('--popup-shine','50%')},{passive:true});
+
 // Liquid-glass pointer reflection for Curio popup surfaces.
-document.querySelectorAll('.suggest-box,.adult-modal,.mobile-sheet-inner,.issue-panel').forEach(el=>{
+document.querySelectorAll('.suggest-box,.adult-modal,.mobile-sheet-inner,.issue-inner').forEach(el=>{
   el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();const x=Math.max(0,Math.min(100,((e.clientX-r.left)/r.width)*100));const y=Math.max(0,Math.min(100,((e.clientY-r.top)/r.height)*100));el.style.setProperty('--popup-x',x+'%');el.style.setProperty('--popup-y',y+'%');el.style.setProperty('--popup-shine',x+'%');},{passive:true});
   el.addEventListener('pointerleave',()=>{el.style.setProperty('--popup-x','50%');el.style.setProperty('--popup-y','50%');el.style.setProperty('--popup-shine','50%');},{passive:true});
 });
