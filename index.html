@@ -34,22 +34,6 @@ body{
 }
 button,input{font:inherit}
 button{cursor:pointer}
-.beta-bar{
-  position:fixed;top:0;left:0;width:100%;height:68px;z-index:3000;
-  background:rgba(53,208,127,.92);color:#06140c;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:4px;padding:6px 16px;font-size:12px;font-weight:800;
-  letter-spacing:.08em;text-transform:uppercase;
-  box-shadow:0 1px 0 rgba(255,255,255,.55),0 5px 25px rgba(40,120,80,.12);
-  backdrop-filter:blur(18px);
-}
-.beta-bar span{font-weight:600;letter-spacing:.01em;text-transform:none;opacity:.88}
-.beta-experimental{
-  border:1px solid rgba(6,20,12,.25);background:rgba(255,255,255,.24);color:#06140c;
-  border-radius:999px;padding:4px 12px;font-size:10px;font-weight:800;white-space:nowrap;
-  transition:.2s ease;
-}
-.beta-experimental:hover{background:rgba(255,255,255,.42);transform:translateY(-1px)}
 header{
   max-width:1500px;margin:auto;padding:28px 5vw 30px;
 }
@@ -194,7 +178,7 @@ body.dark .suggest-box::before,body.dark .adult-modal::before,body.dark .mobile-
 .suggest-message.show{display:block}
 .suggest-note{font-size:11px!important;margin:10px 0 0!important;color:#929aa7!important}
 .issue-panel{
-  position:fixed;top:68px;left:0;width:100%;z-index:1900;display:none;padding:10px 16px 12px;
+  position:fixed;top:24px;left:0;width:100%;z-index:1900;display:none;padding:10px 16px 12px;
   background:rgba(250,251,252,.90);border-bottom:1px solid rgba(24,31,42,.08);
   backdrop-filter:blur(20px) saturate(130%);-webkit-backdrop-filter:blur(20px) saturate(130%);
   box-shadow:0 12px 35px rgba(30,40,55,.10);
@@ -286,7 +270,7 @@ body.dark .uk-clock{color:#b8c0ce}
   .controls button{flex:1}
 }
 @media (max-width:560px){
-  body{padding-top:64px}.beta-bar{height:64px}
+  body{padding-top:64px}
   header{padding-top:22px}.top-left{flex-wrap:wrap}.theme-toggle,.uk-clock{font-size:11px;padding:9px 11px}
   h1{font-size:clamp(46px,15vw,70px)}.hero{font-size:16px}
   .controls button{padding:0 10px;font-size:12px}
@@ -513,7 +497,7 @@ header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.log
 .experience-strip{max-width:1500px;margin:0 auto 34px;padding:0 32px;grid-template-columns:1.2fr .8fr;gap:15px}.experience-block{border-radius:20px;padding:16px}.experience-heading h2{font-size:17px}.wormhole-story{grid-template-columns:1fr 12px 1fr 12px 1fr 12px 1fr}.wormhole-frame{height:112px}.wormhole-frame span{font-size:8px}.backend-cards>div{padding:9px}
 @media(max-width:1200px){.home-layout .grid{grid-template-columns:repeat(3,minmax(0,1fr))}.home-layout{grid-template-columns:minmax(0,1fr) 286px}}
 @media(max-width:900px){.home-layout{grid-template-columns:1fr}.side-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}.experience-strip{grid-template-columns:1fr}.home-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:700px){header{padding:14px 16px 17px}.top-meta{grid-template-columns:1fr auto;margin-bottom:38px}.logo{position:absolute;left:50%;transform:translateX(-50%);top:17px;font-size:16px}.logo span{font-size:6px}.top-right{display:flex}.top-tagline{display:none}.uk-clock{font-size:9px}.theme-toggle{font-size:9px}.hero{font-size:14px}.controls{position:sticky;top:0}.chips{padding-bottom:13px}.mobile-quick{display:flex;gap:8px;overflow:auto;padding:0 16px 14px;scrollbar-width:none}.mobile-quick::-webkit-scrollbar{display:none}.mobile-quick-card{min-width:176px;height:58px;border:1px solid rgba(20,29,45,.08);border-radius:15px;background:rgba(255,255,255,.72);display:grid;grid-template-columns:31px 1fr 12px;align-items:center;gap:7px;padding:0 10px;text-align:left;box-shadow:0 8px 22px rgba(35,47,66,.06)}.mobile-quick-card .quick-icon{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:#f1f4f8;font-size:14px}.mobile-quick-card b{display:block;font-size:10px}.mobile-quick-card small{display:block;font-size:8px;color:#8b94a1;margin-top:2px}.mobile-quick-card em{font-style:normal;font-size:17px;color:#8c95a3}.home-layout{padding:0 16px 28px}.home-layout .grid{grid-template-columns:1fr;gap:11px}.side-tiles{display:none}.card{border-radius:16px}.card-media{height:178px}.card-body{padding:13px}.card h2{font-size:18px}.experience-strip{padding:0 16px;margin-bottom:18px}.experience-block{border-radius:18px;padding:14px}.experience-heading{margin-bottom:10px}.experience-heading h2{font-size:16px}.wormhole-story{grid-template-columns:1fr}.wormhole-story i,.wormhole-frame:nth-of-type(n/**/+2){display:none}.wormhole-frame{height:150px}.backend-cards{grid-template-columns:1fr 1fr}.backend-cards strong{font-size:9px}.backend-cards small{font-size:8px}.mobile-nav{bottom:9px}.beta-bar{height:58px;font-size:9px}.beta-bar span{font-size:8px}.beta-experimental{font-size:8px;padding:3px 9px}}
+@media(max-width:700px){header{padding:14px 16px 17px}.top-meta{grid-template-columns:1fr auto;margin-bottom:38px}.logo{position:absolute;left:50%;transform:translateX(-50%);top:17px;font-size:16px}.logo span{font-size:6px}.top-right{display:flex}.top-tagline{display:none}.uk-clock{font-size:9px}.theme-toggle{font-size:9px}.hero{font-size:14px}.controls{position:sticky;top:0}.chips{padding-bottom:13px}.mobile-quick{display:flex;gap:8px;overflow:auto;padding:0 16px 14px;scrollbar-width:none}.mobile-quick::-webkit-scrollbar{display:none}.mobile-quick-card{min-width:176px;height:58px;border:1px solid rgba(20,29,45,.08);border-radius:15px;background:rgba(255,255,255,.72);display:grid;grid-template-columns:31px 1fr 12px;align-items:center;gap:7px;padding:0 10px;text-align:left;box-shadow:0 8px 22px rgba(35,47,66,.06)}.mobile-quick-card .quick-icon{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:#f1f4f8;font-size:14px}.mobile-quick-card b{display:block;font-size:10px}.mobile-quick-card small{display:block;font-size:8px;color:#8b94a1;margin-top:2px}.mobile-quick-card em{font-style:normal;font-size:17px;color:#8c95a3}.home-layout{padding:0 16px 28px}.home-layout .grid{grid-template-columns:1fr;gap:11px}.side-tiles{display:none}.card{border-radius:16px}.card-media{height:178px}.card-body{padding:13px}.card h2{font-size:18px}.experience-strip{padding:0 16px;margin-bottom:18px}.experience-block{border-radius:18px;padding:14px}.experience-heading{margin-bottom:10px}.experience-heading h2{font-size:16px}.wormhole-story{grid-template-columns:1fr}.wormhole-story i,.wormhole-frame:nth-of-type(n/**/+2){display:none}.wormhole-frame{height:150px}.backend-cards{grid-template-columns:1fr 1fr}.backend-cards strong{font-size:9px}.backend-cards small{font-size:8px}.mobile-nav{bottom:9px}}
 
 </style>
 
@@ -521,7 +505,7 @@ header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.log
 
 
 <style id="curio-canonical-12-3-1">
-/* CurioWeb 12.3.4: popup liquid glass refinement and weather feature removal. */
+/* CurioWeb 12.3.5: restored stable interaction layer, removed weather/wallpaper features, refined glass popups. */
 :root{
   --cw-shell:min(1680px,calc(100vw - 96px));
   --cw-sidebar:350px;
@@ -671,17 +655,11 @@ body.dark .fact-heading h2{color:#fff}.dark .fact-copy{color:#c2c7d3}
 body.dark .fact-copy{color:#c2c7d3}.dark .fact-meta{color:#9299ab}
 body.dark .fact-meta{color:#9299ab}
 body.dark .fact-next{background:rgba(255,255,255,.06);color:#c8c0ff;border-color:rgba(255,255,255,.12)}
-@media(max-width:700px){.logo{width:50px;height:50px}.logo-mark{width:50px;height:50px}.logo-mark svg{width:42px;height:42px}}
-</style>
-</head><body data-curioweb-version="12.3.4">
-<div class="beta-bar">Curio V.1 beta <span>We are still building things, so you may encounter the occasional snag.</span><button class="beta-experimental" id="issueOpen" type="button">This is an experimental version of Curio. Report issues HERE</button></div>
+@media(max-width:700px){.logo{width:50px;height:50px}.logo-mark{width:50px;height:50px}.logo-mark svg{width:42px;height:42px}}.top-tagline,.logo-sub{display:none!important}.issue-panel{top:24px!important;left:50%!important;transform:translateX(-50%)!important;width:min(760px,calc(100vw - 32px))!important;border:1px solid rgba(255,255,255,.26)!important;border-radius:24px!important;background:rgba(255,255,255,.78)!important;box-shadow:0 30px 90px rgba(20,30,45,.20),inset 0 1px 0 rgba(255,255,255,.9)!important;backdrop-filter:blur(24px) saturate(145%)!important;-webkit-backdrop-filter:blur(24px) saturate(145%)!important}.issue-panel.open{display:block!important}body.dark .issue-panel{background:rgba(20,23,31,.82)!important;border-color:rgba(255,255,255,.12)!important;color:#fff!important}</style></head><body data-curioweb-version="12.3.5">
 <div class="issue-panel" id="issuePanel">
 <div class="issue-inner">
 <div class="issue-head"><div class="issue-title">Report an issue</div><button aria-label="Close issue reporter" class="issue-close" id="issueClose" type="button">×</button></div>
-<div class="issue-row">
-<input autocomplete="off" id="issueInput" placeholder="Tell us what went wrong…" type="text"/>
-<button id="issueSubmit" type="button">Submit issue</button>
-</div>
+<div class="issue-row"><input autocomplete="off" id="issueInput" placeholder="Tell us what went wrong…" type="text"/><button id="issueSubmit" type="button">Submit issue</button></div>
 <div class="issue-note" id="issueNote">Preview only for now. Nothing is sent or stored yet.</div>
 </div>
 </div>
@@ -791,6 +769,7 @@ body.dark .fact-next{background:rgba(255,255,255,.06);color:#c8c0ff;border-color
 </div>
 </div>
 <script>
+
 const sites=[{"name": "Neal.fun", "url": "https://neal.fun/", "cat": "Interactive", "desc": "Polished experiments, games and rabbit holes.", "tags": "interactive,fun,science,games"}, {"name": "Radio Garden", "url": "https://radio.garden/", "cat": "Explore", "desc": "Spin the globe and listen to live radio from around the world.", "tags": "radio,world,travel,audio"}, {"name": "WindowSwap", "url": "https://www.window-swap.com/", "cat": "Explore", "desc": "Look through windows around the world via recordings made by strangers.", "tags": "travel,calm,world,video"}, {"name": "The Useless Web", "url": "https://theuselessweb.com/", "cat": "Weird", "desc": "One button. One gloriously pointless website.", "tags": "random,weird,funny"}, {"name": "Pointer Pointer", "url": "https://pointerpointer.com/", "cat": "Weird", "desc": "Move your cursor and find a photograph pointing exactly at it.", "tags": "weird,interactive,funny"}, {"name": "Atlas Obscura", "url": "https://www.atlasobscura.com/", "cat": "Rabbit Holes", "desc": "Hidden places, strange history and fascinating things.", "tags": "history,travel,weird,places"}, {"name": "Marginalia Search", "url": "https://search.marginalia.nu/", "cat": "Discover", "desc": "Search the older, stranger and text heavy web.", "tags": "search,small web,old web"}, {"name": "Every Noise at Once", "url": "https://everynoise.com/", "cat": "Music", "desc": "Explore a huge map of music genres.", "tags": "music,discovery,audio"}, {"name": "Zoomquilt", "url": "https://zoomquilt.org/", "cat": "Art", "desc": "An endlessly zooming collaborative painting.", "tags": "art,visual,weird,calm"}, {"name": "This Is Sand", "url": "https://thisissand.com/", "cat": "Creative", "desc": "Pour digital sand and make satisfying landscapes.", "tags": "creative,art,calm"}, {"name": "Patatap", "url": "https://patatap.com/", "cat": "Creative", "desc": "Turn your keyboard into a tiny audiovisual instrument.", "tags": "music,creative,interactive"}, {"name": "Earth Nullschool", "url": "https://earth.nullschool.net/", "cat": "Science", "desc": "Watch weather and atmospheric conditions move across Earth.", "tags": "science,weather,earth,data"}, {"name": "The True Size Of", "url": "https://www.thetruesize.com/", "cat": "Learn", "desc": "Drag countries around a map and compare their apparent size.", "tags": "maps,geography,learning"}, {"name": "100,000 Stars", "url": "https://stars.chromeexperiments.com/", "cat": "Space", "desc": "Explore a beautiful interactive visualisation of nearby stars.", "tags": "space,science,stars,visual"}, {"name": "Infinite Craft", "url": "https://neal.fun/infinite-craft/", "cat": "Games", "desc": "Combine ideas and discover an absurd number of things.", "tags": "game,crafting,rabbit hole"}, {"name": "Wikipedia Random", "url": "https://en.wikipedia.org/wiki/Special:Random", "cat": "Rabbit Holes", "desc": "One click and Wikipedia decides what you learn next.", "tags": "random,learning,history"}, {"name": "Photopea", "url": "https://www.photopea.com/", "cat": "Useful", "desc": "A powerful image editor that runs entirely in your browser.", "tags": "design,image,useful,creative"}, {"name": "Radiooooo", "url": "https://radiooooo.com/", "cat": "Music", "desc": "Choose a country and decade, then hear music from that place and time.", "tags": "music,history,world"}, {"name": "The Pudding", "url": "https://pudding.cool/", "cat": "Data", "desc": "Beautiful interactive stories built from data.", "tags": "data,journalism,interactive"}, {"name": "FlightRadar24", "url": "https://www.flightradar24.com/", "cat": "Explore", "desc": "Watch aircraft move around the world in real time.", "tags": "aviation,maps,world,live"}, {"name": "Cat Bounce", "url": "https://cat-bounce.com/", "cat": "Weird", "desc": "Bouncing cats. That is the entire concept.", "tags": "weird,funny,pointless"}, {"name": "Endless Horse", "url": "https://endless.horse/", "cat": "Weird", "desc": "Scroll a horse that refuses to end.", "tags": "weird,scroll,funny"}, {"name": "Long Doge Challenge", "url": "https://longdogechallenge.com/", "cat": "Weird", "desc": "Keep scrolling. The doge keeps getting longer.", "tags": "weird,scroll,funny"}, {"name": "Eel Slap", "url": "https://eelslap.com/", "cat": "Weird", "desc": "Slap an eel across a surprisingly satisfying screen.", "tags": "weird,funny,pointless"}, {"name": "Falling Falling", "url": "https://fallingfalling.com/", "cat": "Weird", "desc": "A hypnotic little falling experiment.", "tags": "weird,visual,calm"}, {"name": "Koalas to the Max", "url": "https://koalastothemax.com/", "cat": "Weird", "desc": "Move your cursor and reveal a hidden picture.", "tags": "weird,interactive,calm"}, {"name": "Sandspiel", "url": "https://sandspiel.club/", "cat": "Games", "desc": "A falling sand physics playground.", "tags": "physics,sandbox,creative"}, {"name": "Orb.Farm", "url": "https://orb.farm/", "cat": "Games", "desc": "Build and watch a tiny aquatic ecosystem.", "tags": "simulation,science,calm"}, {"name": "Little Alchemy 2", "url": "https://littlealchemy2.com/", "cat": "Games", "desc": "Combine elements into hundreds of discoveries.", "tags": "game,crafting,rabbit hole"}, {"name": "OpenGuessr", "url": "https://openguessr.com/", "cat": "Games", "desc": "Explore street views and guess where you are.", "tags": "geography,game,travel"}, {"name": "Internet Roadtrip", "url": "https://neal.fun/internet-roadtrip/", "cat": "Explore", "desc": "Take a communal road trip through the internet.", "tags": "travel,interactive,nealfun"}, {"name": "FutureMe", "url": "https://www.futureme.org/", "cat": "Rabbit Holes", "desc": "Write a letter to your future self.", "tags": "future,writing,curious"}, {"name": "The Internet Map", "url": "https://internet-map.net/", "cat": "Explore", "desc": "Visualise the web as a giant map of domains.", "tags": "internet,maps,visual"}, {"name": "MapCrunch", "url": "https://www.mapcrunch.com/", "cat": "Explore", "desc": "Drop into a random street view somewhere on Earth.", "tags": "maps,travel,random"}, {"name": "MyNoise", "url": "https://mynoise.net/", "cat": "Chill", "desc": "Generate layered ambient sounds and noise.", "tags": "audio,calm,ambient"}, {"name": "A Soft Murmur", "url": "https://asoftmurmur.com/", "cat": "Chill", "desc": "Mix gentle environmental sounds.", "tags": "audio,calm,ambient"}, {"name": "Noisli", "url": "https://www.noisli.com/", "cat": "Chill", "desc": "Create a personalised background soundscape.", "tags": "audio,focus,calm"}, {"name": "Drive & Listen", "url": "https://driveandlisten.herokuapp.com/", "cat": "Explore", "desc": "Drive through cities while listening to local radio.", "tags": "travel,video,radio"}, {"name": "HORG", "url": "https://occlusionresearch.org/", "cat": "Rabbit Holes", "desc": "A serious taxonomy of plastic bread bag clips.", "tags": "weird,science,history"}, {"name": "The Brick Bible", "url": "https://thebrickbible.com/", "cat": "Rabbit Holes", "desc": "Biblical stories recreated with LEGO photography.", "tags": "lego,history,art"}, {"name": "The Deep Sea", "url": "https://neal.fun/deep-sea/", "cat": "Science", "desc": "Scroll down through the depths of the ocean.", "tags": "ocean,science,depth"}, {"name": "The Size of Space", "url": "https://neal.fun/size-of-space/", "cat": "Space", "desc": "Zoom through an enormous scale of the universe.", "tags": "space,science,scale"}, {"name": "Space Elevator", "url": "https://neal.fun/space-elevator/", "cat": "Space", "desc": "Ride an imaginary elevator from Earth into space.", "tags": "space,interactive,science"}, {"name": "Universe Sandbox", "url": "https://universesandbox.com/", "cat": "Space", "desc": "Play with gravity, planets and cosmic systems.", "tags": "space,simulation,science"}, {"name": "Stellarium Web", "url": "https://stellarium-web.org/", "cat": "Space", "desc": "Explore a detailed interactive night sky.", "tags": "space,stars,astronomy"}, {"name": "NASA Eyes", "url": "https://eyes.nasa.gov/", "cat": "Space", "desc": "Explore NASA missions and the solar system in 3D.", "tags": "space,nasa,science"}, {"name": "Scale of the Universe", "url": "https://scaleofuniverse.com/", "cat": "Science", "desc": "Explore the universe from tiny particles to galaxies.", "tags": "science,scale,space"}, {"name": "Windy", "url": "https://www.windy.com/", "cat": "Science", "desc": "Explore global weather, wind and atmospheric maps.", "tags": "weather,maps,science"}, {"name": "Ventusky", "url": "https://www.ventusky.com/", "cat": "Science", "desc": "Watch weather systems move across the globe.", "tags": "weather,maps,science"}, {"name": "MarineTraffic", "url": "https://www.marinetraffic.com/", "cat": "Explore", "desc": "Track ships moving across the world's oceans.", "tags": "ships,maps,live,world"}, {"name": "EarthCam", "url": "https://www.earthcam.com/", "cat": "Explore", "desc": "Peek at live webcams from around the world.", "tags": "webcams,travel,live"}, {"name": "Virtual Vacation", "url": "https://www.virtualvacation.us/", "cat": "Explore", "desc": "Take virtual trips through real places.", "tags": "travel,video,world"}, {"name": "Chrome Music Lab", "url": "https://musiclab.chromeexperiments.com/", "cat": "Creative", "desc": "Play with simple musical experiments in your browser.", "tags": "music,creative,interactive"}, {"name": "Silk", "url": "https://silk.com/", "cat": "Creative", "desc": "Draw flowing generative art with your cursor.", "tags": "art,creative,generative"}, {"name": "Weave Silk", "url": "https://weavesilk.com/", "cat": "Creative", "desc": "Create symmetrical glowing silk drawings.", "tags": "art,creative,visual"}, {"name": "Blobmaker", "url": "https://www.blobmaker.app/", "cat": "Creative", "desc": "Generate strange custom SVG blobs.", "tags": "design,creative,random"}, {"name": "Coolors", "url": "https://coolors.co/", "cat": "Useful", "desc": "Generate and explore colour palettes.", "tags": "design,colour,useful"}, {"name": "Remove.bg", "url": "https://www.remove.bg/", "cat": "Useful", "desc": "Remove image backgrounds in seconds.", "tags": "image,tool,useful"}, {"name": "Archive.org", "url": "https://archive.org/", "cat": "Rabbit Holes", "desc": "Explore an enormous archive of books, music, software and the old web.", "tags": "archive,history,web"}, {"name": "Wayback Machine", "url": "https://web.archive.org/", "cat": "Rabbit Holes", "desc": "Travel through snapshots of websites from the past.", "tags": "archive,history,old web"}, {"name": "Library of Babel", "url": "https://libraryofbabel.info/", "cat": "Rabbit Holes", "desc": "Explore a fictional library containing every possible text.", "tags": "books,random,philosophy"}, {"name": "Radio Atlas", "url": "https://radioatlas.org/", "cat": "Music", "desc": "Listen to radio documentaries and unusual audio journeys.", "tags": "audio,documentary,world"}, {"name": "Information is Beautiful", "url": "https://informationisbeautiful.net/", "cat": "Data", "desc": "Explore visual explanations of complex subjects.", "tags": "data,design,learning"}, {"name": "Gapminder", "url": "https://www.gapminder.org/tools/", "cat": "Data", "desc": "Explore global development data interactively.", "tags": "data,world,science"}, {"name": "Our World in Data", "url": "https://ourworldindata.org/", "cat": "Data", "desc": "Explore huge collections of global data and charts.", "tags": "data,science,world"}], cats=["All",...new Set(sites.map(x=>x.cat)),"Adult"];let cat="All",onlyFav=false,favs=JSON.parse(localStorage.getItem("cwFavs")||"[]");
 const q=document.getElementById("q"),grid=document.getElementById("grid"),chips=document.getElementById("chips"),count=document.getElementById("count");
 function esc(x){return x.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
@@ -846,7 +825,7 @@ draw();
 
 // Curio Glass pointer response
 document.addEventListener("pointermove", (e) => {
-  const card = e.target.closest(".card, .side-tile");
+  const card = e.target.closest(".card");
   if (!card) return;
   const r = card.getBoundingClientRect();
   const x = e.clientX - r.left;
@@ -863,7 +842,7 @@ document.addEventListener("pointermove", (e) => {
 });
 
 document.addEventListener("pointerout", (e) => {
-  const card = e.target.closest(".card, .side-tile");
+  const card = e.target.closest(".card");
   if (!card || card.contains(e.relatedTarget)) return;
   card.style.removeProperty("--mx");
   card.style.removeProperty("--my");
@@ -936,7 +915,6 @@ updateUKClock();
 setInterval(updateUKClock,1000);
 
 // Update 8: preview issue reporter
-const issueOpen = document.getElementById("issueOpen");
 const issuePanel = document.getElementById("issuePanel");
 const issueInput = document.getElementById("issueInput");
 const issueSubmit = document.getElementById("issueSubmit");
@@ -944,12 +922,6 @@ const issueClose = document.getElementById("issueClose");
 const issueNote = document.getElementById("issueNote");
 
 issueClose.onclick=()=>issuePanel.classList.remove("open");
-issueOpen.onclick = () => {
-  issuePanel.classList.toggle("open");
-  if(issuePanel.classList.contains("open")){
-    setTimeout(()=>issueInput.focus(),50);
-  }
-};
 issueSubmit.onclick = () => {
   if(!issueInput.value.trim()){
     issueInput.focus();
@@ -970,6 +942,8 @@ syncTheme();
 themeBtn.onclick=()=>{document.body.classList.toggle("dark");localStorage.setItem("cwThemeV12",document.body.classList.contains("dark")?"dark":"light");syncTheme()};
 
 
+
+
 document.getElementById("reportTrigger")?.addEventListener("click",openIssue);
 
 // Prepare a stable client event layer for the future backend.
@@ -982,6 +956,22 @@ window.CurioEvents={
   }
 };
 originalSurprise?.addEventListener("click",()=>CurioEvents.track("surprise_me"));
+
+// 12.3.0 conspiracy collection and tile interaction
+const conspiracyCollection=[
+ {title:"The Philadelphia Experiment",copy:"The legend claims a US Navy ship was made invisible during a secret wartime experiment involving electromagnetic fields. Later versions add teleportation and bizarre effects on the crew. The Navy has denied the experiment, and researchers generally trace the story to later accounts rather than contemporary records.",meta:"A wartime mystery, disputed testimony and one seriously strange story."},
+ {title:"The Dyatlov Pass Incident",copy:"In 1959, nine hikers died in the Ural Mountains under circumstances that inspired decades of speculation. Their tent had been cut open from the inside, and the group had fled into extreme cold. Official explanations have changed over time, while theories range from avalanches to far stranger possibilities.",meta:"A real tragedy surrounded by unanswered questions and competing explanations."},
+ {title:"The Black Knight Satellite",copy:"A popular space mystery claims an ancient artificial object has been orbiting Earth for thousands of years. Photographs from the Space Shuttle era are often cited as evidence, although NASA and researchers have identified the photographed object as space debris or insulation rather than an alien satellite.",meta:"Real photographs, real objects and a very entertaining leap into the unknown."},
+ {title:"The Wow! Signal",copy:"In 1977, a radio telescope detected an unusually strong, narrowband signal that lasted about 72 seconds. Astronomer Jerry Ehman wrote ‘Wow!’ beside the printout. No convincing repeat has ever been detected, leaving its ultimate source unresolved even though there is no evidence that it was extraterrestrial.",meta:"One extraordinary signal and a mystery that never repeated."},
+ {title:"The Montauk Project",copy:"The Montauk Project is a collection of stories alleging secret experiments at Camp Hero in New York involving mind control, time travel and strange technologies. The stories became widely known through books and later retellings, but no reliable evidence has established that the alleged experiments occurred.",meta:"A secret base, alleged experiments and a huge pile of speculative lore."},
+ {title:"The Moon Landing Hoax",copy:"This theory claims the Apollo Moon landings were staged rather than carried out. Supporters point to shadows, the flag and photographic details as supposed anomalies. Those claims have been extensively examined and have ordinary physical explanations, while independent tracking and returned lunar material provide substantial evidence that the missions occurred.",meta:"A famous conspiracy that becomes a rabbit hole about evidence, photography and physics."},
+ {title:"The Taos Hum",copy:"Some residents of Taos, New Mexico report hearing a persistent low frequency hum that others cannot hear. Investigations have produced possible environmental and industrial explanations, but no single source has conclusively explained every report. The mystery is real as a reported phenomenon, while its cause remains debated.",meta:"A sound some people swear is there and a mystery you can’t simply switch off."}
+];
+let conspiracyIndex=Math.floor(Math.random()*conspiracyCollection.length);
+function renderConspiracy(){const item=conspiracyCollection[conspiracyIndex%conspiracyCollection.length];const t=document.getElementById("conspiracyTitle"),c=document.getElementById("conspiracyCopy"),m=document.getElementById("conspiracyMeta");if(t)t.textContent=item.title;if(c)c.textContent=item.copy;if(m)m.textContent=item.meta;}
+renderConspiracy();
+// Cursor-driven glass bloom for cards and sidebar tiles.
+document.querySelectorAll('.card,.side-tile').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');},{passive:true});el.addEventListener('pointerleave',()=>{el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%')},{passive:true});});
 
 // 12.3.3 interactive Did You Know tile
 const factCollection=[
@@ -997,21 +987,6 @@ function renderFact(){const item=factCollection[factIndex%factCollection.length]
 renderFact();
 document.getElementById("factNext")?.addEventListener("click",()=>{factIndex=(factIndex+1)%factCollection.length;renderFact();});
 
-// 12.3.1 conspiracy collection and tile interaction
-const conspiracyCollection=[
- {title:"The Philadelphia Experiment",copy:"The legend claims a US Navy ship was made invisible during a secret wartime experiment involving electromagnetic fields. Later versions add teleportation and bizarre effects on the crew. The Navy has denied the experiment, and researchers generally trace the story to later accounts rather than contemporary records.",meta:"A wartime mystery, disputed testimony and one seriously strange story."},
- {title:"The Dyatlov Pass Incident",copy:"In 1959, nine hikers died in the Ural Mountains under circumstances that inspired decades of speculation. Their tent had been cut open from the inside, and the group had fled into extreme cold. Official explanations have changed over time, while theories range from avalanches to far stranger possibilities.",meta:"A real tragedy surrounded by unanswered questions and competing explanations."},
- {title:"The Black Knight Satellite",copy:"A popular space mystery claims an ancient artificial object has been orbiting Earth for thousands of years. Photographs from the Space Shuttle era are often cited as evidence, although NASA and researchers have identified the photographed object as space debris or insulation rather than an alien satellite.",meta:"Real photographs, real objects and a very entertaining leap into the unknown."},
- {title:"The Wow! Signal",copy:"In 1977, a radio telescope detected an unusually strong, narrowband signal that lasted about 72 seconds. Astronomer Jerry Ehman wrote ‘Wow!’ beside the printout. No convincing repeat has ever been detected, leaving its ultimate source unresolved even though there is no evidence that it was extraterrestrial.",meta:"One extraordinary signal and a mystery that never repeated."},
- {title:"The Montauk Project",copy:"The Montauk Project is a collection of stories alleging secret experiments at Camp Hero in New York involving mind control, time travel and strange technologies. The stories became widely known through books and later retellings, but no reliable evidence has established that the alleged experiments occurred.",meta:"A secret base, alleged experiments and a huge pile of speculative lore."},
- {title:"The Moon Landing Hoax",copy:"This theory claims the Apollo Moon landings were staged rather than carried out. Supporters point to shadows, the flag and photographic details as supposed anomalies. Those claims have been extensively examined and have ordinary physical explanations, while independent tracking and returned lunar material provide substantial evidence that the missions occurred.",meta:"A famous conspiracy that becomes a rabbit hole about evidence, photography and physics."},
- {title:"The Taos Hum",copy:"Some residents of Taos, New Mexico report hearing a persistent low frequency hum that others cannot hear. Investigations have produced possible environmental and industrial explanations, but no single source has conclusively explained every report. The mystery is real as a reported phenomenon, while its cause remains debated.",meta:"A sound some people swear is there and a mystery you can’t simply switch off."}
-];
-let conspiracyIndex=Math.floor(Math.random()*conspiracyCollection.length);
-function renderConspiracy(){const item=conspiracyCollection[conspiracyIndex%conspiracyCollection.length];const t=document.getElementById("conspiracyTitle"),c=document.getElementById("conspiracyCopy"),m=document.getElementById("conspiracyMeta");if(t)t.textContent=item.title;if(c)c.textContent=item.copy;if(m)m.textContent=item.meta;}
-renderConspiracy();
-document.getElementById("conspiracyNext")?.addEventListener("click",()=>{conspiracyIndex=(conspiracyIndex+1)%conspiracyCollection.length;renderConspiracy();});
-// Cursor-driven glass bloom for cards and sidebar tiles.
 // 12.3.4 popup liquid-glass pointer reflection.
 document.querySelectorAll('.suggest-box,.adult-modal,.mobile-sheet-inner').forEach(el=>{
   el.addEventListener('pointermove',e=>{
@@ -1020,7 +995,7 @@ document.querySelectorAll('.suggest-box,.adult-modal,.mobile-sheet-inner').forEa
     const y=Math.max(0,Math.min(100,((e.clientY-r.top)/r.height)*100));
     el.style.setProperty('--popup-x',x+'%');
     el.style.setProperty('--popup-y',y+'%');
-    el.style.setProperty('--popup-shine',((x-50)+50)+'%');
+    el.style.setProperty('--popup-shine',x+'%');
   },{passive:true});
   el.addEventListener('pointerleave',()=>{
     el.style.setProperty('--popup-x','50%');
@@ -1029,5 +1004,4 @@ document.querySelectorAll('.suggest-box,.adult-modal,.mobile-sheet-inner').forEa
   },{passive:true});
 });
 
-document.querySelectorAll('.card,.side-tile').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');},{passive:true});el.addEventListener('pointerleave',()=>{el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%')},{passive:true});});
 </script></body></html>
