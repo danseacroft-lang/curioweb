@@ -28,7 +28,7 @@ body{
   color:var(--text);
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
   -webkit-font-smoothing:antialiased;
-  padding-top:68px;
+  padding-top:0;
   transition:background .35s ease,color .35s ease;
 }
 button,input{font:inherit}
@@ -275,7 +275,411 @@ body.dark .uk-clock{color:#b8c0ce}
   .card{transform:none!important}.card:hover{transform:none}
 }
 </style>
-</head><body>
+
+<style id="curio-update-12">
+/* CurioWeb Update 12: clean editorial Apple-inspired redesign */
+:root{
+  --bg:#f7f9fc;--text:#111318;--muted:#667085;--line:rgba(16,24,40,.09);
+  --glass:rgba(255,255,255,.78);--glass-strong:rgba(255,255,255,.92);
+  --shadow:0 16px 50px rgba(35,47,66,.09);--shadow-hover:0 24px 65px rgba(35,47,66,.14);
+}
+body{
+  background:
+    radial-gradient(circle at 78% 13%,rgba(217,231,255,.66),transparent 25%),
+    radial-gradient(circle at 14% 33%,rgba(236,231,255,.55),transparent 27%),
+    linear-gradient(180deg,#fcfdff 0%,#f7f9fc 52%,#fff 100%);
+  color:var(--text);
+  padding-top:0;
+}
+.beta-bar{display:none}
+header{max-width:1470px;padding:18px 32px 22px}
+.top-meta{
+  min-height:48px;margin-bottom:68px;
+  grid-template-columns:1fr auto 1fr;gap:18px;
+}
+.top-left{gap:8px}
+.theme-toggle,.uk-clock{
+  background:rgba(255,255,255,.70);
+  border:1px solid rgba(16,24,40,.09);
+  border-radius:999px;padding:10px 14px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 8px 25px rgba(35,47,66,.055);
+}
+.theme-toggle{font-size:13px;font-weight:700}
+.uk-clock{font-size:12px}
+.logo{font-size:20px;letter-spacing:.22em}
+.logo span{font-size:9px;letter-spacing:.38em;color:#7d8796}
+.top-right{font-size:13px;color:#202632}
+h1{
+  max-width:850px;
+  font-size:clamp(62px,7.2vw,104px);
+  line-height:.91;
+  letter-spacing:-.067em;
+  margin:0 0 24px;
+  font-weight:820;
+}
+.hero{max-width:770px;font-size:19px;line-height:1.48;color:#647084}
+.controls{
+  max-width:1470px;padding:8px 32px 20px;gap:10px;
+  position:sticky;top:0;
+  background:linear-gradient(rgba(247,249,252,.90) 58%,rgba(247,249,252,0));
+  z-index:50;
+}
+.search-wrap{
+  flex:1;min-width:260px;position:relative;display:flex;align-items:center;
+}
+.search-icon{
+  position:absolute;left:18px;z-index:2;color:#1c2430;font-size:27px;line-height:1;
+  transform:rotate(-20deg);pointer-events:none;
+}
+.controls input{
+  width:100%;height:52px;padding:0 18px 0 52px;
+  border-radius:17px;background:rgba(255,255,255,.82);
+  border:1px solid rgba(16,24,40,.10);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 12px 35px rgba(35,47,66,.075);
+  font-size:15px;
+}
+.controls button{
+  height:52px;border-radius:17px;padding:0 17px;
+  background:rgba(255,255,255,.72);color:#171b22;
+  border:1px solid rgba(16,24,40,.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 10px 28px rgba(35,47,66,.055);
+  font-size:13px;font-weight:750;
+}
+.controls button:hover{background:#fff;border-color:rgba(16,24,40,.16);box-shadow:inset 0 1px 0 #fff,0 15px 35px rgba(35,47,66,.10)}
+.controls .primary{background:rgba(255,255,255,.88);color:#11151c}
+.chips{
+  max-width:1470px;padding:0 32px 30px;gap:7px;
+}
+.chip{
+  background:rgba(255,255,255,.70);border:1px solid rgba(16,24,40,.075);
+  color:#5d6878;padding:9px 15px;font-size:12px;
+  box-shadow:0 6px 18px rgba(35,47,66,.035);
+}
+.chip.active{background:#20242c;color:#fff;border-color:#20242c;box-shadow:0 8px 20px rgba(20,24,32,.15)}
+main{max-width:1470px;padding:0 32px 100px}
+.count{color:#8a94a3;font-size:11px;margin:0 0 13px}
+.grid{
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:16px;
+}
+.card{
+  min-height:0;padding:0;border-radius:18px;overflow:hidden;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(16,24,40,.075);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 12px 32px rgba(35,47,66,.07);
+  backdrop-filter:blur(18px) saturate(120%);
+  -webkit-backdrop-filter:blur(18px) saturate(120%);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.card:before{display:none}
+.card:hover{
+  transform:translateY(-4px)!important;
+  border-color:rgba(16,24,40,.12);
+  box-shadow:inset 0 1px 0 #fff,0 22px 50px rgba(35,47,66,.13);
+}
+.card-link{display:block;color:inherit;text-decoration:none}
+.card-media{
+  height:150px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  isolation:isolate;
+}
+.card-media:before,.card-media:after{content:"";position:absolute;inset:0;pointer-events:none}
+.card-media:before{background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.48),transparent 34%),radial-gradient(circle at 75% 80%,rgba(255,255,255,.16),transparent 35%)}
+.card-media:after{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.10))}
+.card-media span{
+  position:relative;z-index:2;font-size:66px;font-weight:300;line-height:1;
+  color:rgba(255,255,255,.94);text-shadow:0 8px 30px rgba(0,0,0,.24);
+}
+.visual-0{background:linear-gradient(135deg,#14151d,#363a4a 45%,#171923)}
+.visual-1{background:linear-gradient(135deg,#dbe8f7,#6f9bc7 45%,#334b6b)}
+.visual-2{background:radial-gradient(circle at 50% 48%,#bfe8ff 0 7%,#365b8a 8% 16%,#07101e 31% 100%)}
+.visual-3{background:linear-gradient(135deg,#6d4939,#b89a7d 46%,#31475b)}
+.visual-4{background:radial-gradient(circle at 52% 48%,#7c9cff 0 3%,#22315d 20%,#090e1d 60%),linear-gradient(120deg,#101d3b,#080b13)}
+.visual-5{background:linear-gradient(135deg,#8da59a,#1e3a31 58%,#17211d)}
+.visual-6{background:linear-gradient(135deg,#ffcf67,#ff6d8d 45%,#6045c8)}
+.visual-7{background:linear-gradient(135deg,#20143e,#7a4cff 45%,#f1b9ff)}
+.visual-8{background:linear-gradient(135deg,#2b6c92,#c2e8ff 48%,#37602e)}
+.visual-9{background:radial-gradient(circle at 65% 35%,#7ee7d7,#133b5b 28%,#071422 72%)}
+.visual-10{background:linear-gradient(90deg,#2459a6,#21a8e8,#f3df68,#f08b36)}
+.visual-11{background:linear-gradient(135deg,#2b2b2b,#111,#424242)}
+.visual-12{background:linear-gradient(135deg,#2c2c3d,#00b7b0 45%,#d66cff)}
+.visual-13{background:linear-gradient(135deg,#1b1b1d,#d9c9b2 48%,#292a30)}
+.visual-14{background:linear-gradient(135deg,#243f72,#9b62ff 45%,#1a163f)}
+.visual-15{background:linear-gradient(135deg,#f2d9a6,#cf9b62 45%,#536f9a)}
+.visual-16{background:linear-gradient(135deg,#a8c5d8,#2b5877 48%,#122638)}
+.visual-17{background:linear-gradient(135deg,#7c9a7c,#d8e3c7 46%,#476b50)}
+.visual-18{background:linear-gradient(135deg,#e6d9ff,#9e79e8 46%,#443061)}
+.visual-19{background:linear-gradient(135deg,#10141e,#3f6d9c 45%,#8bd0ff)}
+.visual-20{background:linear-gradient(135deg,#ff8c8c,#ffd36e 48%,#69b7ff)}
+.visual-21{background:linear-gradient(135deg,#5d4b43,#d4b58a 50%,#5b7c98)}
+.card-body{padding:13px 14px 12px}
+.card-kicker{font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8a93a1;margin-bottom:5px}
+.card h2{font-size:16px;letter-spacing:-.025em;line-height:1.12;margin:0 0 6px;font-weight:780}
+.card p{font-size:12px;line-height:1.4;color:#737d8d;margin:0;min-height:34px}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:11px;color:#667184;font-size:11px;font-weight:750}
+.fav-btn{
+  width:30px;height:30px;border-radius:50%;border:1px solid rgba(16,24,40,.08);
+  background:rgba(255,255,255,.76);color:#1d232d;font-size:15px;
+}
+.badge,.tags,.actions{display:none}
+.empty{padding:60px;border-radius:22px;background:rgba(255,255,255,.60);border:1px solid rgba(16,24,40,.08)}
+footer{
+  background:rgba(255,255,255,.48);
+  border-top:1px solid rgba(16,24,40,.075);
+  padding:25px 20px 30px;color:#7c8796;font-size:11px;
+}
+.footer-links{gap:2px;margin:10px 0}
+.footer-links button{font-size:11px;padding:5px 8px}
+.made-with-love{margin-top:5px}
+.issue-panel{
+  top:0;right:22px;left:auto;width:min(520px,calc(100% - 44px));z-index:4000;
+  border:1px solid rgba(16,24,40,.10);border-radius:0 0 20px 20px;
+  background:rgba(255,255,255,.90);color:#171b22;
+  box-shadow:0 25px 70px rgba(20,30,45,.17);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+}
+.issue-inner{padding:15px 17px}
+.issue-title{color:#171b22}
+.issue-row input{background:rgba(246,248,251,.92);color:#111;border-color:rgba(16,24,40,.10)}
+.issue-row button{background:#20242c;color:#fff;border-color:#20242c}
+.suggest-overlay,.suggest-box{backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.suggest-box{box-shadow:0 35px 100px rgba(20,30,45,.20),inset 0 1px 0 #fff}
+.wormhole-overlay{z-index:5000}
+@media (max-width:1200px){
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  header{padding-left:22px;padding-right:22px}
+  .top-meta{margin-bottom:52px}
+  .controls{padding-left:22px;padding-right:22px}
+  .chips{padding-left:22px;padding-right:22px}
+  main{padding-left:22px;padding-right:22px}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:700px){
+  .top-meta{grid-template-columns:1fr;justify-items:center}
+  .top-left{justify-self:stretch;justify-content:center;order:2}
+  .logo{order:1}
+  .top-right{display:none}
+  h1{font-size:clamp(50px,14vw,76px)}
+  .controls{flex-wrap:wrap}
+  .search-wrap{flex-basis:100%}
+  .controls button{flex:1}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .grid{grid-template-columns:1fr}
+  .controls button span{display:none}
+  .card-media{height:175px}
+  .issue-panel{right:10px;width:calc(100% - 20px)}
+}
+body.dark{
+  background:radial-gradient(circle at 15% 0,#21163b 0,#08090d 38%),#08090d;
+  color:#f5f7fb;
+}
+body.dark .top-right{color:#d6dbe4}
+body.dark .logo{color:#fff}.dark .logo span{color:#8d96a6}
+body.dark .theme-toggle,body.dark .uk-clock,body.dark .controls input,body.dark .controls button,body.dark .chip{
+  background:rgba(18,21,29,.78);color:#f4f6fa;border-color:rgba(255,255,255,.10);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 10px 28px rgba(0,0,0,.18)
+}
+body.dark .hero{color:#9ba4b6}
+body.dark .controls{background:linear-gradient(rgba(8,9,13,.92) 58%,rgba(8,9,13,0))}
+body.dark .chip.active{background:#fff;color:#15181d;border-color:#fff}
+body.dark .card{background:rgba(18,21,29,.78);border-color:rgba(255,255,255,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 45px rgba(0,0,0,.24)}
+body.dark .card-body{background:rgba(18,21,29,.38)}
+body.dark .card-kicker{color:#9aa4b6}
+body.dark .card h2{color:#f5f7fb}
+body.dark .card p,.dark .card-foot{color:#9ba4b6}
+body.dark .fav-btn{background:rgba(18,21,29,.78);color:#f5f7fb;border-color:rgba(255,255,255,.10)}
+body.dark footer{background:rgba(8,9,13,.45);border-color:rgba(255,255,255,.08)}
+body.dark .issue-panel{background:rgba(18,21,29,.92);color:#f5f7fb;border-color:rgba(255,255,255,.10)}
+body.dark .issue-title{color:#f5f7fb}
+body.dark .issue-row input{background:rgba(255,255,255,.05);color:#fff;border-color:rgba(255,255,255,.10)}
+body.dark .empty{background:rgba(18,21,29,.6);border-color:rgba(255,255,255,.10)}
+
+/* Update 12.1: wallpaper system + news sidebar */
+.wallpaper-layer{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  opacity:.72;transition:background-image .35s ease,opacity .35s ease;
+}
+.wallpaper-layer::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(248,250,253,.90) 0%,rgba(248,250,253,.74) 48%,rgba(255,255,255,.88) 100%);
+}
+body.dark .wallpaper-layer{opacity:.52}
+body.dark .wallpaper-layer::after{
+  background:linear-gradient(180deg,rgba(8,10,15,.88),rgba(8,10,15,.70) 50%,rgba(8,10,15,.90));
+}
+.wallpaper-open{
+  height:40px;padding:0 13px;border-radius:999px;border:1px solid rgba(24,31,42,.10);
+  background:rgba(255,255,255,.62);color:#20252d;font-weight:700;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 8px 24px rgba(30,40,55,.06);
+  transition:.2s ease;
+}
+.wallpaper-open:hover{background:#fff;transform:translateY(-1px);box-shadow:inset 0 1px 0 #fff,0 12px 30px rgba(30,40,55,.10)}
+.top-right{display:flex;justify-self:end;align-items:center;gap:12px}
+.top-tagline{display:flex;align-items:center;gap:8px}
+.home-layout{
+  max-width:1500px;margin:0 auto;padding:0 5vw 90px;
+  display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:22px;align-items:start;
+}
+.home-layout main{max-width:none;margin:0;padding:0}
+.home-layout .grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
+.side-tiles{display:flex;flex-direction:column;gap:16px;position:sticky;top:88px}
+.side-tile{
+  padding:20px;border:1px solid rgba(24,31,42,.09);border-radius:24px;
+  background:rgba(255,255,255,.68);backdrop-filter:blur(18px) saturate(125%);
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 16px 45px rgba(35,45,60,.08);
+}
+.side-kicker{font-size:10px;letter-spacing:.14em;font-weight:850;color:#818b9b;margin-bottom:9px}
+.side-tile h2{font-size:22px;line-height:1.08;letter-spacing:-.035em;margin:0 0 8px}
+.side-tile p{font-size:13px;line-height:1.5;color:#697487;margin:0 0 14px}
+.news-links{display:grid;gap:8px}
+.news-links a{
+  display:flex;justify-content:space-between;align-items:center;text-decoration:none;
+  color:#15191f;font-size:13px;font-weight:750;padding:12px 13px;border-radius:14px;
+  background:rgba(255,255,255,.65);border:1px solid rgba(24,31,42,.08);
+  transition:.18s ease;
+}
+.news-links a:hover{background:#fff;transform:translateY(-1px);border-color:rgba(24,31,42,.16)}
+.side-updated,.local-note{font-size:10px;line-height:1.45;color:#8b94a2;margin-top:11px}
+.postcode-row{display:flex;gap:8px}
+.postcode-row input{
+  flex:1;min-width:0;height:43px;padding:0 12px;border-radius:13px;
+  border:1px solid rgba(24,31,42,.11);background:rgba(255,255,255,.75);color:#15191f;
+  outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
+}
+.postcode-row input:focus{border-color:rgba(20,28,40,.25);box-shadow:0 0 0 3px rgba(20,28,40,.04)}
+.postcode-row button{
+  height:43px;padding:0 14px;border:0;border-radius:13px;background:#11151c;color:#fff;font-weight:750;
+}
+.wallpaper-overlay{
+  position:fixed;inset:0;z-index:5000;display:none;align-items:center;justify-content:center;
+  padding:24px;background:rgba(10,13,18,.30);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.wallpaper-overlay.open{display:flex}
+.wallpaper-box{
+  width:min(720px,100%);max-height:min(88vh,760px);overflow:auto;padding:24px;border-radius:28px;
+  background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.80);
+  box-shadow:0 35px 100px rgba(20,28,40,.22);color:#15191f;
+}
+.wallpaper-sub{color:#697487;font-size:13px;margin:4px 0 18px}
+.wallpaper-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.wallpaper-choice{
+  aspect-ratio:16/9;border-radius:17px;border:2px solid transparent;overflow:hidden;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 8px 20px rgba(30,40,55,.08);
+  position:relative;
+}
+.wallpaper-choice.selected{border-color:#11151c}
+.wallpaper-choice span{position:absolute;left:10px;bottom:8px;color:#fff;font-size:11px;font-weight:750;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.wallpaper-upload{display:flex;align-items:center;gap:10px;margin-top:15px;padding-top:15px;border-top:1px solid rgba(24,31,42,.08)}
+.wallpaper-upload input{display:none}
+.upload-btn,.wallpaper-reset,.wallpaper-save{
+  display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 14px;border-radius:13px;
+  font-weight:750;cursor:pointer;border:1px solid rgba(24,31,42,.10);font-size:12px;
+}
+.upload-btn{background:rgba(24,31,42,.06);color:#15191f}
+.wallpaper-upload span{font-size:11px;color:#7c8796;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wallpaper-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+.wallpaper-reset{background:#f1f3f6;color:#303641}
+.wallpaper-save{background:#11151c;color:#fff;border-color:#11151c}
+.wallpaper-note{font-size:10px;color:#8b94a2;text-align:right;margin-top:8px}
+body.dark .wallpaper-open,body.dark .side-tile,body.dark .news-links a,body.dark .postcode-row input{
+  background:rgba(18,21,29,.72);color:#f4f6fa;border-color:rgba(255,255,255,.10);
+}
+body.dark .side-tile p,body.dark .side-updated,body.dark .local-note{color:#9ba4b6}
+body.dark .news-links a:hover{background:rgba(30,34,46,.9)}
+body.dark .wallpaper-box{background:rgba(20,23,31,.94);color:#f5f7fb;border-color:rgba(255,255,255,.10)}
+body.dark .wallpaper-sub{color:#9ba4b6}
+body.dark .wallpaper-choice.selected{border-color:#fff}
+body.dark .wallpaper-upload{border-color:rgba(255,255,255,.10)}
+body.dark .upload-btn,body.dark .wallpaper-reset{background:rgba(255,255,255,.08);color:#f4f6fa;border-color:rgba(255,255,255,.10)}
+@media (max-width:1050px){
+  .home-layout{grid-template-columns:1fr}
+  .side-tiles{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:700px){
+  .top-right{justify-self:start;flex-wrap:wrap}
+  .top-tagline{display:none}
+  .home-layout{padding-left:5vw;padding-right:5vw}
+  .side-tiles{grid-template-columns:1fr}
+  .wallpaper-grid{grid-template-columns:repeat(2,1fr)}
+  .wallpaper-upload{align-items:flex-start;flex-direction:column}
+}
+
+
+/* CurioWeb 12.2: precision visual pass, hyperspace Surprise Me, mobile navigation and backend groundwork */
+:root{
+  --cw-blue:#3d72ff;--cw-blue-soft:#e8efff;--cw-border:rgba(20,29,45,.09);--cw-panel:rgba(255,255,255,.72);
+}
+body{overflow-x:hidden}
+body::selection{background:#1b63ff;color:#fff}
+.top-right{gap:10px}
+.top-tagline{font-size:12px;color:#778293}
+.home-layout{grid-template-columns:minmax(0,1fr) 292px;gap:20px;padding-bottom:54px}
+.home-layout main{min-width:0}
+.side-tiles{gap:12px}
+.side-tile{padding:15px 16px;border-radius:20px;background:rgba(255,255,255,.67);box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 12px 32px rgba(35,47,66,.065)}
+.side-kicker{font-size:9px;letter-spacing:.13em;margin-bottom:7px}
+.side-tile h2{font-size:17px;margin-bottom:6px}
+.side-tile p{font-size:11px;line-height:1.42;margin-bottom:11px}
+.side-row-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.side-link{border:0;background:none;padding:2px 0;color:#4c76db;font-size:10px;font-weight:800}
+.news-tile .news-links{gap:6px}
+.news-links a{padding:10px 11px;border-radius:12px;font-size:11px;background:rgba(255,255,255,.56)}
+.local-tile .postcode-row{gap:6px}
+.postcode-row input{height:39px;border-radius:11px;font-size:11px}
+.postcode-row button{height:39px;border-radius:11px;font-size:11px}
+.weather-location{font-size:10px;color:#7a8493;margin:-1px 0 8px}
+.weather-main{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:7px}
+.weather-icon{font-size:31px;line-height:1}
+.weather-main strong{font-size:30px;letter-spacing:-.06em}
+.weather-main span{font-size:10px;color:#7d8796;text-align:right;max-width:70px}
+.weather-range{display:flex;gap:12px;margin-top:5px;font-size:9px;color:#8b94a1}
+.wallpaper-mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px}
+.wallpaper-mini-choice{height:38px;border:1px solid rgba(20,29,45,.08);border-radius:7px;padding:0;background-size:cover;background-position:center;cursor:pointer}
+.wallpaper-mini-choice.selected{box-shadow:0 0 0 2px #11151c inset}
+.wallpaper-mini-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px}
+.wallpaper-mini-actions button{height:30px;border-radius:9px;border:1px solid rgba(20,29,45,.09);background:rgba(255,255,255,.62);font-size:9px;font-weight:800;color:#353d49}
+.report-tile{padding:7px}
+.report-trigger{width:100%;display:grid;grid-template-columns:26px 1fr 14px;gap:8px;align-items:center;text-align:left;border:0;background:transparent;padding:7px;color:#1d2430}
+.report-trigger>span:first-child{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(20,29,45,.09);background:rgba(255,255,255,.7);font-size:14px}
+.report-trigger strong{display:block;font-size:11px}.report-trigger small{display:block;font-size:9px;color:#8a94a2;margin-top:2px}.report-trigger b{font-size:17px;color:#8b94a1}
+.experience-strip{max-width:1470px;margin:0 auto 34px;padding:0 32px;display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+.experience-block{border-radius:22px;padding:18px;background:linear-gradient(145deg,#0b0d12,#151923);color:#fff;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 60px rgba(0,0,0,.16);overflow:hidden}
+.experience-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}.experience-heading span{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#8995aa;font-weight:850}.experience-heading h2{margin:4px 0 0;font-size:18px;letter-spacing:-.03em}.experience-heading button{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:7px 11px;font-size:10px;font-weight:800}
+.wormhole-story{display:grid;grid-template-columns:1fr 12px 1fr 12px 1fr 12px 1fr;align-items:center;gap:5px}.wormhole-story i{font-style:normal;color:#78859c;text-align:center}.wormhole-frame{height:98px;border-radius:12px;overflow:hidden;position:relative;background:radial-gradient(circle at center,#20304e 0 2%,#080a10 22%,#030407 70%);border:1px solid rgba(255,255,255,.08);display:flex;align-items:flex-end;padding:8px;font-size:8px;color:#d5dbea;isolation:isolate}.wormhole-frame:before{content:"";position:absolute;inset:-50%;background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.02) 0deg 5deg,rgba(88,144,255,.25) 5.4deg 5.8deg,rgba(255,90,205,.14) 6deg 7deg,transparent 7.5deg 12deg);animation:previewRush 1.7s linear infinite;z-index:-1}.wormhole-frame.streaks:before{animation-duration:1.1s;transform:scale(1.6)}.wormhole-frame.tunnel:before{animation-duration:.75s;transform:scale(2.3)}.wormhole-frame.landing:before{animation-duration:2s;opacity:.65}.wormhole-frame span{position:relative;z-index:2;text-shadow:0 1px 10px #000}.wormhole-frame:after{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;background:#020205;box-shadow:0 0 20px 6px rgba(80,150,255,.3);transform:translate(-50%,-50%)}
+.backend-block{background:linear-gradient(145deg,#11141b,#202631)}.backend-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.backend-cards>div{min-width:0;padding:9px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.035);border-radius:12px}.backend-cards b{display:grid;place-items:center;width:24px;height:24px;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#b9c7e7;margin-bottom:7px;font-size:12px}.backend-cards strong{display:block;font-size:9px}.backend-cards small{display:block;color:#7f8ca2;font-size:7px;line-height:1.35;margin-top:4px}
+.mobile-nav,.mobile-sheet{display:none}
+.wormhole-overlay{background:#010205}
+.wormhole-overlay canvas{position:absolute;inset:0;width:100%;height:100%}
+.wormhole-vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 0 22%,rgba(0,0,0,.10) 38%,rgba(0,0,0,.74) 100%),linear-gradient(90deg,rgba(0,0,0,.35),transparent 25%,transparent 75%,rgba(0,0,0,.35));pointer-events:none}
+.wormhole-copy{opacity:0;animation:wormCopyIn .55s ease 1.15s forwards;text-align:center;position:relative;z-index:5}.wormhole-copy strong{font-size:clamp(28px,4vw,54px);font-weight:800;letter-spacing:-.045em}.wormhole-copy span{font-size:14px;color:#aeb9ce;margin-top:6px}
+@keyframes wormCopyIn{to{opacity:1}}@keyframes previewRush{from{transform:scale(.45) rotate(0)}to{transform:scale(2.8) rotate(24deg)}}
+@media (max-width:1100px){.home-layout{grid-template-columns:minmax(0,1fr) 270px}.experience-strip{grid-template-columns:1fr}.backend-cards{grid-template-columns:repeat(5,1fr)}}
+@media (max-width:850px){.home-layout{grid-template-columns:1fr}.side-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));position:static}.experience-strip{padding:0 22px}.wormhole-story{grid-template-columns:1fr 12px 1fr}.wormhole-frame:nth-of-type(n+3),.wormhole-story i:nth-of-type(n+3){display:none}.backend-cards{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:700px){
+  body{padding-bottom:74px}
+  header{padding:14px 16px 18px}.top-meta{margin-bottom:38px}.logo{font-size:17px}.logo span{font-size:7px}
+  .top-left{width:100%;justify-content:space-between}.theme-toggle,.uk-clock{padding:8px 10px;font-size:10px}
+  h1{font-size:clamp(46px,14vw,68px);line-height:.94;letter-spacing:-.06em;margin-bottom:16px}.hero{font-size:14px;line-height:1.45}
+  .controls{padding:8px 16px 13px;gap:7px}.controls input{height:49px;border-radius:15px;padding-left:46px}.controls button{height:44px;border-radius:14px;font-size:11px;padding:0 11px}
+  .chips{padding:0 16px 18px}.chip{font-size:10px;padding:8px 12px}
+  .home-layout{padding:0 16px 35px}.grid{grid-template-columns:1fr!important;gap:12px}.card{border-radius:17px}.card-media{height:190px}.card-body{padding:13px}.card h2{font-size:18px}
+  .side-tiles{display:none}
+  .experience-strip{padding:0 16px;margin-bottom:20px}.experience-block{padding:15px;border-radius:19px}.wormhole-story{grid-template-columns:1fr}.wormhole-story i,.wormhole-frame:nth-of-type(n+2){display:none}.backend-cards{grid-template-columns:1fr 1fr}.backend-cards>div{padding:8px}.backend-cards small{font-size:8px}
+  .mobile-nav{position:fixed;left:10px;right:10px;bottom:10px;height:62px;z-index:4500;display:grid;grid-template-columns:repeat(5,1fr);padding:6px;border:1px solid rgba(20,29,45,.10);border-radius:20px;background:rgba(255,255,255,.80);backdrop-filter:blur(22px) saturate(140%);box-shadow:0 15px 40px rgba(25,35,50,.18),inset 0 1px 0 rgba(255,255,255,.95)}
+  .mobile-nav button{border:0;background:transparent;color:#7a8493;font-size:8px;font-weight:800;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.mobile-nav button span{font-size:18px;line-height:1;color:#202631}.mobile-nav button:active,.mobile-nav button.active{background:#f0f3f8;color:#11151c}.mobile-nav button.active span{color:#11151c}
+  .mobile-sheet{position:fixed;inset:0;z-index:4400;background:rgba(4,6,10,.35);backdrop-filter:blur(8px);align-items:flex-end}.mobile-sheet.open{display:flex}.mobile-sheet-inner{width:100%;padding:16px 16px 92px;border-radius:28px 28px 0 0;background:rgba(255,255,255,.96);box-shadow:0 -20px 60px rgba(0,0,0,.2);display:grid;gap:8px}.mobile-sheet-head{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 8px}.mobile-sheet-head strong{font-size:18px}.mobile-sheet-head button{border:0;background:#edf0f4;width:34px;height:34px;border-radius:50%;font-size:21px}.mobile-sheet-inner>button:not(.mobile-sheet-head button){height:46px;text-align:left;padding:0 14px;border:1px solid rgba(20,29,45,.08);border-radius:13px;background:#f7f8fa;color:#202631;font-weight:750}
+  body.dark .mobile-nav{background:rgba(18,21,29,.86);border-color:rgba(255,255,255,.10)}body.dark .mobile-nav button{color:#8f99ac}body.dark .mobile-nav button span{color:#f4f6fa}body.dark .mobile-nav button.active{background:#272c36}body.dark .mobile-sheet-inner{background:rgba(18,21,29,.97)}body.dark .mobile-sheet-head button,body.dark .mobile-sheet-inner>button:not(.mobile-sheet-head button){background:#242933;color:#fff;border-color:rgba(255,255,255,.08)}
+}
+</style>
+
+</head><body data-curioweb-version="12.2">
+<div class="wallpaper-layer" id="wallpaperLayer" aria-hidden="true"></div>
 <div class="beta-bar">Curio V.1 beta <span>We are still building things, so you may encounter the occasional snag.</span><button class="beta-experimental" id="issueOpen" type="button">This is an experimental version of Curio. Report issues HERE</button></div>
 <div class="issue-panel" id="issuePanel">
   <div class="issue-inner">
@@ -294,26 +698,118 @@ body.dark .uk-clock{color:#b8c0ce}
       <div class="uk-clock" id="ukClock" aria-label="UK date and time"></div>
     </div>
     <div class="logo">CURIOWEB <span>HUMAN RABBIT HOLES</span></div>
-    <div class="top-right">♥ <span>Explore more. Scroll less.</span></div>
+    <div class="top-right"><button class="wallpaper-open" id="wallpaperOpen" type="button">◫ <span>Wallpapers</span></button><span class="top-tagline">♥ <span>Explore more. Scroll less.</span></span></div>
   </div>
   <h1>Go where the internet gets interesting.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></header>
-<div class="controls"><input id="q" placeholder="Search sites, topics or tags…"><button class="primary" id="random">🎲 Surprise me</button><button id="suggestOpen">💡 Suggest a website</button><button id="fav">★ Favourites</button></div>
-<div class="chips" id="chips"></div><main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
+<div class="controls">
+  <div class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><input id="q" placeholder="Search sites, topics or tags…" aria-label="Search CurioWeb"></div>
+  <button class="primary" id="random">🎲 <span>Surprise me</span></button>
+  <button id="suggestOpen">💡 <span>Suggest a website</span></button>
+  <button id="fav">☆ <span>Favourites</span></button>
+</div>
+<div class="chips" id="chips"></div>
+<div class="home-layout">
+  <main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
+  <aside class="side-tiles" aria-label="CurioWeb information">
+    <section class="side-tile news-tile">
+      <div class="side-kicker">UK NEWS</div>
+      <h2>What's happening in Britain.</h2>
+      <p>Jump into the latest UK stories from trusted news sources.</p>
+      <div class="news-links">
+        <a href="https://www.bbc.co.uk/news" target="_blank" rel="noopener">BBC News <span>↗</span></a>
+        <a href="https://www.theguardian.com/uk-news" target="_blank" rel="noopener">The Guardian UK <span>↗</span></a>
+      </div>
+      <div class="side-updated">External news sites open in a new tab.</div>
+    </section>
+    <section class="side-tile local-tile">
+      <div class="side-kicker">LOCAL NEWS</div>
+      <h2>What's happening near you?</h2>
+      <p>Enter a UK postcode and we'll take you straight to local news for that area.</p>
+      <div class="postcode-row">
+        <input id="postcodeInput" type="text" inputmode="text" maxlength="8" placeholder="e.g. B61 8XX" aria-label="UK postcode">
+        <button id="postcodeGo" type="button">Find</button>
+      </div>
+      <div class="local-note" id="localNote">Your postcode stays in your browser. Nothing is sent to CurioWeb.</div>
+    </section>
+    <section class="side-tile weather-tile">
+      <div class="side-row-head"><div class="side-kicker">WEATHER</div><button class="side-link" id="weatherChange" type="button">Change</button></div>
+      <div class="weather-location" id="weatherLocation">Bromsgrove, Worcestershire</div>
+      <div class="weather-main"><div class="weather-icon" id="weatherIcon">☁️</div><strong id="weatherTemp">14°C</strong><span id="weatherSummary">Partly cloudy</span></div>
+      <div class="weather-range"><span>H: 18°</span><span>L: 11°</span></div>
+    </section>
+    <section class="side-tile wallpaper-mini">
+      <div class="side-row-head"><div><div class="side-kicker">WALLPAPER</div><p>Choose a background for your CurioWeb experience.</p></div></div>
+      <div class="wallpaper-mini-grid" id="wallpaperMiniGrid"></div>
+      <div class="wallpaper-mini-actions"><button type="button" id="miniUpload">⇧ Upload your own</button><button type="button" id="miniSave">Save Wallpaper</button></div>
+    </section>
+    <section class="side-tile report-tile">
+      <button class="report-trigger" id="reportTrigger" type="button"><span>♡</span><span><strong>Report an Issue</strong><small>Found a bug? Let us know.</small></span><b>›</b></button>
+    </section>
+  </aside>
+</div>
+<section class="experience-strip" aria-label="CurioWeb experience preview">
+  <div class="experience-block wormhole-preview-block">
+    <div class="experience-heading"><div><span>Surprise Me</span><h2>Wormhole Animation</h2></div><button type="button" id="previewWormhole">Try it</button></div>
+    <div class="wormhole-story">
+      <div class="wormhole-frame"><div class="preview-stars"></div><span>Initiating jump…</span></div><i>→</i>
+      <div class="wormhole-frame streaks"><div class="preview-stars"></div><span>Entering hyperspace…</span></div><i>→</i>
+      <div class="wormhole-frame tunnel"><div class="preview-stars"></div><span>Woooo…</span></div><i>→</i>
+      <div class="wormhole-frame landing"><div class="preview-stars"></div><span>Landing on something amazing…</span></div>
+    </div>
+  </div>
+  <div class="experience-block backend-block">
+    <div class="experience-heading"><div><span>Backend Ready</span><h2>The next chapter is just the beginning.</h2></div></div>
+    <div class="backend-cards">
+      <div><b>◌</b><strong>Modular Code</strong><small>Clean structure for easy expansion</small></div>
+      <div><b>◇</b><strong>API Ready</strong><small>Built with future backend integration in mind</small></div>
+      <div><b>♙</b><strong>User Accounts</strong><small>Login system coming soon</small></div>
+      <div><b>▤</b><strong>Database Support</strong><small>Ready for favourites and settings</small></div>
+      <div><b>⌁</b><strong>Dynamic Content</strong><small>Easy to connect to live data</small></div>
+    </div>
+  </div>
+</section>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <button type="button" data-mobile="home"><span>⌂</span>Home</button>
+  <button type="button" data-mobile="search"><span>⌕</span>Search</button>
+  <button type="button" data-mobile="categories"><span>◉</span>Categories</button>
+  <button type="button" data-mobile="favourites"><span>♡</span>Favourites</button>
+  <button type="button" data-mobile="more"><span>•••</span>More</button>
+</nav>
+<div class="mobile-sheet" id="mobileSheet" aria-hidden="true"><div class="mobile-sheet-inner"><div class="mobile-sheet-head"><strong>CurioWeb</strong><button id="mobileSheetClose" type="button">×</button></div><button data-sheet="news">UK News</button><button data-sheet="local">Local News</button><button data-sheet="weather">Weather</button><button data-sheet="wallpaper">Wallpapers</button><button data-sheet="report">Report an Issue</button><button data-sheet="about">About CurioWeb</button></div></div>
+<div class="wallpaper-overlay" id="wallpaperOverlay" role="dialog" aria-modal="true" aria-labelledby="wallpaperTitle">
+  <div class="wallpaper-box">
+    <div class="suggest-head">
+      <h2 id="wallpaperTitle">◫ Choose your wallpaper</h2>
+      <button class="suggest-close" id="wallpaperClose" type="button" aria-label="Close">×</button>
+    </div>
+    <p class="wallpaper-sub">Pick a Curio background, upload your own, then save it for this browser.</p>
+    <div class="wallpaper-grid" id="wallpaperGrid"></div>
+    <div class="wallpaper-upload">
+      <label class="upload-btn" for="wallpaperFile">Upload your own</label>
+      <input id="wallpaperFile" type="file" accept="image/*">
+      <span id="wallpaperFileName">No image selected</span>
+    </div>
+    <div class="wallpaper-actions">
+      <button class="wallpaper-reset" id="wallpaperReset" type="button">Reset</button>
+      <button class="wallpaper-save" id="wallpaperSave" type="button">Save wallpaper</button>
+    </div>
+    <div class="wallpaper-note" id="wallpaperNote">Wallpaper is saved locally in this browser.</div>
+  </div>
+</div>
+
 <div class="wormhole-overlay" id="wormholeOverlay" aria-hidden="true">
-  <div class="wormhole-stars"></div>
-  <div class="wormhole-ring ring-one"></div>
-  <div class="wormhole-ring ring-two"></div>
-  <div class="wormhole-ring ring-three"></div>
-  <div class="wormhole-core"></div>
-  <div class="wormhole-copy"><strong>Woooo...</strong><span>down we go!</span></div>
+  <canvas id="wormholeCanvas" aria-hidden="true"></canvas>
+  <div class="wormhole-vignette" aria-hidden="true"></div>
+  <div class="wormhole-copy"><strong>Entering hyperspace</strong><span>Finding your next rabbit hole…</span></div>
 </div>
 
 <footer>
   <div>CurioWeb · Explore responsibly. External websites open in a new tab.</div>
   <div class="footer-links">
-    <button type="button" onclick="openInfo('terms')">Terms</button>
-    <button type="button" onclick="openInfo('privacy')">Privacy</button>
+    <button type="button" onclick="openInfo('terms')">▤ Terms</button>
+    <button type="button" onclick="openInfo('privacy')">♢ Privacy</button>
     <button type="button" onclick="openSuggest()">💡 Suggest a website</button>
+    <button type="button" onclick="openIssue()">⚑ Report an issue</button>
   </div>
   <div class="made-with-love">Made with love by Dan S <span aria-hidden="true">♥</span> GPT</div>
 </footer>
@@ -345,10 +841,35 @@ body.dark .uk-clock{color:#b8c0ce}
 const sites=[{"name": "Neal.fun", "url": "https://neal.fun/", "cat": "Interactive", "desc": "Polished experiments, games and rabbit holes.", "tags": "interactive,fun,science,games"}, {"name": "Radio Garden", "url": "https://radio.garden/", "cat": "Explore", "desc": "Spin the globe and listen to live radio from around the world.", "tags": "radio,world,travel,audio"}, {"name": "WindowSwap", "url": "https://www.window-swap.com/", "cat": "Explore", "desc": "Look through windows around the world via recordings made by strangers.", "tags": "travel,calm,world,video"}, {"name": "The Useless Web", "url": "https://theuselessweb.com/", "cat": "Weird", "desc": "One button. One gloriously pointless website.", "tags": "random,weird,funny"}, {"name": "Pointer Pointer", "url": "https://pointerpointer.com/", "cat": "Weird", "desc": "Move your cursor and find a photograph pointing exactly at it.", "tags": "weird,interactive,funny"}, {"name": "Atlas Obscura", "url": "https://www.atlasobscura.com/", "cat": "Rabbit Holes", "desc": "Hidden places, strange history and fascinating things.", "tags": "history,travel,weird,places"}, {"name": "Marginalia Search", "url": "https://search.marginalia.nu/", "cat": "Discover", "desc": "Search the older, stranger and text heavy web.", "tags": "search,small web,old web"}, {"name": "Every Noise at Once", "url": "https://everynoise.com/", "cat": "Music", "desc": "Explore a huge map of music genres.", "tags": "music,discovery,audio"}, {"name": "Zoomquilt", "url": "https://zoomquilt.org/", "cat": "Art", "desc": "An endlessly zooming collaborative painting.", "tags": "art,visual,weird,calm"}, {"name": "This Is Sand", "url": "https://thisissand.com/", "cat": "Creative", "desc": "Pour digital sand and make satisfying landscapes.", "tags": "creative,art,calm"}, {"name": "Patatap", "url": "https://patatap.com/", "cat": "Creative", "desc": "Turn your keyboard into a tiny audiovisual instrument.", "tags": "music,creative,interactive"}, {"name": "Earth Nullschool", "url": "https://earth.nullschool.net/", "cat": "Science", "desc": "Watch weather and atmospheric conditions move across Earth.", "tags": "science,weather,earth,data"}, {"name": "The True Size Of", "url": "https://www.thetruesize.com/", "cat": "Learn", "desc": "Drag countries around a map and compare their apparent size.", "tags": "maps,geography,learning"}, {"name": "100,000 Stars", "url": "https://stars.chromeexperiments.com/", "cat": "Space", "desc": "Explore a beautiful interactive visualisation of nearby stars.", "tags": "space,science,stars,visual"}, {"name": "Infinite Craft", "url": "https://neal.fun/infinite-craft/", "cat": "Games", "desc": "Combine ideas and discover an absurd number of things.", "tags": "game,crafting,rabbit hole"}, {"name": "Wikipedia Random", "url": "https://en.wikipedia.org/wiki/Special:Random", "cat": "Rabbit Holes", "desc": "One click and Wikipedia decides what you learn next.", "tags": "random,learning,history"}, {"name": "Photopea", "url": "https://www.photopea.com/", "cat": "Useful", "desc": "A powerful image editor that runs entirely in your browser.", "tags": "design,image,useful,creative"}, {"name": "Radiooooo", "url": "https://radiooooo.com/", "cat": "Music", "desc": "Choose a country and decade, then hear music from that place and time.", "tags": "music,history,world"}, {"name": "The Pudding", "url": "https://pudding.cool/", "cat": "Data", "desc": "Beautiful interactive stories built from data.", "tags": "data,journalism,interactive"}, {"name": "FlightRadar24", "url": "https://www.flightradar24.com/", "cat": "Explore", "desc": "Watch aircraft move around the world in real time.", "tags": "aviation,maps,world,live"}, {"name": "Cat Bounce", "url": "https://cat-bounce.com/", "cat": "Weird", "desc": "Bouncing cats. That is the entire concept.", "tags": "weird,funny,pointless"}, {"name": "Endless Horse", "url": "https://endless.horse/", "cat": "Weird", "desc": "Scroll a horse that refuses to end.", "tags": "weird,scroll,funny"}, {"name": "Long Doge Challenge", "url": "https://longdogechallenge.com/", "cat": "Weird", "desc": "Keep scrolling. The doge keeps getting longer.", "tags": "weird,scroll,funny"}, {"name": "Eel Slap", "url": "https://eelslap.com/", "cat": "Weird", "desc": "Slap an eel across a surprisingly satisfying screen.", "tags": "weird,funny,pointless"}, {"name": "Falling Falling", "url": "https://fallingfalling.com/", "cat": "Weird", "desc": "A hypnotic little falling experiment.", "tags": "weird,visual,calm"}, {"name": "Koalas to the Max", "url": "https://koalastothemax.com/", "cat": "Weird", "desc": "Move your cursor and reveal a hidden picture.", "tags": "weird,interactive,calm"}, {"name": "Sandspiel", "url": "https://sandspiel.club/", "cat": "Games", "desc": "A falling sand physics playground.", "tags": "physics,sandbox,creative"}, {"name": "Orb.Farm", "url": "https://orb.farm/", "cat": "Games", "desc": "Build and watch a tiny aquatic ecosystem.", "tags": "simulation,science,calm"}, {"name": "Little Alchemy 2", "url": "https://littlealchemy2.com/", "cat": "Games", "desc": "Combine elements into hundreds of discoveries.", "tags": "game,crafting,rabbit hole"}, {"name": "OpenGuessr", "url": "https://openguessr.com/", "cat": "Games", "desc": "Explore street views and guess where you are.", "tags": "geography,game,travel"}, {"name": "Internet Roadtrip", "url": "https://neal.fun/internet-roadtrip/", "cat": "Explore", "desc": "Take a communal road trip through the internet.", "tags": "travel,interactive,nealfun"}, {"name": "FutureMe", "url": "https://www.futureme.org/", "cat": "Rabbit Holes", "desc": "Write a letter to your future self.", "tags": "future,writing,curious"}, {"name": "The Internet Map", "url": "https://internet-map.net/", "cat": "Explore", "desc": "Visualise the web as a giant map of domains.", "tags": "internet,maps,visual"}, {"name": "MapCrunch", "url": "https://www.mapcrunch.com/", "cat": "Explore", "desc": "Drop into a random street view somewhere on Earth.", "tags": "maps,travel,random"}, {"name": "MyNoise", "url": "https://mynoise.net/", "cat": "Chill", "desc": "Generate layered ambient sounds and noise.", "tags": "audio,calm,ambient"}, {"name": "A Soft Murmur", "url": "https://asoftmurmur.com/", "cat": "Chill", "desc": "Mix gentle environmental sounds.", "tags": "audio,calm,ambient"}, {"name": "Noisli", "url": "https://www.noisli.com/", "cat": "Chill", "desc": "Create a personalised background soundscape.", "tags": "audio,focus,calm"}, {"name": "Drive & Listen", "url": "https://driveandlisten.herokuapp.com/", "cat": "Explore", "desc": "Drive through cities while listening to local radio.", "tags": "travel,video,radio"}, {"name": "HORG", "url": "https://occlusionresearch.org/", "cat": "Rabbit Holes", "desc": "A serious taxonomy of plastic bread bag clips.", "tags": "weird,science,history"}, {"name": "The Brick Bible", "url": "https://thebrickbible.com/", "cat": "Rabbit Holes", "desc": "Biblical stories recreated with LEGO photography.", "tags": "lego,history,art"}, {"name": "The Deep Sea", "url": "https://neal.fun/deep-sea/", "cat": "Science", "desc": "Scroll down through the depths of the ocean.", "tags": "ocean,science,depth"}, {"name": "The Size of Space", "url": "https://neal.fun/size-of-space/", "cat": "Space", "desc": "Zoom through an enormous scale of the universe.", "tags": "space,science,scale"}, {"name": "Space Elevator", "url": "https://neal.fun/space-elevator/", "cat": "Space", "desc": "Ride an imaginary elevator from Earth into space.", "tags": "space,interactive,science"}, {"name": "Universe Sandbox", "url": "https://universesandbox.com/", "cat": "Space", "desc": "Play with gravity, planets and cosmic systems.", "tags": "space,simulation,science"}, {"name": "Stellarium Web", "url": "https://stellarium-web.org/", "cat": "Space", "desc": "Explore a detailed interactive night sky.", "tags": "space,stars,astronomy"}, {"name": "NASA Eyes", "url": "https://eyes.nasa.gov/", "cat": "Space", "desc": "Explore NASA missions and the solar system in 3D.", "tags": "space,nasa,science"}, {"name": "Scale of the Universe", "url": "https://scaleofuniverse.com/", "cat": "Science", "desc": "Explore the universe from tiny particles to galaxies.", "tags": "science,scale,space"}, {"name": "Windy", "url": "https://www.windy.com/", "cat": "Science", "desc": "Explore global weather, wind and atmospheric maps.", "tags": "weather,maps,science"}, {"name": "Ventusky", "url": "https://www.ventusky.com/", "cat": "Science", "desc": "Watch weather systems move across the globe.", "tags": "weather,maps,science"}, {"name": "MarineTraffic", "url": "https://www.marinetraffic.com/", "cat": "Explore", "desc": "Track ships moving across the world's oceans.", "tags": "ships,maps,live,world"}, {"name": "EarthCam", "url": "https://www.earthcam.com/", "cat": "Explore", "desc": "Peek at live webcams from around the world.", "tags": "webcams,travel,live"}, {"name": "Virtual Vacation", "url": "https://www.virtualvacation.us/", "cat": "Explore", "desc": "Take virtual trips through real places.", "tags": "travel,video,world"}, {"name": "Chrome Music Lab", "url": "https://musiclab.chromeexperiments.com/", "cat": "Creative", "desc": "Play with simple musical experiments in your browser.", "tags": "music,creative,interactive"}, {"name": "Silk", "url": "https://silk.com/", "cat": "Creative", "desc": "Draw flowing generative art with your cursor.", "tags": "art,creative,generative"}, {"name": "Weave Silk", "url": "https://weavesilk.com/", "cat": "Creative", "desc": "Create symmetrical glowing silk drawings.", "tags": "art,creative,visual"}, {"name": "Blobmaker", "url": "https://www.blobmaker.app/", "cat": "Creative", "desc": "Generate strange custom SVG blobs.", "tags": "design,creative,random"}, {"name": "Coolors", "url": "https://coolors.co/", "cat": "Useful", "desc": "Generate and explore colour palettes.", "tags": "design,colour,useful"}, {"name": "Remove.bg", "url": "https://www.remove.bg/", "cat": "Useful", "desc": "Remove image backgrounds in seconds.", "tags": "image,tool,useful"}, {"name": "Archive.org", "url": "https://archive.org/", "cat": "Rabbit Holes", "desc": "Explore an enormous archive of books, music, software and the old web.", "tags": "archive,history,web"}, {"name": "Wayback Machine", "url": "https://web.archive.org/", "cat": "Rabbit Holes", "desc": "Travel through snapshots of websites from the past.", "tags": "archive,history,old web"}, {"name": "Library of Babel", "url": "https://libraryofbabel.info/", "cat": "Rabbit Holes", "desc": "Explore a fictional library containing every possible text.", "tags": "books,random,philosophy"}, {"name": "Radio Atlas", "url": "https://radioatlas.org/", "cat": "Music", "desc": "Listen to radio documentaries and unusual audio journeys.", "tags": "audio,documentary,world"}, {"name": "Information is Beautiful", "url": "https://informationisbeautiful.net/", "cat": "Data", "desc": "Explore visual explanations of complex subjects.", "tags": "data,design,learning"}, {"name": "Gapminder", "url": "https://www.gapminder.org/tools/", "cat": "Data", "desc": "Explore global development data interactively.", "tags": "data,world,science"}, {"name": "Our World in Data", "url": "https://ourworldindata.org/", "cat": "Data", "desc": "Explore huge collections of global data and charts.", "tags": "data,science,world"}], cats=["All",...new Set(sites.map(x=>x.cat)),"Adult"];let cat="All",onlyFav=false,favs=JSON.parse(localStorage.getItem("cwFavs")||"[]");
 const q=document.getElementById("q"),grid=document.getElementById("grid"),chips=document.getElementById("chips"),count=document.getElementById("count");
 function esc(x){return x.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+const visualIcons={
+  "The Useless Web":"✦","EarthCam":"◫","NASA Eyes":"◉","WindowSwap":"⌗","Stellarium Web":"✧",
+  "A Soft Murmur":"≈","Neal.fun":"◌","Little Alchemy 2":"⚗","OpenGuessr":"⌖","Radio Garden":"◎",
+  "Coolors":"▥","Internet Archive":"▤","Sandspiel":"∿","Cat Bounce":"⌁","FutureMe":"✉"
+};
+function visualIcon(name){
+  if(visualIcons[name]) return visualIcons[name];
+  const icons=["✦","◌","◎","⌁","✧","◉","⌖","≈","∿","◇"];
+  let n=0; for(let i=0;i<name.length;i++) n=(n+name.charCodeAt(i)*(i+1))%icons.length;
+  return icons[n];
+}
+function visualClass(name){
+  let n=0; for(let i=0;i<name.length;i++) n=(n+name.charCodeAt(i)*(i+1))%12;
+  return "visual-"+n;
+}
 function draw(){chips.innerHTML=cats.map(c=>`<button class="chip ${c==cat?"active":""}" onclick="cat='${c}';draw()">${c}</button>`).join("");
 let s=sites.filter(x=>(cat=="All"||x.cat==cat)&&(!onlyFav||favs.includes(x.name))&&(!q.value||[x.name,x.cat,x.desc,x.tags].join(" ").toLowerCase().includes(q.value.toLowerCase()))); if(cat==="Adult") s=[];
 count.textContent=s.length+" "+(s.length==1?"site":"sites")+" found";
-grid.innerHTML=cat==='Adult'?'<div class="empty">Adult Curio is coming soon. No links have been added yet.</div>':s.length?s.map(x=>`<article class="card"><span class="badge">${esc(x.cat)}</span><h2>${esc(x.name)}</h2><p>${esc(x.desc)}</p><div class="tags">${x.tags.split(",").map(t=>`<span class="tag">#${esc(t)}</span>`).join("")}</div><div class="actions"><a href="${x.url}" target="_blank" rel="noopener">Explore ↗</a><button onclick="toggle('${x.name.replace(/'/g,"\\'")}')">${favs.includes(x.name)?"★":"☆"}</button></div></article>`).join(""):'<div class="empty">Nothing here. Try another search or category.</div>'}
+grid.innerHTML=cat==='Adult'?'<div class="empty">Adult Curio is coming soon. No links have been added yet.</div>':s.length?s.map(x=>`<article class="card">
+  <a class="card-link" href="${x.url}" target="_blank" rel="noopener" aria-label="Open ${esc(x.name)}">
+    <div class="card-media ${visualClass(x.name)}"><span>${visualIcon(x.name)}</span></div>
+    <div class="card-body">
+      <div class="card-kicker">${esc(x.cat)}</div>
+      <h2>${esc(x.name)}</h2>
+      <p>${esc(x.desc)}</p>
+      <div class="card-foot"><span>Explore ↗</span><button type="button" class="fav-btn" aria-label="Favourite ${esc(x.name)}" onclick="event.preventDefault();event.stopPropagation();toggle('${x.name.replace(/'/g,"\\'")}')">${favs.includes(x.name)?"★":"☆"}</button></div>
+    </div>
+  </a>
+</article>`).join(""):'<div class="empty">Nothing here. Try another search or category.</div>'}
 function toggle(n){favs=favs.includes(n)?favs.filter(x=>x!=n):[...favs,n];localStorage.setItem("cwFavs",JSON.stringify(favs));draw()}
 q.oninput=draw;document.getElementById("fav").onclick=()=>{onlyFav=!onlyFav;draw()};
 const wormholeOverlay=document.getElementById("wormholeOverlay");
@@ -405,6 +926,10 @@ const infoOverlay=document.getElementById("infoOverlay");
 const infoTitle=document.getElementById("infoTitle");
 const infoContent=document.getElementById("infoContent");
 
+function openIssue(){
+  issuePanel.classList.add("open");
+  setTimeout(()=>document.getElementById("issueInput").focus(),50);
+}
 function openSuggest(){
   suggestOverlay.classList.add("open");
   suggestMessage.classList.remove("show");
@@ -485,9 +1010,224 @@ issueInput.addEventListener("keydown", e => {
 });
 
 const themeBtn=document.getElementById("theme");
-const savedTheme=localStorage.getItem("cwThemeV10")||"light";
+const savedTheme=localStorage.getItem("cwThemeV12")||"light";
 if(savedTheme==="dark")document.body.classList.add("dark");
 function syncTheme(){themeBtn.innerHTML=document.body.classList.contains("dark")?"☀ <span>Light Mode</span>":"☾ <span>Dark Mode</span>"}
 syncTheme();
-themeBtn.onclick=()=>{document.body.classList.toggle("dark");localStorage.setItem("cwThemeV10",document.body.classList.contains("dark")?"dark":"light");syncTheme()};
+themeBtn.onclick=()=>{document.body.classList.toggle("dark");localStorage.setItem("cwThemeV12",document.body.classList.contains("dark")?"dark":"light");syncTheme()};
+
+// Update 12.1: wallpapers
+const wallpaperLayer=document.getElementById("wallpaperLayer");
+const wallpaperOverlay=document.getElementById("wallpaperOverlay");
+const wallpaperGrid=document.getElementById("wallpaperGrid");
+const wallpaperOpen=document.getElementById("wallpaperOpen");
+const wallpaperClose=document.getElementById("wallpaperClose");
+const wallpaperFile=document.getElementById("wallpaperFile");
+const wallpaperFileName=document.getElementById("wallpaperFileName");
+const wallpaperSave=document.getElementById("wallpaperSave");
+const wallpaperReset=document.getElementById("wallpaperReset");
+const wallpaperNote=document.getElementById("wallpaperNote");
+
+const wallpaperChoices=[
+  {name:"Morning Glass",css:"linear-gradient(135deg,#f7fbff 0%,#dfeaff 45%,#f8f5ff 100%)"},
+  {name:"Soft Sky",css:"radial-gradient(circle at 20% 20%,#d8efff,transparent 34%),linear-gradient(135deg,#f8fbff,#e9eef7 55%,#ffffff)"},
+  {name:"Lavender Haze",css:"radial-gradient(circle at 75% 20%,#e8dcff,transparent 35%),linear-gradient(145deg,#fff,#f1eff9 55%,#e6edf7)"},
+  {name:"Sea Glass",css:"radial-gradient(circle at 20% 30%,#c8f4ee,transparent 35%),linear-gradient(145deg,#f9ffff,#e8f5f4 55%,#f2f7fb)"},
+  {name:"Sunset Cloud",css:"radial-gradient(circle at 75% 25%,#ffd8bd,transparent 30%),radial-gradient(circle at 20% 70%,#dbe7ff,transparent 32%),linear-gradient(145deg,#fff,#f5f3f7)"},
+  {name:"Midnight Aurora",css:"radial-gradient(circle at 75% 20%,#304d83,transparent 28%),radial-gradient(circle at 20% 70%,#314d52,transparent 30%),linear-gradient(145deg,#0b1220,#151525 60%,#08100f)"}
+];
+let pendingWallpaper=localStorage.getItem("cwWallpaperV12")||"";
+let pendingCustom=localStorage.getItem("cwWallpaperCustomV12")||"";
+let selectedWallpaper=pendingWallpaper;
+let selectedCustom=pendingCustom;
+
+function applyWallpaper(){
+  if(selectedCustom){
+    wallpaperLayer.style.backgroundImage=`url("${selectedCustom}")`;
+  }else if(selectedWallpaper){
+    const w=wallpaperChoices.find(x=>x.name===selectedWallpaper);
+    wallpaperLayer.style.backgroundImage=w?w.css:"";
+  }else wallpaperLayer.style.backgroundImage="";
+}
+function renderWallpaperChoices(){
+  wallpaperGrid.innerHTML=wallpaperChoices.map((w,i)=>`<button type="button" class="wallpaper-choice ${!selectedCustom&&selectedWallpaper===w.name?'selected':''}" data-wall="${i}" style="background:${w.css}" aria-label="Choose ${w.name}"><span>${w.name}</span></button>`).join("");
+  wallpaperGrid.querySelectorAll("[data-wall]").forEach(b=>b.onclick=()=>{
+    selectedCustom="";
+    selectedWallpaper=wallpaperChoices[Number(b.dataset.wall)];
+    wallpaperFile.value="";
+    wallpaperFileName.textContent="No image selected";
+    renderWallpaperChoices();
+    applyWallpaper();
+  });
+}
+wallpaperOpen.onclick=()=>{wallpaperOverlay.classList.add("open");renderWallpaperChoices()};
+wallpaperClose.onclick=()=>wallpaperOverlay.classList.remove("open");
+wallpaperOverlay.addEventListener("click",e=>{if(e.target===wallpaperOverlay)wallpaperOverlay.classList.remove("open")});
+wallpaperFile.onchange=()=>{
+  const f=wallpaperFile.files[0];
+  if(!f)return;
+  if(f.size>5*1024*1024){wallpaperNote.textContent="Please choose an image under 5 MB.";wallpaperFile.value="";return}
+  const reader=new FileReader();
+  reader.onload=()=>{
+    selectedCustom=reader.result;
+    selectedWallpaper="";
+    wallpaperFileName.textContent=f.name;
+    renderWallpaperChoices();
+    applyWallpaper();
+    wallpaperNote.textContent="Your image is ready. Click Save wallpaper to keep it.";
+  };
+  reader.readAsDataURL(f);
+};
+wallpaperSave.onclick=()=>{
+  try{
+    localStorage.setItem("cwWallpaperV12",selectedWallpaper||"");
+    localStorage.setItem("cwWallpaperCustomV12",selectedCustom||"");
+    pendingWallpaper=selectedWallpaper;pendingCustom=selectedCustom;
+    wallpaperNote.textContent="Saved. This wallpaper will stay on this browser.";
+    setTimeout(()=>wallpaperOverlay.classList.remove("open"),500);
+  }catch(e){
+    wallpaperNote.textContent="That image is too large for browser storage. Try a smaller image.";
+  }
+};
+wallpaperReset.onclick=()=>{
+  selectedWallpaper="";selectedCustom="";wallpaperFile.value="";wallpaperFileName.textContent="No image selected";
+  applyWallpaper();renderWallpaperChoices();wallpaperNote.textContent="Wallpaper reset. Click Save wallpaper to keep the reset.";
+};
+applyWallpaper();
+
+// Update 12.1: local news postcode helper
+const postcodeInput=document.getElementById("postcodeInput");
+const postcodeGo=document.getElementById("postcodeGo");
+const localNote=document.getElementById("localNote");
+function findLocalNews(){
+  const pc=postcodeInput.value.trim().replace(/\s+/g," ");
+  if(!/^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i.test(pc)){
+    localNote.textContent="Please enter a valid UK postcode, for example B61 8XX.";
+    postcodeInput.focus();
+    return;
+  }
+  const query=encodeURIComponent(`"${pc}" local news UK`);
+  window.open(`https://www.google.com/search?tbm=nws&q=${query}`,"_blank","noopener");
+  localNote.textContent=`Opening local news results for ${pc}.`;
+}
+postcodeGo.onclick=findLocalNews;
+postcodeInput.addEventListener("keydown",e=>{if(e.key==="Enter")findLocalNews()});
+
+
+
+/* CurioWeb 12.2 backend groundwork */
+window.CurioConfig={
+  version:"12.2",
+  backendEnabled:false,
+  apiBase:"/api",
+  features:{accounts:false,dynamicCurios:false,liveNews:false,liveWeather:false,submissions:false},
+  storagePrefix:"curioweb."
+};
+window.CurioAPI={
+  config:window.CurioConfig,
+  async request(path,options={}){
+    if(!this.config.backendEnabled) return {ok:false,offline:true,data:null};
+    const response=await fetch(this.config.apiBase+path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});
+    const data=await response.json().catch(()=>null);
+    if(!response.ok) throw new Error(`API ${response.status}`);
+    return {ok:true,offline:false,data};
+  },
+  getCurios:()=>CurioAPI.request("/curios"),
+  getUser:()=>CurioAPI.request("/me"),
+  saveUser:data=>CurioAPI.request("/me",{method:"PUT",body:JSON.stringify(data)}),
+  submitSuggestion:data=>CurioAPI.request("/suggestions",{method:"POST",body:JSON.stringify(data)}),
+  reportIssue:data=>CurioAPI.request("/issues",{method:"POST",body:JSON.stringify(data)}),
+  getNews:()=>CurioAPI.request("/news"),
+  getWeather:postcode=>CurioAPI.request(`/weather?postcode=${encodeURIComponent(postcode||"")}`)
+};
+
+// Improved Surprise Me: full screen lightspeed tunnel using a canvas.
+const wormCanvas=document.getElementById("wormholeCanvas");
+const wormCtx=wormCanvas.getContext("2d");
+let wormRAF=0,wormStart=0,wormW=0,wormH=0,wormStars=[];
+function wormResize(){
+  const d=Math.min(window.devicePixelRatio||1,2); wormW=window.innerWidth; wormH=window.innerHeight;
+  wormCanvas.width=wormW*d; wormCanvas.height=wormH*d; wormCanvas.style.width=wormW+"px"; wormCanvas.style.height=wormH+"px"; wormCtx.setTransform(d,0,0,d,0,0);
+}
+function makeWormStar(){
+  const angle=Math.random()*Math.PI*2, radius=Math.random()*Math.max(wormW,wormH)*.62+18;
+  return {a:angle,r:radius,z:Math.random(),speed:.5+Math.random()*1.8,tw:Math.random()*.7+.3};
+}
+function seedWorm(){wormStars=Array.from({length:420},makeWormStar)}
+function drawWorm(t){
+  const elapsed=t-wormStart, cx=wormW/2, cy=wormH/2;
+  wormCtx.fillStyle="rgba(1,2,5,.28)";wormCtx.fillRect(0,0,wormW,wormH);
+  const maxR=Math.hypot(wormW,wormH)*.8;
+  for(const s of wormStars){
+    const prev=s.z;s.z-=0.012*s.speed*(1+elapsed/1700);
+    if(s.z<0.002){Object.assign(s,makeWormStar(),{z:1});continue}
+    const scale=1/s.z, x=cx+Math.cos(s.a)*s.r*scale*.22, y=cy+Math.sin(s.a)*s.r*scale*.22;
+    const px=cx+Math.cos(s.a)*s.r*(1/Math.max(prev,.002))*.22, py=cy+Math.sin(s.a)*s.r*(1/Math.max(prev,.002))*.22;
+    const alpha=Math.min(1,(1-s.z)*1.35); const hue=190+Math.sin(s.a*2)*35;
+    wormCtx.strokeStyle=`hsla(${hue},95%,${72+Math.random()*15}%,${alpha})`;wormCtx.lineWidth=Math.min(4,Math.max(.6,3.8*scale*.08));
+    wormCtx.beginPath();wormCtx.moveTo(x,y);wormCtx.lineTo(px,py);wormCtx.stroke();
+  }
+  const g=wormCtx.createRadialGradient(cx,cy,2,cx,cy,Math.min(wormW,wormH)*.24);g.addColorStop(0,"rgba(255,255,255,.95)");g.addColorStop(.05,"rgba(112,184,255,.75)");g.addColorStop(.24,"rgba(76,119,255,.16)");g.addColorStop(1,"rgba(0,0,0,0)");wormCtx.fillStyle=g;wormCtx.beginPath();wormCtx.arc(cx,cy,Math.min(wormW,wormH)*.25,0,Math.PI*2);wormCtx.fill();
+  if(elapsed<2600){wormRAF=requestAnimationFrame(drawWorm)}
+}
+function launchWormhole(){
+  wormResize();seedWorm();wormStart=performance.now();cancelAnimationFrame(wormRAF);wormCtx.fillStyle="#010205";wormCtx.fillRect(0,0,wormW,wormH);wormRAF=requestAnimationFrame(drawWorm);
+}
+window.addEventListener("resize",()=>{if(wormholeOverlay.classList.contains("active"))wormResize()});
+const originalSurprise=document.getElementById("random");
+if(originalSurprise){
+  originalSurprise.addEventListener("click",()=>{if(wormholeOverlay.classList.contains("active"))launchWormhole()});
+}
+const previewWormhole=document.getElementById("previewWormhole");
+if(previewWormhole)previewWormhole.onclick=()=>{document.getElementById("random").click()};
+
+// Mobile navigation and mobile sheet.
+const mobileSheet=document.getElementById("mobileSheet");
+const mobileSheetClose=document.getElementById("mobileSheetClose");
+function closeMobileSheet(){mobileSheet.classList.remove("open");mobileSheet.setAttribute("aria-hidden","true")}
+function openMobileSheet(){mobileSheet.classList.add("open");mobileSheet.setAttribute("aria-hidden","false")}
+mobileSheetClose.onclick=closeMobileSheet;
+mobileSheet.addEventListener("click",e=>{if(e.target===mobileSheet)closeMobileSheet()});
+document.querySelectorAll("[data-mobile]").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll(".mobile-nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");
+  const action=btn.dataset.mobile;
+  if(action==="home")window.scrollTo({top:0,behavior:"smooth"});
+  if(action==="search"){document.getElementById("q").focus();window.scrollTo({top:document.querySelector(".controls").offsetTop-10,behavior:"smooth"})}
+  if(action==="categories")document.getElementById("chips").scrollIntoView({behavior:"smooth",block:"start"});
+  if(action==="favourites")document.getElementById("fav").click();
+  if(action==="more")openMobileSheet();
+}));
+document.querySelectorAll("[data-sheet]").forEach(btn=>btn.addEventListener("click",()=>{
+  const a=btn.dataset.sheet;closeMobileSheet();
+  if(a==="news")document.querySelector(".news-tile")?.scrollIntoView({behavior:"smooth",block:"center"});
+  if(a==="local")document.querySelector(".local-tile")?.scrollIntoView({behavior:"smooth",block:"center"});
+  if(a==="weather")document.querySelector(".weather-tile")?.scrollIntoView({behavior:"smooth",block:"center"});
+  if(a==="wallpaper")wallpaperOpen.click();
+  if(a==="report")openIssue();
+  if(a==="about")openInfo("privacy");
+}));
+
+// Mini wallpaper picker mirrors the full wallpaper system.
+const miniGrid=document.getElementById("wallpaperMiniGrid");
+function renderMiniWallpapers(){
+  if(!miniGrid)return;
+  miniGrid.innerHTML=wallpaperChoices.map((w,i)=>`<button type="button" class="wallpaper-mini-choice ${!selectedCustom&&selectedWallpaper===w.name?'selected':''}" data-mini-wall="${i}" style="background:${w.css}" aria-label="${w.name}"></button>`).join("");
+  miniGrid.querySelectorAll("[data-mini-wall]").forEach(b=>b.onclick=()=>{selectedCustom="";selectedWallpaper=wallpaperChoices[Number(b.dataset.miniWall)].name;applyWallpaper();renderMiniWallpapers();});
+}
+renderMiniWallpapers();
+document.getElementById("miniUpload")?.addEventListener("click",()=>{wallpaperOpen.click();setTimeout(()=>wallpaperFile.click(),120)});
+document.getElementById("miniSave")?.addEventListener("click",()=>wallpaperSave.click());
+
+document.getElementById("reportTrigger")?.addEventListener("click",openIssue);
+
+// Prepare a stable client event layer for the future backend.
+window.CurioEvents={
+  track(name,payload={}){
+    const event={name,payload,timestamp:new Date().toISOString(),version:CurioConfig.version};
+    const queue=JSON.parse(localStorage.getItem("curioweb.eventQueue")||"[]");queue.push(event);
+    localStorage.setItem("curioweb.eventQueue",JSON.stringify(queue.slice(-100)));
+    return event;
+  }
+};
+originalSurprise?.addEventListener("click",()=>CurioEvents.track("surprise_me"));
 </script></body></html>
