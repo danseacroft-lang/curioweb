@@ -274,6 +274,122 @@ body.dark .uk-clock{color:#b8c0ce}
 @media (hover:none){
   .card{transform:none!important}.card:hover{transform:none}
 }
+
+
+/* 12.1.2 precision pass: strict layout grid, hero art and resilient wallpapers */
+:root{--cw-content:1280px;--cw-side:292px;--cw-gap:22px}
+html,body{overflow-x:hidden}
+body{position:relative}
+body>.wallpaper-layer{z-index:0}
+body>header,body>.controls,body>.chips,body>.mobile-quick,body>.home-layout,body>.experience-strip,body>footer{position:relative;z-index:1}
+header{max-width:var(--cw-content);padding:22px 0 30px;position:relative;isolation:isolate;min-height:450px;overflow:visible}
+.top-meta{margin-bottom:52px;position:relative;z-index:3}
+.hero-art{position:absolute;z-index:-1;top:42px;right:-80px;width:760px;height:420px;pointer-events:none;opacity:.82;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDYwMCI+CjxkZWZzPgogPGxpbmVhckdyYWRpZW50IGlkPSJza3kiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZDllY2ZmIi8+PHN0b3Agb2Zmc2V0PSIuNDgiIHN0b3AtY29sb3I9IiNlZWY0ZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGUwZmYiLz48L2xpbmVhckdyYWRpZW50PgogPHJhZGlhbEdyYWRpZW50IGlkPSJnbG93Ij48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9Ii45NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KIDxyYWRpYWxHcmFkaWVudCBpZD0icGxhbmV0Ij48c3RvcCBzdG9wLWNvbG9yPSIjZWVmN2ZmIi8+PHN0b3Agb2Zmc2V0PSIuNiIgc3RvcC1jb2xvcj0iIzlkYmNlNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzVmN2RhOCIvPjwvcmFkaWFsR3JhZGllbnQ+CiA8bGluZWFyR3JhZGllbnQgaWQ9Im1vdW50IiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2E2YmFkMiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzcxODM5YSIvPjwvbGluZWFyR3JhZGllbnQ+CiA8ZmlsdGVyIGlkPSJibHVyIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIvPjwvZmlsdGVyPgo8L2RlZnM+CjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNza3kpIiBvcGFjaXR5PSIuNDgiLz4KPGNpcmNsZSBjeD0iMTI0MCIgY3k9IjE3MCIgcj0iMTg1IiBmaWxsPSJ1cmwoI3BsYW5ldCkiIG9wYWNpdHk9Ii43NiIvPgo8Y2lyY2xlIGN4PSIxMTgwIiBjeT0iODAiIHI9IjIxMCIgZmlsbD0idXJsKCNnbG93KSIgb3BhY2l0eT0iLjU1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KPGcgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjgiPgogPGNpcmNsZSBjeD0iODgwIiBjeT0iODIiIHI9IjMiLz48Y2lyY2xlIGN4PSI5NTAiIGN5PSIxNTAiIHI9IjIiLz48Y2lyY2xlIGN4PSIxMDgwIiBjeT0iNzAiIHI9IjIuNSIvPjxjaXJjbGUgY3g9IjEzOTAiIGN5PSIxMTUiIHI9IjMiLz48Y2lyY2xlIGN4PSIxNDcwIiBjeT0iMjIwIiByPSIyIi8+PGNpcmNsZSBjeD0iNzYwIiBjeT0iMTc1IiByPSIyIi8+CjwvZz4KPHBhdGggZD0iTTAgNTEwIEwyMzAgMzYwIEwzNjAgNDU1IEw1NjAgMjUwIEw3NjAgNDQ1IEw5NTAgMzE1IEwxMTEwIDQ0NSBMMTI4MCAyOTAgTDE2MDAgNDkwIFY2MDAgSDBaIiBmaWxsPSJ1cmwoI21vdW50KSIgb3BhY2l0eT0iLjYyIi8+CjxwYXRoIGQ9Ik0wIDUzNSBMMzAwIDQyMCBMNDcwIDUxMCBMNjgwIDM2NSBMODUwIDUwNSBMMTA0MCA0MTAgTDExOTAgNTIwIEwxNDEwIDM4NSBMMTYwMCA1MjAgVjYwMCBIMFoiIGZpbGw9IiNkZmU4ZjMiIG9wYWNpdHk9Ii44MiIvPgo8cGF0aCBkPSJNMCA1NjAgQzM0MCA1MjAgNjAwIDU3MCA4ODAgNTQwIEMxMTMwIDUxNSAxMzcwIDU0NSAxNjAwIDUyNSBWNjAwIEgwWiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjgyIi8+Cjwvc3ZnPg==');background-size:100% 100%;background-repeat:no-repeat;background-position:center;filter:saturate(.92);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.10) 10%,#000 28%,#000 76%,rgba(0,0,0,.65) 92%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.10) 10%,#000 28%,#000 76%,rgba(0,0,0,.65) 92%,transparent 100%)}
+.hero-art:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(248,251,255,.08),rgba(248,251,255,.48) 70%,rgba(248,251,255,.92) 100%)}
+.hero-copy{position:relative;z-index:2;max-width:760px}
+h1{max-width:720px;font-size:clamp(58px,6.4vw,92px);line-height:.91;letter-spacing:-.067em;margin-bottom:24px}
+.hero{max-width:700px;font-size:18px;line-height:1.52}
+.controls{max-width:var(--cw-content);padding:0 0 18px;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:10px;align-items:center;background:linear-gradient(rgba(246,247,249,.94),rgba(246,247,249,.94));}
+.controls .search-wrap{min-width:0}
+.controls input{width:100%;min-width:0}
+.controls button{min-width:max-content}
+.chips{max-width:var(--cw-content);padding:0 0 24px;gap:7px}
+.home-layout{max-width:var(--cw-content);grid-template-columns:minmax(0,1fr) var(--cw-side);gap:var(--cw-gap);padding:0 0 46px;align-items:start}
+.home-layout main{min-width:0}
+.count{margin-bottom:12px}
+.home-layout .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{min-width:0;min-height:250px;border-radius:20px;padding:0;overflow:hidden}
+.card-link{min-width:0;height:100%;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.card-media{height:152px;min-height:152px;border-radius:0;display:grid;place-items:center}
+.card-body{padding:14px 15px 13px;min-width:0;display:flex;flex-direction:column;flex:1}
+.card h2{font-size:18px;line-height:1.08;margin:7px 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card p{font-size:11px;line-height:1.42;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;padding-top:11px;font-size:10px;font-weight:800;color:#697487}
+.card-foot .fav-btn{flex:0 0 auto;width:30px;height:30px}
+.side-tiles{position:sticky;top:92px;min-width:0;gap:12px}
+.side-tile{min-width:0;padding:14px;border-radius:19px}
+.side-row-head{display:flex;justify-content:space-between;gap:10px}
+.side-tile h2{font-size:16px;line-height:1.12;margin-bottom:7px}
+.side-tile p{font-size:10px;line-height:1.4;margin-bottom:8px}
+.news-hero{height:96px}
+.news-links a{min-width:0}
+.news-links strong,.news-links small{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.postcode-row{grid-template-columns:minmax(0,1fr) 88px}
+.weather-main{grid-template-columns:40px minmax(0,1fr) auto}
+.wallpaper-mini-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.wallpaper-mini-choice{min-width:0}
+.experience-strip{max-width:var(--cw-content);padding:0;margin:0 auto 34px;grid-template-columns:1.25fr .75fr;gap:14px}
+.experience-block{min-width:0}
+.wormhole-story{min-width:0;gap:8px}
+.wormhole-frame{min-width:0}
+.backend-cards{min-width:0}
+footer{position:relative;z-index:1}
+/* Wallpaper must sit above the body background but below all interactive content. */
+.wallpaper-layer{opacity:.9;transition:background-image .35s ease,opacity .35s ease}
+.wallpaper-layer::after{background:linear-gradient(180deg,rgba(248,250,253,.80) 0%,rgba(248,250,253,.72) 44%,rgba(255,255,255,.92) 100%)}
+body.dark .wallpaper-layer::after{background:linear-gradient(180deg,rgba(8,10,15,.82),rgba(8,10,15,.70) 50%,rgba(8,10,15,.90))}
+/* Keep the hero artwork visible even when a wallpaper is selected. */
+body.dark .hero-art:after{background:linear-gradient(180deg,rgba(8,10,15,.02),rgba(8,10,15,.50) 72%,rgba(8,10,15,.92) 100%)}
+/* Avoid accidental layout shifts from long labels. */
+button,.chip,.news-links a,.wallpaper-mini-actions button{white-space:nowrap}
+@media(max-width:1200px){
+  :root{--cw-content:calc(100% - 48px);--cw-side:280px}
+  header{padding-top:22px}
+  .home-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-art{right:-40px;width:650px}
+}
+@media(max-width:980px){
+  :root{--cw-content:calc(100% - 40px)}
+  header{min-height:430px}
+  .controls{grid-template-columns:minmax(0,1fr) auto auto auto}
+  .controls button{padding-left:13px;padding-right:13px}
+  .home-layout{grid-template-columns:1fr}
+  .side-tiles{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-art{right:-90px;opacity:.58;width:620px}
+}
+@media(max-width:720px){
+  :root{--cw-content:calc(100% - 28px)}
+  header{padding:14px 14px 22px;min-height:390px}
+  .top-meta{margin-bottom:52px}
+  .hero-art{top:50px;right:-170px;width:620px;height:360px;opacity:.42}
+  h1{max-width:560px;font-size:clamp(48px,14vw,70px);line-height:.92}
+  .hero{font-size:15px;max-width:500px}
+  .controls{max-width:none;margin:0 14px;grid-template-columns:1fr 1fr;gap:8px;padding:0 0 14px;background:transparent;position:relative}
+  .controls .search-wrap{grid-column:1 / -1}
+  .controls input{height:50px}
+  .controls button{height:46px;min-width:0;padding:0 10px;font-size:11px}
+  .chips{max-width:none;margin:0 14px;padding:0 0 18px;overflow-x:auto}
+  .home-layout{max-width:none;padding:0 14px 28px}
+  .home-layout .grid{grid-template-columns:1fr;gap:11px}
+  .side-tiles{grid-template-columns:1fr;gap:10px}
+  .side-tile{border-radius:17px}
+  .mobile-quick{max-width:none;padding-left:14px;padding-right:14px}
+  .experience-strip{max-width:none;padding:0 14px;grid-template-columns:1fr;gap:10px}
+  .experience-block{border-radius:18px}
+  .wormhole-story{grid-template-columns:1fr}
+  .wormhole-story i,.wormhole-frame:nth-of-type(n+2){display:none}
+  .wormhole-frame{height:145px}
+  .backend-cards{grid-template-columns:1fr 1fr}
+  .wallpaper-box{width:min(620px,calc(100vw - 24px));padding:18px;border-radius:22px}
+}
+@media(max-width:430px){
+  header{min-height:370px}
+  .top-left{gap:6px}
+  .theme-toggle,.uk-clock{padding:8px 10px;font-size:9px}
+  .logo{font-size:15px}
+  .logo span{font-size:5px}
+  h1{font-size:48px}
+  .hero{font-size:14px}
+  .controls{margin:0 14px}
+  .controls button{font-size:10px}
+  .backend-cards{grid-template-columns:1fr}
+  .postcode-row{grid-template-columns:1fr}
+}
+
+
+/* 12.2 location, local news and adult gate */
+.local-results{display:grid;gap:6px;margin-top:9px;max-height:210px;overflow:auto}.local-result{display:block;text-decoration:none;color:#18202b;padding:8px 9px;border:1px solid rgba(20,29,45,.065);border-radius:10px;background:rgba(255,255,255,.62)}.local-result strong{display:block;font-size:9px;line-height:1.35}.local-result small{display:block;color:#7f8998;font-size:7px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.local-status{font-size:8px;color:#7f8998;line-height:1.4}.weather-location-note{font-size:8px;color:#9aa3b0;margin-top:7px}.adult-overlay{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:rgba(7,10,16,.42);backdrop-filter:blur(18px);z-index:9999}.adult-overlay.open{display:grid}.adult-modal{width:min(430px,100%);position:relative;padding:28px;border-radius:28px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.88);box-shadow:0 30px 90px rgba(0,0,0,.22);text-align:center}.adult-lock{font-size:30px;margin-bottom:8px}.adult-modal h2{margin:4px 0 10px;font-size:26px;letter-spacing:-.04em}.adult-riddle{font-size:13px;line-height:1.55;color:#697384;margin:0 0 16px}.adult-modal input{width:100%;height:46px;border:1px solid rgba(20,29,45,.12);border-radius:14px;padding:0 14px;outline:none;font-size:14px;box-sizing:border-box}.adult-unlock{width:100%;height:46px;margin-top:9px}.adult-message{min-height:18px;margin-top:9px;font-size:10px;color:#8a5360}.adult-content{margin-top:16px;padding:13px;border-radius:15px;background:rgba(232,239,255,.65);font-size:11px;line-height:1.45}.modal-close{position:absolute;right:13px;top:13px;width:32px;height:32px;border:0;border-radius:50%;background:rgba(20,29,45,.07);font-size:20px}
+body.dark .adult-modal{background:rgba(25,29,39,.94);border-color:rgba(255,255,255,.10);color:#fff}body.dark .adult-riddle{color:#aeb6c4}body.dark .adult-modal input{background:#171b24;color:#fff;border-color:rgba(255,255,255,.12)}
 </style>
 
 <style id="curio-update-12">
@@ -611,7 +727,7 @@ body.dark .upload-btn,body.dark .wallpaper-reset{background:rgba(255,255,255,.08
 }
 
 
-/* CurioWeb 12.2.1: concept matched desktop sidebar, hyperspace sequence, mobile experience and backend foundation */
+/* CurioWeb 12.1.2: concept matched desktop sidebar, hyperspace sequence, mobile experience and backend foundation */
 :root{
   --cw-blue:#3d72ff;--cw-blue-soft:#e8efff;--cw-border:rgba(20,29,45,.09);--cw-panel:rgba(255,255,255,.72);
 }
@@ -677,7 +793,7 @@ body::selection{background:#1b63ff;color:#fff}
   body.dark .mobile-nav{background:rgba(18,21,29,.86);border-color:rgba(255,255,255,.10)}body.dark .mobile-nav button{color:#8f99ac}body.dark .mobile-nav button span{color:#f4f6fa}body.dark .mobile-nav button.active{background:#272c36}body.dark .mobile-sheet-inner{background:rgba(18,21,29,.97)}body.dark .mobile-sheet-head button,body.dark .mobile-sheet-inner>button:not(.mobile-sheet-head button){background:#242933;color:#fff;border-color:rgba(255,255,255,.08)}
 }
 
-/* 12.2.1 visual specification */
+/* 12.1.2 visual specification */
 body{background:radial-gradient(circle at 73% 12%,rgba(188,215,255,.58),transparent 30%),radial-gradient(circle at 15% 34%,rgba(231,226,255,.48),transparent 31%),linear-gradient(180deg,#f8fbff 0%,#f3f6fa 50%,#fff 100%)}
 header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.logo{font-size:21px;letter-spacing:.24em}.logo span{font-size:8px}.top-right{gap:9px}.top-tagline{font-size:11px}
 .home-layout{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 304px;gap:20px;padding:0 32px 44px}.home-layout main{padding:0;max-width:none}.home-layout .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
@@ -690,7 +806,7 @@ header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.log
 
 </style>
 
-</head><body data-curioweb-version="12.2.1">
+</head><body data-curioweb-version="12.1.2">
 <div class="wallpaper-layer" id="wallpaperLayer" aria-hidden="true"></div>
 <div class="beta-bar">Curio V.1 beta <span>We are still building things, so you may encounter the occasional snag.</span><button class="beta-experimental" id="issueOpen" type="button">This is an experimental version of Curio. Report issues HERE</button></div>
 <div class="issue-panel" id="issuePanel">
@@ -712,7 +828,7 @@ header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.log
     <div class="logo">CURIOWEB <span>HUMAN RABBIT HOLES</span></div>
     <div class="top-right"><button class="wallpaper-open" id="wallpaperOpen" type="button">◫ <span>Wallpapers</span></button><span class="top-tagline">♥ <span>Explore more. Scroll less.</span></span></div>
   </div>
-  <h1>Go where the internet gets interesting.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></header>
+  <div class="hero-art" aria-hidden="true"></div><div class="hero-copy"><h1>Go where the internet gets interesting.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></div></header>
 <div class="controls">
   <div class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><input id="q" placeholder="Search sites, topics or tags…" aria-label="Search CurioWeb"></div>
   <button class="primary" id="random">🎲 <span>Surprise me</span></button>
@@ -722,7 +838,7 @@ header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.log
 <div class="chips" id="chips"></div>
 <div class="mobile-quick" aria-label="CurioWeb quick information">
   <button type="button" class="mobile-quick-card" data-mobile-quick="news"><span class="quick-icon">📰</span><span><b>UK News</b><small>Latest stories</small></span><em>›</em></button>
-  <button type="button" class="mobile-quick-card" data-mobile-quick="local"><span class="quick-icon">📍</span><span><b>Local News</b><small>Use your postcode</small></span><em>›</em></button>
+  <button type="button" class="mobile-quick-card" data-mobile-quick="local"><span class="quick-icon">📍</span><span><b>Local News</b><small>Find local stories</small></span><em>›</em></button>
   <button type="button" class="mobile-quick-card" data-mobile-quick="weather"><span class="quick-icon">☁️</span><span><b>Weather</b><small>Bromsgrove</small></span><em>›</em></button>
   <button type="button" class="mobile-quick-card" data-mobile-quick="wallpaper"><span class="quick-icon">🖼️</span><span><b>Wallpaper</b><small>Personalise Curio</small></span><em>›</em></button>
 </div>
@@ -739,14 +855,15 @@ header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.log
       </div>
     </section>
     <section class="side-tile local-tile">
-      <div class="side-kicker blue-kicker">LOCAL NEWS</div><h2>What's happening near you?</h2>
-      <div class="postcode-row"><input id="postcodeInput" type="text" inputmode="text" maxlength="8" placeholder="Enter your postcode (e.g. B61 8XX)" aria-label="UK postcode"><button id="postcodeGo" type="button">Find News</button></div>
-      <div class="local-note" id="localNote">Your postcode stays in your browser.</div>
+      <div class="side-kicker blue-kicker">WHAT'S HAPPENING NEAR YOU</div><h2>Local news by postcode</h2>
+      <div class="postcode-row"><input id="postcodeInput" type="text" inputmode="text" maxlength="8" placeholder="Postcode e.g. B61 8XX" aria-label="UK postcode"><button id="postcodeGo" type="button">Find News</button></div>
+      <div class="local-results" id="localResults" aria-live="polite"></div>
+      <div class="local-note" id="localNote">Your postcode is only used in your browser to request local results.</div>
     </section>
     <section class="side-tile weather-tile">
-      <div class="side-row-head"><div><div class="side-kicker blue-kicker">WEATHER</div><div class="weather-location" id="weatherLocation">Bromsgrove, Worcestershire</div></div><button class="side-link" id="weatherChange" type="button">Change</button></div>
+      <div class="side-row-head"><div><div class="side-kicker blue-kicker">WEATHER NEAR YOU</div><div class="weather-location" id="weatherLocation">Location not set</div></div><button class="side-link" id="weatherChange" type="button">Find me</button></div>
       <div class="weather-main"><div class="weather-icon" id="weatherIcon">🌤️</div><strong id="weatherTemp">14°C</strong><span id="weatherSummary">Partly cloudy</span></div>
-      <div class="weather-range"><span>H: 18°</span><span>L: 11°</span></div>
+      <div class="weather-range"><span id="weatherHigh">H: --</span><span id="weatherLow">L: --</span></div><div class="weather-location-note" id="weatherLocationNote">Your location stays in this browser.</div>
     </section>
     <section class="side-tile wallpaper-mini">
       <div class="side-kicker blue-kicker">WALLPAPER</div><h2>Choose a background</h2><p>Personalise your CurioWeb experience.</p>
@@ -786,14 +903,14 @@ header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.log
   <button type="button" data-mobile="favourites"><span>♡</span>Favourites</button>
   <button type="button" data-mobile="more"><span>•••</span>More</button>
 </nav>
-<div class="mobile-sheet" id="mobileSheet" aria-hidden="true"><div class="mobile-sheet-inner"><div class="mobile-sheet-head"><strong>CurioWeb</strong><button id="mobileSheetClose" type="button">×</button></div><button data-sheet="news">UK News</button><button data-sheet="local">Local News</button><button data-sheet="weather">Weather</button><button data-sheet="wallpaper">Wallpapers</button><button data-sheet="report">Report an Issue</button><button data-sheet="about">About CurioWeb</button></div></div>
+<div class="adult-overlay" id="adultOverlay" aria-hidden="true"><div class="adult-modal" role="dialog" aria-modal="true" aria-labelledby="adultTitle"><button class="modal-close" id="adultClose" type="button" aria-label="Close">×</button><div class="adult-lock">🔒</div><div class="side-kicker blue-kicker">ADULT CURIOS</div><h2 id="adultTitle">A little riddle first.</h2><p class="adult-riddle">I can be heard, but I have no mouth. I can travel through empty space, but I have no feet. What am I?</p><input id="adultAnswer" type="text" autocomplete="off" placeholder="Your answer" aria-label="Answer to the riddle"><button id="adultUnlock" type="button" class="primary adult-unlock">Unlock Adult Curios</button><div class="adult-message" id="adultMessage" aria-live="polite"></div><div class="adult-content" id="adultContent" hidden><strong>Access granted.</strong><p>No Adult Curio links have been added yet. This area is ready for them.</p></div></div></div><div class="mobile-sheet" id="mobileSheet" aria-hidden="true"><div class="mobile-sheet-inner"><div class="mobile-sheet-head"><strong>CurioWeb</strong><button id="mobileSheetClose" type="button">×</button></div><button data-sheet="news">UK News</button><button data-sheet="local">Local News</button><button data-sheet="weather">Weather</button><button data-sheet="wallpaper">Wallpapers</button><button data-sheet="report">Report an Issue</button><button data-sheet="adult">Adult Curios</button><button data-sheet="about">About CurioWeb</button></div></div>
 <div class="wallpaper-overlay" id="wallpaperOverlay" role="dialog" aria-modal="true" aria-labelledby="wallpaperTitle">
   <div class="wallpaper-box">
     <div class="suggest-head">
       <h2 id="wallpaperTitle">◫ Choose your wallpaper</h2>
       <button class="suggest-close" id="wallpaperClose" type="button" aria-label="Close">×</button>
     </div>
-    <p class="wallpaper-sub">Pick a Curio background, upload your own, then save it for this browser.</p>
+    <p class="wallpaper-sub">Choose a Curio background, preview it instantly, upload your own, then save it for this browser.</p>
     <div class="wallpaper-grid" id="wallpaperGrid"></div>
     <div class="wallpaper-upload">
       <label class="upload-btn" for="wallpaperFile">Upload your own</label>
@@ -867,10 +984,10 @@ function visualClass(name){
   let n=0; for(let i=0;i<name.length;i++) n=(n+name.charCodeAt(i)*(i+1))%12;
   return "visual-"+n;
 }
-function draw(){chips.innerHTML=cats.map(c=>`<button class="chip ${c==cat?"active":""}" onclick="cat='${c}';draw()">${c}</button>`).join("");
+function draw(){chips.innerHTML=cats.map(c=>`<button class="chip ${c==cat?"active":""}" onclick="${c==='Adult'?'openAdult()':'cat=\''+c+'\';draw()'}">${c}</button>`).join("");
 let s=sites.filter(x=>(cat=="All"||x.cat==cat)&&(!onlyFav||favs.includes(x.name))&&(!q.value||[x.name,x.cat,x.desc,x.tags].join(" ").toLowerCase().includes(q.value.toLowerCase()))); if(cat==="Adult") s=[];
 count.textContent=s.length+" "+(s.length==1?"site":"sites")+" found";
-grid.innerHTML=cat==='Adult'?'<div class="empty">Adult Curio is coming soon. No links have been added yet.</div>':s.length?s.map(x=>`<article class="card">
+grid.innerHTML=cat==='Adult'?'<div class="empty">Adult Curios are locked. Solve the riddle to unlock the section. No links have been added yet.</div>':s.length?s.map(x=>`<article class="card">
   <a class="card-link" href="${x.url}" target="_blank" rel="noopener" aria-label="Open ${esc(x.name)}">
     <div class="card-media ${visualClass(x.name)}"><span>${visualIcon(x.name)}</span></div>
     <div class="card-body">
@@ -1027,7 +1144,7 @@ function syncTheme(){themeBtn.innerHTML=document.body.classList.contains("dark")
 syncTheme();
 themeBtn.onclick=()=>{document.body.classList.toggle("dark");localStorage.setItem("cwThemeV12",document.body.classList.contains("dark")?"dark":"light");syncTheme()};
 
-// Update 12.1: wallpapers
+// 12.1.2 wallpaper engine: resilient local storage, preview, save and reset.
 const wallpaperLayer=document.getElementById("wallpaperLayer");
 const wallpaperOverlay=document.getElementById("wallpaperOverlay");
 const wallpaperGrid=document.getElementById("wallpaperGrid");
@@ -1038,124 +1155,79 @@ const wallpaperFileName=document.getElementById("wallpaperFileName");
 const wallpaperSave=document.getElementById("wallpaperSave");
 const wallpaperReset=document.getElementById("wallpaperReset");
 const wallpaperNote=document.getElementById("wallpaperNote");
-
+const WALL_KEY="cwWallpaperV12";
+const CUSTOM_KEY="cwWallpaperCustomV12";
 const wallpaperChoices=[
-  {name:"Morning Glass",css:"linear-gradient(135deg,#f7fbff 0%,#dfeaff 45%,#f8f5ff 100%)"},
-  {name:"Soft Sky",css:"radial-gradient(circle at 20% 20%,#d8efff,transparent 34%),linear-gradient(135deg,#f8fbff,#e9eef7 55%,#ffffff)"},
-  {name:"Lavender Haze",css:"radial-gradient(circle at 75% 20%,#e8dcff,transparent 35%),linear-gradient(145deg,#fff,#f1eff9 55%,#e6edf7)"},
-  {name:"Sea Glass",css:"radial-gradient(circle at 20% 30%,#c8f4ee,transparent 35%),linear-gradient(145deg,#f9ffff,#e8f5f4 55%,#f2f7fb)"},
-  {name:"Sunset Cloud",css:"radial-gradient(circle at 75% 25%,#ffd8bd,transparent 30%),radial-gradient(circle at 20% 70%,#dbe7ff,transparent 32%),linear-gradient(145deg,#fff,#f5f3f7)"},
-  {name:"Midnight Aurora",css:"radial-gradient(circle at 75% 20%,#304d83,transparent 28%),radial-gradient(circle at 20% 70%,#314d52,transparent 30%),linear-gradient(145deg,#0b1220,#151525 60%,#08100f)"}
+ {name:"Morning Glass",css:"linear-gradient(135deg,#f7fbff 0%,#dfeaff 45%,#f8f5ff 100%)"},
+ {name:"Soft Sky",css:"radial-gradient(circle at 20% 20%,#d8efff,transparent 34%),linear-gradient(135deg,#f8fbff,#e9eef7 55%,#ffffff)"},
+ {name:"Lavender Haze",css:"radial-gradient(circle at 75% 20%,#e8dcff,transparent 35%),linear-gradient(145deg,#fff,#f1eff9 55%,#e6edf7)"},
+ {name:"Sea Glass",css:"radial-gradient(circle at 20% 30%,#c8f4ee,transparent 35%),linear-gradient(145deg,#f9ffff,#e8f5f4 55%,#f2f7fb)"},
+ {name:"Sunset Cloud",css:"radial-gradient(circle at 75% 25%,#ffd8bd,transparent 30%),radial-gradient(circle at 20% 70%,#dbe7ff,transparent 32%),linear-gradient(145deg,#fff,#f5f3f7)"},
+ {name:"Midnight Aurora",css:"radial-gradient(circle at 75% 20%,#304d83,transparent 28%),radial-gradient(circle at 20% 70%,#314d52,transparent 30%),linear-gradient(145deg,#0b1220,#151525 60%,#08100f)"}
 ];
-let pendingWallpaper=localStorage.getItem("cwWallpaperV12")||"";
-let pendingCustom=localStorage.getItem("cwWallpaperCustomV12")||"";
-let selectedWallpaper=pendingWallpaper;
-let selectedCustom=pendingCustom;
-
+let selectedWallpaper=localStorage.getItem(WALL_KEY)||"";
+let selectedCustom=localStorage.getItem(CUSTOM_KEY)||"";
 function applyWallpaper(){
-  if(selectedCustom){
-    wallpaperLayer.style.backgroundImage=`url("${selectedCustom}")`;
-  }else if(selectedWallpaper){
-    const w=wallpaperChoices.find(x=>x.name===selectedWallpaper);
-    wallpaperLayer.style.backgroundImage=w?w.css:"";
-  }else wallpaperLayer.style.backgroundImage="";
+  wallpaperLayer.style.backgroundImage="none";
+  if(selectedCustom){wallpaperLayer.style.backgroundImage=`url("${selectedCustom}")`;}
+  else if(selectedWallpaper){const w=wallpaperChoices.find(x=>x.name===selectedWallpaper);if(w)wallpaperLayer.style.backgroundImage=w.css;}
 }
 function renderWallpaperChoices(){
+  if(!wallpaperGrid)return;
   wallpaperGrid.innerHTML=wallpaperChoices.map((w,i)=>`<button type="button" class="wallpaper-choice ${!selectedCustom&&selectedWallpaper===w.name?'selected':''}" data-wall="${i}" style="background:${w.css}" aria-label="Choose ${w.name}"><span>${w.name}</span></button>`).join("");
   wallpaperGrid.querySelectorAll("[data-wall]").forEach(b=>b.onclick=()=>{
-    selectedCustom="";
-    selectedWallpaper=wallpaperChoices[Number(b.dataset.wall)];
-    wallpaperFile.value="";
-    wallpaperFileName.textContent="No image selected";
-    renderWallpaperChoices();
-    applyWallpaper();
+    selectedCustom="";selectedWallpaper=wallpaperChoices[Number(b.dataset.wall)].name;
+    if(wallpaperFile)wallpaperFile.value=""; if(wallpaperFileName)wallpaperFileName.textContent="No image selected";
+    applyWallpaper();renderWallpaperChoices();renderMiniWallpapers();
+    if(wallpaperNote)wallpaperNote.textContent="Previewing. Click Save wallpaper to keep it.";
   });
 }
-wallpaperOpen.onclick=()=>{wallpaperOverlay.classList.add("open");renderWallpaperChoices()};
+wallpaperOpen.onclick=()=>{wallpaperOverlay.classList.add("open");renderWallpaperChoices();renderMiniWallpapers();};
 wallpaperClose.onclick=()=>wallpaperOverlay.classList.remove("open");
 wallpaperOverlay.addEventListener("click",e=>{if(e.target===wallpaperOverlay)wallpaperOverlay.classList.remove("open")});
 wallpaperFile.onchange=()=>{
-  const f=wallpaperFile.files[0];
-  if(!f)return;
-  if(f.size>5*1024*1024){wallpaperNote.textContent="Please choose an image under 5 MB.";wallpaperFile.value="";return}
+  const f=wallpaperFile.files[0]; if(!f)return;
+  if(!f.type.startsWith("image/")){wallpaperNote.textContent="Please choose an image file.";wallpaperFile.value="";return;}
+  if(f.size>4*1024*1024){wallpaperNote.textContent="Please choose an image under 4 MB.";wallpaperFile.value="";return;}
   const reader=new FileReader();
-  reader.onload=()=>{
-    selectedCustom=reader.result;
-    selectedWallpaper="";
-    wallpaperFileName.textContent=f.name;
-    renderWallpaperChoices();
-    applyWallpaper();
-    wallpaperNote.textContent="Your image is ready. Click Save wallpaper to keep it.";
-  };
+  reader.onload=()=>{selectedCustom=reader.result;selectedWallpaper="";wallpaperFileName.textContent=f.name;renderWallpaperChoices();renderMiniWallpapers();applyWallpaper();wallpaperNote.textContent="Previewing your image. Click Save wallpaper to keep it."};
+  reader.onerror=()=>{wallpaperNote.textContent="That image could not be loaded. Please try another one."};
   reader.readAsDataURL(f);
 };
 wallpaperSave.onclick=()=>{
   try{
-    localStorage.setItem("cwWallpaperV12",selectedWallpaper||"");
-    localStorage.setItem("cwWallpaperCustomV12",selectedCustom||"");
-    pendingWallpaper=selectedWallpaper;pendingCustom=selectedCustom;
-    wallpaperNote.textContent="Saved. This wallpaper will stay on this browser.";
-    setTimeout(()=>wallpaperOverlay.classList.remove("open"),500);
-  }catch(e){
-    wallpaperNote.textContent="That image is too large for browser storage. Try a smaller image.";
-  }
+    if(selectedCustom)localStorage.setItem(CUSTOM_KEY,selectedCustom);else localStorage.removeItem(CUSTOM_KEY);
+    if(selectedWallpaper)localStorage.setItem(WALL_KEY,selectedWallpaper);else localStorage.removeItem(WALL_KEY);
+    wallpaperNote.textContent="Saved. Your wallpaper will stay on this browser.";
+    renderMiniWallpapers();
+    setTimeout(()=>wallpaperOverlay.classList.remove("open"),650);
+  }catch(e){wallpaperNote.textContent="That image is too large for browser storage. Try a smaller image."}
 };
 wallpaperReset.onclick=()=>{
-  selectedWallpaper="";selectedCustom="";wallpaperFile.value="";wallpaperFileName.textContent="No image selected";
-  applyWallpaper();renderWallpaperChoices();wallpaperNote.textContent="Wallpaper reset. Click Save wallpaper to keep the reset.";
+  selectedWallpaper="";selectedCustom="";localStorage.removeItem(WALL_KEY);localStorage.removeItem(CUSTOM_KEY);
+  if(wallpaperFile)wallpaperFile.value="";if(wallpaperFileName)wallpaperFileName.textContent="No image selected";
+  applyWallpaper();renderWallpaperChoices();renderMiniWallpapers();wallpaperNote.textContent="Wallpaper reset.";
 };
 applyWallpaper();
-
-// Update 12.1: local news postcode helper
-const postcodeInput=document.getElementById("postcodeInput");
-const postcodeGo=document.getElementById("postcodeGo");
-const localNote=document.getElementById("localNote");
-function findLocalNews(){
-  const pc=postcodeInput.value.trim().replace(/\s+/g," ");
-  if(!/^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i.test(pc)){
-    localNote.textContent="Please enter a valid UK postcode, for example B61 8XX.";
-    postcodeInput.focus();
-    return;
-  }
-  const query=encodeURIComponent(`"${pc}" local news UK`);
-  window.open(`https://www.google.com/search?tbm=nws&q=${query}`,"_blank","noopener");
-  localNote.textContent=`Opening local news results for ${pc}.`;
-}
-postcodeGo.onclick=findLocalNews;
-postcodeInput.addEventListener("keydown",e=>{if(e.key==="Enter")findLocalNews()});
-
-
-
-// 12.2.1 mobile quick cards
-document.querySelectorAll("[data-mobile-quick]").forEach(btn=>{btn.addEventListener("click",()=>{const kind=btn.dataset.mobileQuick;if(kind==="news")document.getElementById("newsMore")?.click();if(kind==="local")document.getElementById("postcodeInput")?.scrollIntoView({behavior:"smooth",block:"center"});if(kind==="weather")document.getElementById("weatherChange")?.click();if(kind==="wallpaper")wallpaperOpen?.click()})});
-const newsMore=document.getElementById("newsMore"); if(newsMore)newsMore.onclick=()=>window.open("https://www.bbc.co.uk/news","_blank","noopener");
-const weatherChange=document.getElementById("weatherChange"); if(weatherChange)weatherChange.onclick=()=>{const current=document.getElementById("weatherLocation"); if(current){current.textContent=current.textContent.includes("Bromsgrove")?"UK weather preview":"Bromsgrove, Worcestershire"}};
-
-/* CurioWeb 12.2 backend groundwork */
-window.CurioConfig={
-  version:"12.2.1",
-  backendEnabled:false,
-  apiBase:"/api",
-  features:{accounts:false,dynamicCurios:false,liveNews:false,liveWeather:false,submissions:false},
-  storagePrefix:"curioweb."
-};
-window.CurioAPI={
-  config:window.CurioConfig,
-  async request(path,options={}){
-    if(!this.config.backendEnabled) return {ok:false,offline:true,data:null};
-    const response=await fetch(this.config.apiBase+path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});
-    const data=await response.json().catch(()=>null);
-    if(!response.ok) throw new Error(`API ${response.status}`);
-    return {ok:true,offline:false,data};
-  },
-  getCurios:()=>CurioAPI.request("/curios"),
-  getUser:()=>CurioAPI.request("/me"),
-  saveUser:data=>CurioAPI.request("/me",{method:"PUT",body:JSON.stringify(data)}),
-  submitSuggestion:data=>CurioAPI.request("/suggestions",{method:"POST",body:JSON.stringify(data)}),
-  reportIssue:data=>CurioAPI.request("/issues",{method:"POST",body:JSON.stringify(data)}),
-  getNews:()=>CurioAPI.request("/news"),
-  getWeather:postcode=>CurioAPI.request(`/weather?postcode=${encodeURIComponent(postcode||"")}`)
-};
+/* CurioWeb 12.2: browser location, postcode news and backend ready API */
+window.CurioConfig={version:"12.2",backendEnabled:false,apiBase:"/api",features:{accounts:false,dynamicCurios:false,liveNews:true,liveWeather:true,submissions:false},storagePrefix:"curioweb."};
+window.CurioAPI={config:window.CurioConfig,async request(path,options={}){if(!this.config.backendEnabled)throw new Error("Backend is not connected");const response=await fetch(this.config.apiBase+path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});const data=await response.json().catch(()=>null);if(!response.ok)throw new Error(data?.error||`API ${response.status}`);return data;},getNews:postcode=>CurioAPI.request(`/news?postcode=${encodeURIComponent(postcode)}`),getWeather:(lat,lon)=>CurioAPI.request(`/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`)};
+const postcodeInput=document.getElementById("postcodeInput"),postcodeGo=document.getElementById("postcodeGo"),localNote=document.getElementById("localNote"),localResults=document.getElementById("localResults");
+function validPostcode(pc){return /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i.test(pc)}
+function escapeHtml(v){return String(v??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function renderLocalResults(items,label){if(!localResults)return;localResults.innerHTML=items.length?items.slice(0,5).map(x=>`<a class="local-result" href="${x.link}" target="_blank" rel="noopener"><strong>${escapeHtml(x.title)}</strong><small>${escapeHtml(x.source||label||"Recent local news")}</small></a>`).join(""):"<div class=\"local-status\">No recent local stories were found.</div>"}
+async function findLocalNews(){const pc=postcodeInput.value.trim().replace(/\s+/g," ").toUpperCase();if(!validPostcode(pc)){localNote.textContent="Please enter a valid UK postcode, for example B61 8XX.";postcodeInput.focus();return}localNote.textContent=`Finding recent stories near ${pc}…`;localResults.innerHTML='<div class="local-status">Searching local sources…</div>';try{let data;if(CurioConfig.backendEnabled){data=await CurioAPI.getNews(pc)}else{const rss=`https://news.google.com/rss/search?q=${encodeURIComponent('"'+pc+'" local news')}&hl=en-GB&gl=GB&ceid=GB:en`;const proxy=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rss)}`;const r=await fetch(proxy);if(!r.ok)throw new Error("News service unavailable");const j=await r.json();data={items:(j.items||[]).slice(0,5).map(i=>({title:i.title,link:i.link,source:i.author||"Google News"}))}}renderLocalResults(data.items||[],pc);localNote.textContent=`Recent results for ${pc}. Your postcode is not stored by CurioWeb.`}catch(e){localResults.innerHTML='<div class="local-status">We could not load local news right now. Please try again in a moment.</div>';localNote.textContent="The postcode remains in this browser and is not saved to CurioWeb."}}
+postcodeGo.onclick=findLocalNews;postcodeInput.addEventListener("keydown",e=>{if(e.key==="Enter")findLocalNews()});
+const weatherLocation=document.getElementById("weatherLocation"),weatherChange=document.getElementById("weatherChange"),weatherTemp=document.getElementById("weatherTemp"),weatherSummary=document.getElementById("weatherSummary"),weatherHigh=document.getElementById("weatherHigh"),weatherLow=document.getElementById("weatherLow"),weatherIcon=document.getElementById("weatherIcon"),weatherLocationNote=document.getElementById("weatherLocationNote");
+const weatherCodes={0:["☀️","Clear sky"],1:["🌤️","Mainly clear"],2:["⛅","Partly cloudy"],3:["☁️","Overcast"],45:["🌫️","Fog"],48:["🌫️","Rime fog"],51:["🌦️","Light drizzle"],53:["🌦️","Drizzle"],55:["🌧️","Heavy drizzle"],61:["🌦️","Light rain"],63:["🌧️","Rain"],65:["🌧️","Heavy rain"],71:["🌨️","Light snow"],73:["🌨️","Snow"],75:["❄️","Heavy snow"],80:["🌦️","Showers"],81:["🌧️","Showers"],82:["⛈️","Heavy showers"],95:["⛈️","Thunderstorm"],96:["⛈️","Thunderstorm"],99:["⛈️","Thunderstorm"]};
+async function loadWeather(lat,lon){weatherLocation.textContent="Finding your weather…";weatherChange.textContent="Loading…";try{let d;if(CurioConfig.backendEnabled){d=await CurioAPI.getWeather(lat,lon)}else{const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto`;const r=await fetch(u);if(!r.ok)throw new Error("Weather unavailable");d=await r.json()}const code=d.current?.weather_code;const [ico,sum]=weatherCodes[code]||["🌤️","Current conditions"];weatherIcon.textContent=ico;weatherTemp.textContent=Math.round(d.current?.temperature_2m??0)+"°C";weatherSummary.textContent=sum;weatherHigh.textContent="H: "+Math.round(d.daily?.temperature_2m_max?.[0]??0)+"°";weatherLow.textContent="L: "+Math.round(d.daily?.temperature_2m_min?.[0]??0)+"°";weatherLocation.textContent="Your current location";weatherLocationNote.textContent="Location is used only for this session and is not stored.";weatherChange.textContent="Refresh"}catch(e){weatherLocation.textContent="Weather unavailable";weatherLocationNote.textContent="Allow location access and try again.";weatherChange.textContent="Find me"}}
+function findMyLocation(){if(!navigator.geolocation){weatherLocation.textContent="Location not supported";return}weatherChange.textContent="Finding…";navigator.geolocation.getCurrentPosition(p=>loadWeather(p.coords.latitude,p.coords.longitude),()=>{weatherLocation.textContent="Location access denied";weatherLocationNote.textContent="You can enable location access in your browser settings.";weatherChange.textContent="Try again"},{enableHighAccuracy:false,maximumAge:300000,timeout:10000})}
+weatherChange.onclick=findMyLocation;
+const adultOverlay=document.getElementById("adultOverlay"),adultAnswer=document.getElementById("adultAnswer"),adultUnlock=document.getElementById("adultUnlock"),adultMessage=document.getElementById("adultMessage"),adultContent=document.getElementById("adultContent"),adultClose=document.getElementById("adultClose");
+function openAdult(){adultOverlay.classList.add("open");adultOverlay.setAttribute("aria-hidden","false");adultAnswer.value="";adultMessage.textContent="";adultContent.hidden=true;setTimeout(()=>adultAnswer.focus(),80)}
+function closeAdult(){adultOverlay.classList.remove("open");adultOverlay.setAttribute("aria-hidden","true")}
+function tryAdult(){const answer=adultAnswer.value.trim().toLowerCase();if(answer==="sound"){adultMessage.textContent="Correct.";adultContent.hidden=false;localStorage.setItem("curioweb.adultUnlocked","1")}else adultMessage.textContent="Not quite. Think about something that travels without a body."}
+adultUnlock.onclick=tryAdult;adultAnswer.addEventListener("keydown",e=>{if(e.key==="Enter")tryAdult()});adultClose.onclick=closeAdult;adultOverlay.addEventListener("click",e=>{if(e.target===adultOverlay)closeAdult()});
 
 // Improved Surprise Me: full screen lightspeed tunnel using a canvas.
 const wormCanvas=document.getElementById("wormholeCanvas");
@@ -1220,6 +1292,7 @@ document.querySelectorAll("[data-sheet]").forEach(btn=>btn.addEventListener("cli
   if(a==="weather")document.querySelector(".weather-tile")?.scrollIntoView({behavior:"smooth",block:"center"});
   if(a==="wallpaper")wallpaperOpen.click();
   if(a==="report")openIssue();
+  if(a==="adult")openAdult();
   if(a==="about")openInfo("privacy");
 }));
 
@@ -1228,10 +1301,13 @@ const miniGrid=document.getElementById("wallpaperMiniGrid");
 function renderMiniWallpapers(){
   if(!miniGrid)return;
   miniGrid.innerHTML=wallpaperChoices.map((w,i)=>`<button type="button" class="wallpaper-mini-choice ${!selectedCustom&&selectedWallpaper===w.name?'selected':''}" data-mini-wall="${i}" style="background:${w.css}" aria-label="${w.name}"></button>`).join("");
-  miniGrid.querySelectorAll("[data-mini-wall]").forEach(b=>b.onclick=()=>{selectedCustom="";selectedWallpaper=wallpaperChoices[Number(b.dataset.miniWall)].name;applyWallpaper();renderMiniWallpapers();});
+  miniGrid.querySelectorAll("[data-mini-wall]").forEach(b=>b.onclick=()=>{
+    selectedCustom="";selectedWallpaper=wallpaperChoices[Number(b.dataset.miniWall)].name;
+    applyWallpaper();renderMiniWallpapers();renderWallpaperChoices();
+  });
 }
 renderMiniWallpapers();
-document.getElementById("miniUpload")?.addEventListener("click",()=>{wallpaperOpen.click();setTimeout(()=>wallpaperFile.click(),120)});
+document.getElementById("miniUpload")?.addEventListener("click",()=>{wallpaperOpen.click();setTimeout(()=>wallpaperFile.click(),180)});
 document.getElementById("miniSave")?.addEventListener("click",()=>wallpaperSave.click());
 
 document.getElementById("reportTrigger")?.addEventListener("click",openIssue);
