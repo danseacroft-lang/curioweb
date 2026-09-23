@@ -250,9 +250,145 @@ body{padding-top:68px}
 }
 </style>
 
+
+<style>
+/* CurioWeb Update 8 */
+.top-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.uk-clock{
+  color:#b8c0ce;
+  font-size:12px;
+  font-weight:650;
+  letter-spacing:.02em;
+  padding:8px 11px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:999px;
+  background:rgba(255,255,255,.035);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.12);
+  white-space:nowrap;
+}
+.issue-panel{
+  position:fixed;
+  top:68px;
+  left:0;
+  width:100%;
+  z-index:990;
+  display:none;
+  padding:10px 16px 12px;
+  background:rgba(8,9,13,.90);
+  border-bottom:1px solid rgba(255,255,255,.09);
+  backdrop-filter:blur(18px) saturate(130%);
+  -webkit-backdrop-filter:blur(18px) saturate(130%);
+  box-shadow:0 12px 35px rgba(0,0,0,.25);
+}
+.issue-panel.open{display:block}
+.issue-inner{max-width:900px;margin:auto}
+.issue-title{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#d9dee8;margin-bottom:7px}
+.issue-row{display:flex;gap:8px}
+.issue-row input{
+  min-width:0;
+  flex:1;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:12px;
+  color:#fff;
+  padding:11px 13px;
+  font-size:14px;
+  outline:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 0 0 0 rgba(255,255,255,0);
+  transition:.18s ease;
+}
+.issue-row input:focus{
+  border-color:rgba(255,255,255,.30);
+  box-shadow:0 0 0 3px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.18);
+}
+.issue-row button{
+  flex:0 0 auto;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  color:#f4f6fa;
+  border-radius:12px;
+  padding:11px 15px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 18px rgba(255,255,255,.035);
+}
+.issue-row button:hover{
+  background:rgba(255,255,255,.13);
+  border-color:rgba(255,255,255,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 24px rgba(255,255,255,.07);
+}
+.issue-note{color:#818b9d;font-size:10px;margin-top:6px}
+.controls{
+  align-items:center;
+}
+.controls input{
+  height:48px;
+  padding:0 17px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:15px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 30px rgba(0,0,0,.13);
+  backdrop-filter:blur(16px) saturate(125%);
+  -webkit-backdrop-filter:blur(16px) saturate(125%);
+  transition:border-color .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.controls input::placeholder{color:#7f899a}
+.controls input:focus{
+  outline:none;
+  background:rgba(255,255,255,.065);
+  border-color:rgba(255,255,255,.27);
+  box-shadow:0 0 0 3px rgba(255,255,255,.045),0 12px 32px rgba(0,0,0,.18),0 0 28px rgba(255,255,255,.035);
+}
+.controls button{
+  min-height:48px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.12);
+  color:#edf0f5;
+  border-radius:15px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 8px 26px rgba(0,0,0,.14),0 0 18px rgba(255,255,255,.025);
+}
+.controls button:hover{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.25);
+  transform:translateY(-1px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 12px 30px rgba(0,0,0,.20),0 0 26px rgba(255,255,255,.055);
+}
+.controls .primary{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.15);
+  color:#f7f8fa;
+}
+.beta-experimental{
+  max-width:min(92vw,760px);
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+@media (max-width:700px){
+  .top-meta{align-items:flex-start;flex-direction:column;gap:8px}
+  .uk-clock{font-size:11px;padding:7px 10px}
+  .issue-panel{top:64px}
+  .issue-row{flex-direction:column}
+  .issue-row button{width:100%}
+  .beta-experimental{font-size:10px}
+}
+</style>
+
 </head><body>
-<div class="beta-bar">Curio V.1 beta <span>We are still building things, so you may encounter the occasional snag.</span><button class="beta-experimental" type="button">Or, try an experimental version of Curio &gt;</button></div>
-<header><div class="logo">CURIOWEB · HUMAN RABBIT HOLES</div><h1>The internet is bigger than your feed.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></header>
+<div class="beta-bar">Curio V.1 beta <span>We are still building things, so you may encounter the occasional snag.</span><button class="beta-experimental" id="issueOpen" type="button">This is an experimental version of Curio. Report issues HERE</button></div>
+<div class="issue-panel" id="issuePanel">
+  <div class="issue-inner">
+    <div class="issue-title">Report an issue</div>
+    <div class="issue-row">
+      <input id="issueInput" type="text" placeholder="Tell us what went wrong…" autocomplete="off">
+      <button id="issueSubmit" type="button">Submit issue</button>
+    </div>
+    <div class="issue-note" id="issueNote">Preview only for now. Nothing is sent or stored yet.</div>
+  </div>
+</div>
+<header><div class="top-meta"><div class="logo">CURIOWEB · HUMAN RABBIT HOLES</div><div class="uk-clock" id="ukClock" aria-label="UK date and time"></div></div><h1>Go where the internet gets interesting.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></header>
 <div class="controls"><input id="q" placeholder="Search sites, topics or tags…"><button class="primary" id="random">🎲 Surprise me</button><button id="suggestOpen">💡 Suggest a website</button><button id="fav">★ Favourites</button></div>
 <div class="chips" id="chips"></div><main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
 <footer>
@@ -363,4 +499,53 @@ suggestOverlay.addEventListener("click",e=>{if(e.target===suggestOverlay)closeSu
 infoOverlay.addEventListener("click",e=>{if(e.target===infoOverlay)closeInfo()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSuggest();closeInfo()}});
 document.getElementById("suggestOpen").onclick=openSuggest;
+
+// Update 8: UK clock
+const ukClock = document.getElementById("ukClock");
+function updateUKClock(){
+  const now = new Date();
+  const date = new Intl.DateTimeFormat("en-GB", {
+    timeZone:"Europe/London",
+    weekday:"short",
+    day:"numeric",
+    month:"short",
+    year:"numeric"
+  }).format(now);
+  const time = new Intl.DateTimeFormat("en-GB", {
+    timeZone:"Europe/London",
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit",
+    hour12:false
+  }).format(now);
+  ukClock.textContent = `${date} · ${time} UK`;
+}
+updateUKClock();
+setInterval(updateUKClock,1000);
+
+// Update 8: preview issue reporter
+const issueOpen = document.getElementById("issueOpen");
+const issuePanel = document.getElementById("issuePanel");
+const issueInput = document.getElementById("issueInput");
+const issueSubmit = document.getElementById("issueSubmit");
+const issueNote = document.getElementById("issueNote");
+
+issueOpen.onclick = () => {
+  issuePanel.classList.toggle("open");
+  if(issuePanel.classList.contains("open")){
+    setTimeout(()=>issueInput.focus(),50);
+  }
+};
+issueSubmit.onclick = () => {
+  if(!issueInput.value.trim()){
+    issueInput.focus();
+    return;
+  }
+  issueInput.value = "";
+  issueNote.textContent = "Thanks! Your report has been noted. The proper reporting system is coming in a future version.";
+};
+issueInput.addEventListener("keydown", e => {
+  if(e.key === "Enter") issueSubmit.click();
+});
+
 </script></body></html>
