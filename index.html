@@ -1,5 +1,6 @@
-<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CurioWeb</title>
+<!DOCTYPE html>
+
+<html><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>CurioWeb</title>
 <style>
 :root{
   --bg:#f6f7f9;
@@ -311,10 +312,6 @@ h1{max-width:720px;font-size:clamp(58px,6.4vw,92px);line-height:.91;letter-spaci
 .side-row-head{display:flex;justify-content:space-between;gap:10px}
 .side-tile h2{font-size:16px;line-height:1.12;margin-bottom:7px}
 .side-tile p{font-size:10px;line-height:1.4;margin-bottom:8px}
-.news-hero{height:96px}
-.news-links a{min-width:0}
-.news-links strong,.news-links small{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.postcode-row{grid-template-columns:minmax(0,1fr) 88px}
 .weather-main{grid-template-columns:40px minmax(0,1fr) auto}
 .wallpaper-mini-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .wallpaper-mini-choice{min-width:0}
@@ -330,8 +327,6 @@ footer{position:relative;z-index:1}
 body.dark .wallpaper-layer::after{background:linear-gradient(180deg,rgba(8,10,15,.82),rgba(8,10,15,.70) 50%,rgba(8,10,15,.90))}
 /* Keep the hero artwork visible even when a wallpaper is selected. */
 body.dark .hero-art:after{background:linear-gradient(180deg,rgba(8,10,15,.02),rgba(8,10,15,.50) 72%,rgba(8,10,15,.92) 100%)}
-/* Avoid accidental layout shifts from long labels. */
-button,.chip,.news-links a,.wallpaper-mini-actions button{white-space:nowrap}
 @media(max-width:1200px){
   :root{--cw-content:calc(100% - 48px);--cw-side:280px}
   header{padding-top:22px}
@@ -383,12 +378,7 @@ button,.chip,.news-links a,.wallpaper-mini-actions button{white-space:nowrap}
   .controls{margin:0 14px}
   .controls button{font-size:10px}
   .backend-cards{grid-template-columns:1fr}
-  .postcode-row{grid-template-columns:1fr}
-}
-
-
-/* 12.2 location, local news and adult gate */
-.local-results{display:grid;gap:6px;margin-top:9px;max-height:210px;overflow:auto}.local-result{display:block;text-decoration:none;color:#18202b;padding:8px 9px;border:1px solid rgba(20,29,45,.065);border-radius:10px;background:rgba(255,255,255,.62)}.local-result strong{display:block;font-size:9px;line-height:1.35}.local-result small{display:block;color:#7f8998;font-size:7px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.local-status{font-size:8px;color:#7f8998;line-height:1.4}.weather-location-note{font-size:8px;color:#9aa3b0;margin-top:7px}.adult-overlay{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:rgba(7,10,16,.42);backdrop-filter:blur(18px);z-index:9999}.adult-overlay.open{display:grid}.adult-modal{width:min(430px,100%);position:relative;padding:28px;border-radius:28px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.88);box-shadow:0 30px 90px rgba(0,0,0,.22);text-align:center}.adult-lock{font-size:30px;margin-bottom:8px}.adult-modal h2{margin:4px 0 10px;font-size:26px;letter-spacing:-.04em}.adult-riddle{font-size:13px;line-height:1.55;color:#697384;margin:0 0 16px}.adult-modal input{width:100%;height:46px;border:1px solid rgba(20,29,45,.12);border-radius:14px;padding:0 14px;outline:none;font-size:14px;box-sizing:border-box}.adult-unlock{width:100%;height:46px;margin-top:9px}.adult-message{min-height:18px;margin-top:9px;font-size:10px;color:#8a5360}.adult-content{margin-top:16px;padding:13px;border-radius:15px;background:rgba(232,239,255,.65);font-size:11px;line-height:1.45}.modal-close{position:absolute;right:13px;top:13px;width:32px;height:32px;border:0;border-radius:50%;background:rgba(20,29,45,.07);font-size:20px}
+}.weather-location-note{font-size:8px;color:#9aa3b0;margin-top:7px}.adult-overlay{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:rgba(7,10,16,.42);backdrop-filter:blur(18px);z-index:9999}.adult-overlay.open{display:grid}.adult-modal{width:min(430px,100%);position:relative;padding:28px;border-radius:28px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.88);box-shadow:0 30px 90px rgba(0,0,0,.22);text-align:center}.adult-lock{font-size:30px;margin-bottom:8px}.adult-modal h2{margin:4px 0 10px;font-size:26px;letter-spacing:-.04em}.adult-riddle{font-size:13px;line-height:1.55;color:#697384;margin:0 0 16px}.adult-modal input{width:100%;height:46px;border:1px solid rgba(20,29,45,.12);border-radius:14px;padding:0 14px;outline:none;font-size:14px;box-sizing:border-box}.adult-unlock{width:100%;height:46px;margin-top:9px}.adult-message{min-height:18px;margin-top:9px;font-size:10px;color:#8a5360}.adult-content{margin-top:16px;padding:13px;border-radius:15px;background:rgba(232,239,255,.65);font-size:11px;line-height:1.45}.modal-close{position:absolute;right:13px;top:13px;width:32px;height:32px;border:0;border-radius:50%;background:rgba(20,29,45,.07);font-size:20px}
 body.dark .adult-modal{background:rgba(25,29,39,.94);border-color:rgba(255,255,255,.10);color:#fff}body.dark .adult-riddle{color:#aeb6c4}body.dark .adult-modal input{background:#171b24;color:#fff;border-color:rgba(255,255,255,.12)}
 
 /* 12.2.1 precision pass: keep the search controls clean and free of a full-width gradient band. */
@@ -405,7 +395,6 @@ body.dark .controls{background:transparent!important}
 .conspiracy-next{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;border-radius:11px;padding:8px 10px;font-size:10px;font-weight:750;cursor:pointer}
 .conspiracy-next:hover{background:rgba(255,255,255,.10)}
 </style>
-
 <style id="curio-update-12">
 /* CurioWeb Update 12: clean editorial Apple-inspired redesign */
 :root{
@@ -667,25 +656,6 @@ body.dark .wallpaper-layer::after{
 .side-kicker{font-size:10px;letter-spacing:.14em;font-weight:850;color:#818b9b;margin-bottom:9px}
 .side-tile h2{font-size:22px;line-height:1.08;letter-spacing:-.035em;margin:0 0 8px}
 .side-tile p{font-size:13px;line-height:1.5;color:#697487;margin:0 0 14px}
-.news-links{display:grid;gap:8px}
-.news-links a{
-  display:flex;justify-content:space-between;align-items:center;text-decoration:none;
-  color:#15191f;font-size:13px;font-weight:750;padding:12px 13px;border-radius:14px;
-  background:rgba(255,255,255,.65);border:1px solid rgba(24,31,42,.08);
-  transition:.18s ease;
-}
-.news-links a:hover{background:#fff;transform:translateY(-1px);border-color:rgba(24,31,42,.16)}
-.side-updated,.local-note{font-size:10px;line-height:1.45;color:#8b94a2;margin-top:11px}
-.postcode-row{display:flex;gap:8px}
-.postcode-row input{
-  flex:1;min-width:0;height:43px;padding:0 12px;border-radius:13px;
-  border:1px solid rgba(24,31,42,.11);background:rgba(255,255,255,.75);color:#15191f;
-  outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
-}
-.postcode-row input:focus{border-color:rgba(20,28,40,.25);box-shadow:0 0 0 3px rgba(20,28,40,.04)}
-.postcode-row button{
-  height:43px;padding:0 14px;border:0;border-radius:13px;background:#11151c;color:#fff;font-weight:750;
-}
 .wallpaper-overlay{
   position:fixed;inset:0;z-index:5000;display:none;align-items:center;justify-content:center;
   padding:24px;background:rgba(10,13,18,.30);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
@@ -717,11 +687,6 @@ body.dark .wallpaper-layer::after{
 .wallpaper-reset{background:#f1f3f6;color:#303641}
 .wallpaper-save{background:#11151c;color:#fff;border-color:#11151c}
 .wallpaper-note{font-size:10px;color:#8b94a2;text-align:right;margin-top:8px}
-body.dark .wallpaper-open,body.dark .side-tile,body.dark .news-links a,body.dark .postcode-row input{
-  background:rgba(18,21,29,.72);color:#f4f6fa;border-color:rgba(255,255,255,.10);
-}
-body.dark .side-tile p,body.dark .side-updated,body.dark .local-note{color:#9ba4b6}
-body.dark .news-links a:hover{background:rgba(30,34,46,.9)}
 body.dark .wallpaper-box{background:rgba(20,23,31,.94);color:#f5f7fb;border-color:rgba(255,255,255,.10)}
 body.dark .wallpaper-sub{color:#9ba4b6}
 body.dark .wallpaper-choice.selected{border-color:#fff}
@@ -758,11 +723,6 @@ body::selection{background:#1b63ff;color:#fff}
 .side-tile p{font-size:11px;line-height:1.42;margin-bottom:11px}
 .side-row-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .side-link{border:0;background:none;padding:2px 0;color:#4c76db;font-size:10px;font-weight:800}
-.news-tile .news-links{gap:6px}
-.news-links a{padding:10px 11px;border-radius:12px;font-size:11px;background:rgba(255,255,255,.56)}
-.local-tile .postcode-row{gap:6px}
-.postcode-row input{height:39px;border-radius:11px;font-size:11px}
-.postcode-row button{height:39px;border-radius:11px;font-size:11px}
 .weather-location{font-size:10px;color:#7a8493;margin:-1px 0 8px}
 .weather-main{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:7px}
 .weather-icon{font-size:31px;line-height:1}
@@ -811,7 +771,7 @@ body::selection{background:#1b63ff;color:#fff}
 body{background:radial-gradient(circle at 73% 12%,rgba(188,215,255,.58),transparent 30%),radial-gradient(circle at 15% 34%,rgba(231,226,255,.48),transparent 31%),linear-gradient(180deg,#f8fbff 0%,#f3f6fa 50%,#fff 100%)}
 header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.logo{font-size:21px;letter-spacing:.24em}.logo span{font-size:8px}.top-right{gap:9px}.top-tagline{font-size:11px}
 .home-layout{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 304px;gap:20px;padding:0 32px 44px}.home-layout main{padding:0;max-width:none}.home-layout .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
-.side-tiles{display:flex;flex-direction:column;gap:11px}.side-tile{border:1px solid rgba(20,29,45,.085);border-radius:19px;padding:14px;background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(125%);-webkit-backdrop-filter:blur(20px) saturate(125%);box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 12px 34px rgba(35,47,66,.075)}.side-kicker{font-size:9px;font-weight:850;letter-spacing:.12em;margin:0 0 5px;color:#6e7888}.blue-kicker{color:#1b63ff}.side-row-head{align-items:flex-start}.side-tile h2{font-size:16px;letter-spacing:-.025em;margin:0 0 8px}.side-tile p{font-size:10px;color:#778293;line-height:1.4;margin:0 0 9px}.side-link{font-size:9px;color:#3471ed}.news-hero{height:82px;border-radius:11px;overflow:hidden;position:relative;background:linear-gradient(135deg,#b9d3ed,#6d87a7 48%,#303b4d);margin:7px 0 8px;display:flex;align-items:flex-end;justify-content:flex-end}.news-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(4,12,25,.32))}.news-hero-buildings{font-size:64px;opacity:.9;filter:saturate(.55);transform:translate(-18px,7px)}.news-hero-label{position:absolute;z-index:2;left:9px;top:8px;background:#e9232f;color:#fff;font-size:7px;font-weight:900;padding:4px 6px;border-radius:5px;letter-spacing:.08em}.news-links{display:flex;flex-direction:column;gap:5px}.news-links a{display:grid;grid-template-columns:28px 1fr 12px;gap:8px;align-items:center;text-decoration:none;color:#18202b;padding:7px 7px;border:1px solid rgba(20,29,45,.065);border-radius:10px;background:rgba(255,255,255,.58)}.news-links a:hover{background:#fff}.news-logo{width:25px;height:25px;border-radius:5px;display:grid;place-items:center;font-size:8px;font-weight:900;color:#fff}.news-logo.bbc{background:#d71920}.news-logo.guardian{background:#142e50;font-family:Georgia,serif;font-size:18px}.news-logo.sky{background:#d61f2c;font-size:9px}.news-links strong{display:block;font-size:9px}.news-links small{display:block;color:#7f8998;font-size:7px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.news-links b{font-size:16px;color:#8791a0}.postcode-row{display:grid;grid-template-columns:1fr;gap:7px}.postcode-row input{height:38px;width:100%;padding:0 11px;background:rgba(255,255,255,.75);border:1px solid rgba(20,29,45,.09);border-radius:11px;font-size:10px;outline:none}.postcode-row button{height:36px;background:#11151c;color:#fff;border:0;border-radius:11px;font-size:10px;font-weight:800}.local-note{font-size:8px;color:#9aa3b0;margin-top:7px}.weather-location{font-size:9px;color:#7d8795;margin:1px 0 0}.weather-main{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:5px;margin-top:5px}.weather-icon{font-size:34px}.weather-main strong{font-size:29px;letter-spacing:-.06em}.weather-main span{font-size:9px;color:#7e8795;text-align:right}.weather-range{display:flex;gap:11px;font-size:8px;color:#8d96a4;margin-top:3px}.wallpaper-mini h2{font-size:15px;margin-bottom:3px}.wallpaper-mini-grid{grid-template-columns:repeat(4,1fr);gap:5px}.wallpaper-mini-choice{height:39px;border-radius:7px}.wallpaper-mini-actions{gap:6px}.wallpaper-mini-actions button{font-size:8px;height:30px}.report-tile{padding:6px}.report-trigger{padding:6px}.report-trigger>span:first-child{width:27px;height:27px}.report-trigger strong{font-size:10px}.report-trigger small{font-size:8px}
+.side-tiles{display:flex;flex-direction:column;gap:11px}.side-tile{border:1px solid rgba(20,29,45,.085);border-radius:19px;padding:14px;background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(125%);-webkit-backdrop-filter:blur(20px) saturate(125%);box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 12px 34px rgba(35,47,66,.075)}.side-kicker{font-size:9px;font-weight:850;letter-spacing:.12em;margin:0 0 5px;color:#6e7888}.blue-kicker{color:#1b63ff}.side-row-head{align-items:flex-start}.side-tile h2{font-size:16px;letter-spacing:-.025em;margin:0 0 8px}.side-tile p{font-size:10px;color:#778293;line-height:1.4;margin:0 0 9px}.side-link{font-size:9px;color:#3471ed}.weather-location{font-size:9px;color:#7d8795;margin:1px 0 0}.weather-main{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:5px;margin-top:5px}.weather-icon{font-size:34px}.weather-main strong{font-size:29px;letter-spacing:-.06em}.weather-main span{font-size:9px;color:#7e8795;text-align:right}.weather-range{display:flex;gap:11px;font-size:8px;color:#8d96a4;margin-top:3px}.wallpaper-mini h2{font-size:15px;margin-bottom:3px}.wallpaper-mini-grid{grid-template-columns:repeat(4,1fr);gap:5px}.wallpaper-mini-choice{height:39px;border-radius:7px}.wallpaper-mini-actions{gap:6px}.wallpaper-mini-actions button{font-size:8px;height:30px}.report-tile{padding:6px}.report-trigger{padding:6px}.report-trigger>span:first-child{width:27px;height:27px}.report-trigger strong{font-size:10px}.report-trigger small{font-size:8px}
 .mobile-quick{display:none}
 .experience-strip{max-width:1500px;margin:0 auto 34px;padding:0 32px;grid-template-columns:1.2fr .8fr;gap:15px}.experience-block{border-radius:20px;padding:16px}.experience-heading h2{font-size:17px}.wormhole-story{grid-template-columns:1fr 12px 1fr 12px 1fr 12px 1fr}.wormhole-frame{height:112px}.wormhole-frame span{font-size:8px}.backend-cards>div{padding:9px}
 @media(max-width:1200px){.home-layout .grid{grid-template-columns:repeat(3,minmax(0,1fr))}.home-layout{grid-template-columns:minmax(0,1fr) 286px}}
@@ -819,8 +779,6 @@ header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.log
 @media(max-width:700px){header{padding:14px 16px 17px}.top-meta{grid-template-columns:1fr auto;margin-bottom:38px}.logo{position:absolute;left:50%;transform:translateX(-50%);top:17px;font-size:16px}.logo span{font-size:6px}.top-right{display:flex}.top-tagline{display:none}.wallpaper-open{padding:8px 10px!important;font-size:10px}.wallpaper-open span{display:none}.uk-clock{font-size:9px}.theme-toggle{font-size:9px}.hero{font-size:14px}.controls{position:sticky;top:0}.chips{padding-bottom:13px}.mobile-quick{display:flex;gap:8px;overflow:auto;padding:0 16px 14px;scrollbar-width:none}.mobile-quick::-webkit-scrollbar{display:none}.mobile-quick-card{min-width:176px;height:58px;border:1px solid rgba(20,29,45,.08);border-radius:15px;background:rgba(255,255,255,.72);display:grid;grid-template-columns:31px 1fr 12px;align-items:center;gap:7px;padding:0 10px;text-align:left;box-shadow:0 8px 22px rgba(35,47,66,.06)}.mobile-quick-card .quick-icon{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:#f1f4f8;font-size:14px}.mobile-quick-card b{display:block;font-size:10px}.mobile-quick-card small{display:block;font-size:8px;color:#8b94a1;margin-top:2px}.mobile-quick-card em{font-style:normal;font-size:17px;color:#8c95a3}.home-layout{padding:0 16px 28px}.home-layout .grid{grid-template-columns:1fr;gap:11px}.side-tiles{display:none}.card{border-radius:16px}.card-media{height:178px}.card-body{padding:13px}.card h2{font-size:18px}.experience-strip{padding:0 16px;margin-bottom:18px}.experience-block{border-radius:18px;padding:14px}.experience-heading{margin-bottom:10px}.experience-heading h2{font-size:16px}.wormhole-story{grid-template-columns:1fr}.wormhole-story i,.wormhole-frame:nth-of-type(n+2){display:none}.wormhole-frame{height:150px}.backend-cards{grid-template-columns:1fr 1fr}.backend-cards strong{font-size:9px}.backend-cards small{font-size:8px}.mobile-nav{bottom:9px}.beta-bar{height:58px;font-size:9px}.beta-bar span{font-size:8px}.beta-experimental{font-size:8px;padding:3px 9px}}
 
 </style>
-
-
 <style id="curio-final-12-2-3">
 /* 12.2.3 visual regression repair: preserve the hero artwork, remove the search band,
    and restore the liquid glass pointer treatment. */
@@ -860,9 +818,6 @@ body.dark .controls{background:transparent!important}
   .card:before,.card:after{opacity:.34}
 }
 </style>
-
-
-
 <style id="curio-12-2-6-layout">
 .appearance-controls{display:flex;align-items:center;gap:8px;flex:0 0 auto}
 .appearance-controls button{white-space:nowrap}
@@ -871,7 +826,6 @@ body.dark .controls{background:transparent!important}
 @media(max-width:700px){.appearance-controls{gap:6px}.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{padding:8px 10px!important;font-size:9px}.appearance-controls .wallpaper-open span{display:none}.appearance-controls .theme-toggle span{display:none}}
 </style>
 <style id="curio-12-2-6-safety">html,body{overflow-x:hidden}img,svg,canvas{max-width:100%}</style>
-
 <style id="curio-12-2-7-final-polish">
 /* 12.2.7 final precision pass: typography, control alignment and grid rhythm. */
 html{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
@@ -975,171 +929,163 @@ body.dark .controls{background:transparent!important;background-image:none!impor
   main{padding-left:16px!important;padding-right:16px!important}
 }
 </style>
-
-</head><body data-curioweb-version="12.2.7">
-<div class="wallpaper-layer" id="wallpaperLayer" aria-hidden="true"></div>
+<style id="curio-12-2-8-final-fix">
+.top-meta{overflow:visible!important;align-items:center;min-height:48px;padding-top:2px}
+.top-right{overflow:visible!important;align-items:center!important}
+.appearance-controls{height:40px;align-items:center;display:flex;gap:8px;overflow:visible}
+.appearance-controls button,.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{height:40px!important;min-height:40px!important;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1;vertical-align:middle;margin:0!important}
+.wallpaper-open{padding:0 14px!important}
+.wallpaper-icon{width:16px;height:16px;display:block;flex:0 0 16px}
+.controls{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+@media(max-width:900px){.top-right{flex-wrap:nowrap}.appearance-controls{gap:6px}}
+@media(max-width:700px){.appearance-controls{height:36px}.appearance-controls button,.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{height:36px!important;min-height:36px!important;padding:0 10px!important}.wallpaper-icon{width:14px;height:14px;flex-basis:14px}}
+</style></head><body data-curioweb-version="12.2.7">
+<div aria-hidden="true" class="wallpaper-layer" id="wallpaperLayer"></div>
 <div class="beta-bar">Curio V.1 beta <span>We are still building things, so you may encounter the occasional snag.</span><button class="beta-experimental" id="issueOpen" type="button">This is an experimental version of Curio. Report issues HERE</button></div>
 <div class="issue-panel" id="issuePanel">
-  <div class="issue-inner">
-    <div class="issue-head"><div class="issue-title">Report an issue</div><button class="issue-close" id="issueClose" type="button" aria-label="Close issue reporter">×</button></div>
-    <div class="issue-row">
-      <input id="issueInput" type="text" placeholder="Tell us what went wrong…" autocomplete="off">
-      <button id="issueSubmit" type="button">Submit issue</button>
-    </div>
-    <div class="issue-note" id="issueNote">Preview only for now. Nothing is sent or stored yet.</div>
-  </div>
+<div class="issue-inner">
+<div class="issue-head"><div class="issue-title">Report an issue</div><button aria-label="Close issue reporter" class="issue-close" id="issueClose" type="button">×</button></div>
+<div class="issue-row">
+<input autocomplete="off" id="issueInput" placeholder="Tell us what went wrong…" type="text"/>
+<button id="issueSubmit" type="button">Submit issue</button>
+</div>
+<div class="issue-note" id="issueNote">Preview only for now. Nothing is sent or stored yet.</div>
+</div>
 </div>
 <header>
-  <div class="top-meta">
-    <div class="top-left">
-      <div class="uk-clock" id="ukClock" aria-label="UK date and time"></div>
-    </div>
-    <div class="logo">CURIOWEB <span>HUMAN RABBIT HOLES</span></div>
-    <div class="top-right"><div class="appearance-controls"><button class="theme-toggle" id="theme" type="button" aria-label="Toggle dark mode">☾ <span>Dark Mode</span></button><button class="wallpaper-open" id="wallpaperOpen" type="button">◫ <span>Wallpapers</span></button></div><span class="top-tagline">♥ <span>Explore more. Scroll less.</span></span></div>
-  </div>
-  <div class="hero-art" aria-hidden="true"></div><div class="hero-copy"><h1>Go where the internet gets interesting.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></div></header>
+<div class="top-meta">
+<div class="top-left">
+<div aria-label="UK date and time" class="uk-clock" id="ukClock"></div>
+</div>
+<div class="logo">CURIOWEB <span>HUMAN RABBIT HOLES</span></div>
+<div class="top-right"><div class="appearance-controls"><button aria-label="Toggle dark mode" class="theme-toggle" id="theme" type="button">☾ <span>Dark Mode</span></button><button aria-label="Choose wallpaper" class="wallpaper-open" id="wallpaperOpen" type="button"><svg aria_hidden="true" class="wallpaper-icon" viewBox="0 0 24 24"><rect fill="none" height="16" rx="3" stroke="currentColor" stroke-width="1.8" width="18" x="3" y="4"></rect><circle cx="8" cy="9" fill="currentColor" r="1.6"></circle><path d="M5.5 17l4.4-4.4 3.1 3 2.3-2.2 3.2 3.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg><span>Wallpapers</span></button></div><span class="top-tagline">♥ <span>Explore more. Scroll less.</span></span></div>
+</div>
+<div aria-hidden="true" class="hero-art"></div><div class="hero-copy"><h1>Go where the internet gets interesting.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></div></header>
 <div class="controls">
-  <div class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><input id="q" placeholder="Search sites, topics or tags…" aria-label="Search CurioWeb"></div>
-  <button class="primary" id="random">🎲 <span>Surprise me</span></button>
-  <button id="suggestOpen">💡 <span>Suggest a website</span></button>
-  <button id="fav">☆ <span>Favourites</span></button>
+<div class="search-wrap"><span aria-hidden="true" class="search-icon">⌕</span><input aria-label="Search CurioWeb" id="q" placeholder="Search sites, topics or tags…"/></div>
+<button class="primary" id="random">🎲 <span>Surprise me</span></button>
+<button id="suggestOpen">💡 <span>Suggest a website</span></button>
+<button id="fav">☆ <span>Favourites</span></button>
 </div>
 <div class="chips" id="chips"></div>
-<div class="mobile-quick" aria-label="CurioWeb quick information">
-  <button type="button" class="mobile-quick-card" data-mobile-quick="news"><span class="quick-icon">📰</span><span><b>UK News</b><small>Latest stories</small></span><em>›</em></button>
-  <button type="button" class="mobile-quick-card" data-mobile-quick="local"><span class="quick-icon">📍</span><span><b>Local News</b><small>Find local stories</small></span><em>›</em></button>
-  <button type="button" class="mobile-quick-card" data-mobile-quick="weather"><span class="quick-icon">☁️</span><span><b>Weather</b><small>Bromsgrove</small></span><em>›</em></button>
-  <button type="button" class="mobile-quick-card" data-mobile-quick="wallpaper"><span class="quick-icon">🖼️</span><span><b>Wallpaper</b><small>Personalise Curio</small></span><em>›</em></button>
+<div aria-label="CurioWeb quick information" class="mobile-quick">
+
+
+<button class="mobile-quick-card" data-mobile-quick="weather" type="button"><span class="quick-icon">☁️</span><span><b>Weather</b><small>Find your weather</small></span><em>›</em></button>
+<button class="mobile-quick-card" data-mobile-quick="wallpaper" type="button"><span class="quick-icon">🖼️</span><span><b>Wallpaper</b><small>Personalise Curio</small></span><em>›</em></button>
 </div>
 <div class="home-layout">
-  <main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
-  <aside class="side-tiles" aria-label="CurioWeb information">
-    <section class="side-tile news-tile">
-      <div class="side-row-head"><div><div class="side-kicker blue-kicker">UK NEWS</div><h2>Latest from around the UK</h2></div><button class="side-link" id="newsMore" type="button">View more →</button></div>
-      <div class="news-hero" aria-hidden="true"><div class="news-hero-label">UK TODAY</div><div class="news-hero-buildings">🏛️</div></div>
-      <div class="news-links">
-        <a href="https://www.bbc.co.uk/news" target="_blank" rel="noopener"><span class="news-logo bbc">BBC</span><span><strong>BBC News</strong><small>The latest from around the UK</small></span><b>›</b></a>
-        <a href="https://www.theguardian.com/uk-news" target="_blank" rel="noopener"><span class="news-logo guardian">G</span><span><strong>The Guardian</strong><small>UK news, analysis and opinion</small></span><b>›</b></a>
-        <a href="https://news.sky.com/uk" target="_blank" rel="noopener"><span class="news-logo sky">sky</span><span><strong>Sky News</strong><small>Breaking news and top stories</small></span><b>›</b></a>
-      </div>
-    </section>
-    <section class="side-tile local-tile">
-      <div class="side-kicker blue-kicker">WHAT'S HAPPENING NEAR YOU</div><h2>Local news by postcode</h2>
-      <div class="postcode-row"><input id="postcodeInput" type="text" inputmode="text" maxlength="8" placeholder="Postcode e.g. B61 8XX" aria-label="UK postcode"><button id="postcodeGo" type="button">Find News</button></div>
-      <div class="local-results" id="localResults" aria-live="polite"></div>
-      <div class="local-note" id="localNote">Your postcode is only used in your browser to request local results.</div>
-    </section>
-    <section class="side-tile weather-tile">
-      <div class="side-row-head"><div><div class="side-kicker blue-kicker">WEATHER NEAR YOU</div><div class="weather-location" id="weatherLocation">Location not set</div></div><button class="side-link" id="weatherChange" type="button">Find me</button></div>
-      <div class="weather-main"><div class="weather-icon" id="weatherIcon">🌤️</div><strong id="weatherTemp">14°C</strong><span id="weatherSummary">Partly cloudy</span></div>
-      <div class="weather-range"><span id="weatherHigh">H: --</span><span id="weatherLow">L: --</span></div><div class="weather-location-note" id="weatherLocationNote">Your location stays in this browser.</div>
-    </section>
-    <section class="side-tile wallpaper-mini">
-      <div class="side-kicker blue-kicker">WALLPAPER</div><h2>Choose a background</h2><p>Personalise your CurioWeb experience.</p>
-      <div class="wallpaper-mini-grid" id="wallpaperMiniGrid"></div>
-      <div class="wallpaper-mini-actions"><button type="button" id="miniUpload">⇧ Upload your own</button><button type="button" id="miniSave">Save Wallpaper</button></div>
-    </section>
-    <section class="side-tile conspiracy-tile" aria-live="polite">
-      <div class="side-kicker">👁 RANDOM CONSPIRACY THEORY</div>
-      <h2 id="conspiracyTitle">The Philadelphia Experiment</h2>
-      <p class="conspiracy-copy" id="conspiracyCopy">A long running story claims a US Navy ship was made invisible during a secret wartime experiment involving powerful electromagnetic fields. Later versions of the story add stranger details, including the ship supposedly disappearing and reappearing elsewhere. The US Navy has denied that the experiment took place, and researchers generally trace the legend to later accounts rather than contemporary evidence.</p>
-      <p class="conspiracy-meta" id="conspiracyMeta">A famous mystery built from wartime secrecy, later testimony and a very strange story.</p>
-      <button class="conspiracy-next" id="conspiracyNext" type="button">Next theory ↻</button>
-    </section>
-    <section class="side-tile report-tile">
-      <button class="report-trigger" id="reportTrigger" type="button"><span>♡</span><span><strong>Report an Issue</strong><small>Found a bug? Let us know.</small></span><b>›</b></button>
-    </section>
-  </aside>
-</div>
-<section class="experience-strip" aria-label="CurioWeb experience preview">
-  <div class="experience-block wormhole-preview-block">
-    <div class="experience-heading"><div><span>Surprise Me</span><h2>Hyperspace Animation</h2></div><button type="button" id="previewWormhole">Try it</button></div>
-    <div class="wormhole-story">
-      <div class="wormhole-frame"><div class="preview-stars"></div><span>Initiating jump…</span></div><i>→</i>
-      <div class="wormhole-frame streaks"><div class="preview-stars"></div><span>Entering Hyperspace!</span></div><i>→</i>
-      <div class="wormhole-frame tunnel"><div class="preview-stars"></div><span>Warp speed...</span></div><i>→</i>
-      <div class="wormhole-frame landing"><div class="preview-stars"></div><span>Destination ahead...</span></div>
-    </div>
-  </div>
-  <div class="experience-block backend-block">
-    <div class="experience-heading"><div><span>Backend Ready</span><h2>Ready for the next chapter.</h2></div></div>
-    <div class="backend-cards">
-      <div><b>◌</b><strong>Modular Code</strong><small>Clean structure for easy expansion</small></div>
-      <div><b>◇</b><strong>API Ready</strong><small>Built with future backend integration in mind</small></div>
-      <div><b>♙</b><strong>User Accounts</strong><small>Login system coming soon</small></div>
-      <div><b>▤</b><strong>Database Support</strong><small>Ready for favourites and settings</small></div>
-      <div><b>⌁</b><strong>Dynamic Content</strong><small>Easy to connect to live data</small></div>
-    </div>
-  </div>
+<main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
+<aside aria-label="CurioWeb information" class="side-tiles">
+
+
+<section class="side-tile weather-tile">
+<div class="side-row-head"><div><div class="side-kicker blue-kicker">WEATHER NEAR YOU</div><div class="weather-location" id="weatherLocation">Location not set</div></div><button class="side-link" id="weatherChange" type="button">Find me</button></div>
+<div class="weather-main"><div class="weather-icon" id="weatherIcon">🌤️</div><strong id="weatherTemp">14°C</strong><span id="weatherSummary">Partly cloudy</span></div>
+<div class="weather-range"><span id="weatherHigh">H: --</span><span id="weatherLow">L: --</span></div><div class="weather-location-note" id="weatherLocationNote">Your location stays in this browser.</div>
 </section>
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-  <button type="button" data-mobile="home"><span>⌂</span>Home</button>
-  <button type="button" data-mobile="search"><span>⌕</span>Search</button>
-  <button type="button" data-mobile="categories"><span>◉</span>Categories</button>
-  <button type="button" data-mobile="favourites"><span>♡</span>Favourites</button>
-  <button type="button" data-mobile="more"><span>•••</span>More</button>
+<section class="side-tile wallpaper-mini">
+<div class="side-kicker blue-kicker">WALLPAPER</div><h2>Choose a background</h2><p>Personalise your CurioWeb experience.</p>
+<div class="wallpaper-mini-grid" id="wallpaperMiniGrid"></div>
+<div class="wallpaper-mini-actions"><button id="miniUpload" type="button">⇧ Upload your own</button><button id="miniSave" type="button">Save Wallpaper</button></div>
+</section>
+<section aria-live="polite" class="side-tile conspiracy-tile">
+<div class="side-kicker">👁 RANDOM CONSPIRACY THEORY</div>
+<h2 id="conspiracyTitle">The Philadelphia Experiment</h2>
+<p class="conspiracy-copy" id="conspiracyCopy">A long running story claims a US Navy ship was made invisible during a secret wartime experiment involving powerful electromagnetic fields. Later versions of the story add stranger details, including the ship supposedly disappearing and reappearing elsewhere. The US Navy has denied that the experiment took place, and researchers generally trace the legend to later accounts rather than contemporary evidence.</p>
+<p class="conspiracy-meta" id="conspiracyMeta">A famous mystery built from wartime secrecy, later testimony and a very strange story.</p>
+<button class="conspiracy-next" id="conspiracyNext" type="button">Next theory ↻</button>
+</section>
+<section class="side-tile report-tile">
+<button class="report-trigger" id="reportTrigger" type="button"><span>♡</span><span><strong>Report an Issue</strong><small>Found a bug? Let us know.</small></span><b>›</b></button>
+</section>
+</aside>
+</div>
+<section aria-label="CurioWeb experience preview" class="experience-strip">
+<div class="experience-block wormhole-preview-block">
+<div class="experience-heading"><div><span>Surprise Me</span><h2>Hyperspace Animation</h2></div><button id="previewWormhole" type="button">Try it</button></div>
+<div class="wormhole-story">
+<div class="wormhole-frame"><div class="preview-stars"></div><span>Initiating jump…</span></div><i>→</i>
+<div class="wormhole-frame streaks"><div class="preview-stars"></div><span>Entering Hyperspace!</span></div><i>→</i>
+<div class="wormhole-frame tunnel"><div class="preview-stars"></div><span>Warp speed...</span></div><i>→</i>
+<div class="wormhole-frame landing"><div class="preview-stars"></div><span>Destination ahead...</span></div>
+</div>
+</div>
+<div class="experience-block backend-block">
+<div class="experience-heading"><div><span>Backend Ready</span><h2>Ready for the next chapter.</h2></div></div>
+<div class="backend-cards">
+<div><b>◌</b><strong>Modular Code</strong><small>Clean structure for easy expansion</small></div>
+<div><b>◇</b><strong>API Ready</strong><small>Built with future backend integration in mind</small></div>
+<div><b>♙</b><strong>User Accounts</strong><small>Login system coming soon</small></div>
+<div><b>▤</b><strong>Database Support</strong><small>Ready for favourites and settings</small></div>
+<div><b>⌁</b><strong>Dynamic Content</strong><small>Easy to connect to live data</small></div>
+</div>
+</div>
+</section>
+<nav aria-label="Mobile navigation" class="mobile-nav" id="mobileNav">
+<button data-mobile="home" type="button"><span>⌂</span>Home</button>
+<button data-mobile="search" type="button"><span>⌕</span>Search</button>
+<button data-mobile="categories" type="button"><span>◉</span>Categories</button>
+<button data-mobile="favourites" type="button"><span>♡</span>Favourites</button>
+<button data-mobile="more" type="button"><span>•••</span>More</button>
 </nav>
-<div class="adult-overlay" id="adultOverlay" aria-hidden="true"><div class="adult-modal" role="dialog" aria-modal="true" aria-labelledby="adultTitle"><button class="modal-close" id="adultClose" type="button" aria-label="Close">×</button><div class="adult-lock">🔒</div><div class="side-kicker blue-kicker">ADULT CURIOS</div><h2 id="adultTitle">A little riddle first.</h2><p class="adult-riddle">I can be heard, but I have no mouth. I can travel through empty space, but I have no feet. What am I?</p><input id="adultAnswer" type="text" autocomplete="off" placeholder="Your answer" aria-label="Answer to the riddle"><button id="adultUnlock" type="button" class="primary adult-unlock">Unlock Adult Curios</button><div class="adult-message" id="adultMessage" aria-live="polite"></div><div class="adult-content" id="adultContent" hidden><strong>Access granted.</strong><p>No Adult Curio links have been added yet. This area is ready for them.</p></div></div></div><div class="mobile-sheet" id="mobileSheet" aria-hidden="true"><div class="mobile-sheet-inner"><div class="mobile-sheet-head"><strong>CurioWeb</strong><button id="mobileSheetClose" type="button">×</button></div><button data-sheet="news">UK News</button><button data-sheet="local">Local News</button><button data-sheet="weather">Weather</button><button data-sheet="wallpaper">Wallpapers</button><button data-sheet="report">Report an Issue</button><button data-sheet="adult">Adult Curios</button><button data-sheet="about">About CurioWeb</button></div></div>
-<div class="wallpaper-overlay" id="wallpaperOverlay" role="dialog" aria-modal="true" aria-labelledby="wallpaperTitle">
-  <div class="wallpaper-box">
-    <div class="suggest-head">
-      <h2 id="wallpaperTitle">◫ Choose your wallpaper</h2>
-      <button class="suggest-close" id="wallpaperClose" type="button" aria-label="Close">×</button>
-    </div>
-    <p class="wallpaper-sub">Choose a Curio background, preview it instantly, upload your own, then save it for this browser.</p>
-    <div class="wallpaper-grid" id="wallpaperGrid"></div>
-    <div class="wallpaper-upload">
-      <label class="upload-btn" for="wallpaperFile">Upload your own</label>
-      <input id="wallpaperFile" type="file" accept="image/*">
-      <span id="wallpaperFileName">No image selected</span>
-    </div>
-    <div class="wallpaper-actions">
-      <button class="wallpaper-reset" id="wallpaperReset" type="button">Reset</button>
-      <button class="wallpaper-save" id="wallpaperSave" type="button">Save wallpaper</button>
-    </div>
-    <div class="wallpaper-note" id="wallpaperNote">Wallpaper is saved locally in this browser.</div>
-  </div>
+<div aria-hidden="true" class="adult-overlay" id="adultOverlay"><div aria-labelledby="adultTitle" aria-modal="true" class="adult-modal" role="dialog"><button aria-label="Close" class="modal-close" id="adultClose" type="button">×</button><div class="adult-lock">🔒</div><div class="side-kicker blue-kicker">ADULT CURIOS</div><h2 id="adultTitle">A little riddle first.</h2><p class="adult-riddle">I can be heard, but I have no mouth. I can travel through empty space, but I have no feet. What am I?</p><input aria-label="Answer to the riddle" autocomplete="off" id="adultAnswer" placeholder="Your answer" type="text"/><button class="primary adult-unlock" id="adultUnlock" type="button">Unlock Adult Curios</button><div aria-live="polite" class="adult-message" id="adultMessage"></div><div class="adult-content" hidden="" id="adultContent"><strong>Access granted.</strong><p>No Adult Curio links have been added yet. This area is ready for them.</p></div></div></div><div aria-hidden="true" class="mobile-sheet" id="mobileSheet"><div class="mobile-sheet-inner"><div class="mobile-sheet-head"><strong>CurioWeb</strong><button id="mobileSheetClose" type="button">×</button></div><button data-sheet="weather">Weather</button><button data-sheet="wallpaper">Wallpapers</button><button data-sheet="report">Report an Issue</button><button data-sheet="adult">Adult Curios</button><button data-sheet="about">About CurioWeb</button></div></div>
+<div aria-labelledby="wallpaperTitle" aria-modal="true" class="wallpaper-overlay" id="wallpaperOverlay" role="dialog">
+<div class="wallpaper-box">
+<div class="suggest-head">
+<h2 id="wallpaperTitle">◫ Choose your wallpaper</h2>
+<button aria-label="Close" class="suggest-close" id="wallpaperClose" type="button">×</button>
 </div>
-
-<div class="wormhole-overlay" id="wormholeOverlay" aria-hidden="true">
-  <canvas id="wormholeCanvas" aria-hidden="true"></canvas>
-  <div class="wormhole-vignette" aria-hidden="true"></div>
-  <div class="wormhole-copy"><strong>Entering Hyperspace!</strong><span>Finding your next rabbit hole...</span></div>
+<p class="wallpaper-sub">Choose a Curio background, preview it instantly, upload your own, then save it for this browser.</p>
+<div class="wallpaper-grid" id="wallpaperGrid"></div>
+<div class="wallpaper-upload">
+<label class="upload-btn" for="wallpaperFile">Upload your own</label>
+<input accept="image/*" id="wallpaperFile" type="file"/>
+<span id="wallpaperFileName">No image selected</span>
 </div>
-
+<div class="wallpaper-actions">
+<button class="wallpaper-reset" id="wallpaperReset" type="button">Reset</button>
+<button class="wallpaper-save" id="wallpaperSave" type="button">Save wallpaper</button>
+</div>
+<div class="wallpaper-note" id="wallpaperNote">Wallpaper is saved locally in this browser.</div>
+</div>
+</div>
+<div aria-hidden="true" class="wormhole-overlay" id="wormholeOverlay">
+<canvas aria-hidden="true" id="wormholeCanvas"></canvas>
+<div aria-hidden="true" class="wormhole-vignette"></div>
+<div class="wormhole-copy"><strong>Entering Hyperspace!</strong><span>Finding your next rabbit hole...</span></div>
+</div>
 <footer>
-  <div>CurioWeb · Explore responsibly. External websites open in a new tab.</div>
-  <div class="footer-links">
-    <button type="button" onclick="openInfo('terms')">▤ Terms</button>
-    <button type="button" onclick="openInfo('privacy')">♢ Privacy</button>
-    <button type="button" onclick="openSuggest()">💡 Suggest a website</button>
-    <button type="button" onclick="openIssue()">⚑ Report an issue</button>
-  </div>
-  <div class="made-with-love">Made with love by Dan S <span aria-hidden="true">♥</span> GPT</div>
-</footer>
-
-<div class="suggest-overlay" id="suggestOverlay" role="dialog" aria-modal="true" aria-labelledby="suggestTitle">
-  <div class="suggest-box">
-    <div class="suggest-head">
-      <h2 id="suggestTitle">💡 Suggest a website</h2>
-      <button class="suggest-close" type="button" aria-label="Close" onclick="closeSuggest()">×</button>
-    </div>
-    <p>Found something strange, brilliant or completely unnecessary? Tell us about it.</p>
-    <input class="suggest-input" id="suggestInput" type="url" placeholder="Website suggestion" autocomplete="off">
-    <button class="suggest-submit" type="button" onclick="submitSuggestion()">Submit suggestion</button>
-    <div class="suggest-message" id="suggestMessage">Thanks! Your suggestion has been noted. The submission system is coming in a future version.</div>
-    <p class="suggest-note">Preview version for now. Nothing is sent anywhere yet.</p>
-  </div>
+<div>CurioWeb · Explore responsibly. External websites open in a new tab.</div>
+<div class="footer-links">
+<button onclick="openInfo('terms')" type="button">▤ Terms</button>
+<button onclick="openInfo('privacy')" type="button">♢ Privacy</button>
+<button onclick="openSuggest()" type="button">💡 Suggest a website</button>
+<button onclick="openIssue()" type="button">⚑ Report an issue</button>
 </div>
-
-<div class="suggest-overlay" id="infoOverlay" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
-  <div class="suggest-box">
-    <div class="suggest-head">
-      <h2 id="infoTitle">CurioWeb</h2>
-      <button class="suggest-close" type="button" aria-label="Close" onclick="closeInfo()">×</button>
-    </div>
-    <div id="infoContent"></div>
-  </div>
+<div class="made-with-love">Made with love by Dan S <span aria-hidden="true">♥</span> GPT</div>
+</footer>
+<div aria-labelledby="suggestTitle" aria-modal="true" class="suggest-overlay" id="suggestOverlay" role="dialog">
+<div class="suggest-box">
+<div class="suggest-head">
+<h2 id="suggestTitle">💡 Suggest a website</h2>
+<button aria-label="Close" class="suggest-close" onclick="closeSuggest()" type="button">×</button>
+</div>
+<p>Found something strange, brilliant or completely unnecessary? Tell us about it.</p>
+<input autocomplete="off" class="suggest-input" id="suggestInput" placeholder="Website suggestion" type="url"/>
+<button class="suggest-submit" onclick="submitSuggestion()" type="button">Submit suggestion</button>
+<div class="suggest-message" id="suggestMessage">Thanks! Your suggestion has been noted. The submission system is coming in a future version.</div>
+<p class="suggest-note">Preview version for now. Nothing is sent anywhere yet.</p>
+</div>
+</div>
+<div aria-labelledby="infoTitle" aria-modal="true" class="suggest-overlay" id="infoOverlay" role="dialog">
+<div class="suggest-box">
+<div class="suggest-head">
+<h2 id="infoTitle">CurioWeb</h2>
+<button aria-label="Close" class="suggest-close" onclick="closeInfo()" type="button">×</button>
+</div>
+<div id="infoContent"></div>
+</div>
 </div>
 <script>
 const sites=[{"name": "Neal.fun", "url": "https://neal.fun/", "cat": "Interactive", "desc": "Polished experiments, games and rabbit holes.", "tags": "interactive,fun,science,games"}, {"name": "Radio Garden", "url": "https://radio.garden/", "cat": "Explore", "desc": "Spin the globe and listen to live radio from around the world.", "tags": "radio,world,travel,audio"}, {"name": "WindowSwap", "url": "https://www.window-swap.com/", "cat": "Explore", "desc": "Look through windows around the world via recordings made by strangers.", "tags": "travel,calm,world,video"}, {"name": "The Useless Web", "url": "https://theuselessweb.com/", "cat": "Weird", "desc": "One button. One gloriously pointless website.", "tags": "random,weird,funny"}, {"name": "Pointer Pointer", "url": "https://pointerpointer.com/", "cat": "Weird", "desc": "Move your cursor and find a photograph pointing exactly at it.", "tags": "weird,interactive,funny"}, {"name": "Atlas Obscura", "url": "https://www.atlasobscura.com/", "cat": "Rabbit Holes", "desc": "Hidden places, strange history and fascinating things.", "tags": "history,travel,weird,places"}, {"name": "Marginalia Search", "url": "https://search.marginalia.nu/", "cat": "Discover", "desc": "Search the older, stranger and text heavy web.", "tags": "search,small web,old web"}, {"name": "Every Noise at Once", "url": "https://everynoise.com/", "cat": "Music", "desc": "Explore a huge map of music genres.", "tags": "music,discovery,audio"}, {"name": "Zoomquilt", "url": "https://zoomquilt.org/", "cat": "Art", "desc": "An endlessly zooming collaborative painting.", "tags": "art,visual,weird,calm"}, {"name": "This Is Sand", "url": "https://thisissand.com/", "cat": "Creative", "desc": "Pour digital sand and make satisfying landscapes.", "tags": "creative,art,calm"}, {"name": "Patatap", "url": "https://patatap.com/", "cat": "Creative", "desc": "Turn your keyboard into a tiny audiovisual instrument.", "tags": "music,creative,interactive"}, {"name": "Earth Nullschool", "url": "https://earth.nullschool.net/", "cat": "Science", "desc": "Watch weather and atmospheric conditions move across Earth.", "tags": "science,weather,earth,data"}, {"name": "The True Size Of", "url": "https://www.thetruesize.com/", "cat": "Learn", "desc": "Drag countries around a map and compare their apparent size.", "tags": "maps,geography,learning"}, {"name": "100,000 Stars", "url": "https://stars.chromeexperiments.com/", "cat": "Space", "desc": "Explore a beautiful interactive visualisation of nearby stars.", "tags": "space,science,stars,visual"}, {"name": "Infinite Craft", "url": "https://neal.fun/infinite-craft/", "cat": "Games", "desc": "Combine ideas and discover an absurd number of things.", "tags": "game,crafting,rabbit hole"}, {"name": "Wikipedia Random", "url": "https://en.wikipedia.org/wiki/Special:Random", "cat": "Rabbit Holes", "desc": "One click and Wikipedia decides what you learn next.", "tags": "random,learning,history"}, {"name": "Photopea", "url": "https://www.photopea.com/", "cat": "Useful", "desc": "A powerful image editor that runs entirely in your browser.", "tags": "design,image,useful,creative"}, {"name": "Radiooooo", "url": "https://radiooooo.com/", "cat": "Music", "desc": "Choose a country and decade, then hear music from that place and time.", "tags": "music,history,world"}, {"name": "The Pudding", "url": "https://pudding.cool/", "cat": "Data", "desc": "Beautiful interactive stories built from data.", "tags": "data,journalism,interactive"}, {"name": "FlightRadar24", "url": "https://www.flightradar24.com/", "cat": "Explore", "desc": "Watch aircraft move around the world in real time.", "tags": "aviation,maps,world,live"}, {"name": "Cat Bounce", "url": "https://cat-bounce.com/", "cat": "Weird", "desc": "Bouncing cats. That is the entire concept.", "tags": "weird,funny,pointless"}, {"name": "Endless Horse", "url": "https://endless.horse/", "cat": "Weird", "desc": "Scroll a horse that refuses to end.", "tags": "weird,scroll,funny"}, {"name": "Long Doge Challenge", "url": "https://longdogechallenge.com/", "cat": "Weird", "desc": "Keep scrolling. The doge keeps getting longer.", "tags": "weird,scroll,funny"}, {"name": "Eel Slap", "url": "https://eelslap.com/", "cat": "Weird", "desc": "Slap an eel across a surprisingly satisfying screen.", "tags": "weird,funny,pointless"}, {"name": "Falling Falling", "url": "https://fallingfalling.com/", "cat": "Weird", "desc": "A hypnotic little falling experiment.", "tags": "weird,visual,calm"}, {"name": "Koalas to the Max", "url": "https://koalastothemax.com/", "cat": "Weird", "desc": "Move your cursor and reveal a hidden picture.", "tags": "weird,interactive,calm"}, {"name": "Sandspiel", "url": "https://sandspiel.club/", "cat": "Games", "desc": "A falling sand physics playground.", "tags": "physics,sandbox,creative"}, {"name": "Orb.Farm", "url": "https://orb.farm/", "cat": "Games", "desc": "Build and watch a tiny aquatic ecosystem.", "tags": "simulation,science,calm"}, {"name": "Little Alchemy 2", "url": "https://littlealchemy2.com/", "cat": "Games", "desc": "Combine elements into hundreds of discoveries.", "tags": "game,crafting,rabbit hole"}, {"name": "OpenGuessr", "url": "https://openguessr.com/", "cat": "Games", "desc": "Explore street views and guess where you are.", "tags": "geography,game,travel"}, {"name": "Internet Roadtrip", "url": "https://neal.fun/internet-roadtrip/", "cat": "Explore", "desc": "Take a communal road trip through the internet.", "tags": "travel,interactive,nealfun"}, {"name": "FutureMe", "url": "https://www.futureme.org/", "cat": "Rabbit Holes", "desc": "Write a letter to your future self.", "tags": "future,writing,curious"}, {"name": "The Internet Map", "url": "https://internet-map.net/", "cat": "Explore", "desc": "Visualise the web as a giant map of domains.", "tags": "internet,maps,visual"}, {"name": "MapCrunch", "url": "https://www.mapcrunch.com/", "cat": "Explore", "desc": "Drop into a random street view somewhere on Earth.", "tags": "maps,travel,random"}, {"name": "MyNoise", "url": "https://mynoise.net/", "cat": "Chill", "desc": "Generate layered ambient sounds and noise.", "tags": "audio,calm,ambient"}, {"name": "A Soft Murmur", "url": "https://asoftmurmur.com/", "cat": "Chill", "desc": "Mix gentle environmental sounds.", "tags": "audio,calm,ambient"}, {"name": "Noisli", "url": "https://www.noisli.com/", "cat": "Chill", "desc": "Create a personalised background soundscape.", "tags": "audio,focus,calm"}, {"name": "Drive & Listen", "url": "https://driveandlisten.herokuapp.com/", "cat": "Explore", "desc": "Drive through cities while listening to local radio.", "tags": "travel,video,radio"}, {"name": "HORG", "url": "https://occlusionresearch.org/", "cat": "Rabbit Holes", "desc": "A serious taxonomy of plastic bread bag clips.", "tags": "weird,science,history"}, {"name": "The Brick Bible", "url": "https://thebrickbible.com/", "cat": "Rabbit Holes", "desc": "Biblical stories recreated with LEGO photography.", "tags": "lego,history,art"}, {"name": "The Deep Sea", "url": "https://neal.fun/deep-sea/", "cat": "Science", "desc": "Scroll down through the depths of the ocean.", "tags": "ocean,science,depth"}, {"name": "The Size of Space", "url": "https://neal.fun/size-of-space/", "cat": "Space", "desc": "Zoom through an enormous scale of the universe.", "tags": "space,science,scale"}, {"name": "Space Elevator", "url": "https://neal.fun/space-elevator/", "cat": "Space", "desc": "Ride an imaginary elevator from Earth into space.", "tags": "space,interactive,science"}, {"name": "Universe Sandbox", "url": "https://universesandbox.com/", "cat": "Space", "desc": "Play with gravity, planets and cosmic systems.", "tags": "space,simulation,science"}, {"name": "Stellarium Web", "url": "https://stellarium-web.org/", "cat": "Space", "desc": "Explore a detailed interactive night sky.", "tags": "space,stars,astronomy"}, {"name": "NASA Eyes", "url": "https://eyes.nasa.gov/", "cat": "Space", "desc": "Explore NASA missions and the solar system in 3D.", "tags": "space,nasa,science"}, {"name": "Scale of the Universe", "url": "https://scaleofuniverse.com/", "cat": "Science", "desc": "Explore the universe from tiny particles to galaxies.", "tags": "science,scale,space"}, {"name": "Windy", "url": "https://www.windy.com/", "cat": "Science", "desc": "Explore global weather, wind and atmospheric maps.", "tags": "weather,maps,science"}, {"name": "Ventusky", "url": "https://www.ventusky.com/", "cat": "Science", "desc": "Watch weather systems move across the globe.", "tags": "weather,maps,science"}, {"name": "MarineTraffic", "url": "https://www.marinetraffic.com/", "cat": "Explore", "desc": "Track ships moving across the world's oceans.", "tags": "ships,maps,live,world"}, {"name": "EarthCam", "url": "https://www.earthcam.com/", "cat": "Explore", "desc": "Peek at live webcams from around the world.", "tags": "webcams,travel,live"}, {"name": "Virtual Vacation", "url": "https://www.virtualvacation.us/", "cat": "Explore", "desc": "Take virtual trips through real places.", "tags": "travel,video,world"}, {"name": "Chrome Music Lab", "url": "https://musiclab.chromeexperiments.com/", "cat": "Creative", "desc": "Play with simple musical experiments in your browser.", "tags": "music,creative,interactive"}, {"name": "Silk", "url": "https://silk.com/", "cat": "Creative", "desc": "Draw flowing generative art with your cursor.", "tags": "art,creative,generative"}, {"name": "Weave Silk", "url": "https://weavesilk.com/", "cat": "Creative", "desc": "Create symmetrical glowing silk drawings.", "tags": "art,creative,visual"}, {"name": "Blobmaker", "url": "https://www.blobmaker.app/", "cat": "Creative", "desc": "Generate strange custom SVG blobs.", "tags": "design,creative,random"}, {"name": "Coolors", "url": "https://coolors.co/", "cat": "Useful", "desc": "Generate and explore colour palettes.", "tags": "design,colour,useful"}, {"name": "Remove.bg", "url": "https://www.remove.bg/", "cat": "Useful", "desc": "Remove image backgrounds in seconds.", "tags": "image,tool,useful"}, {"name": "Archive.org", "url": "https://archive.org/", "cat": "Rabbit Holes", "desc": "Explore an enormous archive of books, music, software and the old web.", "tags": "archive,history,web"}, {"name": "Wayback Machine", "url": "https://web.archive.org/", "cat": "Rabbit Holes", "desc": "Travel through snapshots of websites from the past.", "tags": "archive,history,old web"}, {"name": "Library of Babel", "url": "https://libraryofbabel.info/", "cat": "Rabbit Holes", "desc": "Explore a fictional library containing every possible text.", "tags": "books,random,philosophy"}, {"name": "Radio Atlas", "url": "https://radioatlas.org/", "cat": "Music", "desc": "Listen to radio documentaries and unusual audio journeys.", "tags": "audio,documentary,world"}, {"name": "Information is Beautiful", "url": "https://informationisbeautiful.net/", "cat": "Data", "desc": "Explore visual explanations of complex subjects.", "tags": "data,design,learning"}, {"name": "Gapminder", "url": "https://www.gapminder.org/tools/", "cat": "Data", "desc": "Explore global development data interactively.", "tags": "data,world,science"}, {"name": "Our World in Data", "url": "https://ourworldindata.org/", "cat": "Data", "desc": "Explore huge collections of global data and charts.", "tags": "data,science,world"}], cats=["All",...new Set(sites.map(x=>x.cat)),"Adult"];let cat="All",onlyFav=false,favs=JSON.parse(localStorage.getItem("cwFavs")||"[]");
@@ -1386,23 +1332,8 @@ wallpaperReset.onclick=()=>{
 };
 applyWallpaper();
 /* CurioWeb 12.2: browser location, postcode news and backend ready API */
-window.CurioConfig={version:"12.2.1",backendEnabled:false,apiBase:"/api",features:{accounts:false,dynamicCurios:false,liveNews:true,liveWeather:true,submissions:false},storagePrefix:"curioweb."};
-window.CurioAPI={config:window.CurioConfig,async request(path,options={}){if(!this.config.backendEnabled)throw new Error("Backend is not connected");const response=await fetch(this.config.apiBase+path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});const data=await response.json().catch(()=>null);if(!response.ok)throw new Error(data?.error||`API ${response.status}`);return data;},getNews:postcode=>CurioAPI.request(`/news?postcode=${encodeURIComponent(postcode)}`),getWeather:(lat,lon)=>CurioAPI.request(`/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`)};
-const postcodeInput=document.getElementById("postcodeInput"),postcodeGo=document.getElementById("postcodeGo"),localNote=document.getElementById("localNote"),localResults=document.getElementById("localResults");
-function validPostcode(pc){return /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i.test(pc)}
-function escapeHtml(v){return String(v??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-function renderLocalResults(items,label){if(!localResults)return;localResults.innerHTML=items.length?items.slice(0,5).map(x=>`<a class="local-result" href="${x.link}" target="_blank" rel="noopener"><strong>${escapeHtml(x.title)}</strong><small>${escapeHtml(x.source||label||"Recent local news")}</small></a>`).join(""):"<div class=\"local-status\">No recent local stories were found.</div>"}
-const conspiracyTheories=[
-  {title:"The Philadelphia Experiment",copy:"A long running story claims a US Navy ship was made invisible during a secret wartime experiment involving powerful electromagnetic fields. Later versions add stranger details, including the ship supposedly disappearing and reappearing elsewhere. The US Navy has denied that the experiment took place, and researchers generally trace the legend to later accounts rather than contemporary evidence.",meta:"Wartime secrecy + later testimony + one very strange story."},
-  {title:"The Dyatlov Pass Mystery",copy:"In 1959, nine experienced hikers died in the Ural Mountains under circumstances that generated decades of speculation. Their tent had been left in an unusual state and the group had fled into severe weather. Avalanches, katabatic winds and other natural explanations have been investigated, while more exotic theories have ranged from military tests to the paranormal.",meta:"A real tragedy with an unusually persistent mystery around it."},
-  {title:"The Wow! Signal",copy:"In 1977, a radio telescope detected a powerful, narrowband signal that lasted about 72 seconds and appeared to come from the direction of Sagittarius. It was never detected again, which is what made it so intriguing. Scientists have proposed several natural explanations, but the original signal remains famous because it was so difficult to reproduce.",meta:"One unexplained signal, one chance observation and a huge cosmic question mark."},
-  {title:"The Phantom Time Hypothesis",copy:"This fringe historical theory claims that parts of the early Middle Ages were invented or inserted into the calendar, meaning we might be living centuries earlier than we think. Historians reject the claim because it conflicts with archaeological, astronomical and documentary evidence, but the idea is wonderfully unsettling to explore.",meta:"A bizarre calendar theory that asks whether our timeline itself is wrong."},
-  {title:"The Black Knight Satellite",copy:"The legend says a mysterious artificial object has been orbiting Earth for thousands of years. The story blends unrelated observations, old newspaper reports and later interpretations of satellite photographs. Space agencies have identified the photographed objects as ordinary human made hardware, but the legend continues to grow online.",meta:"A mysterious satellite legend assembled from several very different stories."}
-];
-let conspiracyIndex=0;
-function renderConspiracy(){const x=conspiracyTheories[conspiracyIndex%conspiracyTheories.length];const t=document.getElementById('conspiracyTitle'),c=document.getElementById('conspiracyCopy'),m=document.getElementById('conspiracyMeta');if(t){t.textContent=x.title;c.textContent=x.copy;m.textContent=x.meta}}
-async function findLocalNews(){const pc=postcodeInput.value.trim().replace(/\s+/g," ").toUpperCase();if(!validPostcode(pc)){localNote.textContent="Please enter a valid UK postcode, for example B61 8XX.";postcodeInput.focus();return}localNote.textContent=`Finding recent stories near ${pc}…`;localResults.innerHTML='<div class="local-status">Searching local sources…</div>';try{let data;if(CurioConfig.backendEnabled){data=await CurioAPI.getNews(pc)}else{const rss=`https://news.google.com/rss/search?q=${encodeURIComponent('"'+pc+'" local news')}&hl=en-GB&gl=GB&ceid=GB:en`;const proxy=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rss)}`;const r=await fetch(proxy);if(!r.ok)throw new Error("News service unavailable");const j=await r.json();data={items:(j.items||[]).slice(0,5).map(i=>({title:i.title,link:i.link,source:i.author||"Google News"}))}}renderLocalResults(data.items||[],pc);localNote.textContent=`Recent results for ${pc}. Your postcode is not stored by CurioWeb.`}catch(e){localResults.innerHTML='<div class="local-status">We could not load local news right now. Please try again in a moment.</div>';localNote.textContent="The postcode remains in this browser and is not saved to CurioWeb."}}
-postcodeGo.onclick=findLocalNews;postcodeInput.addEventListener("keydown",e=>{if(e.key==="Enter")findLocalNews()});
+window.CurioConfig={version:"12.2.8",backendEnabled:false,apiBase:"/api",features:{accounts:false,dynamicCurios:false,liveNews:false,liveWeather:true,submissions:false},storagePrefix:"curioweb."};
+window.CurioAPI={config:window.CurioConfig,async request(path,options={}){if(!this.config.backendEnabled)throw new Error("Backend is not connected");const response=await fetch(this.config.apiBase+path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});const data=await response.json().catch(()=>null);if(!response.ok)throw new Error(data?.error||`API ${response.status}`);return data;},getWeather:(lat,lon)=>CurioAPI.request(`/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`)};
 const weatherLocation=document.getElementById("weatherLocation"),weatherChange=document.getElementById("weatherChange"),weatherTemp=document.getElementById("weatherTemp"),weatherSummary=document.getElementById("weatherSummary"),weatherHigh=document.getElementById("weatherHigh"),weatherLow=document.getElementById("weatherLow"),weatherIcon=document.getElementById("weatherIcon"),weatherLocationNote=document.getElementById("weatherLocationNote");
 const weatherCodes={0:["☀️","Clear sky"],1:["🌤️","Mainly clear"],2:["⛅","Partly cloudy"],3:["☁️","Overcast"],45:["🌫️","Fog"],48:["🌫️","Rime fog"],51:["🌦️","Light drizzle"],53:["🌦️","Drizzle"],55:["🌧️","Heavy drizzle"],61:["🌦️","Light rain"],63:["🌧️","Rain"],65:["🌧️","Heavy rain"],71:["🌨️","Light snow"],73:["🌨️","Snow"],75:["❄️","Heavy snow"],80:["🌦️","Showers"],81:["🌧️","Showers"],82:["⛈️","Heavy showers"],95:["⛈️","Thunderstorm"],96:["⛈️","Thunderstorm"],99:["⛈️","Thunderstorm"]};
 async function loadWeather(lat,lon){weatherLocation.textContent="Finding your weather…";weatherChange.textContent="Loading…";try{let d;if(CurioConfig.backendEnabled){d=await CurioAPI.getWeather(lat,lon)}else{const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto`;const r=await fetch(u);if(!r.ok)throw new Error("Weather unavailable");d=await r.json()}const code=d.current?.weather_code;const [ico,sum]=weatherCodes[code]||["🌤️","Current conditions"];weatherIcon.textContent=ico;weatherTemp.textContent=Math.round(d.current?.temperature_2m??0)+"°C";weatherSummary.textContent=sum;weatherHigh.textContent="H: "+Math.round(d.daily?.temperature_2m_max?.[0]??0)+"°";weatherLow.textContent="L: "+Math.round(d.daily?.temperature_2m_min?.[0]??0)+"°";weatherLocation.textContent="Your current location";weatherLocationNote.textContent="Location is used only for this session and is not stored.";weatherChange.textContent="Refresh"}catch(e){weatherLocation.textContent="Weather unavailable";weatherLocationNote.textContent="Allow location access and try again.";weatherChange.textContent="Find me"}}
@@ -1473,8 +1404,6 @@ document.querySelectorAll("[data-mobile]").forEach(btn=>btn.addEventListener("cl
 }));
 document.querySelectorAll("[data-sheet]").forEach(btn=>btn.addEventListener("click",()=>{
   const a=btn.dataset.sheet;closeMobileSheet();
-  if(a==="news")document.querySelector(".news-tile")?.scrollIntoView({behavior:"smooth",block:"center"});
-  if(a==="local")document.querySelector(".local-tile")?.scrollIntoView({behavior:"smooth",block:"center"});
   if(a==="weather")document.querySelector(".weather-tile")?.scrollIntoView({behavior:"smooth",block:"center"});
   if(a==="wallpaper")wallpaperOpen.click();
   if(a==="report")openIssue();
