@@ -207,15 +207,87 @@ body{padding-top:68px}
 }
 </style>
 
+
+<style>
+/* CurioWeb suggestion modal */
+.suggest-overlay{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(3,4,8,.72);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.suggest-overlay.open{display:flex}
+.suggest-box{
+  width:min(520px,100%);
+  background:linear-gradient(145deg,rgba(30,34,46,.96),rgba(14,16,23,.97));
+  border:1px solid rgba(190,181,255,.28);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 25px 80px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.suggest-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:7px}
+.suggest-head h2{margin:0;font-size:25px}
+.suggest-close{width:40px;height:40px;padding:0;border-radius:50%;font-size:22px;line-height:1}
+.suggest-box p{color:var(--muted);margin:0 0 18px;line-height:1.5}
+.suggest-input{width:100%;min-width:0;background:#0d1016;border:1px solid var(--line);color:white;border-radius:13px;padding:14px;font-size:15px;outline:none}
+.suggest-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(155,123,255,.12)}
+.suggest-submit{width:100%;margin-top:10px;background:var(--purple);color:#15111d;border:0}
+.suggest-message{display:none;margin-top:12px;padding:11px 13px;border-radius:12px;background:rgba(85,230,193,.1);border:1px solid rgba(85,230,193,.25);color:#baf7e7;font-size:13px;line-height:1.4}
+.suggest-message.show{display:block}
+.suggest-note{font-size:11px!important;margin:10px 0 0!important;opacity:.72}
+.footer-links{margin-top:10px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.footer-links button{background:none;border:0;color:#8f98aa;padding:3px;font-size:12px;font-weight:600}
+.footer-links button:hover{color:#d9d5ff;box-shadow:none}
+@media (max-width:700px){
+  .suggest-box{padding:20px;border-radius:19px}
+  .suggest-head h2{font-size:22px}
+}
+</style>
+
 </head><body>
 <div class="beta-bar">Curio V.1 beta <span>We are still building things, so you may encounter the occasional snag.</span><button class="beta-experimental" type="button">Or, try an experimental version of Curio &gt;</button></div>
 <header><div class="logo">CURIOWEB · HUMAN RABBIT HOLES</div><h1>The internet is bigger than your feed.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></header>
-<div class="controls"><input id="q" placeholder="Search sites, topics or tags…"><button class="primary" id="random">🎲 Surprise me</button><button id="fav">★ Favourites</button></div>
+<div class="controls"><input id="q" placeholder="Search sites, topics or tags…"><button class="primary" id="random">🎲 Surprise me</button><button id="suggestOpen">💡 Suggest a website</button><button id="fav">★ Favourites</button></div>
 <div class="chips" id="chips"></div><main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
 <footer>
   <div>CurioWeb · Explore responsibly. External websites open in a new tab.</div>
+  <div class="footer-links">
+    <button type="button" onclick="openInfo('terms')">Terms</button>
+    <button type="button" onclick="openInfo('privacy')">Privacy</button>
+    <button type="button" onclick="openSuggest()">💡 Suggest a website</button>
+  </div>
   <div class="made-with-love">Made with love by Dan S <span aria-hidden="true">♥</span> GPT</div>
 </footer>
+
+<div class="suggest-overlay" id="suggestOverlay" role="dialog" aria-modal="true" aria-labelledby="suggestTitle">
+  <div class="suggest-box">
+    <div class="suggest-head">
+      <h2 id="suggestTitle">💡 Suggest a website</h2>
+      <button class="suggest-close" type="button" aria-label="Close" onclick="closeSuggest()">×</button>
+    </div>
+    <p>Found something strange, brilliant or completely unnecessary? Tell us about it.</p>
+    <input class="suggest-input" id="suggestInput" type="url" placeholder="Website suggestion" autocomplete="off">
+    <button class="suggest-submit" type="button" onclick="submitSuggestion()">Submit suggestion</button>
+    <div class="suggest-message" id="suggestMessage">Thanks! Your suggestion has been noted. The submission system is coming in a future version.</div>
+    <p class="suggest-note">Preview version for now. Nothing is sent anywhere yet.</p>
+  </div>
+</div>
+
+<div class="suggest-overlay" id="infoOverlay" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+  <div class="suggest-box">
+    <div class="suggest-head">
+      <h2 id="infoTitle">CurioWeb</h2>
+      <button class="suggest-close" type="button" aria-label="Close" onclick="closeInfo()">×</button>
+    </div>
+    <div id="infoContent"></div>
+  </div>
+</div>
 <script>
 const sites=[{"name": "Neal.fun", "url": "https://neal.fun/", "cat": "Interactive", "desc": "Polished experiments, games and rabbit holes.", "tags": "interactive,fun,science,games"}, {"name": "Radio Garden", "url": "https://radio.garden/", "cat": "Explore", "desc": "Spin the globe and listen to live radio from around the world.", "tags": "radio,world,travel,audio"}, {"name": "WindowSwap", "url": "https://www.window-swap.com/", "cat": "Explore", "desc": "Look through windows around the world via recordings made by strangers.", "tags": "travel,calm,world,video"}, {"name": "The Useless Web", "url": "https://theuselessweb.com/", "cat": "Weird", "desc": "One button. One gloriously pointless website.", "tags": "random,weird,funny"}, {"name": "Pointer Pointer", "url": "https://pointerpointer.com/", "cat": "Weird", "desc": "Move your cursor and find a photograph pointing exactly at it.", "tags": "weird,interactive,funny"}, {"name": "Atlas Obscura", "url": "https://www.atlasobscura.com/", "cat": "Rabbit Holes", "desc": "Hidden places, strange history and fascinating things.", "tags": "history,travel,weird,places"}, {"name": "Marginalia Search", "url": "https://search.marginalia.nu/", "cat": "Discover", "desc": "Search the older, stranger and text heavy web.", "tags": "search,small web,old web"}, {"name": "Every Noise at Once", "url": "https://everynoise.com/", "cat": "Music", "desc": "Explore a huge map of music genres.", "tags": "music,discovery,audio"}, {"name": "Zoomquilt", "url": "https://zoomquilt.org/", "cat": "Art", "desc": "An endlessly zooming collaborative painting.", "tags": "art,visual,weird,calm"}, {"name": "This Is Sand", "url": "https://thisissand.com/", "cat": "Creative", "desc": "Pour digital sand and make satisfying landscapes.", "tags": "creative,art,calm"}, {"name": "Patatap", "url": "https://patatap.com/", "cat": "Creative", "desc": "Turn your keyboard into a tiny audiovisual instrument.", "tags": "music,creative,interactive"}, {"name": "Earth Nullschool", "url": "https://earth.nullschool.net/", "cat": "Science", "desc": "Watch weather and atmospheric conditions move across Earth.", "tags": "science,weather,earth,data"}, {"name": "The True Size Of", "url": "https://www.thetruesize.com/", "cat": "Learn", "desc": "Drag countries around a map and compare their apparent size.", "tags": "maps,geography,learning"}, {"name": "100,000 Stars", "url": "https://stars.chromeexperiments.com/", "cat": "Space", "desc": "Explore a beautiful interactive visualisation of nearby stars.", "tags": "space,science,stars,visual"}, {"name": "Infinite Craft", "url": "https://neal.fun/infinite-craft/", "cat": "Games", "desc": "Combine ideas and discover an absurd number of things.", "tags": "game,crafting,rabbit hole"}, {"name": "Wikipedia Random", "url": "https://en.wikipedia.org/wiki/Special:Random", "cat": "Rabbit Holes", "desc": "One click and Wikipedia decides what you learn next.", "tags": "random,learning,history"}, {"name": "Photopea", "url": "https://www.photopea.com/", "cat": "Useful", "desc": "A powerful image editor that runs entirely in your browser.", "tags": "design,image,useful,creative"}, {"name": "Radiooooo", "url": "https://radiooooo.com/", "cat": "Music", "desc": "Choose a country and decade, then hear music from that place and time.", "tags": "music,history,world"}, {"name": "The Pudding", "url": "https://pudding.cool/", "cat": "Data", "desc": "Beautiful interactive stories built from data.", "tags": "data,journalism,interactive"}, {"name": "FlightRadar24", "url": "https://www.flightradar24.com/", "cat": "Explore", "desc": "Watch aircraft move around the world in real time.", "tags": "aviation,maps,world,live"}], cats=["All",...new Set(sites.map(x=>x.cat))];let cat="All",onlyFav=false,favs=JSON.parse(localStorage.getItem("cwFavs")||"[]");
 const q=document.getElementById("q"),grid=document.getElementById("grid"),chips=document.getElementById("chips"),count=document.getElementById("count");
@@ -255,4 +327,40 @@ document.addEventListener("pointerout", (e) => {
   card.style.transform = "";
 });
 
-</script></body></html><!-- CurioWeb deployment refresh -->
+
+const suggestOverlay=document.getElementById("suggestOverlay");
+const suggestInput=document.getElementById("suggestInput");
+const suggestMessage=document.getElementById("suggestMessage");
+const infoOverlay=document.getElementById("infoOverlay");
+const infoTitle=document.getElementById("infoTitle");
+const infoContent=document.getElementById("infoContent");
+
+function openSuggest(){
+  suggestOverlay.classList.add("open");
+  suggestMessage.classList.remove("show");
+  setTimeout(()=>suggestInput.focus(),50);
+}
+function closeSuggest(){suggestOverlay.classList.remove("open")}
+function submitSuggestion(){
+  const value=suggestInput.value.trim();
+  if(!value){suggestInput.focus();return}
+  suggestMessage.classList.add("show");
+  suggestInput.value="";
+}
+function openInfo(type){
+  if(type==="terms"){
+    infoTitle.textContent="Terms";
+    infoContent.innerHTML='<p>CurioWeb is a directory of links to third party websites. We do not own or control those websites and cannot guarantee their content, availability, accuracy or safety.</p><p>Links are provided for discovery and convenience. When you leave CurioWeb, the external website's own terms and policies apply.</p><p>We may add, remove or change listings at any time.</p>';
+  }else{
+    infoTitle.textContent="Privacy";
+    infoContent.innerHTML='<p>CurioWeb is currently a simple static website. We do not currently have an account system, analytics system or working suggestion submission system.</p><p>The suggestion box is only a preview for now. Nothing entered into it is sent to CurioWeb or stored by us.</p><p>External websites linked from CurioWeb may collect information under their own privacy policies.</p>';
+  }
+  infoOverlay.classList.add("open");
+}
+function closeInfo(){infoOverlay.classList.remove("open")}
+
+suggestOverlay.addEventListener("click",e=>{if(e.target===suggestOverlay)closeSuggest()});
+infoOverlay.addEventListener("click",e=>{if(e.target===infoOverlay)closeInfo()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSuggest();closeInfo()}});
+document.getElementById("suggestOpen").onclick=openSuggest;
+</script></body></html>
