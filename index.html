@@ -779,167 +779,126 @@ header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.log
 @media(max-width:700px){header{padding:14px 16px 17px}.top-meta{grid-template-columns:1fr auto;margin-bottom:38px}.logo{position:absolute;left:50%;transform:translateX(-50%);top:17px;font-size:16px}.logo span{font-size:6px}.top-right{display:flex}.top-tagline{display:none}.wallpaper-open{padding:8px 10px!important;font-size:10px}.wallpaper-open span{display:none}.uk-clock{font-size:9px}.theme-toggle{font-size:9px}.hero{font-size:14px}.controls{position:sticky;top:0}.chips{padding-bottom:13px}.mobile-quick{display:flex;gap:8px;overflow:auto;padding:0 16px 14px;scrollbar-width:none}.mobile-quick::-webkit-scrollbar{display:none}.mobile-quick-card{min-width:176px;height:58px;border:1px solid rgba(20,29,45,.08);border-radius:15px;background:rgba(255,255,255,.72);display:grid;grid-template-columns:31px 1fr 12px;align-items:center;gap:7px;padding:0 10px;text-align:left;box-shadow:0 8px 22px rgba(35,47,66,.06)}.mobile-quick-card .quick-icon{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:#f1f4f8;font-size:14px}.mobile-quick-card b{display:block;font-size:10px}.mobile-quick-card small{display:block;font-size:8px;color:#8b94a1;margin-top:2px}.mobile-quick-card em{font-style:normal;font-size:17px;color:#8c95a3}.home-layout{padding:0 16px 28px}.home-layout .grid{grid-template-columns:1fr;gap:11px}.side-tiles{display:none}.card{border-radius:16px}.card-media{height:178px}.card-body{padding:13px}.card h2{font-size:18px}.experience-strip{padding:0 16px;margin-bottom:18px}.experience-block{border-radius:18px;padding:14px}.experience-heading{margin-bottom:10px}.experience-heading h2{font-size:16px}.wormhole-story{grid-template-columns:1fr}.wormhole-story i,.wormhole-frame:nth-of-type(n+2){display:none}.wormhole-frame{height:150px}.backend-cards{grid-template-columns:1fr 1fr}.backend-cards strong{font-size:9px}.backend-cards small{font-size:8px}.mobile-nav{bottom:9px}.beta-bar{height:58px;font-size:9px}.beta-bar span{font-size:8px}.beta-experimental{font-size:8px;padding:3px 9px}}
 
 </style>
-<style id="curio-final-12-2-3">
-/* 12.2.3 visual regression repair: preserve the hero artwork, remove the search band,
-   and restore the liquid glass pointer treatment. */
-header{position:relative;overflow:visible}
-.hero-art{z-index:0!important;pointer-events:none!important}
-.hero-copy{z-index:2!important}
-
-/* The search controls float cleanly without a background strip. */
-.controls{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-body.dark .controls{background:transparent!important}
-
-/* Liquid glass tiles. The light bloom follows the pointer through --mx/--my. */
-.card{position:relative;isolation:isolate;overflow:hidden;will-change:transform}
-.card:before{
-  content:"";display:block;position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;
-  background:
-    radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.46) 0,rgba(255,255,255,.20) 13%,rgba(255,255,255,0) 34%),
-    linear-gradient(120deg,rgba(255,255,255,.22),rgba(255,255,255,0) 34%,rgba(255,255,255,.10) 68%,rgba(255,255,255,0) 100%);
-  opacity:.72;mix-blend-mode:screen;transition:opacity .2s ease;
-}
-.card:after{
-  content:"";position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(105deg,transparent 34%,rgba(255,255,255,0) 42%,rgba(255,255,255,.30) 50%,rgba(255,255,255,0) 58%,transparent 66%);
-  background-size:220% 100%;background-position:var(--shine-x,50%) 0;
-  opacity:.34;mix-blend-mode:screen;transition:background-position .08s linear,opacity .2s ease;
-}
-.card > *{position:relative;z-index:2}
-.card:hover:before{opacity:.92}
-.card:hover:after{opacity:.52}
 
 
-/* Mobile: keep the hero artwork atmospheric, never over the text. */
-@media(max-width:700px){
-  header{overflow:hidden}
-  .hero-art{z-index:0!important;right:-180px!important;opacity:.34!important;width:620px!important}
-  .hero-copy{z-index:2!important}
-  .card:before,.card:after{opacity:.34}
-}
-</style>
-<style id="curio-12-2-6-layout">
-.appearance-controls{display:flex;align-items:center;gap:8px;flex:0 0 auto}
-.appearance-controls button{white-space:nowrap}
-.top-right{gap:12px}
-@media(max-width:900px){.top-right{flex-wrap:wrap;justify-content:flex-end}.top-tagline{display:none}}
-@media(max-width:700px){.appearance-controls{gap:6px}.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{padding:8px 10px!important;font-size:9px}.appearance-controls .wallpaper-open span{display:none}.appearance-controls .theme-toggle span{display:none}}
-</style>
-<style id="curio-12-2-6-safety">html,body{overflow-x:hidden}img,svg,canvas{max-width:100%}</style>
-<style id="curio-12-2-7-final-polish">
-/* 12.2.7 final precision pass: typography, control alignment and grid rhythm. */
-html{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
-body{
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  text-rendering:optimizeLegibility;
-  font-kerning:normal;
-  font-variant-ligatures:common-ligatures;
-}
-button,input,textarea,select{
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  text-rendering:optimizeLegibility;
-  font-kerning:normal;
-}
 
-/* One clean horizontal control system. */
-.controls{
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr) 180px 210px 160px!important;
-  align-items:stretch!important;
-  gap:10px!important;
-  min-height:60px;
-  padding:0 32px 18px!important;
-  background:transparent!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-}
-.controls .search-wrap,
-.controls input,
-.controls button{height:58px!important;min-height:58px!important}
-.controls .search-wrap{align-self:stretch}
-.controls input{display:block}
-.controls button{
-  width:100%;
-  min-width:0!important;
-  padding:0 16px!important;
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:7px;
-  line-height:1;
-  white-space:nowrap;
-}
-.controls button span{line-height:1}
 
-/* Category row has one consistent pill height and sits on the same content grid. */
-.chips{
-  display:flex!important;
-  align-items:center!important;
-  min-height:46px;
-  height:46px;
-  padding:0 32px 24px!important;
-  gap:8px!important;
-  overflow-x:auto;
-  overflow-y:visible;
-  scrollbar-width:none;
+<style id="curio-canonical-12-3-1">
+/* CurioWeb 12.3.1: canonical layout and tile interaction. This replaces the accumulated override stack. */
+:root{
+  --cw-shell:min(1680px,calc(100vw - 96px));
+  --cw-sidebar:350px;
+  --cw-gap:28px;
+  --cw-control-h:58px;
+  --cw-pill-h:44px;
 }
+html{box-sizing:border-box;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;font-kerning:normal}
+img,svg,canvas{max-width:100%}
+
+/* One master grid. Every major horizontal section uses exactly the same shell. */
+header,.controls,.chips,.home-layout,.experience-strip,.backend-section,footer{width:var(--cw-shell);max-width:var(--cw-shell);margin-inline:auto}
+header{padding:22px 0 30px;min-height:430px;position:relative;overflow:visible}
+.top-meta{width:100%;min-height:54px;margin:0 0 70px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;position:relative;z-index:10}
+.top-left{justify-self:start;display:flex;align-items:center;gap:8px}
+.top-right{justify-self:end;display:flex;align-items:center;gap:14px;overflow:visible}
+.logo{position:relative;top:auto;left:auto;transform:none;justify-self:center;display:flex;align-items:center;justify-content:center;gap:8px;line-height:1}
+.logo-mark{flex:0 0 auto;display:grid;place-items:center;margin:0;font-size:initial;letter-spacing:normal;font-weight:normal;color:inherit}
+.logo-word{display:inline;margin:0;font-size:20px;letter-spacing:.19em;font-weight:900;color:var(--text)}
+.logo-sub{position:absolute;top:35px;left:50%;transform:translateX(-50%);white-space:nowrap;margin:0;font-size:7px;letter-spacing:.28em;font-weight:800;color:#7b8492}
+.appearance-controls{display:flex;align-items:center;gap:8px;height:42px;overflow:visible}
+.appearance-controls button,.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{height:42px!important;min-height:42px!important;box-sizing:border-box;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px;line-height:1;white-space:nowrap;margin:0!important;padding:0 14px!important}
+.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{min-width:122px}
+.wallpaper-icon{width:16px!important;height:16px!important;flex:0 0 16px!important;display:block}
+
+.hero-copy{position:relative;z-index:2;max-width:760px;margin:0}
+.hero-copy h1{margin:0 0 22px;max-width:760px}
+.hero{max-width:760px;margin:0}
+.hero-art{z-index:0!important;pointer-events:none!important;right:-20px;width:min(760px,58vw)}
+body.dark .hero-art{opacity:.28!important;filter:saturate(.55) brightness(.38) contrast(1.02)!important}
+
+/* Search/action row: one clean row, one shared baseline, no gradient band. */
+.controls{display:grid;grid-template-columns:minmax(0,1fr) 170px 220px 170px;gap:10px;align-items:stretch;padding:0 0 18px;min-height:76px;background:transparent!important;background-image:none!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;position:relative;z-index:20}
+.controls .search-wrap,.controls input,.controls button{height:var(--cw-control-h)!important;min-height:var(--cw-control-h)!important;margin:0!important;box-sizing:border-box!important}
+.controls .search-wrap{display:flex;align-items:center;position:relative;min-width:0}
+.controls .search-wrap input{width:100%;display:block;line-height:1}
+.controls button{width:100%;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px;padding:0 12px!important;line-height:1;white-space:nowrap}
+
+/* Category menu: fixed height, no clipping, common baseline. */
+.chips{display:flex!important;align-items:center!important;gap:8px!important;min-height:56px;height:56px;padding:0 0 12px!important;overflow-x:auto;overflow-y:visible;scrollbar-width:none;position:relative;z-index:10}
 .chips::-webkit-scrollbar{display:none}
-.chip{
-  height:42px!important;
-  min-height:42px!important;
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  padding:0 16px!important;
-  line-height:1!important;
-  white-space:nowrap;
-  flex:0 0 auto;
-}
+.chip{height:var(--cw-pill-h)!important;min-height:var(--cw-pill-h)!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto;padding:0 16px!important;line-height:1!important;white-space:nowrap}
 
-/* Keep the count and first row of cards aligned with the exact same content edge. */
-main{padding-left:32px!important;padding-right:32px!important}
-.count{line-height:18px;margin-bottom:13px!important}
+/* Main content and tiles share the same grid edges. */
+.home-layout{display:grid;grid-template-columns:minmax(0,1fr) var(--cw-sidebar);gap:var(--cw-gap);align-items:start;padding:0 0 54px}
+.home-layout main{min-width:0;padding:0!important}
+.count{margin:0 0 13px;line-height:18px}
+.home-layout .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{min-width:0;min-height:250px;border-radius:20px;padding:0;overflow:hidden;position:relative;isolation:isolate;will-change:transform;--mx:50%;--my:50%;transition:transform .12s ease,box-shadow .22s ease}
+.card > *{position:relative;z-index:2}
+.side-tiles{display:flex;flex-direction:column;gap:14px;position:sticky;top:24px;min-width:0}
+.side-tile{width:100%;min-width:0;overflow:hidden;position:relative;isolation:isolate;--mx:50%;--my:50%;--shine-x:50%;transition:transform .12s ease,box-shadow .22s ease}
+.weather-tile{margin-top:0}
+.side-row-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 
-/* Remove every inherited search/control background band, including dark-mode overrides. */
-.controls,
-body.dark .controls{background:transparent!important;background-image:none!important;box-shadow:none!important}
+/* Liquid glass interaction applies to Curios and interactive sidebar tiles. */
+.card:before,.side-tile:before{content:"";display:block;position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.46) 0,rgba(255,255,255,.20) 13%,rgba(255,255,255,0) 34%),linear-gradient(120deg,rgba(255,255,255,.22),rgba(255,255,255,0) 34%,rgba(255,255,255,.10) 68%,rgba(255,255,255,0) 100%);opacity:.72;mix-blend-mode:screen;transition:opacity .2s ease}
+.card:after,.side-tile:after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:inherit;background:linear-gradient(105deg,transparent 34%,rgba(255,255,255,0) 42%,rgba(255,255,255,.30) 50%,rgba(255,255,255,0) 58%,transparent 66%);background-size:220% 100%;background-position:var(--shine-x,50%) 0;opacity:.30;mix-blend-mode:screen;transition:background-position .08s linear,opacity .2s ease}
+.card:hover:before,.side-tile:hover:before{opacity:.92}
+.card:hover:after,.side-tile:hover:after{opacity:.52}
 
-@media(max-width:1200px){
-  .controls{grid-template-columns:minmax(0,1fr) 170px 190px 150px!important}
+/* Conspiracy tile: its own visual identity. */
+.conspiracy-tile{background:radial-gradient(circle at 82% 18%,rgba(108,118,255,.20),transparent 30%),radial-gradient(circle at 15% 75%,rgba(72,198,255,.10),transparent 35%),linear-gradient(145deg,#181c2b,#0b0e17)!important;color:#f7f8fb;border:1px solid rgba(255,255,255,.10);padding:16px!important;box-shadow:0 18px 42px rgba(10,12,20,.18),inset 0 1px 0 rgba(255,255,255,.08)!important}
+.conspiracy-visual{position:relative;min-height:58px;display:flex;align-items:flex-end;gap:10px;padding:0 0 9px;margin-bottom:10px;border-bottom:1px solid rgba(255,255,255,.10)}
+.conspiracy-ghost{font-size:39px;line-height:.9;filter:drop-shadow(0 5px 12px rgba(132,143,255,.35));transform:translateY(2px)}
+.conspiracy-spark{position:absolute;top:2px;left:52px;font-size:17px;color:#aab4ff;opacity:.85}
+.conspiracy-spark.s2{top:26px;left:72px;font-size:12px;color:#fff;opacity:.45}
+.conspiracy-visual .side-kicker{color:#b9c0e9!important}
+.conspiracy-visual small{display:block;color:#8991aa;font-size:9px;line-height:1.35;margin-top:3px}
+.conspiracy-heading{display:flex;align-items:flex-start;gap:7px}
+.conspiracy-heading h2{color:#fff!important;font-size:19px!important;line-height:1.12!important;margin:3px 0 8px!important;letter-spacing:-.025em}
+.conspiracy-eye{color:#aeb8ff;font-size:14px;line-height:1.2;margin-top:5px}
+.conspiracy-copy{font-size:12px!important;line-height:1.55!important;color:#cbd1df!important;margin:0 0 10px!important}
+.conspiracy-meta{font-size:9px!important;line-height:1.45!important;color:#8f98aa!important;margin:0 0 12px!important}
+.conspiracy-next{border:1px solid rgba(255,255,255,.14)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;border-radius:12px!important;padding:9px 11px!important;font-size:10px!important;font-weight:800!important;cursor:pointer;width:100%;min-height:36px;transition:.18s ease}
+.conspiracy-next:hover{background:rgba(255,255,255,.13)!important;border-color:rgba(255,255,255,.22)!important;transform:translateY(-1px)}
+
+.experience-strip,.backend-section,footer{margin-top:0}
+
+@media(max-width:1250px){
+  :root{--cw-sidebar:320px;--cw-gap:24px}
+  .controls{grid-template-columns:minmax(0,1fr) 150px 185px 150px}
 }
-@media(max-width:980px){
-  .controls{grid-template-columns:minmax(0,1fr) 150px 170px 140px!important}
+@media(max-width:1000px){
+  :root{--cw-sidebar:300px}
+  .home-layout .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media(max-width:720px){
-  .controls{
-    grid-template-columns:1fr 1fr!important;
-    gap:8px!important;
-    padding:0 16px 14px!important;
-    min-height:0;
-  }
-  .controls .search-wrap{grid-column:1 / -1}
-  .controls .search-wrap,.controls input{height:52px!important;min-height:52px!important}
+@media(max-width:900px){
+  :root{--cw-shell:calc(100vw - 32px)}
+  header,.controls,.chips,.home-layout,.experience-strip,.backend-section,footer{width:var(--cw-shell);max-width:var(--cw-shell)}
+  .top-meta{margin-bottom:48px}
+  .top-right{gap:8px}.top-tagline{display:none}
+  .home-layout{grid-template-columns:1fr;gap:20px}
+  .side-tiles{position:static}
+}
+@media(max-width:700px){
+  header{min-height:0;padding:16px 0 24px}
+  .top-meta{grid-template-columns:1fr auto;margin-bottom:42px}
+  .logo{justify-self:start}.logo-mark{width:27px;height:27px}.logo-sub{top:31px;font-size:6px}
+  .appearance-controls{gap:6px}.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{min-width:42px!important;width:42px!important;padding:0!important}.appearance-controls span{display:none}.wallpaper-icon{width:14px!important;height:14px!important;flex-basis:14px!important}
+  .hero-copy h1{margin-bottom:16px}
+  .controls{grid-template-columns:1fr 1fr;gap:8px;padding-bottom:14px}
+  .controls .search-wrap{grid-column:1/-1}
   .controls button{height:48px!important;min-height:48px!important}
-  .chips{
-    min-height:44px;height:44px;padding:0 16px 13px!important;gap:7px!important;
-  }
+  .controls .search-wrap,.controls input{height:52px!important;min-height:52px!important}
+  .chips{height:52px;min-height:52px;padding-bottom:8px!important}
   .chip{height:40px!important;min-height:40px!important;padding:0 14px!important}
-  main{padding-left:16px!important;padding-right:16px!important}
+  .home-layout{padding-bottom:32px}
+  .home-layout .grid{grid-template-columns:1fr;gap:12px}
+  .conspiracy-ghost{font-size:34px}
 }
-</style>
-<style id="curio-12-2-8-final-fix">
-.top-meta{overflow:visible!important;align-items:center;min-height:48px;padding-top:2px}
-.top-right{overflow:visible!important;align-items:center!important}
-.appearance-controls{height:40px;align-items:center;display:flex;gap:8px;overflow:visible}
-.appearance-controls button,.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{height:40px!important;min-height:40px!important;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1;vertical-align:middle;margin:0!important}
-.wallpaper-open{padding:0 14px!important}
-.wallpaper-icon{width:16px;height:16px;display:block;flex:0 0 16px}
-.controls{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-@media(max-width:900px){.top-right{flex-wrap:nowrap}.appearance-controls{gap:6px}}
-@media(max-width:700px){.appearance-controls{height:36px}.appearance-controls button,.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{height:36px!important;min-height:36px!important;padding:0 10px!important}.wallpaper-icon{width:14px;height:14px;flex-basis:14px}}
-</style></head><body data-curioweb-version="12.2.7">
+</style></head><body data-curioweb-version="12.3.1">
 <div aria-hidden="true" class="wallpaper-layer" id="wallpaperLayer"></div>
 <div class="beta-bar">Curio V.1 beta <span>We are still building things, so you may encounter the occasional snag.</span><button class="beta-experimental" id="issueOpen" type="button">This is an experimental version of Curio. Report issues HERE</button></div>
 <div class="issue-panel" id="issuePanel">
@@ -957,8 +916,8 @@ body.dark .controls{background:transparent!important;background-image:none!impor
 <div class="top-left">
 <div aria-label="UK date and time" class="uk-clock" id="ukClock"></div>
 </div>
-<div class="logo">CURIOWEB <span>HUMAN RABBIT HOLES</span></div>
-<div class="top-right"><div class="appearance-controls"><button aria-label="Toggle dark mode" class="theme-toggle" id="theme" type="button">☾ <span>Dark Mode</span></button><button aria-label="Choose wallpaper" class="wallpaper-open" id="wallpaperOpen" type="button"><svg aria_hidden="true" class="wallpaper-icon" viewBox="0 0 24 24"><rect fill="none" height="16" rx="3" stroke="currentColor" stroke-width="1.8" width="18" x="3" y="4"></rect><circle cx="8" cy="9" fill="currentColor" r="1.6"></circle><path d="M5.5 17l4.4-4.4 3.1 3 2.3-2.2 3.2 3.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg><span>Wallpapers</span></button></div><span class="top-tagline">♥ <span>Explore more. Scroll less.</span></span></div>
+<div aria-label="CurioWeb" class="logo"><span aria-hidden="true" class="logo-mark"><svg role="img" viewbox="0 0 48 48"><circle cx="24" cy="24" fill="none" r="20" stroke="currentColor" stroke-width="3"></circle><path d="M30 14c-7-4-15 1-15 9 0 7 5 12 12 12 5 0 8-3 8-7 0-4-3-7-7-7-3 0-5 2-5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path><circle cx="31" cy="14" fill="currentColor" r="2.2"></circle></svg></span><span class="logo-word">CURIO</span><span class="logo-sub">WEB · HUMAN RABBIT HOLES</span></div>
+<div class="top-right"><div class="appearance-controls"><button aria-label="Toggle dark mode" class="theme-toggle" id="theme" type="button">☾ <span>Dark Mode</span></button><button aria-label="Choose wallpaper" class="wallpaper-open" id="wallpaperOpen" type="button"><svg aria_hidden="true" class="wallpaper-icon" viewbox="0 0 24 24"><rect fill="none" height="16" rx="3" stroke="currentColor" stroke-width="1.8" width="18" x="3" y="4"></rect><circle cx="8" cy="9" fill="currentColor" r="1.6"></circle><path d="M5.5 17l4.4-4.4 3.1 3 2.3-2.2 3.2 3.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg><span>Wallpapers</span></button></div><span class="top-tagline">♥ <span>Explore more. Scroll less.</span></span></div>
 </div>
 <div aria-hidden="true" class="hero-art"></div><div class="hero-copy"><h1>Go where the internet gets interesting.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></div></header>
 <div class="controls">
@@ -969,16 +928,12 @@ body.dark .controls{background:transparent!important;background-image:none!impor
 </div>
 <div class="chips" id="chips"></div>
 <div aria-label="CurioWeb quick information" class="mobile-quick">
-
-
 <button class="mobile-quick-card" data-mobile-quick="weather" type="button"><span class="quick-icon">☁️</span><span><b>Weather</b><small>Find your weather</small></span><em>›</em></button>
 <button class="mobile-quick-card" data-mobile-quick="wallpaper" type="button"><span class="quick-icon">🖼️</span><span><b>Wallpaper</b><small>Personalise Curio</small></span><em>›</em></button>
 </div>
 <div class="home-layout">
 <main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
 <aside aria-label="CurioWeb information" class="side-tiles">
-
-
 <section class="side-tile weather-tile">
 <div class="side-row-head"><div><div class="side-kicker blue-kicker">WEATHER NEAR YOU</div><div class="weather-location" id="weatherLocation">Location not set</div></div><button class="side-link" id="weatherChange" type="button">Find me</button></div>
 <div class="weather-main"><div class="weather-icon" id="weatherIcon">🌤️</div><strong id="weatherTemp">14°C</strong><span id="weatherSummary">Partly cloudy</span></div>
@@ -990,11 +945,11 @@ body.dark .controls{background:transparent!important;background-image:none!impor
 <div class="wallpaper-mini-actions"><button id="miniUpload" type="button">⇧ Upload your own</button><button id="miniSave" type="button">Save Wallpaper</button></div>
 </section>
 <section aria-live="polite" class="side-tile conspiracy-tile">
-<div class="side-kicker">👁 RANDOM CONSPIRACY THEORY</div>
-<h2 id="conspiracyTitle">The Philadelphia Experiment</h2>
-<p class="conspiracy-copy" id="conspiracyCopy">A long running story claims a US Navy ship was made invisible during a secret wartime experiment involving powerful electromagnetic fields. Later versions of the story add stranger details, including the ship supposedly disappearing and reappearing elsewhere. The US Navy has denied that the experiment took place, and researchers generally trace the legend to later accounts rather than contemporary evidence.</p>
+<div class="conspiracy-visual"><span aria-hidden="true" class="conspiracy-ghost">👻</span><span class="conspiracy-spark">✦</span><span class="conspiracy-spark s2">·</span><div><div class="side-kicker">RANDOM CONSPIRACY</div><small>Take a little detour into the strange.</small></div></div>
+<div class="conspiracy-heading"><span aria-hidden="true" class="conspiracy-eye">◉</span><h2 id="conspiracyTitle">The Philadelphia Experiment</h2></div>
+<p class="conspiracy-copy" id="conspiracyCopy">A long running story claims a US Navy ship was made invisible during a secret wartime experiment involving powerful electromagnetic fields. Later versions add stranger details, including the ship supposedly disappearing and reappearing elsewhere. The US Navy has denied that the experiment took place, and researchers generally trace the legend to later accounts rather than contemporary evidence.</p>
 <p class="conspiracy-meta" id="conspiracyMeta">A famous mystery built from wartime secrecy, later testimony and a very strange story.</p>
-<button class="conspiracy-next" id="conspiracyNext" type="button">Next theory ↻</button>
+<button class="conspiracy-next" id="conspiracyNext" type="button">Another conspiracy <span aria-hidden="true">↻</span></button>
 </section>
 <section class="side-tile report-tile">
 <button class="report-trigger" id="reportTrigger" type="button"><span>♡</span><span><strong>Report an Issue</strong><small>Found a bug? Let us know.</small></span><b>›</b></button>
@@ -1143,7 +1098,7 @@ draw();
 
 // Curio Glass pointer response
 document.addEventListener("pointermove", (e) => {
-  const card = e.target.closest(".card");
+  const card = e.target.closest(".card, .side-tile");
   if (!card) return;
   const r = card.getBoundingClientRect();
   const x = e.clientX - r.left;
@@ -1160,7 +1115,7 @@ document.addEventListener("pointermove", (e) => {
 });
 
 document.addEventListener("pointerout", (e) => {
-  const card = e.target.closest(".card");
+  const card = e.target.closest(".card, .side-tile");
   if (!card || card.contains(e.relatedTarget)) return;
   card.style.removeProperty("--mx");
   card.style.removeProperty("--my");
@@ -1332,14 +1287,14 @@ wallpaperReset.onclick=()=>{
 };
 applyWallpaper();
 /* CurioWeb 12.2: browser location, postcode news and backend ready API */
-window.CurioConfig={version:"12.2.8",backendEnabled:false,apiBase:"/api",features:{accounts:false,dynamicCurios:false,liveNews:false,liveWeather:true,submissions:false},storagePrefix:"curioweb."};
+window.CurioConfig={version:"12.3.1",backendEnabled:false,apiBase:"/api",features:{accounts:false,dynamicCurios:false,liveNews:false,liveWeather:true,submissions:false},storagePrefix:"curioweb."};
 window.CurioAPI={config:window.CurioConfig,async request(path,options={}){if(!this.config.backendEnabled)throw new Error("Backend is not connected");const response=await fetch(this.config.apiBase+path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});const data=await response.json().catch(()=>null);if(!response.ok)throw new Error(data?.error||`API ${response.status}`);return data;},getWeather:(lat,lon)=>CurioAPI.request(`/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`)};
 const weatherLocation=document.getElementById("weatherLocation"),weatherChange=document.getElementById("weatherChange"),weatherTemp=document.getElementById("weatherTemp"),weatherSummary=document.getElementById("weatherSummary"),weatherHigh=document.getElementById("weatherHigh"),weatherLow=document.getElementById("weatherLow"),weatherIcon=document.getElementById("weatherIcon"),weatherLocationNote=document.getElementById("weatherLocationNote");
 const weatherCodes={0:["☀️","Clear sky"],1:["🌤️","Mainly clear"],2:["⛅","Partly cloudy"],3:["☁️","Overcast"],45:["🌫️","Fog"],48:["🌫️","Rime fog"],51:["🌦️","Light drizzle"],53:["🌦️","Drizzle"],55:["🌧️","Heavy drizzle"],61:["🌦️","Light rain"],63:["🌧️","Rain"],65:["🌧️","Heavy rain"],71:["🌨️","Light snow"],73:["🌨️","Snow"],75:["❄️","Heavy snow"],80:["🌦️","Showers"],81:["🌧️","Showers"],82:["⛈️","Heavy showers"],95:["⛈️","Thunderstorm"],96:["⛈️","Thunderstorm"],99:["⛈️","Thunderstorm"]};
 async function loadWeather(lat,lon){weatherLocation.textContent="Finding your weather…";weatherChange.textContent="Loading…";try{let d;if(CurioConfig.backendEnabled){d=await CurioAPI.getWeather(lat,lon)}else{const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto`;const r=await fetch(u);if(!r.ok)throw new Error("Weather unavailable");d=await r.json()}const code=d.current?.weather_code;const [ico,sum]=weatherCodes[code]||["🌤️","Current conditions"];weatherIcon.textContent=ico;weatherTemp.textContent=Math.round(d.current?.temperature_2m??0)+"°C";weatherSummary.textContent=sum;weatherHigh.textContent="H: "+Math.round(d.daily?.temperature_2m_max?.[0]??0)+"°";weatherLow.textContent="L: "+Math.round(d.daily?.temperature_2m_min?.[0]??0)+"°";weatherLocation.textContent="Your current location";weatherLocationNote.textContent="Location is used only for this session and is not stored.";weatherChange.textContent="Refresh"}catch(e){weatherLocation.textContent="Weather unavailable";weatherLocationNote.textContent="Allow location access and try again.";weatherChange.textContent="Find me"}}
 function findMyLocation(){if(!navigator.geolocation){weatherLocation.textContent="Location not supported";return}weatherChange.textContent="Finding…";navigator.geolocation.getCurrentPosition(p=>loadWeather(p.coords.latitude,p.coords.longitude),()=>{weatherLocation.textContent="Location access denied";weatherLocationNote.textContent="You can enable location access in your browser settings.";weatherChange.textContent="Try again"},{enableHighAccuracy:false,maximumAge:300000,timeout:10000})}
 weatherChange.onclick=findMyLocation;
-const conspiracyNext=document.getElementById("conspiracyNext"); if(conspiracyNext) conspiracyNext.addEventListener("click",()=>{conspiracyIndex++;renderConspiracy()}); renderConspiracy();
+const conspiracyNextButton=document.getElementById("conspiracyNext"); if(conspiracyNextButton) conspiracyNextButton.addEventListener("click",()=>{conspiracyIndex++;renderConspiracy()});
 const adultOverlay=document.getElementById("adultOverlay"),adultAnswer=document.getElementById("adultAnswer"),adultUnlock=document.getElementById("adultUnlock"),adultMessage=document.getElementById("adultMessage"),adultContent=document.getElementById("adultContent"),adultClose=document.getElementById("adultClose");
 function openAdult(){adultOverlay.classList.add("open");adultOverlay.setAttribute("aria-hidden","false");adultAnswer.value="";adultMessage.textContent="";adultContent.hidden=true;setTimeout(()=>adultAnswer.focus(),80)}
 function closeAdult(){adultOverlay.classList.remove("open");adultOverlay.setAttribute("aria-hidden","true")}
@@ -1437,4 +1392,20 @@ window.CurioEvents={
   }
 };
 originalSurprise?.addEventListener("click",()=>CurioEvents.track("surprise_me"));
+
+// 12.3.1 conspiracy collection and tile interaction
+const conspiracyCollection=[
+ {title:"The Philadelphia Experiment",copy:"The legend claims a US Navy ship was made invisible during a secret wartime experiment involving electromagnetic fields. Later versions add teleportation and bizarre effects on the crew. The Navy has denied the experiment, and researchers generally trace the story to later accounts rather than contemporary records.",meta:"A wartime mystery, disputed testimony and one seriously strange story."},
+ {title:"The Dyatlov Pass Incident",copy:"In 1959, nine hikers died in the Ural Mountains under circumstances that inspired decades of speculation. Their tent had been cut open from the inside, and the group had fled into extreme cold. Official explanations have changed over time, while theories range from avalanches to far stranger possibilities.",meta:"A real tragedy surrounded by unanswered questions and competing explanations."},
+ {title:"The Black Knight Satellite",copy:"A popular space mystery claims an ancient artificial object has been orbiting Earth for thousands of years. Photographs from the Space Shuttle era are often cited as evidence, although NASA and researchers have identified the photographed object as space debris or insulation rather than an alien satellite.",meta:"Real photographs, real objects and a very entertaining leap into the unknown."},
+ {title:"The Wow! Signal",copy:"In 1977, a radio telescope detected an unusually strong, narrowband signal that lasted about 72 seconds. Astronomer Jerry Ehman wrote ‘Wow!’ beside the printout. No convincing repeat has ever been detected, leaving its ultimate source unresolved even though there is no evidence that it was extraterrestrial.",meta:"One extraordinary signal and a mystery that never repeated."},
+ {title:"The Montauk Project",copy:"The Montauk Project is a collection of stories alleging secret experiments at Camp Hero in New York involving mind control, time travel and strange technologies. The stories became widely known through books and later retellings, but no reliable evidence has established that the alleged experiments occurred.",meta:"A secret base, alleged experiments and a huge pile of speculative lore."},
+ {title:"The Moon Landing Hoax",copy:"This theory claims the Apollo Moon landings were staged rather than carried out. Supporters point to shadows, the flag and photographic details as supposed anomalies. Those claims have been extensively examined and have ordinary physical explanations, while independent tracking and returned lunar material provide substantial evidence that the missions occurred.",meta:"A famous conspiracy that becomes a rabbit hole about evidence, photography and physics."},
+ {title:"The Taos Hum",copy:"Some residents of Taos, New Mexico report hearing a persistent low frequency hum that others cannot hear. Investigations have produced possible environmental and industrial explanations, but no single source has conclusively explained every report. The mystery is real as a reported phenomenon, while its cause remains debated.",meta:"A sound some people swear is there and a mystery you can’t simply switch off."}
+];
+let conspiracyIndex=Math.floor(Math.random()*conspiracyCollection.length);
+function renderConspiracy(){const item=conspiracyCollection[conspiracyIndex%conspiracyCollection.length];const t=document.getElementById("conspiracyTitle"),c=document.getElementById("conspiracyCopy"),m=document.getElementById("conspiracyMeta");if(t)t.textContent=item.title;if(c)c.textContent=item.copy;if(m)m.textContent=item.meta;}
+renderConspiracy();
+// Cursor-driven glass bloom for cards and sidebar tiles.
+document.querySelectorAll('.card,.side-tile').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');},{passive:true});el.addEventListener('pointerleave',()=>{el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%')},{passive:true});});
 </script></body></html>
