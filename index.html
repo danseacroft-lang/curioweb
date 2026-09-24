@@ -57,11 +57,18 @@ body:before{
 }
 @keyframes aurora{to{transform:rotate(18deg) translate3d(4%,2%,0) scale(1.05)}}
 .app{min-height:100vh;padding:28px clamp(18px,4vw,54px) 36px;display:flex;flex-direction:column}
-.nav{display:flex;justify-content:space-between;align-items:center;max-width:1160px;width:100%;margin:auto auto 20px}
-.brand{display:flex;gap:10px;align-items:center;font-weight:700;letter-spacing:-.03em}
+.nav{
+  max-width:1160px;width:100%;margin:0 auto;padding:22px 28px;
+  display:grid;align-items:center;
+  gap:16px
+}
+.brand{
+  display:flex;align-items:center;
+  justify-content:center;gap:10px;color:var(--ink);text-decoration:none
+}
 .logo{width:30px;height:30px;border-radius:10px;background:linear-gradient(145deg,#fff,#cbd5e4);box-shadow:inset 1px 1px 1px #fff,0 7px 20px #7183a430;position:relative}
 .logo:after{content:"";position:absolute;width:11px;height:11px;border-radius:50%;background:#111318;left:9px;top:9px;box-shadow:0 0 12px #11131855}
-.nav-note{font-size:12px;color:var(--muted);font-weight:600}
+
 .stage{
   width:min(1160px,100%);margin:auto;display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px;
 }
@@ -115,57 +122,43 @@ h1{font-size:clamp(38px,6vw,70px);line-height:.95;letter-spacing:-.065em;margin:
 .metric-top{display:flex;justify-content:space-between;align-items:center;color:#7b8290;font-size:12px;font-weight:650}
 .metric-value{font-size:27px;font-weight:700;letter-spacing:-.04em;margin-top:7px;font-variant-numeric:tabular-nums}
 .metric-unit{font-size:12px;color:#7b8290;font-weight:650;margin-left:3px}
-.footer{max-width:1160px;width:100%;margin:15px auto 0;display:flex;justify-content:space-between;color:#858c98;font-size:11px;padding:0 5px}
-.dot{width:7px;height:7px;border-radius:50%;background:#53bf83;display:inline-block;margin-right:7px;box-shadow:0 0 0 4px #53bf8320}
+.footer{max-width:1160px;width:100%;margin:15px auto 0;display:flex;justify-content:space-between;color:#858c98;font-size:11px;padding:0 5px;text-align:center;justify-content:center}
 
-.theme-button {
-  appearance: none;
-  -webkit-appearance: none;
-  box-sizing: border-box;
-  width: 42px;
-  height: 42px;
-  min-width: 42px;
-  min-height: 42px;
-  padding: 0;
-  margin: 0;
-  position: relative;
-  display: grid;
-  place-items: center;
-  flex: 0 0 42px;
-  overflow: hidden;
-  border: 1px solid var(--stroke);
-  border-radius: 50%;
-  background: var(--glass-strong);
-  color: var(--ink);
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  line-height: 0;
-  font-size: 0;
-  isolation: isolate;
-  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+.top-actions{
+  display:flex;align-items:center;
+  justify-content:flex-end;gap:10px
 }
-.theme-button:hover { transform: translateY(-1px) scale(1.03); }
-.theme-button:active { transform: scale(.96); }
-
-.theme-icon {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  font-size: 19px;
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  pointer-events: none;
+.theme-button{
+  appearance:none;-webkit-appearance:none;box-sizing:border-box;
+  width:58px;min-width:58px;height:28px;padding:0 8px;margin:0;
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;
+  overflow:hidden;border:1px solid var(--stroke);border-radius:999px;
+  background:var(--glass-strong);color:var(--ink);box-shadow:var(--shadow);
+  cursor:pointer;line-height:1;font-size:11px;font-weight:650;
+  letter-spacing:-.01em;isolation:isolate;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease
 }
-body.dark body.dark body.dark .theme-button{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);box-shadow:0 8px 24px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.10)}
-.theme-button:hover{transform:translateY(-1px) scale(1.03)}
-.theme-button:active{transform:scale(.94)}
-.theme-icon{width:18px;height:18px;position:relative;display:block}
+.theme-button:hover{transform:translateY(-1px)}
+.theme-button:active{transform:scale(.97)}
+.theme-icon{
+  display:inline-grid;place-items:center;width:16px;height:16px;
+  margin:0;padding:0;line-height:1;font-size:15px;
+  font-family:Arial,sans-serif;font-weight:400;pointer-events:none
+}
+.theme-label{display:inline-block;pointer-events:none}
 body.dark @media(max-width:850px){.stage{grid-template-columns:1fr}.side{display:grid;grid-template-columns:repeat(3,1fr)}.side h2{grid-column:1/-1}.main{min-height:570px}.footer{display:none}}
-@media(max-width:560px){.app{padding:18px 12px 22px}.nav{margin-bottom:12px}.main{border-radius:32px;padding:34px 16px 26px}.side{border-radius:26px;padding:13px;grid-template-columns:1fr 1fr 1fr;gap:8px}.metric{padding:13px 11px;border-radius:18px}.metric-value{font-size:21px}.nav-note{display:none}.gauge-wrap{width:min(330px,82vw)}}
+@media(max-width:560px){
+.nav{
+  max-width:1160px;width:100%;margin:0 auto;padding:22px 28px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px
+}
+.brand{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  color:var(--ink);text-decoration:none
+}
+.theme-button{width:58px;min-width:58px;padding:0 8px}
+.app{padding:18px 12px 22px}.nav{margin-bottom:12px}.main{border-radius:32px;padding:34px 16px 26px}.side{border-radius:26px;padding:13px;grid-template-columns:1fr 1fr 1fr;gap:8px}.metric{padding:13px 11px;border-radius:18px}.metric-value{font-size:21px}.gauge-wrap{width:min(330px,82vw)}}
 
 .connection-identity {
   width: 100%;
@@ -198,19 +191,84 @@ body.dark @media(max-width:850px){.stage{grid-template-columns:1fr}.side{display
   overflow-wrap: anywhere;
 }
 
+#confettiCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.celebration {
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s ease, visibility .35s ease;
+}
+
+.celebration.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.celebration-card {
+  width: min(560px, 100%);
+  padding: 28px 30px;
+  text-align: center;
+  border-radius: 28px;
+  border: 1px solid var(--stroke);
+  background: var(--glass-strong);
+  box-shadow: 0 24px 70px rgba(0,0,0,.18);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  transform: translateY(12px) scale(.96);
+  transition: transform .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.celebration.show .celebration-card {
+  transform: translateY(0) scale(1);
+}
+
+.celebration-icon {
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+
+.celebration-card p {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(17px, 2.2vw, 21px);
+  line-height: 1.45;
+  font-weight: 650;
+  letter-spacing: -.02em;
+}
+
 </style>
 </head>
 <body>
+<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+<div class="celebration" id="celebration" role="status" aria-live="polite">
+  <div class="celebration-card">
+    <div class="celebration-icon">🎉</div>
+    <p>Your speed results allow you to watch movies, send Emails, stream music, game and more</p>
+  </div>
+</div>
+
 <div class="app">
   <header class="nav">
+    <button class="theme-button" id="themeToggle" type="button"
+      aria-label="Switch to dark mode" title="Switch to dark mode">
+      <span class="theme-icon" id="themeIcon" aria-hidden="true">☀</span>
+      <span class="theme-label" id="themeLabel">Day</span>
+    </button>
     <div class="brand"><span class="logo"></span><span>Liquid Speed</span></div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div class="nav-note"><span class="dot"></span></div>
-      <button class="theme-button" id="themeToggle" type="button"
-        aria-label="Switch to dark mode" title="Switch to dark mode">
-        <span class="theme-icon" id="themeIcon" aria-hidden="true">☀</span>
-      </button>
-    </div>
   </header>
 
   <main class="stage">
@@ -257,8 +315,6 @@ const els = {
   ping:$("ping"), download:$("download"), upload:$("upload")
 };
 
-
-
 const greeting = document.getElementById("greeting");
 
 function updateGreeting() {
@@ -277,9 +333,12 @@ if(savedTheme === "dark") document.body.classList.add("dark");
 
 const themeIcon = document.getElementById("themeIcon");
 
+const themeLabel = document.getElementById("themeLabel");
+
 function updateThemeLabel(){
   const dark = document.body.classList.contains("dark");
   themeIcon.textContent = dark ? "☾" : "☀";
+  themeLabel.textContent = dark ? "Night" : "Day";
   themeToggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
   themeToggle.setAttribute("title", dark ? "Switch to light mode" : "Switch to dark mode");
 }
@@ -318,7 +377,6 @@ function showSpeed(value, label="Mbps"){
   els.unit.textContent = label;
 }
 function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
-
 
 async function loadConnectionIdentity() {
   const ipEl = document.getElementById("userIp");
@@ -422,6 +480,102 @@ async function uploadTest(size){
   return (size*8)/((performance.now()-t0)/1000*1e6);
 }
 
+let celebrationTimer = null;
+let confettiFrame = null;
+
+function celebrateFastResult() {
+  const canvas = document.getElementById("confettiCanvas");
+  const celebration = document.getElementById("celebration");
+  const ctx = canvas?.getContext("2d");
+  if (!canvas || !celebration || !ctx) return;
+
+  if (celebrationTimer) clearTimeout(celebrationTimer);
+  if (confettiFrame) cancelAnimationFrame(confettiFrame);
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const colors = ["#007aff","#34c759","#ff9f0a","#ff375f","#af52de","#5ac8fa","#ffd60a"];
+  const pieces = [];
+  const launchPoints = [width * .22, width * .5, width * .78];
+
+  for (let i = 0; i < 180; i++) {
+    pieces.push({
+      x: launchPoints[i % 3] + (Math.random() - .5) * 70,
+      y: height * .72 + Math.random() * 20,
+      vx: (Math.random() - .5) * 8,
+      vy: -(9 + Math.random() * 8),
+      gravity: .17 + Math.random() * .07,
+      rotation: Math.random() * Math.PI * 2,
+      spin: (Math.random() - .5) * .3,
+      w: 4 + Math.random() * 5,
+      h: 7 + Math.random() * 9,
+      life: 0,
+      maxLife: 145 + Math.random() * 60,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      circle: Math.random() > .5
+    });
+  }
+
+  celebration.classList.add("show");
+
+  function frame() {
+    ctx.clearRect(0, 0, width, height);
+    let alive = false;
+
+    for (const p of pieces) {
+      if (p.life >= p.maxLife) continue;
+      alive = true;
+      p.life++;
+      p.vx *= .992;
+      p.vy += p.gravity;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rotation += p.spin;
+
+      const fadeStart = p.maxLife * .72;
+      const alpha = p.life > fadeStart
+        ? 1 - (p.life - fadeStart) / (p.maxLife - fadeStart)
+        : 1;
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, alpha);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      ctx.fillStyle = p.color;
+
+      if (p.circle) {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.w * .65, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      }
+      ctx.restore();
+    }
+
+    if (alive) confettiFrame = requestAnimationFrame(frame);
+    else {
+      ctx.clearRect(0, 0, width, height);
+      confettiFrame = null;
+    }
+  }
+
+  frame();
+
+  celebrationTimer = setTimeout(() => {
+    celebration.classList.remove("show");
+    setTimeout(() => ctx.clearRect(0, 0, width, height), 400);
+  }, 10000);
+}
+
 async function run(){
   els.start.disabled=true; els.again.hidden=true;
   els.headline.textContent="Checking your connection";
@@ -447,6 +601,10 @@ async function run(){
     els.download.innerHTML=`${download.toFixed(download>=100?0:1)}<span class="metric-unit">Mbps</span>`;
     showSpeed(download);
     setGauge(download, Math.max(100,download*1.25));
+
+    if (download > 50) {
+      celebrateFastResult();
+    }
 
     els.status.textContent="Checking upload…";
     const u=[];
