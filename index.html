@@ -312,9 +312,9 @@ h1{max-width:720px;font-size:clamp(58px,6.4vw,92px);line-height:.91;letter-spaci
 .side-row-head{display:flex;justify-content:space-between;gap:10px}
 .side-tile h2{font-size:16px;line-height:1.12;margin-bottom:7px}
 .side-tile p{font-size:10px;line-height:1.4;margin-bottom:8px}
-.weather-main{grid-template-columns:40px minmax(0,1fr) auto}
-.wallpaper-mini-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-.wallpaper-mini-choice{min-width:0}
+
+
+
 .experience-strip{max-width:var(--cw-content);padding:0;margin:0 auto 34px;grid-template-columns:1.25fr .75fr;gap:14px}
 .experience-block{min-width:0}
 .wormhole-story{min-width:0;gap:8px}
@@ -378,7 +378,7 @@ body.dark .hero-art:after{background:linear-gradient(180deg,rgba(8,10,15,.02),rg
   .controls{margin:0 14px}
   .controls button{font-size:10px}
   .backend-cards{grid-template-columns:1fr}
-}.weather-location-note{font-size:8px;color:#9aa3b0;margin-top:7px}.adult-overlay{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:rgba(7,10,16,.42);backdrop-filter:blur(18px);z-index:9999}.adult-overlay.open{display:grid}.adult-modal{width:min(430px,100%);position:relative;padding:28px;border-radius:28px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.88);box-shadow:0 30px 90px rgba(0,0,0,.22);text-align:center}.adult-lock{font-size:30px;margin-bottom:8px}.adult-modal h2{margin:4px 0 10px;font-size:26px;letter-spacing:-.04em}.adult-riddle{font-size:13px;line-height:1.55;color:#697384;margin:0 0 16px}.adult-modal input{width:100%;height:46px;border:1px solid rgba(20,29,45,.12);border-radius:14px;padding:0 14px;outline:none;font-size:14px;box-sizing:border-box}.adult-unlock{width:100%;height:46px;margin-top:9px}.adult-message{min-height:18px;margin-top:9px;font-size:10px;color:#8a5360}.adult-content{margin-top:16px;padding:13px;border-radius:15px;background:rgba(232,239,255,.65);font-size:11px;line-height:1.45}.modal-close{position:absolute;right:13px;top:13px;width:32px;height:32px;border:0;border-radius:50%;background:rgba(20,29,45,.07);font-size:20px}
+}.adult-overlay{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:rgba(7,10,16,.42);backdrop-filter:blur(18px);z-index:9999}.adult-overlay.open{display:grid}.adult-modal{width:min(430px,100%);position:relative;padding:28px;border-radius:28px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.88);box-shadow:0 30px 90px rgba(0,0,0,.22);text-align:center}.adult-lock{font-size:30px;margin-bottom:8px}.adult-modal h2{margin:4px 0 10px;font-size:26px;letter-spacing:-.04em}.adult-riddle{font-size:13px;line-height:1.55;color:#697384;margin:0 0 16px}.adult-modal input{width:100%;height:46px;border:1px solid rgba(20,29,45,.12);border-radius:14px;padding:0 14px;outline:none;font-size:14px;box-sizing:border-box}.adult-unlock{width:100%;height:46px;margin-top:9px}.adult-message{min-height:18px;margin-top:9px;font-size:10px;color:#8a5360}.adult-content{margin-top:16px;padding:13px;border-radius:15px;background:rgba(232,239,255,.65);font-size:11px;line-height:1.45}.modal-close{position:absolute;right:13px;top:13px;width:32px;height:32px;border:0;border-radius:50%;background:rgba(20,29,45,.07);font-size:20px}
 body.dark .adult-modal{background:rgba(25,29,39,.94);border-color:rgba(255,255,255,.10);color:#fff}body.dark .adult-riddle{color:#aeb6c4}body.dark .adult-modal input{background:#171b24;color:#fff;border-color:rgba(255,255,255,.12)}
 
 /* 12.2.1 precision pass: keep the search controls clean and free of a full-width gradient band. */
@@ -394,7 +394,8 @@ body.dark .controls{background:transparent!important}
 .conspiracy-meta{font-size:9px;line-height:1.45;color:#8f98aa;margin:0 0 11px}
 .conspiracy-next{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;border-radius:11px;padding:8px 10px;font-size:10px;font-weight:750;cursor:pointer}
 .conspiracy-next:hover{background:rgba(255,255,255,.10)}
-</style>
+.tile-actions{display:flex;align-items:center;gap:6px;margin-left:auto}.tile-action{width:30px;height:30px;border:1px solid rgba(255,255,255,.62);border-radius:10px;background:rgba(255,255,255,.48);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 6px 18px rgba(30,40,60,.08);display:inline-flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;color:#536074;padding:0;transition:transform .18s ease,background .18s ease,box-shadow .18s ease}.tile-action:hover{transform:translateY(-1px);background:rgba(255,255,255,.72)}body.dark .tile-action{background:rgba(30,38,52,.48);border-color:rgba(255,255,255,.16);color:#dce4f2}
+.curio-toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);padding:11px 16px;border-radius:14px;background:rgba(20,26,36,.78);color:#fff;border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(0,0,0,.2);font-size:12px;font-weight:800;opacity:0;pointer-events:none;transition:.2s;z-index:9999}.curio-toast.show{opacity:1;transform:translate(-50%,0)}.curio-info h3{margin:5px 0 8px;font-size:24px}.curio-info p{line-height:1.6;color:#657085;margin:0 0 16px}body.dark .curio-info p{color:#b7c0d0}</style>
 <style id="curio-update-12">
 /* CurioWeb Update 12: clean editorial Apple-inspired redesign */
 :root{
@@ -563,6 +564,20 @@ footer{
 .issue-row button{background:#20242c;color:#fff;border-color:#20242c}
 .suggest-overlay,.suggest-box{backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
 .suggest-box{box-shadow:0 35px 100px rgba(20,30,45,.20),inset 0 1px 0 #fff}
+/* Shared Curio Liquid Glass for every user-facing popup/modal. */
+.suggest-box,.adult-modal,.wallpaper-box,.issue-panel,.mobile-sheet-inner{
+  background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(240,245,252,.58))!important;
+  border:1px solid rgba(255,255,255,.62)!important;
+  box-shadow:0 30px 100px rgba(20,30,45,.22),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(40,55,80,.06)!important;
+  backdrop-filter:blur(28px) saturate(145%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(145%)!important;
+}
+body.dark .suggest-box,body.dark .adult-modal,body.dark .wallpaper-box,body.dark .issue-panel,body.dark .mobile-sheet-inner{
+  background:linear-gradient(145deg,rgba(30,35,48,.78),rgba(12,15,22,.68))!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:0 30px 100px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.10),inset 0 -1px 0 rgba(0,0,0,.22)!important;
+}
+
 .wormhole-overlay{z-index:5000}
 @media (max-width:1200px){
   .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -723,17 +738,17 @@ body::selection{background:#1b63ff;color:#fff}
 .side-tile p{font-size:11px;line-height:1.42;margin-bottom:11px}
 .side-row-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .side-link{border:0;background:none;padding:2px 0;color:#4c76db;font-size:10px;font-weight:800}
-.weather-location{font-size:10px;color:#7a8493;margin:-1px 0 8px}
-.weather-main{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:7px}
-.weather-icon{font-size:31px;line-height:1}
-.weather-main strong{font-size:30px;letter-spacing:-.06em}
-.weather-main span{font-size:10px;color:#7d8796;text-align:right;max-width:70px}
-.weather-range{display:flex;gap:12px;margin-top:5px;font-size:9px;color:#8b94a1}
-.wallpaper-mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px}
-.wallpaper-mini-choice{height:38px;border:1px solid rgba(20,29,45,.08);border-radius:7px;padding:0;background-size:cover;background-position:center;cursor:pointer}
-.wallpaper-mini-choice.selected{box-shadow:0 0 0 2px #11151c inset}
-.wallpaper-mini-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px}
-.wallpaper-mini-actions button{height:30px;border-radius:9px;border:1px solid rgba(20,29,45,.09);background:rgba(255,255,255,.62);font-size:9px;font-weight:800;color:#353d49}
+
+
+
+
+
+
+
+
+
+
+
 .report-tile{padding:7px}
 .report-trigger{width:100%;display:grid;grid-template-columns:26px 1fr 14px;gap:8px;align-items:center;text-align:left;border:0;background:transparent;padding:7px;color:#1d2430}
 .report-trigger>span:first-child{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(20,29,45,.09);background:rgba(255,255,255,.7);font-size:14px}
@@ -771,7 +786,7 @@ body::selection{background:#1b63ff;color:#fff}
 body{background:radial-gradient(circle at 73% 12%,rgba(188,215,255,.58),transparent 30%),radial-gradient(circle at 15% 34%,rgba(231,226,255,.48),transparent 31%),linear-gradient(180deg,#f8fbff 0%,#f3f6fa 50%,#fff 100%)}
 header{max-width:1500px;padding:24px 32px 24px}.top-meta{margin-bottom:58px}.logo{font-size:21px;letter-spacing:.24em}.logo span{font-size:8px}.top-right{gap:9px}.top-tagline{font-size:11px}
 .home-layout{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 304px;gap:20px;padding:0 32px 44px}.home-layout main{padding:0;max-width:none}.home-layout .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
-.side-tiles{display:flex;flex-direction:column;gap:11px}.side-tile{border:1px solid rgba(20,29,45,.085);border-radius:19px;padding:14px;background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(125%);-webkit-backdrop-filter:blur(20px) saturate(125%);box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 12px 34px rgba(35,47,66,.075)}.side-kicker{font-size:9px;font-weight:850;letter-spacing:.12em;margin:0 0 5px;color:#6e7888}.blue-kicker{color:#1b63ff}.side-row-head{align-items:flex-start}.side-tile h2{font-size:16px;letter-spacing:-.025em;margin:0 0 8px}.side-tile p{font-size:10px;color:#778293;line-height:1.4;margin:0 0 9px}.side-link{font-size:9px;color:#3471ed}.weather-location{font-size:9px;color:#7d8795;margin:1px 0 0}.weather-main{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:5px;margin-top:5px}.weather-icon{font-size:34px}.weather-main strong{font-size:29px;letter-spacing:-.06em}.weather-main span{font-size:9px;color:#7e8795;text-align:right}.weather-range{display:flex;gap:11px;font-size:8px;color:#8d96a4;margin-top:3px}.wallpaper-mini h2{font-size:15px;margin-bottom:3px}.wallpaper-mini-grid{grid-template-columns:repeat(4,1fr);gap:5px}.wallpaper-mini-choice{height:39px;border-radius:7px}.wallpaper-mini-actions{gap:6px}.wallpaper-mini-actions button{font-size:8px;height:30px}.report-tile{padding:6px}.report-trigger{padding:6px}.report-trigger>span:first-child{width:27px;height:27px}.report-trigger strong{font-size:10px}.report-trigger small{font-size:8px}
+.side-tiles{display:flex;flex-direction:column;gap:11px}.side-tile{border:1px solid rgba(20,29,45,.085);border-radius:19px;padding:14px;background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(125%);-webkit-backdrop-filter:blur(20px) saturate(125%);box-shadow:inset 0 1px 0 rgba(255,255,255,.98),0 12px 34px rgba(35,47,66,.075)}.side-kicker{font-size:9px;font-weight:850;letter-spacing:.12em;margin:0 0 5px;color:#6e7888}.blue-kicker{color:#1b63ff}.side-row-head{align-items:flex-start}.side-tile h2{font-size:16px;letter-spacing:-.025em;margin:0 0 8px}.side-tile p{font-size:10px;color:#778293;line-height:1.4;margin:0 0 9px}.side-link{font-size:9px;color:#3471ed}.report-tile{padding:6px}.report-trigger{padding:6px}.report-trigger>span:first-child{width:27px;height:27px}.report-trigger strong{font-size:10px}.report-trigger small{font-size:8px}
 .mobile-quick{display:none}
 .experience-strip{max-width:1500px;margin:0 auto 34px;padding:0 32px;grid-template-columns:1.2fr .8fr;gap:15px}.experience-block{border-radius:20px;padding:16px}.experience-heading h2{font-size:17px}.wormhole-story{grid-template-columns:1fr 12px 1fr 12px 1fr 12px 1fr}.wormhole-frame{height:112px}.wormhole-frame span{font-size:8px}.backend-cards>div{padding:9px}
 @media(max-width:1200px){.home-layout .grid{grid-template-columns:repeat(3,minmax(0,1fr))}.home-layout{grid-template-columns:minmax(0,1fr) 286px}}
@@ -815,8 +830,13 @@ header{padding:22px 0 30px;min-height:430px;position:relative;overflow:visible}
 .hero-copy{position:relative;z-index:2;max-width:760px;margin:0}
 .hero-copy h1{margin:0 0 22px;max-width:760px}
 .hero{max-width:760px;margin:0}
-.hero-art{z-index:0!important;pointer-events:none!important;right:-20px;width:min(760px,58vw)}
+.hero-art{z-index:0!important;pointer-events:none!important;right:-20px;top:18px;width:min(760px,58vw);height:420px;opacity:.86!important}
 body.dark .hero-art{opacity:.28!important;filter:saturate(.55) brightness(.38) contrast(1.02)!important}
+
+/* Curio identity and hero preservation */
+.logo{display:flex!important;visibility:visible!important;opacity:1!important}
+.logo-word{display:inline!important;visibility:visible!important}
+.hero-art{visibility:visible!important}
 
 /* Search/action row: one clean row, one shared baseline, no gradient band. */
 .controls{display:grid;grid-template-columns:minmax(0,1fr) 170px 220px 170px;gap:10px;align-items:stretch;padding:0 0 18px;min-height:76px;background:transparent!important;background-image:none!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;position:relative;z-index:20}
@@ -839,7 +859,7 @@ body.dark .hero-art{opacity:.28!important;filter:saturate(.55) brightness(.38) c
 .card > *{position:relative;z-index:2}
 .side-tiles{display:flex;flex-direction:column;gap:14px;position:sticky;top:24px;min-width:0}
 .side-tile{width:100%;min-width:0;overflow:hidden;position:relative;isolation:isolate;--mx:50%;--my:50%;--shine-x:50%;transition:transform .12s ease,box-shadow .22s ease}
-.weather-tile{margin-top:0}
+
 .side-row-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 
 /* Liquid glass interaction applies to Curios and interactive sidebar tiles. */
@@ -906,12 +926,12 @@ button:not(.beta-experimental){height:var(--cw-button-h)!important;min-height:va
 .appearance-controls button,.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}
 .controls .search-wrap,.controls input,.controls button{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}
 .controls{min-height:var(--cw-button-h)!important}
-.chips{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important;padding-bottom:10px!important}
+.chips{height:54px!important;min-height:54px!important;padding-bottom:10px!important;box-sizing:border-box!important;align-items:flex-start!important}
 .chip{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}
 .suggest-close,.suggest-submit,.issue-close,.issue-row button,.adult-unlock,.modal-close,.wallpaper-open,.upload-btn,.wallpaper-reset,.wallpaper-save,.wallpaper-mini-actions button,.conspiracy-next,.feature-next,.side-link{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}
 .side-link{padding:0 10px!important}
-.wallpaper-mini-actions{grid-template-columns:1fr 1fr}
-.wallpaper-mini-actions button{padding:0 8px!important}
+
+
 .report-trigger{min-height:var(--cw-button-h)!important;height:var(--cw-button-h)!important}
 .footer-links button{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}
 
@@ -936,8 +956,8 @@ body.dark .hero-art:after{background:radial-gradient(ellipse 78% 74% at 58% 45%,
 
 /* The user-facing page no longer exposes the internal hyperspace storyboard or backend roadmap. */
 .experience-strip{display:none!important}
-@media(max-width:700px){.controls .search-wrap,.controls input{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}.controls button{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}.chips{height:50px!important;min-height:50px!important}.chip{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}.feature-icon{font-size:32px}}
-</style></head><body data-curioweb-version="12.4.0">
+@media(max-width:700px){.controls .search-wrap,.controls input{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}.controls button{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}.chips{height:54px!important;min-height:54px!important}.chip{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}.appearance-controls .theme-toggle,.appearance-controls .wallpaper-open{height:var(--cw-button-h)!important;min-height:var(--cw-button-h)!important}.feature-icon{font-size:32px}}
+</style></head><body data-curioweb-version="12.4.1">
 <div aria-hidden="true" class="wallpaper-layer" id="wallpaperLayer"></div>
 <div class="beta-bar">Curio V.1 beta <span>We are still building things, so you may encounter the occasional snag.</span><button class="beta-experimental" id="issueOpen" type="button">This is an experimental version of Curio. Report issues HERE</button></div>
 <div class="issue-panel" id="issuePanel">
@@ -956,7 +976,7 @@ body.dark .hero-art:after{background:radial-gradient(ellipse 78% 74% at 58% 45%,
 <div aria-label="UK date and time" class="uk-clock" id="ukClock"></div>
 </div>
 <div aria-label="CurioWeb" class="logo"><span aria-hidden="true" class="logo-mark"><svg role="img" viewbox="0 0 48 48"><circle cx="24" cy="24" fill="none" r="20" stroke="currentColor" stroke-width="3"></circle><path d="M30 14c-7-4-15 1-15 9 0 7 5 12 12 12 5 0 8-3 8-7 0-4-3-7-7-7-3 0-5 2-5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path><circle cx="31" cy="14" fill="currentColor" r="2.2"></circle></svg></span><span class="logo-word">CURIO</span><span class="logo-sub">WEB · HUMAN RABBIT HOLES</span></div>
-<div class="top-right"><div class="appearance-controls"><button aria-label="Toggle dark mode" class="theme-toggle" id="theme" type="button">☾ <span>Dark Mode</span></button><button aria-label="Choose wallpaper" class="wallpaper-open" id="wallpaperOpen" type="button"><svg aria_hidden="true" class="wallpaper-icon" viewbox="0 0 24 24"><rect fill="none" height="16" rx="3" stroke="currentColor" stroke-width="1.8" width="18" x="3" y="4"></rect><circle cx="8" cy="9" fill="currentColor" r="1.6"></circle><path d="M5.5 17l4.4-4.4 3.1 3 2.3-2.2 3.2 3.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg><span>Wallpapers</span></button></div><span class="top-tagline">♥ <span>Explore more. Scroll less.</span></span></div>
+<div class="top-right"><div class="appearance-controls"><button aria-label="Toggle dark mode" class="theme-toggle" id="theme" type="button">☾ <span>Dark Mode</span></button><button aria-label="Choose wallpaper" class="wallpaper-open" id="wallpaperOpen" type="button"><svg aria_hidden="true" class="wallpaper-icon" viewbox="0 0 24 24"><rect fill="none" height="16" rx="3" stroke="currentColor" stroke-width="1.8" width="18" x="3" y="4"></rect><circle cx="8" cy="9" fill="currentColor" r="1.6"></circle><path d="M5.5 17l4.4-4.4 3.1 3 2.3-2.2 3.2 3.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg><span>Wallpapers</span></button></div></div>
 </div>
 <div aria-hidden="true" class="hero-art"></div><div class="hero-copy"><h1>Go where the internet gets interesting.</h1><div class="hero">A hand picked launchpad for the strange, beautiful, useful and completely unnecessary corners of the web. No algorithm. Just rabbit holes.</div></div></header>
 <div class="controls">
@@ -966,23 +986,9 @@ body.dark .hero-art:after{background:radial-gradient(ellipse 78% 74% at 58% 45%,
 <button id="fav">☆ <span>Favourites</span></button>
 </div>
 <div class="chips" id="chips"></div>
-<div aria-label="CurioWeb quick information" class="mobile-quick">
-<button class="mobile-quick-card" data-mobile-quick="weather" type="button"><span class="quick-icon">☁️</span><span><b>Weather</b><small>Find your weather</small></span><em>›</em></button>
-<button class="mobile-quick-card" data-mobile-quick="wallpaper" type="button"><span class="quick-icon">🖼️</span><span><b>Wallpaper</b><small>Personalise Curio</small></span><em>›</em></button>
-</div>
 <div class="home-layout">
 <main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
 <aside aria-label="CurioWeb information" class="side-tiles">
-<section class="side-tile weather-tile">
-<div class="side-row-head"><div><div class="side-kicker blue-kicker">WEATHER NEAR YOU</div><div class="weather-location" id="weatherLocation">Location not set</div></div><button class="side-link" id="weatherChange" type="button">Find me</button></div>
-<div class="weather-main"><div class="weather-icon" id="weatherIcon">🌤️</div><strong id="weatherTemp">14°C</strong><span id="weatherSummary">Partly cloudy</span></div>
-<div class="weather-range"><span id="weatherHigh">H: --</span><span id="weatherLow">L: --</span></div><div class="weather-location-note" id="weatherLocationNote">Your location stays in this browser.</div>
-</section>
-<section class="side-tile wallpaper-mini">
-<div class="side-kicker blue-kicker">WALLPAPER</div><h2>Choose a background</h2><p>Personalise your CurioWeb experience.</p>
-<div class="wallpaper-mini-grid" id="wallpaperMiniGrid"></div>
-<div class="wallpaper-mini-actions"><button id="miniUpload" type="button">⇧ Upload your own</button><button id="miniSave" type="button">Save Wallpaper</button></div>
-</section>
 <section aria-live="polite" class="side-tile conspiracy-tile">
 <div class="conspiracy-visual"><span aria-hidden="true" class="conspiracy-ghost">👻</span><span class="conspiracy-spark">✦</span><span class="conspiracy-spark s2">·</span><div><div class="side-kicker">RANDOM CONSPIRACY</div><small>Take a little detour into the strange.</small></div></div>
 <div class="conspiracy-heading"><span aria-hidden="true" class="conspiracy-eye">◉</span><h2 id="conspiracyTitle">The Philadelphia Experiment</h2></div>
@@ -1031,7 +1037,7 @@ body.dark .hero-art:after{background:radial-gradient(ellipse 78% 74% at 58% 45%,
 <button data-mobile="favourites" type="button"><span>♡</span>Favourites</button>
 <button data-mobile="more" type="button"><span>•••</span>More</button>
 </nav>
-<div aria-hidden="true" class="adult-overlay" id="adultOverlay"><div aria-labelledby="adultTitle" aria-modal="true" class="adult-modal" role="dialog"><button aria-label="Close" class="modal-close" id="adultClose" type="button">×</button><div class="adult-lock">🔒</div><div class="side-kicker blue-kicker">ADULT CURIOS</div><h2 id="adultTitle">A little riddle first.</h2><p class="adult-riddle">I can be heard, but I have no mouth. I can travel through empty space, but I have no feet. What am I?</p><input aria-label="Answer to the riddle" autocomplete="off" id="adultAnswer" placeholder="Your answer" type="text"/><button class="primary adult-unlock" id="adultUnlock" type="button">Unlock Adult Curios</button><div aria-live="polite" class="adult-message" id="adultMessage"></div><div class="adult-content" hidden="" id="adultContent"><strong>Access granted.</strong><p>No Adult Curio links have been added yet. This area is ready for them.</p></div></div></div><div aria-hidden="true" class="mobile-sheet" id="mobileSheet"><div class="mobile-sheet-inner"><div class="mobile-sheet-head"><strong>CurioWeb</strong><button id="mobileSheetClose" type="button">×</button></div><button data-sheet="weather">Weather</button><button data-sheet="wallpaper">Wallpapers</button><button data-sheet="report">Report an Issue</button><button data-sheet="adult">Adult Curios</button><button data-sheet="about">About CurioWeb</button></div></div>
+<div aria-hidden="true" class="adult-overlay" id="adultOverlay"><div aria-labelledby="adultTitle" aria-modal="true" class="adult-modal" role="dialog"><button aria-label="Close" class="modal-close" id="adultClose" type="button">×</button><div class="adult-lock">🔒</div><div class="side-kicker blue-kicker">ADULT CURIOS</div><h2 id="adultTitle">A little riddle first.</h2><p class="adult-riddle">I can be heard, but I have no mouth. I can travel through empty space, but I have no feet. What am I?</p><input aria-label="Answer to the riddle" autocomplete="off" id="adultAnswer" placeholder="Your answer" type="text"/><button class="primary adult-unlock" id="adultUnlock" type="button">Unlock Adult Curios</button><div aria-live="polite" class="adult-message" id="adultMessage"></div><div class="adult-content" hidden="" id="adultContent"><strong>Access granted.</strong><p>No Adult Curio links have been added yet. This area is ready for them.</p></div></div></div><div aria-hidden="true" class="mobile-sheet" id="mobileSheet"><div class="mobile-sheet-inner"><div class="mobile-sheet-head"><strong>CurioWeb</strong><button id="mobileSheetClose" type="button">×</button></div><button data-sheet="report">Report an Issue</button><button data-sheet="adult">Adult Curios</button><button data-sheet="about">About CurioWeb</button></div></div>
 <div aria-labelledby="wallpaperTitle" aria-modal="true" class="wallpaper-overlay" id="wallpaperOverlay" role="dialog">
 <div class="wallpaper-box">
 <div class="suggest-head">
@@ -1055,7 +1061,7 @@ body.dark .hero-art:after{background:radial-gradient(ellipse 78% 74% at 58% 45%,
 <div aria-hidden="true" class="wormhole-overlay" id="wormholeOverlay">
 <canvas aria-hidden="true" id="wormholeCanvas"></canvas>
 <div aria-hidden="true" class="wormhole-vignette"></div>
-<div class="wormhole-copy"><strong>Entering Hyperspace!</strong><span>Finding your next rabbit hole...</span></div>
+<div class="wormhole-copy"><strong>Entering Hyperspace!</strong><span id="wormholeStatus">Finding your next rabbit hole...</span></div>
 </div>
 <footer>
 <div>CurioWeb · Explore responsibly. External websites open in a new tab.</div>
@@ -1067,7 +1073,7 @@ body.dark .hero-art:after{background:radial-gradient(ellipse 78% 74% at 58% 45%,
 </div>
 <div class="made-with-love">Made with love by Dan S <span aria-hidden="true">♥</span> GPT</div>
 </footer>
-<div aria-labelledby="suggestTitle" aria-modal="true" class="suggest-overlay" id="suggestOverlay" role="dialog">
+<div aria-labelledby="curioInfoTitle" aria-modal="true" class="suggest-overlay" id="curioInfoOverlay" role="dialog"><div class="suggest-box"><div class="suggest-head"><h2 id="curioInfoTitle">Curio</h2><button aria-label="Close" class="suggest-close" onclick="closeCurioInfo()" type="button">×</button></div><div id="curioInfoContent"></div></div></div><div aria-labelledby="suggestTitle" aria-modal="true" class="suggest-overlay" id="suggestOverlay" role="dialog">
 <div class="suggest-box">
 <div class="suggest-head">
 <h2 id="suggestTitle">💡 Suggest a website</h2>
@@ -1118,30 +1124,50 @@ grid.innerHTML=cat==='Adult'?'<div class="empty">Adult Curios are locked. Solve 
       <div class="card-kicker">${esc(x.cat)}</div>
       <h2>${esc(x.name)}</h2>
       <p>${esc(x.desc)}</p>
-      <div class="card-foot"><span>Explore ↗</span><button type="button" class="fav-btn" aria-label="Favourite ${esc(x.name)}" onclick="event.preventDefault();event.stopPropagation();toggle('${x.name.replace(/'/g,"\\'")}')">${favs.includes(x.name)?"★":"☆"}</button></div>
+      <div class="card-foot"><span>Explore ↗</span><div class="tile-actions">
+<button type="button" class="tile-action fav-btn" aria-label="Favourite ${esc(x.name)}" title="Favourite" onclick="event.preventDefault();event.stopPropagation();toggle('${x.name.replace(/'/g,"\'")}')">${favs.includes(x.name)?"★":"☆"}</button>
+<button type="button" class="tile-action" aria-label="Share ${esc(x.name)}" title="Share" onclick="event.preventDefault();event.stopPropagation();shareCurio('${x.name.replace(/'/g,"\'")}','${x.url.replace(/'/g,"\'")}','${x.desc.replace(/'/g,"\'")}')">↗</button>
+<button type="button" class="tile-action" aria-label="Information about ${esc(x.name)}" title="Information" onclick="event.preventDefault();event.stopPropagation();openCurioInfo('${x.name.replace(/'/g,"\'")}','${x.cat.replace(/'/g,"\'")}','${x.desc.replace(/'/g,"\'")}','${x.url.replace(/'/g,"\'")}')">ⓘ</button>
+</div></div>
     </div>
   </a>
 </article>`).join(""):'<div class="empty">Nothing here. Try another search or category.</div>'}
 function toggle(n){favs=favs.includes(n)?favs.filter(x=>x!=n):[...favs,n];localStorage.setItem("cwFavs",JSON.stringify(favs));draw()}
+
+const curioInfoOverlay=document.getElementById("curioInfoOverlay"),curioInfoContent=document.getElementById("curioInfoContent");
+function openCurioInfo(name,cat,desc,url){if(!curioInfoOverlay)return;curioInfoContent.innerHTML=`<div class="curio-info"><div class="card-kicker">${esc(cat)}</div><h3>${esc(name)}</h3><p>${esc(desc)}</p><button class="suggest-submit" type="button" onclick="window.open('${url.replace(/'/g,"\'")}','_blank','noopener')">Open Curio ↗</button></div>`;curioInfoOverlay.classList.add("open")}
+function closeCurioInfo(){if(curioInfoOverlay)curioInfoOverlay.classList.remove("open")}
+if(curioInfoOverlay)curioInfoOverlay.addEventListener("click",e=>{if(e.target===curioInfoOverlay)closeCurioInfo()});
+async function shareCurio(name,url,desc){const data={title:`${name} · CurioWeb`,text:desc,url};try{if(navigator.share){await navigator.share(data);return}await navigator.clipboard.writeText(url);showToast("Link copied to clipboard")}catch(e){if(e&&e.name!=="AbortError"){try{await navigator.clipboard.writeText(url);showToast("Link copied to clipboard")}catch(_){showToast("Link ready to share")}}}}
+function showToast(message){let t=document.getElementById("curioToast");if(!t){t=document.createElement("div");t.id="curioToast";t.className="curio-toast";document.body.appendChild(t)}t.textContent=message;t.classList.add("show");clearTimeout(window.__curioToast);window.__curioToast=setTimeout(()=>t.classList.remove("show"),1800)}
 q.oninput=draw;document.getElementById("fav").onclick=()=>{onlyFav=!onlyFav;draw()};
 const wormholeOverlay=document.getElementById("wormholeOverlay");
+const wormholeStatus=document.getElementById("wormholeStatus");
 let surpriseBusy=false;
-document.getElementById("random").onclick=()=>{
+function runHyperspace(chosen){
   if(surpriseBusy)return;
-  let s=cat==="Adult"?[]:sites.filter(x=>(cat==="All"||x.cat===cat)&&(!onlyFav||favs.includes(x.name)));
-  if(!s.length)return;
   surpriseBusy=true;
-  const chosen=s[Math.floor(Math.random()*s.length)];
-  const destinationWindow=window.open("about:blank","_blank");
   wormholeOverlay.classList.add("active");
   wormholeOverlay.setAttribute("aria-hidden","false");
+  if(wormholeStatus)wormholeStatus.textContent="Finding your next rabbit hole...";
   launchWormhole();
-  setTimeout(()=>{
-    wormholeOverlay.classList.remove("active");
-    wormholeOverlay.setAttribute("aria-hidden","true");
-    if(destinationWindow && !destinationWindow.closed){destinationWindow.location.href=chosen.url}else{window.location.href=chosen.url}
-    surpriseBusy=false;
-  },2600);
+  const start=performance.now();
+  const finish=()=>{
+    if(wormholeStatus)wormholeStatus.textContent="Destination ahead...";
+    setTimeout(()=>{
+      wormholeOverlay.classList.remove("active");
+      wormholeOverlay.setAttribute("aria-hidden","true");
+      surpriseBusy=false;
+      window.location.href=chosen.url;
+    },420);
+  };
+  setTimeout(finish,2850);
+}
+document.getElementById("random").onclick=()=>{
+  if(surpriseBusy)return;
+  const s=cat==="Adult"?[]:sites.filter(x=>(cat==="All"||x.cat===cat)&&(!onlyFav||favs.includes(x.name)));
+  if(!s.length)return;
+  runHyperspace(s[Math.floor(Math.random()*s.length)]);
 };
 draw();
 
@@ -1336,13 +1362,8 @@ wallpaperReset.onclick=()=>{
 };
 applyWallpaper();
 /* CurioWeb 12.2: browser location, postcode news and backend ready API */
-window.CurioConfig={version:"12.4.0",backendEnabled:false,apiBase:"/api",features:{accounts:false,dynamicCurios:false,liveNews:false,liveWeather:true,submissions:false},storagePrefix:"curioweb."};
-window.CurioAPI={config:window.CurioConfig,async request(path,options={}){if(!this.config.backendEnabled)throw new Error("Backend is not connected");const response=await fetch(this.config.apiBase+path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});const data=await response.json().catch(()=>null);if(!response.ok)throw new Error(data?.error||`API ${response.status}`);return data;},getWeather:(lat,lon)=>CurioAPI.request(`/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`)};
-const weatherLocation=document.getElementById("weatherLocation"),weatherChange=document.getElementById("weatherChange"),weatherTemp=document.getElementById("weatherTemp"),weatherSummary=document.getElementById("weatherSummary"),weatherHigh=document.getElementById("weatherHigh"),weatherLow=document.getElementById("weatherLow"),weatherIcon=document.getElementById("weatherIcon"),weatherLocationNote=document.getElementById("weatherLocationNote");
-const weatherCodes={0:["☀️","Clear sky"],1:["🌤️","Mainly clear"],2:["⛅","Partly cloudy"],3:["☁️","Overcast"],45:["🌫️","Fog"],48:["🌫️","Rime fog"],51:["🌦️","Light drizzle"],53:["🌦️","Drizzle"],55:["🌧️","Heavy drizzle"],61:["🌦️","Light rain"],63:["🌧️","Rain"],65:["🌧️","Heavy rain"],71:["🌨️","Light snow"],73:["🌨️","Snow"],75:["❄️","Heavy snow"],80:["🌦️","Showers"],81:["🌧️","Showers"],82:["⛈️","Heavy showers"],95:["⛈️","Thunderstorm"],96:["⛈️","Thunderstorm"],99:["⛈️","Thunderstorm"]};
-async function loadWeather(lat,lon){weatherLocation.textContent="Finding your weather…";weatherChange.textContent="Loading…";try{let d;if(CurioConfig.backendEnabled){d=await CurioAPI.getWeather(lat,lon)}else{const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto`;const r=await fetch(u);if(!r.ok)throw new Error("Weather unavailable");d=await r.json()}const code=d.current?.weather_code;const [ico,sum]=weatherCodes[code]||["🌤️","Current conditions"];weatherIcon.textContent=ico;weatherTemp.textContent=Math.round(d.current?.temperature_2m??0)+"°C";weatherSummary.textContent=sum;weatherHigh.textContent="H: "+Math.round(d.daily?.temperature_2m_max?.[0]??0)+"°";weatherLow.textContent="L: "+Math.round(d.daily?.temperature_2m_min?.[0]??0)+"°";weatherLocation.textContent="Your current location";weatherLocationNote.textContent="Location is used only for this session and is not stored.";weatherChange.textContent="Refresh"}catch(e){weatherLocation.textContent="Weather unavailable";weatherLocationNote.textContent="Allow location access and try again.";weatherChange.textContent="Find me"}}
-function findMyLocation(){if(!navigator.geolocation){weatherLocation.textContent="Location not supported";return}weatherChange.textContent="Finding…";navigator.geolocation.getCurrentPosition(p=>loadWeather(p.coords.latitude,p.coords.longitude),()=>{weatherLocation.textContent="Location access denied";weatherLocationNote.textContent="You can enable location access in your browser settings.";weatherChange.textContent="Try again"},{enableHighAccuracy:false,maximumAge:300000,timeout:10000})}
-weatherChange.onclick=findMyLocation;
+window.CurioConfig={version:"12.4.3",backendEnabled:false,apiBase:"/api",features:{accounts:false,dynamicCurios:false,liveNews:false,liveWeather:false,submissions:false},storagePrefix:"curioweb."};
+window.CurioAPI={config:window.CurioConfig,async request(path,options={}){if(!this.config.backendEnabled)throw new Error("Backend is not connected");const response=await fetch(this.config.apiBase+path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});const data=await response.json().catch(()=>null);if(!response.ok)throw new Error(data?.error||`API ${response.status}`);return data;}};
 const conspiracyNextButton=document.getElementById("conspiracyNext"); if(conspiracyNextButton) conspiracyNextButton.addEventListener("click",()=>{conspiracyIndex++;renderConspiracy()});
 const adultOverlay=document.getElementById("adultOverlay"),adultAnswer=document.getElementById("adultAnswer"),adultUnlock=document.getElementById("adultUnlock"),adultMessage=document.getElementById("adultMessage"),adultContent=document.getElementById("adultContent"),adultClose=document.getElementById("adultClose");
 function openAdult(){adultOverlay.classList.add("open");adultOverlay.setAttribute("aria-hidden","false");adultAnswer.value="";adultMessage.textContent="";adultContent.hidden=true;setTimeout(()=>adultAnswer.focus(),80)}
@@ -1377,7 +1398,7 @@ function drawWorm(t){
     wormCtx.beginPath();wormCtx.moveTo(x,y);wormCtx.lineTo(px,py);wormCtx.stroke();
   }
   const g=wormCtx.createRadialGradient(cx,cy,2,cx,cy,Math.min(wormW,wormH)*.24);g.addColorStop(0,"rgba(255,255,255,.95)");g.addColorStop(.05,"rgba(112,184,255,.75)");g.addColorStop(.24,"rgba(76,119,255,.16)");g.addColorStop(1,"rgba(0,0,0,0)");wormCtx.fillStyle=g;wormCtx.beginPath();wormCtx.arc(cx,cy,Math.min(wormW,wormH)*.25,0,Math.PI*2);wormCtx.fill();
-  if(elapsed<2600){wormRAF=requestAnimationFrame(drawWorm)}
+  if(elapsed<3300){wormRAF=requestAnimationFrame(drawWorm)}
 }
 function launchWormhole(){
   wormResize();seedWorm();wormStart=performance.now();cancelAnimationFrame(wormRAF);wormCtx.fillStyle="#010205";wormCtx.fillRect(0,0,wormW,wormH);wormRAF=requestAnimationFrame(drawWorm);
@@ -1425,7 +1446,7 @@ document.querySelectorAll("[data-mobile]").forEach(btn=>btn.addEventListener("cl
 }));
 document.querySelectorAll("[data-sheet]").forEach(btn=>btn.addEventListener("click",()=>{
   const a=btn.dataset.sheet;closeMobileSheet();
-  if(a==="weather")document.querySelector(".weather-tile")?.scrollIntoView({behavior:"smooth",block:"center"});
+
   if(a==="wallpaper")wallpaperOpen.click();
   if(a==="report")openIssue();
   if(a==="adult")openAdult();
@@ -1433,18 +1454,6 @@ document.querySelectorAll("[data-sheet]").forEach(btn=>btn.addEventListener("cli
 }));
 
 // Mini wallpaper picker mirrors the full wallpaper system.
-const miniGrid=document.getElementById("wallpaperMiniGrid");
-function renderMiniWallpapers(){
-  if(!miniGrid)return;
-  miniGrid.innerHTML=wallpaperChoices.map((w,i)=>`<button type="button" class="wallpaper-mini-choice ${!selectedCustom&&selectedWallpaper===w.name?'selected':''}" data-mini-wall="${i}" style="background:${w.css}" aria-label="${w.name}"></button>`).join("");
-  miniGrid.querySelectorAll("[data-mini-wall]").forEach(b=>b.onclick=()=>{
-    selectedCustom="";selectedWallpaper=wallpaperChoices[Number(b.dataset.miniWall)].name;
-    applyWallpaper();renderMiniWallpapers();renderWallpaperChoices();
-  });
-}
-renderMiniWallpapers();
-document.getElementById("miniUpload")?.addEventListener("click",()=>{wallpaperOpen.click();setTimeout(()=>wallpaperFile.click(),180)});
-document.getElementById("miniSave")?.addEventListener("click",()=>wallpaperSave.click());
 
 document.getElementById("reportTrigger")?.addEventListener("click",openIssue);
 
