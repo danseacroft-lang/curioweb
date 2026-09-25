@@ -1,640 +1,530 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eef3fb">
-<title>Liquid Speed</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HypaSpeed — Internet Speed Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#edf2f8;
-  --ink:#10131a;
-  --muted:#737b88;
-  --glass:rgba(255,255,255,.46);
-  --glass-strong:rgba(255,255,255,.62);
-  --stroke:rgba(255,255,255,.72);
-  --shadow:0 30px 80px rgba(45,62,92,.16),0 8px 28px rgba(45,62,92,.10);
-  --accent:#111318;
-  --blue:#3478f6;
-  --page-glow:rgba(255,255,255,.72);
-  --reflection-x:50%;
-  --reflection-y:20%;
-}
-body.dark{
-  --bg:#080a0f;
-  --ink:#f5f7fb;
-  --muted:#9aa3b2;
-  --glass:rgba(25,28,35,.48);
-  --glass-strong:rgba(34,38,47,.62);
-  --stroke:rgba(255,255,255,.14);
-  --shadow:0 30px 90px rgba(0,0,0,.46),0 8px 30px rgba(0,0,0,.32);
-  --accent:#fff;
-  --blue:#69a1ff;
-  --page-glow:rgba(255,255,255,.14);
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,system-ui,sans-serif;color:var(--ink)}
-body{
-  overflow-x:hidden;
-  background:
-    radial-gradient(circle at 12% 12%,rgba(112,177,255,.38),transparent 30%),
-    radial-gradient(circle at 88% 18%,rgba(214,173,255,.34),transparent 30%),
-    radial-gradient(circle at 70% 90%,rgba(110,229,209,.30),transparent 34%),
-    linear-gradient(135deg,#f6f8fb,#e7edf6 55%,#f3f6fa);
-  transition:background .55s ease,color .4s ease;
-}
-body.dark{
-  background:
-    radial-gradient(circle at 12% 12%,rgba(55,110,190,.25),transparent 30%),
-    radial-gradient(circle at 88% 18%,rgba(125,76,180,.20),transparent 30%),
-    radial-gradient(circle at 70% 90%,rgba(40,145,132,.18),transparent 34%),
-    linear-gradient(135deg,#080a0f,#11151d 55%,#080a0f);
-}
-body:before{
-  content:"";position:fixed;inset:-30%;pointer-events:none;opacity:.22;
-  background:conic-gradient(from 180deg,transparent,rgba(255,255,255,.9),transparent 32%,rgba(132,184,255,.24),transparent 62%);
-  filter:blur(70px);animation:aurora 18s ease-in-out infinite alternate;
-}
-@keyframes aurora{to{transform:rotate(18deg) translate3d(4%,2%,0) scale(1.05)}}
-.app{min-height:100vh;padding:28px clamp(18px,4vw,54px) 36px;display:flex;flex-direction:column}
-.nav{
-  max-width:1160px;width:100%;margin:0 auto;padding:22px 28px;
-  display:grid;align-items:center;
-  gap:16px
-}
-.brand{
-  display:flex;align-items:center;
-  justify-content:center;gap:10px;color:var(--ink);text-decoration:none
-}
-.logo{width:30px;height:30px;border-radius:10px;background:linear-gradient(145deg,#fff,#cbd5e4);box-shadow:inset 1px 1px 1px #fff,0 7px 20px #7183a430;position:relative}
-.logo:after{content:"";position:absolute;width:11px;height:11px;border-radius:50%;background:#111318;left:9px;top:9px;box-shadow:0 0 12px #11131855}
+  :root{
+    --bg-0:#08080b; --bg-1:#0d0e13; --bg-2:#121319;
+    --glass: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.14);
+    --glass-hi: rgba(255,255,255,0.30);
+    --ink-0:#f5f6f8; --ink-1:#a9adb8; --ink-2:#6d7180;
+    --blue:#0a84ff; --violet:#8a5cff; --cyan:#33d1ff; --mint:#33e0a1;
+    --radius-lg:28px; --radius-md:18px; --radius-sm:12px;
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+    box-sizing:border-box;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg-0:#eef0f4; --bg-1:#e6e8ee; --bg-2:#dde0e8;
+      --glass: rgba(255,255,255,0.55); --glass-border: rgba(255,255,255,0.7);
+      --ink-0:#15171c; --ink-1:#4a4d57; --ink-2:#7d818c;
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px); -webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:
+      radial-gradient(900px 600px at 15% -10%, rgba(10,132,255,0.20), transparent 60%),
+      radial-gradient(900px 700px at 110% 10%, rgba(138,92,255,0.18), transparent 55%),
+      radial-gradient(700px 500px at 50% 120%, rgba(51,224,161,0.10), transparent 60%),
+      var(--bg-0);
+    color:var(--ink-0);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+    min-height:100%;
+    overflow-x:hidden;
+    letter-spacing:-0.011em;
+  }
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
 
-.stage{
-  width:min(1160px,100%);margin:auto;display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px;
-}
-.glass{
-  position:relative;overflow:hidden;background:var(--glass);border:1px solid var(--stroke);
-  box-shadow:var(--shadow);backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%);
-}
-.glass:before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(circle at var(--reflection-x) var(--reflection-y),
-      var(--page-glow) 0%, rgba(255,255,255,.22) 9%, rgba(255,255,255,.07) 19%, transparent 38%),
-    linear-gradient(125deg,rgba(255,255,255,.58),transparent 22%,transparent 68%,rgba(255,255,255,.18));
-  opacity:.86;
-  transition:background-position .08s linear;
-}
-.main{min-height:610px;border-radius:42px;padding:42px 34px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.main:after{
-  content:"";position:absolute;left:15%;right:15%;top:0;height:1px;background:linear-gradient(90deg,transparent,#fff,transparent);opacity:.95
-}
-.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:#7d8490;font-weight:700;margin-bottom:18px}
-h1{font-size:clamp(38px,6vw,70px);line-height:.95;letter-spacing:-.065em;margin:0 0 13px;text-align:center;font-weight:700}
-.subtitle{font-size:15px;color:var(--muted);text-align:center;margin:0 0 34px}
-.gauge-wrap{width:min(390px,76vw);aspect-ratio:1;position:relative;margin:0 auto 26px}
-.gauge{
-  width:100%;height:100%;border-radius:50%;padding:12px;
-  background:conic-gradient(from 0deg,#111318 0deg,var(--blue) var(--progress,0deg),rgba(120,132,150,.12) var(--progress,0deg) 360deg);
-  box-shadow:0 22px 55px rgba(42,59,89,.18),inset 0 0 0 1px rgba(255,255,255,.55);
-  transition:background .25s ease;
-}
-.gauge-inner{height:100%;width:100%;border-radius:50%;background:rgba(247,249,252,.68);border:1px solid rgba(255,255,255,.85);display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:inset 0 1px 18px rgba(255,255,255,.7)}
-.speed{font-size:clamp(58px,9vw,94px);font-weight:700;letter-spacing:-.075em;line-height:.9;font-variant-numeric:tabular-nums}
-.unit{font-size:15px;color:var(--muted);font-weight:700;margin-top:10px}
-.status{height:20px;margin-top:8px;font-size:12px;color:var(--muted);font-weight:600}
-.controls{display:flex;align-items:center;gap:10px}
-.button{
-  border:0;cursor:pointer;font:inherit;font-weight:700;border-radius:999px;padding:14px 24px;
-  background:rgba(18,20,24,.95);color:#fff;box-shadow:0 10px 24px rgba(18,20,24,.22),inset 0 1px rgba(255,255,255,.18);
-  transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease;
-}
-.button:hover{transform:translateY(-1px);box-shadow:0 13px 28px rgba(18,20,24,.26)}
-.button:active{transform:scale(.97)}
-.button:disabled{opacity:.55;cursor:default;transform:none}
-.secondary{background:rgba(255,255,255,.54);color:var(--ink);border:1px solid rgba(255,255,255,.8);box-shadow:0 8px 20px rgba(55,70,95,.10)}
-.side{border-radius:32px;padding:22px;display:flex;flex-direction:column;gap:12px}
-.side h2{font-size:13px;margin:0 0 4px;color:#777f8d;text-transform:uppercase;letter-spacing:.12em}
-.metric{
-  position:relative;border-radius:23px;background:rgba(255,255,255,.38);border:1px solid rgba(255,255,255,.72);
-  padding:18px 17px;box-shadow:inset 0 1px rgba(255,255,255,.6)
-}
-.metric-top{display:flex;justify-content:space-between;align-items:center;color:#7b8290;font-size:12px;font-weight:650}
-.metric-value{font-size:27px;font-weight:700;letter-spacing:-.04em;margin-top:7px;font-variant-numeric:tabular-nums}
-.metric-unit{font-size:12px;color:#7b8290;font-weight:650;margin-left:3px}
-.footer{max-width:1160px;width:100%;margin:15px auto 0;display:flex;justify-content:space-between;color:#858c98;font-size:11px;padding:0 5px;text-align:center;justify-content:center}
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:40;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px clamp(18px,4vw,44px);
+    background:rgba(10,10,14,0.55);
+    -webkit-backdrop-filter:blur(20px) saturate(160%);
+    backdrop-filter:blur(20px) saturate(160%);
+    border-bottom:1px solid rgba(255,255,255,0.07);
+  }
+  .brand{display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none;}
+  .brand svg{width:30px;height:30px;display:block;}
+  .brand span{font-weight:800; font-size:18px; letter-spacing:-0.02em;}
+  nav.links{display:flex; gap:6px;}
+  nav.links button{
+    background:transparent; border:none; color:var(--ink-1); font:inherit;
+    font-size:14.5px; font-weight:500; padding:9px 16px; border-radius:999px;
+    cursor:pointer; transition:background .2s ease, color .2s ease;
+  }
+  nav.links button:hover{background:var(--glass); color:var(--ink-0);}
+  nav.links button:focus-visible{outline:2px solid var(--blue); outline-offset:2px;}
 
-.top-actions{
-  display:flex;align-items:center;
-  justify-content:flex-end;gap:10px
-}
-.theme-button{
-  appearance:none;-webkit-appearance:none;box-sizing:border-box;
-  width:58px;min-width:58px;height:28px;padding:0 8px;margin:0;
-  display:inline-flex;align-items:center;justify-content:center;gap:5px;
-  overflow:hidden;border:1px solid var(--stroke);border-radius:999px;
-  background:var(--glass-strong);color:var(--ink);box-shadow:var(--shadow);
-  cursor:pointer;line-height:1;font-size:11px;font-weight:650;
-  letter-spacing:-.01em;isolation:isolate;
-  transition:transform .2s ease,background .2s ease,border-color .2s ease
-}
-.theme-button:hover{transform:translateY(-1px)}
-.theme-button:active{transform:scale(.97)}
-.theme-icon{
-  display:inline-grid;place-items:center;width:16px;height:16px;
-  margin:0;padding:0;line-height:1;font-size:15px;
-  font-family:Arial,sans-serif;font-weight:400;pointer-events:none
-}
-.theme-label{display:inline-block;pointer-events:none}
-body.dark @media(max-width:850px){.stage{grid-template-columns:1fr}.side{display:grid;grid-template-columns:repeat(3,1fr)}.side h2{grid-column:1/-1}.main{min-height:570px}.footer{display:none}}
-@media(max-width:560px){
-.nav{
-  max-width:1160px;width:100%;margin:0 auto;padding:22px 28px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:10px
-}
-.brand{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  color:var(--ink);text-decoration:none
-}
-.theme-button{width:58px;min-width:58px;padding:0 8px}
-.app{padding:18px 12px 22px}.nav{margin-bottom:12px}.main{border-radius:32px;padding:34px 16px 26px}.side{border-radius:26px;padding:13px;grid-template-columns:1fr 1fr 1fr;gap:8px}.metric{padding:13px 11px;border-radius:18px}.metric-value{font-size:21px}.gauge-wrap{width:min(330px,82vw)}}
+  /* ---------- Hero ---------- */
+  main{max-width:1180px; margin:0 auto; padding:clamp(40px,7vw,84px) clamp(18px,4vw,44px) 100px;}
+  .eyebrow{color:var(--ink-2); font-size:14px; font-weight:500; margin:0 0 14px;}
+  h1.title{
+    font-size:clamp(40px,7.5vw,74px); line-height:1.02; font-weight:800;
+    letter-spacing:-0.035em; margin:0 0 14px; text-align:center;
+    background:linear-gradient(180deg,#ffffff 10%, #aeb4c4 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  p.sub{
+    text-align:center; color:var(--ink-1); font-size:clamp(16px,2.2vw,19px);
+    max-width:560px; margin:0 auto 52px; font-weight:400; line-height:1.5;
+  }
 
-.connection-identity {
-  width: 100%;
-  margin: 0 0 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  text-align: center;
-}
+  /* ---------- Glass card base ---------- */
+  .glass{
+    position:relative; border-radius:var(--radius-lg);
+    background:var(--glass);
+    border:1px solid var(--glass-border);
+    -webkit-backdrop-filter:blur(28px) saturate(180%);
+    backdrop-filter:blur(28px) saturate(180%);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset, 0 30px 60px -20px rgba(0,0,0,0.55);
+    overflow:hidden;
+  }
+  .glass::before{
+    content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.16), transparent 60%);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .glass:hover::before{opacity:1;}
+  .tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); transition:transform .25s ease;}
 
-.connection-identity strong {
-  display: block;
-  max-width: 100%;
-  font-size: 17px;
-  font-weight: 750;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  overflow-wrap: anywhere;
-}
+  /* ---------- Speed test card ---------- */
+  .speed-card{padding:clamp(28px,5vw,56px); text-align:center;}
+  .gauge-wrap{position:relative; width:min(280px,60vw); height:min(280px,60vw); margin:0 auto 22px;}
+  .gauge-wrap svg{width:100%; height:100%; transform:rotate(-90deg);}
+  .gauge-track{fill:none; stroke:rgba(255,255,255,0.08); stroke-width:10;}
+  .gauge-fill{fill:none; stroke:url(#gaugeGrad); stroke-width:10; stroke-linecap:round; stroke-dasharray:754; stroke-dashoffset:754; transition:stroke-dashoffset .4s cubic-bezier(.4,0,.2,1);}
+  .gauge-center{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .gauge-num{font-size:clamp(38px,8vw,54px); font-weight:800; letter-spacing:-0.03em; font-variant-numeric:tabular-nums;}
+  .gauge-unit{color:var(--ink-1); font-size:14px; font-weight:600; margin-top:2px;}
+  .gauge-status{color:var(--ink-2); font-size:13px; margin-top:6px; height:16px;}
 
-.connection-identity span {
-  display: block;
-  max-width: 100%;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.3;
-  text-align: center;
-  overflow-wrap: anywhere;
-}
+  .go-btn{
+    appearance:none; border:none; cursor:pointer; font:inherit;
+    font-weight:700; font-size:16px; letter-spacing:-0.01em; color:#fff;
+    padding:15px 40px; border-radius:999px; margin-top:6px;
+    background:linear-gradient(135deg,var(--blue),var(--violet));
+    box-shadow:0 10px 30px -8px rgba(10,132,255,0.55), 0 1px 0 rgba(255,255,255,0.3) inset;
+    transition:transform .15s ease, box-shadow .15s ease, opacity .2s ease;
+  }
+  .go-btn:hover{transform:translateY(-2px); box-shadow:0 14px 36px -8px rgba(10,132,255,0.7), 0 1px 0 rgba(255,255,255,0.3) inset;}
+  .go-btn:active{transform:translateY(0px) scale(.98);}
+  .go-btn:disabled{opacity:.55; cursor:default; transform:none;}
+  .go-btn:focus-visible{outline:2px solid #fff; outline-offset:3px;}
 
-#confettiCanvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 100;
-}
+  .stats-row{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:34px;}
+  @media (max-width:640px){.stats-row{grid-template-columns:1fr 1fr;}}
+  .stat-tile{
+    padding:18px 14px; border-radius:var(--radius-md); text-align:left;
+    background:var(--glass); border:1px solid var(--glass-border);
+    -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px);
+  }
+  .stat-tile .lbl{color:var(--ink-2); font-size:12.5px; font-weight:600; display:flex; align-items:center; gap:6px;}
+  .stat-tile .val{font-size:22px; font-weight:700; margin-top:6px; font-variant-numeric:tabular-nums; letter-spacing:-0.01em;}
+  .stat-tile .val small{font-size:13px; color:var(--ink-1); font-weight:600; margin-left:3px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);}
 
-.celebration {
-  position: fixed;
-  inset: 0;
-  z-index: 101;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .35s ease, visibility .35s ease;
-}
+  .conn-row{
+    margin-top:16px; display:flex; flex-wrap:wrap; justify-content:center; gap:10px 28px;
+    color:var(--ink-1); font-size:13.5px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .conn-row b{color:var(--ink-0); font-weight:600;}
+  .conn-note{color:var(--ink-2); font-size:12px; margin-top:10px;}
 
-.celebration.show {
-  opacity: 1;
-  visibility: visible;
-}
+  /* feature tiles */
+  .feat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px;}
+  @media (max-width:760px){.feat-grid{grid-template-columns:1fr;}}
+  .feat{padding:26px 24px; border-radius:var(--radius-md);}
+  .feat .icon{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .feat h3{font-size:16.5px; font-weight:650; margin:0 0 6px; letter-spacing:-0.01em;}
+  .feat p{font-size:14px; color:var(--ink-1); line-height:1.55; margin:0;}
 
-.celebration-card {
-  width: min(560px, 100%);
-  padding: 28px 30px;
-  text-align: center;
-  border-radius: 28px;
-  border: 1px solid var(--stroke);
-  background: var(--glass-strong);
-  box-shadow: 0 24px 70px rgba(0,0,0,.18);
-  backdrop-filter: blur(28px) saturate(150%);
-  -webkit-backdrop-filter: blur(28px) saturate(150%);
-  transform: translateY(12px) scale(.96);
-  transition: transform .45s cubic-bezier(.2,.8,.2,1);
-}
+  footer{
+    text-align:center; padding:32px 20px calc(32px + env(safe-area-inset-bottom,0px));
+    color:var(--ink-2); font-size:13px; border-top:1px solid rgba(255,255,255,0.06);
+  }
+  footer a{color:var(--ink-1); text-decoration:none;}
 
-.celebration.show .celebration-card {
-  transform: translateY(0) scale(1);
-}
+  /* ---------- Modal ---------- */
+  .overlay{
+    position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center;
+    background:rgba(4,4,7,0.6); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+    opacity:0; pointer-events:none; transition:opacity .28s ease; padding:20px;
+    padding-top:calc(20px + env(safe-area-inset-top,0px)); padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  }
+  .overlay.open{opacity:1; pointer-events:auto;}
+  .modal{
+    width:100%; max-width:440px; max-height:86vh; overflow:auto;
+    border-radius:26px; padding:34px 30px;
+    background:rgba(22,23,30,0.78);
+    border:1px solid rgba(255,255,255,0.16);
+    -webkit-backdrop-filter:blur(34px) saturate(180%);
+    backdrop-filter:blur(34px) saturate(180%);
+    box-shadow:0 1px 0 rgba(255,255,255,0.15) inset, 0 40px 80px -20px rgba(0,0,0,0.7);
+    transform:scale(.92) translateY(14px); transition:transform .32s cubic-bezier(.2,.9,.25,1);
+  }
+  .overlay.open .modal{transform:scale(1) translateY(0);}
+  .modal h2{font-size:22px; font-weight:750; margin:0 0 12px; letter-spacing:-0.02em;}
+  .modal p{color:var(--ink-1); font-size:14.5px; line-height:1.6; margin:0 0 12px;}
+  .modal .close{
+    position:absolute; top:16px; right:16px; width:30px; height:30px; border-radius:50%;
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); color:var(--ink-1);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:15px;
+  }
+  .modal .close:hover{background:rgba(255,255,255,0.16); color:#fff;}
+  .field{margin-top:16px; text-align:left;}
+  .field label{display:block; font-size:12.5px; font-weight:600; color:var(--ink-2); margin-bottom:6px;}
+  .field input, .field textarea{
+    width:100%; font:inherit; font-size:14.5px; color:var(--ink-0); padding:11px 13px;
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.14); border-radius:12px;
+    outline:none; resize:vertical; transition:border-color .18s ease, background .18s ease;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--blue); background:rgba(255,255,255,0.08);}
+  .modal .go-btn{width:100%; margin-top:20px; padding:13px 20px;}
+  .send-note{font-size:12.5px; color:var(--ink-2); margin-top:10px; text-align:center;}
 
-.celebration-icon {
-  font-size: 34px;
-  margin-bottom: 12px;
-}
-
-.celebration-card p {
-  margin: 0;
-  color: var(--ink);
-  font-size: clamp(17px, 2.2vw, 21px);
-  line-height: 1.45;
-  font-weight: 650;
-  letter-spacing: -.02em;
-}
-
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
 </style>
 </head>
 <body>
-<canvas id="confettiCanvas" aria-hidden="true"></canvas>
-<div class="celebration" id="celebration" role="status" aria-live="polite">
-  <div class="celebration-card">
-    <div class="celebration-icon">🎉</div>
-    <p>Your speed results allow you to watch movies, send Emails, stream music, game and more</p>
+
+<header>
+  <div class="brand" id="logoHome">
+    <svg viewBox="0 0 32 32" fill="none">
+      <defs>
+        <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+          <stop offset="0%" stop-color="#33d1ff"/><stop offset="100%" stop-color="#8a5cff"/>
+        </linearGradient>
+      </defs>
+      <circle cx="16" cy="16" r="15" fill="url(#logoGrad)" opacity="0.16"/>
+      <circle cx="16" cy="16" r="15" stroke="url(#logoGrad)" stroke-width="1.4"/>
+      <path d="M11 20 L17 9 L15 15 L21 15 L14 24 L16 18 Z" fill="url(#logoGrad)"/>
+    </svg>
+    <span>HypaSpeed</span>
+  </div>
+  <nav class="links">
+    <button data-open="about">About</button>
+    <button data-open="contact">Contact</button>
+  </nav>
+</header>
+
+<main>
+  <p class="eyebrow" style="text-align:center;">Internet speed, measured beautifully</p>
+  <h1 class="title">How fast is<br>your connection?</h1>
+  <p class="sub">One tap. Real download throughput, straight from your browser — no sign‑up, no clutter.</p>
+
+  <section class="glass tilt speed-card" id="speedCard">
+    <div class="gauge-wrap">
+      <svg viewBox="0 0 260 260">
+        <defs>
+          <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#33d1ff"/><stop offset="55%" stop-color="#0a84ff"/><stop offset="100%" stop-color="#8a5cff"/>
+          </linearGradient>
+        </defs>
+        <circle class="gauge-track" cx="130" cy="130" r="120"/>
+        <circle class="gauge-fill" id="gaugeFill" cx="130" cy="130" r="120"/>
+      </svg>
+      <div class="gauge-center">
+        <div class="gauge-num mono" id="gaugeNum">0.0</div>
+        <div class="gauge-unit">Mbps</div>
+        <div class="gauge-status" id="gaugeStatus">Ready when you are</div>
+      </div>
+    </div>
+
+    <button class="go-btn" id="goBtn">Start Test</button>
+
+    <div class="stats-row">
+      <div class="stat-tile">
+        <div class="lbl"><span class="dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></span>Download</div>
+        <div class="val mono" id="dlVal">—<small>Mbps</small></div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl"><span class="dot" style="background:var(--violet);box-shadow:0 0 8px var(--violet);"></span>Upload</div>
+        <div class="val mono" id="ulVal">—<small>Mbps</small></div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl"><span class="dot"></span>Ping</div>
+        <div class="val mono" id="pingVal">—<small>ms</small></div>
+      </div>
+    </div>
+
+    <div class="conn-row">
+      <div>IP Address · <b id="ipVal">Detecting…</b></div>
+      <div>Provider · <b id="ispVal">Detecting…</b></div>
+    </div>
+    <p class="conn-note" id="connNote">Download, upload, and IP lookup all run as real network transfers from your browser.</p>
+  </section>
+
+  <div class="feat-grid">
+    <div class="glass tilt feat">
+      <div class="icon" style="background:linear-gradient(135deg,#0a84ff,#33d1ff);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v13m0 0-4-4m4 4 4-4M5 19h14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Real throughput</h3>
+      <p>Download speed comes from live transfers in your browser, not a guess.</p>
+    </div>
+    <div class="glass tilt feat">
+      <div class="icon" style="background:linear-gradient(135deg,#8a5cff,#0a84ff);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2 4 6v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6l-8-4Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Nothing installed</h3>
+      <p>Runs entirely in the page. No plugin, no account, nothing to clean up after.</p>
+    </div>
+    <div class="glass tilt feat">
+      <div class="icon" style="background:linear-gradient(135deg,#33e0a1,#0a84ff);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Seconds, not minutes</h3>
+      <p>A short, focused test — get a number and get on with your day.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 HypaSpeed · <a href="#" data-open="about">About</a> · <a href="#" data-open="contact">Contact</a>
+</footer>
+
+<!-- About modal -->
+<div class="overlay" id="overlay-about">
+  <div class="modal">
+    <button class="close" data-close>✕</button>
+    <h2>About HypaSpeed</h2>
+    <p>HypaSpeed is a small, focused tool for one question: how fast is this connection, right now?</p>
+    <p>No accounts, no history you didn't ask for, no clutter around the number. Just a clean measurement, presented well.</p>
+    <p>Built as a design showcase — the download reading is a genuine in‑browser transfer test; the interface is what we spent our time on.</p>
   </div>
 </div>
 
-<div class="app">
-  <header class="nav">
-    <button class="theme-button" id="themeToggle" type="button"
-      aria-label="Switch to dark mode" title="Switch to dark mode">
-      <span class="theme-icon" id="themeIcon" aria-hidden="true">☀</span>
-      <span class="theme-label" id="themeLabel">Day</span>
-    </button>
-    <div class="brand"><span class="logo"></span><span>Liquid Speed</span></div>
-  </header>
-
-  <main class="stage">
-    <section class="glass main">
-      <div class="eyebrow" id="greeting">Good afternoon</div>
-      <h1 id="headline">How fast is your internet?</h1>
-      <p class="subtitle" id="subtitle">Press the button below to test your connection, It shall only take a moment.</p>
-
-      <div class="gauge-wrap" aria-live="polite">
-        <div class="gauge" id="gauge" style="--progress:0deg">
-          <div class="gauge-inner">
-            <div class="speed" id="speed">0</div>
-            <div class="unit" id="unit">Mbps</div>
-            <div class="status" id="status">Ready</div>
-          </div>
-        </div>
+<!-- Contact modal -->
+<div class="overlay" id="overlay-contact">
+  <div class="modal">
+    <button class="close" data-close>✕</button>
+    <h2>Get in touch</h2>
+    <p>Questions, feedback, or something's off? Send a note and your mail app will open with everything filled in.</p>
+    <form id="contactForm">
+      <div class="field">
+        <label for="cName">Name</label>
+        <input id="cName" type="text" required placeholder="Your name">
       </div>
-
-      <div class="controls">
-        <button class="button" id="start">Start speed test</button>
-        <button class="button secondary" id="again" hidden>Test again</button>
+      <div class="field">
+        <label for="cEmail">Email</label>
+        <input id="cEmail" type="email" required placeholder="you@example.com">
       </div>
-    </section>
-
-    <aside class="glass side">
-      <div class="connection-identity">
-        <strong id="userIp">Loading IP…</strong>
-        <span id="userProvider">Finding provider…</span>
+      <div class="field">
+        <label for="cMsg">Message</label>
+        <textarea id="cMsg" rows="4" required placeholder="What's on your mind?"></textarea>
       </div>
-      <div class="metric"><div class="metric-top"><span>Ping</span><span>↔</span></div><div class="metric-value" id="ping">—<span class="metric-unit">ms</span></div></div>
-      <div class="metric"><div class="metric-top"><span>Download</span><span>↓</span></div><div class="metric-value" id="download">—<span class="metric-unit">Mbps</span></div></div>
-      <div class="metric"><div class="metric-top"><span>Upload</span><span>↑</span></div><div class="metric-value" id="upload">—<span class="metric-unit">Mbps</span></div></div>
-    </aside>
-  </main>
-
-  <footer class="footer"><span>Liquid Speed</span><span>Measurements vary with network conditions and server distance.</span></footer>
+      <button class="go-btn" type="submit">Send message</button>
+      <p class="send-note">Opens your default mail app — nothing is sent from here.</p>
+    </form>
+  </div>
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
-const els = {
-  start:$("start"), again:$("again"), speed:$("speed"), unit:$("unit"), status:$("status"),
-  headline:$("headline"), subtitle:$("subtitle"), gauge:$("gauge"),
-  ping:$("ping"), download:$("download"), upload:$("upload")
-};
-
-const greeting = document.getElementById("greeting");
-
-function updateGreeting() {
-  const hour = new Date().getHours();
-  greeting.textContent =
-    hour >= 5 && hour < 12 ? "Good morning" :
-    hour >= 12 && hour < 18 ? "Good afternoon" :
-    "Good evening";
-}
-
-updateGreeting();
-
-const themeToggle = document.getElementById("themeToggle");
-const savedTheme = localStorage.getItem("liquid-speed-theme");
-if(savedTheme === "dark") document.body.classList.add("dark");
-
-const themeIcon = document.getElementById("themeIcon");
-
-const themeLabel = document.getElementById("themeLabel");
-
-function updateThemeLabel(){
-  const dark = document.body.classList.contains("dark");
-  themeIcon.textContent = dark ? "☾" : "☀";
-  themeLabel.textContent = dark ? "Night" : "Day";
-  themeToggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-  themeToggle.setAttribute("title", dark ? "Switch to light mode" : "Switch to dark mode");
-}
-updateThemeLabel();
-
-themeToggle.addEventListener("click", ()=>{
-  document.body.classList.toggle("dark");
-  localStorage.setItem("liquid-speed-theme",
-    document.body.classList.contains("dark") ? "dark" : "light");
-  updateThemeLabel();
-});
-
-document.querySelectorAll(".glass").forEach(tile=>{
-  tile.addEventListener("pointermove", e=>{
-    const r = tile.getBoundingClientRect();
-    const x = ((e.clientX-r.left)/r.width)*100;
-    const y = ((e.clientY-r.top)/r.height)*100;
-    tile.style.setProperty("--reflection-x", `${x}%`);
-    tile.style.setProperty("--reflection-y", `${y}%`);
-  });
-  tile.addEventListener("pointerleave", ()=>{
-    tile.style.setProperty("--reflection-x", "50%");
-    tile.style.setProperty("--reflection-y", "20%");
-  });
-});
-
-const ENDPOINT = "https://speed.cloudflare.com";
-const sizes = [1e6, 5e6, 10e6, 25e6];
-
-function setGauge(value, max=1000){
-  const pct = Math.max(0, Math.min(1, value / max));
-  els.gauge.style.setProperty("--progress", `${pct * 360}deg`);
-}
-function showSpeed(value, label="Mbps"){
-  els.speed.textContent = Number.isFinite(value) ? value.toFixed(value >= 100 ? 0 : 1) : "0";
-  els.unit.textContent = label;
-}
-function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
-
-async function loadConnectionIdentity() {
-  const ipEl = document.getElementById("userIp");
-  const providerEl = document.getElementById("userProvider");
-
-  try {
-    const response = await fetch("https://api.ipify.org?format=json", {
-      cache: "no-store"
-    });
-
-    if (!response.ok) throw new Error("IP lookup failed");
-
-    const data = await response.json();
-    const ip = data.ip;
-
-    if (!ip) throw new Error("No IP returned");
-
-    ipEl.textContent = ip;
-
-    try {
-      const providerResponse = await fetch(
-        `https://atlas.ipinfo.app/api/v2/ip/${encodeURIComponent(ip)}`,
-        { cache: "no-store" }
-      );
-
-      if (!providerResponse.ok) throw new Error("Provider lookup failed");
-
-      const network = await providerResponse.json();
-      const provider = network.as_description?.trim();
-
-      providerEl.textContent = provider || "Provider unavailable";
-    } catch {
-      providerEl.textContent = "Provider unavailable";
+// ---- Tilt + glare for .tilt / .glass elements ----
+document.querySelectorAll('.glass').forEach(el=>{
+  el.addEventListener('mousemove', e=>{
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
+    el.style.setProperty('--mx', (px*100)+'%');
+    el.style.setProperty('--my', (py*100)+'%');
+    if(el.classList.contains('tilt')){
+      el.style.setProperty('--ry', ((px-0.5)*8)+'deg');
+      el.style.setProperty('--rx', ((0.5-py)*8)+'deg');
     }
-  } catch {
-    ipEl.textContent = "IP unavailable";
-    providerEl.textContent = "Provider unavailable";
+  });
+  el.addEventListener('mouseleave', ()=>{
+    el.style.setProperty('--rx','0deg'); el.style.setProperty('--ry','0deg');
+  });
+});
+
+// ---- Modals ----
+document.querySelectorAll('[data-open]').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    e.preventDefault();
+    document.getElementById('overlay-'+btn.dataset.open).classList.add('open');
+  });
+});
+document.querySelectorAll('.overlay').forEach(ov=>{
+  ov.addEventListener('click', e=>{ if(e.target===ov) ov.classList.remove('open'); });
+  ov.querySelector('[data-close]').addEventListener('click', ()=>ov.classList.remove('open'));
+});
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));
+});
+document.getElementById('logoHome').addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+document.getElementById('contactForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = document.getElementById('cName').value;
+  const email = document.getElementById('cEmail').value;
+  const msg = document.getElementById('cMsg').value;
+  const subject = encodeURIComponent('HypaSpeed contact — '+name);
+  const body = encodeURIComponent(msg+'\n\n— '+name+' ('+email+')');
+  window.location.href = `mailto:hello@hypaspeed.example?subject=${subject}&body=${body}`;
+});
+
+// ---- Speed test (real transfers via Cloudflare's public speed-test endpoints) ----
+// These calls are same-technique as speed.cloudflare.com / fast.com: a GET stream for
+// download, a POST body for upload, and a metadata endpoint for client IP / ASN.
+// NOTE: claude.ai's artifact preview sandbox only allows outbound requests to a short
+// script/font allowlist, so these calls are blocked *in this preview* and fall back
+// gracefully. Once this file is hosted on a normal domain (or opened locally), the
+// sandbox restriction no longer applies and every value below is a live measurement.
+const CF_BASE = 'https://speed.cloudflare.com';
+const goBtn = document.getElementById('goBtn');
+const gaugeFill = document.getElementById('gaugeFill');
+const gaugeNum = document.getElementById('gaugeNum');
+const gaugeStatus = document.getElementById('gaugeStatus');
+const dlVal = document.getElementById('dlVal');
+const ulVal = document.getElementById('ulVal');
+const pingVal = document.getElementById('pingVal');
+const ipVal = document.getElementById('ipVal');
+const ispVal = document.getElementById('ispVal');
+const connNote = document.getElementById('connNote');
+const CIRC = 754;
+const GAUGE_MAX = 200; // Mbps at full ring
+
+function setGauge(mbps){
+  const clamped = Math.max(0, Math.min(mbps, GAUGE_MAX));
+  gaugeFill.style.strokeDashoffset = CIRC - (clamped/GAUGE_MAX)*CIRC;
+  gaugeNum.textContent = mbps.toFixed(1);
+}
+
+function randomBuffer(bytes){
+  const buf = new Uint8Array(bytes);
+  const CHUNK = 65536; // crypto API's per-call limit
+  for(let i=0;i<bytes;i+=CHUNK){
+    crypto.getRandomValues(buf.subarray(i, Math.min(i+CHUNK, bytes)));
+  }
+  return buf;
+}
+
+// --- IP / ISP lookup ---
+async function loadMeta(){
+  try{
+    const res = await fetch(`${CF_BASE}/meta`, {cache:'no-store'});
+    if(!res.ok) throw new Error('meta failed');
+    const meta = await res.json();
+    ipVal.textContent = meta.clientIp || meta.clientIP || 'Unknown';
+    const provider = meta.asOrganization || meta.asOrg || meta.isp;
+    ispVal.textContent = provider ? `${provider}${meta.country ? ' · '+meta.country : ''}` : 'Unknown';
+  }catch(err){
+    ipVal.textContent = 'Blocked in preview';
+    ispVal.textContent = 'Blocked in preview';
   }
 }
 
-loadConnectionIdentity();
-
-async function timedFetch(url, options={}){
-  const t0 = performance.now();
-  const response = await fetch(url, {...options, cache:"no-store"});
-  if(!response.ok) throw new Error("Network request failed");
-  return {response, started:t0};
-}
-
-async function pingTest(){
-  const samples=[];
-  for(let i=0;i<5;i++){
-    const t0=performance.now();
+// --- Ping: median of a few tiny round trips ---
+async function measurePing(){
+  const samples = [];
+  for(let i=0;i<4;i++){
+    const t0 = performance.now();
     try{
-      await fetch(`${ENDPOINT}/__down?bytes=1&r=${crypto.randomUUID()}`, {cache:"no-store"});
+      await fetch(`${CF_BASE}/__down?bytes=0&cb=${Date.now()}`, {cache:'no-store'});
       samples.push(performance.now()-t0);
-    }catch{}
-    await sleep(80);
+    }catch(err){ return null; }
   }
-  if(!samples.length) throw new Error("Ping unavailable");
   samples.sort((a,b)=>a-b);
   return samples[Math.floor(samples.length/2)];
 }
 
-async function downloadTest(size){
-  const {response,started}=await timedFetch(`${ENDPOINT}/__down?bytes=${size}&r=${crypto.randomUUID()}`);
-  const reader=response.body?.getReader();
-  let bytes=0, last=started, best=0;
-  if(reader){
-    while(true){
-      const {done,value}=await reader.read();
-      if(done) break;
-      bytes += value.byteLength;
-      const now=performance.now(), elapsed=(now-started)/1000;
-      if(elapsed>0){
-        const mbps=(bytes*8)/(elapsed*1e6);
-        best=Math.max(best,mbps);
-        showSpeed(mbps);
-        setGauge(mbps, Math.max(100,best*1.25,1000));
-        els.status.textContent="Downloading…";
+// --- Download: stream increasingly large payloads, updating the gauge live ---
+async function measureDownload(){
+  const sizes = [2e6, 8e6, 25e6]; // 2MB, 8MB, 25MB
+  let totalBytes = 0;
+  const start = performance.now();
+  let lastMbps = 0;
+
+  for(const size of sizes){
+    try{
+      const res = await fetch(`${CF_BASE}/__down?bytes=${size}&cb=${Date.now()}`, {cache:'no-store'});
+      const reader = res.body.getReader();
+      while(true){
+        const {done, value} = await reader.read();
+        if(done) break;
+        totalBytes += value.length;
+        const elapsed = (performance.now()-start)/1000;
+        lastMbps = (totalBytes*8/1e6)/Math.max(elapsed,0.05);
+        setGauge(lastMbps);
       }
-      last=now;
-    }
-  }else{
-    const data=await response.arrayBuffer();
-    bytes=data.byteLength;
+    }catch(err){ return {mbps:0, ok:false}; }
   }
-  const seconds=(performance.now()-started)/1000;
-  return (bytes*8)/(seconds*1e6);
+  return {mbps:lastMbps, ok:totalBytes>0};
 }
 
-async function uploadTest(size){
-  const data=new Uint8Array(size);
-  crypto.getRandomValues(data.subarray(0, Math.min(size, 65536)));
-  const t0=performance.now();
-  const response=await fetch(`${ENDPOINT}/__up?r=${crypto.randomUUID()}`, {
-    method:"POST",body:data,cache:"no-store",headers:{"Content-Type":"application/octet-stream"}
+// --- Upload: XHR so we get real upload-progress events for the live gauge ---
+function measureUpload(){
+  return new Promise(resolve=>{
+    const size = 12e6; // 12MB
+    let payload;
+    try{ payload = randomBuffer(size); }catch(e){ resolve({mbps:0, ok:false}); return; }
+    const xhr = new XMLHttpRequest();
+    const start = performance.now();
+    xhr.open('POST', `${CF_BASE}/__up`, true);
+    xhr.upload.onprogress = (e)=>{
+      if(!e.lengthComputable) return;
+      const elapsed = (performance.now()-start)/1000;
+      const mbps = (e.loaded*8/1e6)/Math.max(elapsed,0.05);
+      setGauge(mbps);
+    };
+    xhr.onload = ()=>{
+      const elapsed = (performance.now()-start)/1000;
+      resolve({mbps:(size*8/1e6)/Math.max(elapsed,0.05), ok: xhr.status>=200 && xhr.status<400});
+    };
+    xhr.onerror = ()=>resolve({mbps:0, ok:false});
+    xhr.send(payload);
   });
-  if(!response.ok) throw new Error("Upload request failed");
-  await response.arrayBuffer().catch(()=>{});
-  return (size*8)/((performance.now()-t0)/1000*1e6);
 }
 
-let celebrationTimer = null;
-let confettiFrame = null;
+async function runTest(){
+  goBtn.disabled = true;
+  dlVal.innerHTML = '—<small>Mbps</small>';
+  ulVal.innerHTML = '—<small>Mbps</small>';
+  pingVal.innerHTML = '—<small>ms</small>';
+  setGauge(0);
 
-function celebrateFastResult() {
-  const canvas = document.getElementById("confettiCanvas");
-  const celebration = document.getElementById("celebration");
-  const ctx = canvas?.getContext("2d");
-  if (!canvas || !celebration || !ctx) return;
+  gaugeStatus.textContent = 'Checking latency…';
+  const ping = await measurePing();
+  pingVal.innerHTML = ping!==null ? Math.max(1, Math.round(ping))+'<small>ms</small>' : '<span style="font-size:13px;">n/a</span>';
 
-  if (celebrationTimer) clearTimeout(celebrationTimer);
-  if (confettiFrame) cancelAnimationFrame(confettiFrame);
+  gaugeStatus.textContent = 'Testing download…';
+  const dl = await measureDownload();
+  setGauge(dl.mbps);
+  dlVal.innerHTML = dl.ok ? dl.mbps.toFixed(1)+'<small>Mbps</small>' : '<span style="font-size:13px;">Blocked</span>';
 
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  gaugeStatus.textContent = 'Testing upload…';
+  setGauge(0);
+  const ul = await measureUpload();
+  ulVal.innerHTML = ul.ok ? ul.mbps.toFixed(1)+'<small>Mbps</small>' : '<span style="font-size:13px;">Blocked</span>';
+  setGauge(dl.mbps); // leave the ring reflecting the download headline number
 
-  canvas.width = width * dpr;
-  canvas.height = height * dpr;
-  canvas.style.width = width + "px";
-  canvas.style.height = height + "px";
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  const colors = ["#007aff","#34c759","#ff9f0a","#ff375f","#af52de","#5ac8fa","#ffd60a"];
-  const pieces = [];
-  const launchPoints = [width * .22, width * .5, width * .78];
-
-  for (let i = 0; i < 180; i++) {
-    pieces.push({
-      x: launchPoints[i % 3] + (Math.random() - .5) * 70,
-      y: height * .72 + Math.random() * 20,
-      vx: (Math.random() - .5) * 8,
-      vy: -(9 + Math.random() * 8),
-      gravity: .17 + Math.random() * .07,
-      rotation: Math.random() * Math.PI * 2,
-      spin: (Math.random() - .5) * .3,
-      w: 4 + Math.random() * 5,
-      h: 7 + Math.random() * 9,
-      life: 0,
-      maxLife: 145 + Math.random() * 60,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      circle: Math.random() > .5
-    });
+  if(!dl.ok && !ul.ok){
+    gaugeStatus.textContent = 'Blocked in this preview';
+    connNote.textContent = 'This preview sandbox blocks outbound requests to the speed-test server. Host this file on your own domain to see live results.';
+  } else {
+    gaugeStatus.textContent = 'Test complete';
   }
-
-  celebration.classList.add("show");
-
-  function frame() {
-    ctx.clearRect(0, 0, width, height);
-    let alive = false;
-
-    for (const p of pieces) {
-      if (p.life >= p.maxLife) continue;
-      alive = true;
-      p.life++;
-      p.vx *= .992;
-      p.vy += p.gravity;
-      p.x += p.vx;
-      p.y += p.vy;
-      p.rotation += p.spin;
-
-      const fadeStart = p.maxLife * .72;
-      const alpha = p.life > fadeStart
-        ? 1 - (p.life - fadeStart) / (p.maxLife - fadeStart)
-        : 1;
-
-      ctx.save();
-      ctx.globalAlpha = Math.max(0, alpha);
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rotation);
-      ctx.fillStyle = p.color;
-
-      if (p.circle) {
-        ctx.beginPath();
-        ctx.arc(0, 0, p.w * .65, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-      }
-      ctx.restore();
-    }
-
-    if (alive) confettiFrame = requestAnimationFrame(frame);
-    else {
-      ctx.clearRect(0, 0, width, height);
-      confettiFrame = null;
-    }
-  }
-
-  frame();
-
-  celebrationTimer = setTimeout(() => {
-    celebration.classList.remove("show");
-    setTimeout(() => ctx.clearRect(0, 0, width, height), 400);
-  }, 10000);
+  goBtn.disabled = false;
+  goBtn.textContent = 'Test Again';
 }
 
-async function run(){
-  els.start.disabled=true; els.again.hidden=true;
-  els.headline.textContent="Checking your connection";
-  els.subtitle.textContent="Measuring latency, then download and upload.";
-  els.status.textContent="Finding latency…";
-  showSpeed(0); setGauge(0);
-  els.ping.innerHTML='—<span class="metric-unit">ms</span>';
-  els.download.innerHTML='—<span class="metric-unit">Mbps</span>';
-  els.upload.innerHTML='—<span class="metric-unit">Mbps</span>';
-
-  try{
-    const ping=await pingTest();
-    els.ping.innerHTML=`${Math.round(ping)}<span class="metric-unit">ms</span>`;
-
-    els.status.textContent="Starting download…";
-    const d=[];
-    for(const size of sizes){
-      try{ d.push(await downloadTest(size)); }catch{}
-      if(d.length>=2 && d[d.length-1] < d[d.length-2]*.55) break;
-    }
-    if(!d.length) throw new Error("Download test unavailable");
-    const download=d.slice(-Math.min(3,d.length)).reduce((a,b)=>a+b,0)/Math.min(3,d.length);
-    els.download.innerHTML=`${download.toFixed(download>=100?0:1)}<span class="metric-unit">Mbps</span>`;
-    showSpeed(download);
-    setGauge(download, Math.max(100,download*1.25));
-
-    if (download > 50) {
-      celebrateFastResult();
-    }
-
-    els.status.textContent="Checking upload…";
-    const u=[];
-    for(const size of [1e6,5e6,10e6]){
-      try{u.push(await uploadTest(size));}catch{}
-    }
-    if(u.length){
-      const upload=u.slice(-2).reduce((a,b)=>a+b,0)/Math.min(2,u.length);
-      els.upload.innerHTML=`${upload.toFixed(upload>=100?0:1)}<span class="metric-unit">Mbps</span>`;
-    }else{
-      els.upload.innerHTML='—<span class="metric-unit">Mbps</span>';
-    }
-
-    els.headline.textContent="Your connection is ready";
-    els.subtitle.textContent="Measured from this browser over a live network connection.";
-    els.status.textContent="Complete";
-    els.again.hidden=false;
-  }catch(err){
-    console.error(err);
-    els.headline.textContent="We couldn't finish the test";
-    els.subtitle.textContent="The speed test server did not accept the browser request. Try again or check your connection.";
-    els.status.textContent="Test unavailable";
-    els.again.hidden=false;
-  }finally{
-    els.start.disabled=false;
-  }
-}
-
-els.start.addEventListener("click",run);
-els.again.addEventListener("click",run);
+goBtn.addEventListener('click', runTest);
+loadMeta();
 </script>
 </body>
 </html>
