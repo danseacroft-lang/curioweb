@@ -155,8 +155,8 @@
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
   p.sub{
-    text-align:center; color:var(--ink-1); font-size:clamp(16px,2.2vw,19px);
-    max-width:560px; margin:0 auto 52px; font-weight:400; line-height:1.5;
+    text-align:center; color:var(--ink-1); font-size:clamp(13px,1.6vw,14.5px);
+    max-width:600px; margin:0 auto 52px; font-weight:400; line-height:1.55;
   }
 
   /* ---------- Glass card base ---------- */
@@ -183,10 +183,16 @@
   .gauge-unit{color:var(--ink-1); font-size:14px; font-weight:600; margin-top:2px;}
   .gauge-status{color:var(--ink-2); font-size:13px; margin-top:6px; height:16px;}
 
+  /* One shared size for every pill button/control in the speed card (Start
+     Test, Share results, the test-length dropdown): 46px tall, 15px/600
+     type, so they read as one consistent row instead of mismatched sizes. */
+  /* Fixed width too, not just height — 220px fits "Share results" (the
+     widest of the three, icon included) with room to spare, so Start Test,
+     Share results, and the test-length dropdown all match exactly. */
   .go-btn{
-    appearance:none; border:none; cursor:pointer; font:inherit;
-    font-weight:600; font-size:16px; letter-spacing:-0.008em; color:#fff;
-    padding:14px 38px; border-radius:999px; margin-top:6px;
+    appearance:none; border:none; cursor:pointer; font:inherit; text-align:center;
+    font-weight:600; font-size:15px; letter-spacing:-0.008em; color:#fff;
+    width:220px; padding:13px 26px; min-height:46px; border-radius:999px; margin-top:6px;
     background:linear-gradient(135deg,var(--blue),var(--violet));
     box-shadow:0 1px 0 rgba(255,255,255,0.3) inset, 0 8px 20px -6px rgba(0,0,0,0.35);
     transition:transform .15s ease, box-shadow .15s ease, opacity .2s ease;
@@ -211,9 +217,9 @@
   .mode-select-wrap{margin:0 0 18px; display:flex; justify-content:center;}
   .mode-select{
     appearance:none; -webkit-appearance:none; cursor:pointer; font:inherit;
-    font-size:13.5px; font-weight:600; color:var(--ink-0);
-    padding:9px 34px 9px 16px; border-radius:999px;
-    background:var(--glass) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23a9adb8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>') no-repeat right 12px center;
+    font-size:15px; font-weight:600; color:var(--ink-0);
+    width:220px; padding:13px 40px 13px 26px; min-height:46px; border-radius:999px;
+    background:var(--glass) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23a9adb8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>') no-repeat right 16px center;
     background-size:14px; border:1px solid var(--glass-border);
     -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
     transition:background-color .2s ease, border-color .2s ease;
@@ -222,6 +228,16 @@
   .mode-select:focus-visible{outline:2px solid var(--blue); outline-offset:2px;}
   .mode-select:disabled{opacity:.5; cursor:default;}
   .mode-select option{background:var(--bg-1); color:var(--ink-0);}
+
+  /* Postcode entry — same pill as the dropdown/buttons, but a plain text
+     field: no dropdown-arrow background, centered placeholder text. */
+  .pill-input{
+    background-image:none; background-color:var(--glass);
+    padding:13px 26px; text-align:center; cursor:text;
+  }
+  .pill-input::placeholder{color:var(--ink-2); font-weight:500;}
+  .pill-input:focus{outline:none; border-color:var(--blue); background-color:rgba(127,127,127,0.10);}
+  #postcodeNote{text-align:center; margin-bottom:18px;}
 
   .conn-row{
     margin-top:16px; display:flex; flex-wrap:wrap; justify-content:center; gap:10px 28px;
@@ -272,8 +288,8 @@
   .spark circle{fill:var(--cyan);}
 
   .share-btn{
-    appearance:none; cursor:pointer; font:inherit; display:inline-flex; align-items:center; gap:8px;
-    margin-top:20px; padding:11px 22px; border-radius:999px; font-size:14px; font-weight:700;
+    appearance:none; cursor:pointer; font:inherit; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    width:220px; margin-top:20px; padding:13px 26px; min-height:46px; border-radius:999px; font-size:15px; font-weight:600;
     color:var(--ink-0); background:var(--glass); border:1px solid var(--glass-border);
     transition:background .2s ease, transform .15s ease, opacity .2s ease;
   }
@@ -295,14 +311,18 @@
 
   /* ---------- Promo tile (VPN slot) — a placeholder for a later, finalized build ---------- */
   .promo-tile{
-    background:linear-gradient(160deg, rgba(76,134,255,0.22), rgba(12,24,48,0.55) 70%);
+    /* The glow lives right here now, as a second background layer painted
+       in the same paint step as the base gradient — not a separate
+       absolutely-positioned element with its own backdrop-filter/compositing
+       layer, which is what produced the hard-edged box earlier. Keeps
+       shifting all the way to 100% — a gradient that goes flat partway
+       through reads as a solid pasted block, most visible on dark backdrops
+       where that flat fill is nearly indistinguishable from the page itself. */
+    background:
+      radial-gradient(circle at 88% 96%, rgba(120,180,255,0.32), rgba(120,180,255,0) 45%),
+      linear-gradient(160deg, rgba(76,134,255,0.22), rgba(20,32,58,0.50) 65%, rgba(9,14,26,0.38) 100%);
     border-color:rgba(130,175,255,0.30);
     padding-bottom:64px;
-  }
-  .promo-tile .promo-glow{
-    position:absolute; right:-40px; bottom:-40px; width:190px; height:190px; z-index:0;
-    background:radial-gradient(circle at 35% 35%, rgba(120,180,255,0.35), transparent 70%);
-    pointer-events:none;
   }
   .promo-tile p{margin-bottom:16px;}
   .promo-btn{
@@ -314,22 +334,28 @@
   }
   .promo-btn:hover{transform:translateY(-1px);}
   .promo-btn:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+  /* A small solid badge rather than a faded watermark — full opacity, its
+     own pill background, so it reads as a normal logo instead of blending
+     into (and getting lost in) the tile's gradient underneath it. */
   .promo-logo{
-    position:absolute; right:20px; bottom:18px; z-index:1;
-    display:flex; align-items:center; gap:6px; color:#bcd4ff; opacity:0.55;
+    position:absolute; right:16px; bottom:16px; z-index:1;
+    display:flex; align-items:center; gap:6px;
+    padding:6px 12px 6px 8px; border-radius:999px;
+    background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.22);
+    -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+    color:#eef4ff;
   }
-  .promo-logo svg{width:16px; height:16px;}
+  .promo-logo svg{width:15px; height:15px; flex-shrink:0;}
   .promo-logo span{font-size:11.5px; font-weight:700; letter-spacing:0.01em;}
 
   /* Cloudflare 1.1.1.1 variant — same treatment, brand-orange instead of brand-blue */
   .promo-tile-cf{
-    background:linear-gradient(160deg, rgba(246,130,31,0.20), rgba(40,20,8,0.55) 70%);
+    background:
+      radial-gradient(circle at 88% 96%, rgba(255,150,60,0.32), rgba(255,150,60,0) 45%),
+      linear-gradient(160deg, rgba(246,130,31,0.20), rgba(50,26,10,0.50) 65%, rgba(18,10,6,0.38) 100%);
     border-color:rgba(255,175,110,0.30);
   }
-  .promo-tile-cf .promo-glow{
-    background:radial-gradient(circle at 35% 35%, rgba(255,150,60,0.35), transparent 70%);
-  }
-  .promo-tile-cf .promo-logo{color:#ffcda0;}
+  .promo-tile-cf .promo-logo{color:#ffe4c7; background:rgba(255,255,255,0.14); border-color:rgba(255,255,255,0.22);}
   .promo-btn-cf{background:linear-gradient(135deg,#F6821F,#C1560A);}
 
   footer{
@@ -450,7 +476,7 @@
 <main>
   <p class="eyebrow" style="text-align:center;">Internet speed, measured beautifully</p>
   <h1 class="title">Is your connection<br>future-proof?</h1>
-  <p class="sub">Let's find out — one tap for real download and upload throughput, straight from your browser.</p>
+  <p class="sub">Ensure no other devices are using the internet (eg: TV streaming, downloading) before you start. For a more accurate indication of the speed delivered by your provider, use a laptop or computer connected directly (via Ethernet) to the router.</p>
 
   <section class="glass tilt speed-card" id="speedCard">
     <div class="gauge-wrap">
@@ -470,14 +496,19 @@
       </div>
     </div>
 
-    <div class="mode-select-wrap">
+    <div class="mode-select-wrap" id="postcodeWrap">
+      <input class="mode-select pill-input" id="postcodeInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Enter your postcode" aria-label="Postcode">
+    </div>
+    <p class="conn-note" id="postcodeNote">Press Enter to continue to the test.</p>
+
+    <div class="mode-select-wrap" id="modeSelectWrap" style="display:none;">
       <select class="mode-select" id="modeSelect" aria-label="Test length">
         <option value="full" selected>Full test</option>
         <option value="quick">Quick test</option>
       </select>
     </div>
 
-    <button class="go-btn" id="goBtn">Start Test</button>
+    <button class="go-btn" id="goBtn" style="display:none;" disabled>Start Test</button>
 
     <div class="stats-row">
       <div class="glass stat-tile">
@@ -533,7 +564,6 @@
       <ul class="history-list" id="historyList"></ul>
     </div>
     <div class="glass tilt feat promo-tile">
-      <div class="promo-glow" aria-hidden="true"></div>
       <div class="icon" style="background:linear-gradient(135deg,#4C86FF,#1E3A6E);">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3 5 6v5c0 5 3 8.5 7 10 4-1.5 7-5 7-10V6l-7-3Z"/><path d="M9 12l2 2 4-4"/></svg>
       </div>
@@ -546,7 +576,6 @@
       </div>
     </div>
     <div class="glass tilt feat promo-tile promo-tile-cf">
-      <div class="promo-glow" aria-hidden="true"></div>
       <div class="icon" style="background:linear-gradient(135deg,#F6821F,#C1560A);">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M6 17a4 4 0 0 1 .3-7.97 5.5 5.5 0 0 1 10.6-1.4A4.5 4.5 0 0 1 17.5 17H6Z"/></svg>
       </div>
@@ -863,6 +892,27 @@ const serverVal = document.getElementById('serverVal');
 const avgCompareNote = document.getElementById('avgCompareNote');
 const CIRC = 754;
 const GAUGE_MAX = 200; // Mbps at full ring
+
+// ---- Postcode gate ----
+// The test controls stay hidden until a postcode is entered and confirmed
+// with Enter — only then do the test-length dropdown and Start Test button
+// appear.
+const postcodeWrap = document.getElementById('postcodeWrap');
+const postcodeInput = document.getElementById('postcodeInput');
+const postcodeNote = document.getElementById('postcodeNote');
+const modeSelectWrap = document.getElementById('modeSelectWrap');
+
+postcodeInput.addEventListener('keydown', e=>{
+  if(e.key !== 'Enter') return;
+  e.preventDefault();
+  const postcode = postcodeInput.value.trim();
+  if(!postcode) return;
+  postcodeWrap.style.display = 'none';
+  postcodeNote.style.display = 'none';
+  modeSelectWrap.style.display = 'flex';
+  goBtn.style.display = 'inline-block';
+  goBtn.disabled = false;
+});
 
 // ---- Quick / Full test-length dropdown ----
 // Quick skips the largest download chunk and halves the upload payload —
