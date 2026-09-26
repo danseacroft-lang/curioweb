@@ -178,6 +178,24 @@
   }
   .conn-row b{color:var(--ink-0); font-weight:600;}
   .conn-note{color:var(--ink-2); font-size:12px; margin-top:10px;}
+  .kbd{
+    display:inline-block; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600;
+    padding:1px 6px; border-radius:6px; background:var(--glass); border:1px solid var(--glass-border); color:var(--ink-1);
+  }
+
+  .tier-row{margin-top:22px; display:flex; justify-content:center;}
+  .tier-badge{
+    display:inline-flex; align-items:center; gap:7px; font-size:13.5px; font-weight:650;
+    padding:9px 18px; border-radius:999px; color:var(--ink-0);
+    background:var(--glass); border:1px solid var(--glass-border);
+  }
+  .tier-badge .tdot{width:8px;height:8px;border-radius:50%;}
+
+  .history-row{margin-top:16px; display:flex; align-items:center; gap:12px; justify-content:center;}
+  .history-lbl{font-size:12px; color:var(--ink-2); font-weight:600; white-space:nowrap;}
+  #sparkline{width:120px; height:26px; overflow:visible;}
+  #sparkline polyline{fill:none; stroke:var(--cyan); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+  #sparkline circle{fill:var(--cyan);}
 
   .share-btn{
     appearance:none; cursor:pointer; font:inherit; display:inline-flex; align-items:center; gap:8px;
@@ -344,11 +362,22 @@
       </div>
     </div>
 
+    <div class="tier-row" id="tierRow" style="display:none;">
+      <span class="tier-badge" id="tierBadge"></span>
+    </div>
+
+    <div class="history-row" id="historyRow" style="display:none;">
+      <span class="history-lbl">Recent tests</span>
+      <svg id="sparkline" viewBox="0 0 200 40" preserveAspectRatio="none"></svg>
+    </div>
+
     <div class="conn-row">
       <div>IP Address · <b id="ipVal">Detecting…</b></div>
       <div>Provider · <b id="ispVal">Detecting…</b></div>
+      <div id="connTypeRow" style="display:none;">Network · <b id="connTypeVal">—</b></div>
     </div>
     <p class="conn-note" id="connNote">Download, upload, and IP lookup all run as real network transfers from your browser.</p>
+    <p class="conn-note" style="margin-top:2px;">Press <kbd class="kbd">S</kbd> anywhere on the page to start a test.</p>
 
     <button class="share-btn" id="shareBtn" type="button" disabled>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6 15.4 6.4M8.6 13.4l6.8 4.2"/></svg>
@@ -728,6 +757,11 @@ async function runTest(){
   };
   shareBtn.disabled = !(dl.ok || ul.ok);
 
+  if(dl.ok){
+    updateTierBadge(dl.mbps);
+    recordHistory(dl.mbps);
+  }
+
   if(dl.ok && dl.mbps >= 50){
     launchConfetti();
     document.getElementById('overlay-celebrate').classList.add('open');
@@ -821,6 +855,85 @@ function launchConfetti(){
   }
   requestAnimationFrame(frame);
 }
+
+// ---- Tier badge: what this speed is actually good for ----
+const tierRow = document.getElementById('tierRow');
+const tierBadge = document.getElementById('tierBadge');
+
+function updateTierBadge(mbps){
+  let label, color;
+  if(mbps < 10){ label='Good for browsing & email'; color='#f5a623'; }
+  else if(mbps < 25){ label='Great for HD streaming'; color='var(--cyan)'; }
+  else if(mbps < 50){ label='Great for 4K streaming'; color='var(--blue)'; }
+  else { label='Built for 4K, gaming & multiple devices'; color='var(--mint)'; }
+  tierBadge.innerHTML = `<span class="tdot" style="background:${color};box-shadow:0 0 8px ${color};"></span>${label}`;
+  tierRow.style.display = 'flex';
+}
+
+// ---- Recent test history + sparkline ----
+const historyRow = document.getElementById('historyRow');
+const sparkline = document.getElementById('sparkline');
+
+function loadHistory(){
+  try{ return JSON.parse(localStorage.getItem('hypaspeed-history') || '[]'); }
+  catch(e){ return []; }
+}
+
+function recordHistory(mbps){
+  let hist = loadHistory();
+  hist.push(mbps);
+  if(hist.length > 8) hist = hist.slice(-8);
+  try{ localStorage.setItem('hypaspeed-history', JSON.stringify(hist)); }catch(e){ /* not persisted */ }
+  drawSparkline(hist);
+}
+
+function drawSparkline(hist){
+  if(!hist || hist.length < 2){
+    historyRow.style.display = hist && hist.length ? 'flex' : 'none';
+    return;
+  }
+  historyRow.style.display = 'flex';
+  const max = Math.max(...hist, 1);
+  const min = Math.min(...hist, 0);
+  const range = Math.max(max-min, 1);
+  const w = 200, h = 40, pad = 4;
+  const pts = hist.map((v,i)=>{
+    const x = pad + (i/(hist.length-1))*(w-pad*2);
+    const y = h-pad - ((v-min)/range)*(h-pad*2);
+    return [x,y];
+  });
+  const line = pts.map(p=>p.join(',')).join(' ');
+  const last = pts[pts.length-1];
+  sparkline.innerHTML = `<polyline points="${line}"/><circle cx="${last[0]}" cy="${last[1]}" r="3"/>`;
+}
+
+drawSparkline(loadHistory());
+
+// ---- Network Information API badge (real-time, no network call needed) ----
+const connTypeRow = document.getElementById('connTypeRow');
+const connTypeVal = document.getElementById('connTypeVal');
+const netInfo = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+function renderNetInfo(){
+  if(!netInfo) return;
+  const typeLabels = { 'wifi':'Wi-Fi', 'cellular':'Cellular', 'ethernet':'Ethernet', 'none':'Offline', 'unknown':'Unknown' };
+  const label = typeLabels[netInfo.type] || (netInfo.effectiveType ? netInfo.effectiveType.toUpperCase() : 'Unknown');
+  connTypeVal.textContent = label + (netInfo.saveData ? ' · Data Saver on' : '');
+  connTypeRow.style.display = 'block';
+}
+if(netInfo){
+  renderNetInfo();
+  netInfo.addEventListener && netInfo.addEventListener('change', renderNetInfo);
+}
+
+// ---- Keyboard shortcut: press "S" anywhere to start a test ----
+document.addEventListener('keydown', e=>{
+  const tag = (e.target && e.target.tagName) || '';
+  if(tag==='INPUT' || tag==='TEXTAREA') return;
+  if((e.key==='s' || e.key==='S') && !e.metaKey && !e.ctrlKey && !e.altKey && !goBtn.disabled){
+    runTest();
+  }
+});
 </script>
 </body>
 </html>
