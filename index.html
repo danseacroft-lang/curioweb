@@ -190,18 +190,14 @@
   }
   .tier-badge .tdot{width:8px;height:8px;border-radius:50%;}
 
-  #sparkline{width:100%; height:34px; margin-top:2px;}
-  #sparkline polyline{fill:none; stroke:var(--cyan); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
-  #sparkline circle{fill:var(--cyan);}
   .history-list{list-style:none; margin:12px 0 0; padding:0;}
   .history-list li{
-    display:flex; justify-content:space-between; gap:10px; font-size:12.5px; color:var(--ink-1);
-    padding:7px 0; border-top:1px solid var(--hairline);
+    font-size:13.5px; color:var(--ink-1); line-height:1.5;
+    padding:9px 0; border-top:1px solid var(--hairline);
   }
   .history-list li:first-child{border-top:none;}
-  .history-list .h-time{color:var(--ink-2);}
-  .history-list .h-vals{color:var(--ink-0); font-weight:600; font-family:'JetBrains Mono',monospace; font-size:12px;}
-  .history-empty{font-size:14px; color:var(--ink-1); line-height:1.55; margin:0;}
+  .history-list li b{color:var(--ink-0); font-weight:650;}
+  .history-empty{border-top:none;}
 
   .share-btn{
     appearance:none; cursor:pointer; font:inherit; display:inline-flex; align-items:center; gap:8px;
@@ -392,7 +388,6 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
       </div>
       <h3>Test history</h3>
-      <svg id="sparkline" viewBox="0 0 200 40" preserveAspectRatio="none"></svg>
       <ul class="history-list" id="historyList"></ul>
     </div>
     <div class="glass tilt feat">
@@ -872,8 +867,7 @@ function updateTierBadge(mbps){
   tierRow.style.display = 'flex';
 }
 
-// ---- Recent test history: sparkline + list, shown in the "Test history" tile ----
-const sparkline = document.getElementById('sparkline');
+// ---- Recent test history: plain-text list in the "Test history" tile ----
 const historyList = document.getElementById('historyList');
 
 function loadHistory(){
@@ -900,30 +894,18 @@ function relativeTime(ts){
 
 function renderHistory(hist){
   if(!hist || !hist.length){
-    sparkline.innerHTML = '';
-    historyList.innerHTML = '<li class="history-empty" style="border-top:none;">No tests yet — run one above and it\'ll show up here.</li>';
+    historyList.innerHTML = '<li class="history-empty">No tests yet — run one above and it\'ll show up here.</li>';
     return;
   }
-  const downloads = hist.map(h=>h.download);
-  const max = Math.max(...downloads, 1);
-  const min = Math.min(...downloads, 0);
-  const range = Math.max(max-min, 1);
-  const w = 200, h = 40, pad = 4;
-  if(hist.length >= 2){
-    const pts = downloads.map((v,i)=>{
-      const x = pad + (i/(downloads.length-1))*(w-pad*2);
-      const y = h-pad - ((v-min)/range)*(h-pad*2);
-      return [x,y];
-    });
-    const line = pts.map(p=>p.join(',')).join(' ');
-    const last = pts[pts.length-1];
-    sparkline.innerHTML = `<polyline points="${line}"/><circle cx="${last[0]}" cy="${last[1]}" r="3"/>`;
-  } else {
-    sparkline.innerHTML = '';
-  }
-  historyList.innerHTML = hist.slice().reverse().slice(0,5).map(h=>{
-    const ul = h.upload!=null ? `↑${h.upload.toFixed(1)}` : '↑—';
-    return `<li><span class="h-time">${relativeTime(h.ts)}</span><span class="h-vals">↓${h.download.toFixed(1)} ${ul}</span></li>`;
+  const recent = hist.slice().reverse().slice(0,5);
+  historyList.innerHTML = recent.map((h,i)=>{
+    const prefix = i===0 ? 'Last test' : relativeTime(h.ts);
+    const when = i===0 ? relativeTime(h.ts).toLowerCase() : '';
+    const upTxt = h.upload!=null ? `, up speed ${h.upload.toFixed(1)}Mbps` : '';
+    const pingTxt = h.ping!=null ? `, ${h.ping}ms ping` : '';
+    return i===0
+      ? `<li><b>${prefix}:</b> ${when}, ${h.download.toFixed(1)}Mbps down${upTxt}${pingTxt}</li>`
+      : `<li><b>${prefix}:</b> ${h.download.toFixed(1)}Mbps down${upTxt}${pingTxt}</li>`;
   }).join('');
 }
 
