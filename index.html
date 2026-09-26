@@ -95,6 +95,22 @@
   }
   .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
 
+  /* ---------- Top loading bar ---------- */
+  /* Sits above the sticky header (higher z-index), fixed to the very top of
+     the viewport, and fades in only while a test is running. */
+  #topProgress{
+    position:fixed; top:env(safe-area-inset-top,0px); left:0; right:0; height:3px;
+    z-index:60; background:transparent; opacity:0; pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  #topProgress.active{opacity:1;}
+  #topProgressFill{
+    height:100%; width:0%;
+    background:linear-gradient(90deg,var(--cyan),var(--blue),var(--violet));
+    box-shadow:0 0 8px rgba(10,132,255,0.6);
+    transition:width .25s ease;
+  }
+
   /* ---------- Nav ---------- */
   header{
     position:sticky; top:env(safe-area-inset-top,0px); z-index:40;
@@ -439,6 +455,7 @@
 </style>
 </head>
 <body>
+<div id="topProgress" aria-hidden="true"><div id="topProgressFill"></div></div>
 <div id="wallpaperLayer" aria-hidden="true"></div>
 <canvas id="confettiCanvas" aria-hidden="true"></canvas>
 
@@ -931,6 +948,24 @@ function setGauge(mbps){
   gaugeNum.textContent = mbps.toFixed(1);
 }
 
+// ---- Top loading bar ----
+// Ping gets a small head start (0→8%), download drives the bulk of the bar
+// (8→85%, matching bytes actually received against the bytes expected for
+// the chosen Quick/Full test), and upload finishes it off (85→100%).
+const topProgress = document.getElementById('topProgress');
+const topProgressFill = document.getElementById('topProgressFill');
+function setTopProgress(pct){
+  topProgressFill.style.width = Math.max(0, Math.min(100, pct)) + '%';
+}
+function showTopProgress(){
+  setTopProgress(0);
+  topProgress.classList.add('active');
+}
+function hideTopProgress(){
+  topProgress.classList.remove('active');
+  setTimeout(()=>setTopProgress(0), 300); // reset once faded out, ready for the next run
+}
+
 function randomBuffer(bytes){
   const buf = new Uint8Array(bytes);
   const CHUNK = 65536; // crypto API's per-call limit
@@ -1048,6 +1083,7 @@ async function measurePing(){
 // reading with a fraction of the data transferred.
 async function measureDownload(){
   const sizes = testMode==='quick' ? [2e6, 8e6] : [2e6, 8e6, 25e6];
+  const totalExpected = sizes.reduce((a,b)=>a+b, 0);
   let totalBytes = 0;
   const start = performance.now();
   let lastMbps = 0;
@@ -1063,6 +1099,7 @@ async function measureDownload(){
         const elapsed = (performance.now()-start)/1000;
         lastMbps = (totalBytes*8/1e6)/Math.max(elapsed,0.05);
         setGauge(lastMbps);
+        setTopProgress(8 + (totalBytes/totalExpected)*77); // download owns the 8%→85% span
       }
     }catch(err){ return {mbps:0, ok:false}; }
   }
@@ -1084,6 +1121,7 @@ function measureUpload(){
       const elapsed = (performance.now()-start)/1000;
       const mbps = (e.loaded*8/1e6)/Math.max(elapsed,0.05);
       setGauge(mbps);
+      setTopProgress(85 + (e.loaded/size)*15); // upload finishes the 85%→100% span
     };
     xhr.onload = ()=>{
       const elapsed = (performance.now()-start)/1000;
@@ -1103,11 +1141,13 @@ async function runTest(){
   jitterVal.textContent = '';
   avgCompareNote.style.display = 'none';
   setGauge(0);
+  showTopProgress();
 
   gaugeStatus.textContent = 'Checking latency…';
   const {median: ping, jitter} = await measurePing();
   pingVal.innerHTML = ping!==null ? Math.max(1, Math.round(ping))+'<small>ms</small>' : '<span style="font-size:13px;">n/a</span>';
   jitterVal.textContent = jitter!==null ? `±${Math.round(jitter)}ms jitter` : '';
+  setTopProgress(8);
 
   gaugeStatus.textContent = 'Testing download…';
   const dl = await measureDownload();
@@ -1126,6 +1166,8 @@ async function runTest(){
   } else {
     gaugeStatus.textContent = 'Test complete';
   }
+  setTopProgress(100);
+  setTimeout(hideTopProgress, 400); // let the bar visibly reach the end before fading
   goBtn.disabled = false;
   goBtn.textContent = 'Test Again';
   modeSelect.disabled = false;
