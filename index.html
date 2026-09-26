@@ -4,6 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>HypaSpeed — Internet Speed Test</title>
+<script>
+// ---- Mobile detection, run synchronously before first paint ----
+// Mobile gets the lean build: core speed-test features only, no wallpaper
+// picker and no theme chooser. Desktop gets everything. Detection combines
+// a UA check with a coarse-pointer + narrow-viewport check, so a phone held
+// sideways or an unusual UA string still lands in the right bucket.
+(function(){
+  var ua = navigator.userAgent || navigator.vendor || '';
+  var uaIsMobile = /Android|iPhone|iPad|iPod|Mobile|Windows Phone/i.test(ua);
+  var coarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+  var narrowViewport = window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
+  var isMobile = uaIsMobile || (coarsePointer && narrowViewport);
+  document.documentElement.classList.toggle('is-mobile', isMobile);
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://speed.cloudflare.com">
@@ -116,6 +131,8 @@
     transition:background .2s ease, color .2s ease;
   }
   .icon-btn:hover{background:rgba(127,127,127,0.12); color:var(--ink-0);}
+  .icon-btn:disabled{opacity:.5; cursor:default;}
+  .icon-btn:disabled:hover{background:transparent;}
   .icon-btn:focus-visible{outline:2px solid var(--blue); outline-offset:-2px;}
   .icon-group > .icon-btn + .icon-btn{border-left:1px solid var(--glass-border);}
   .icon-btn svg{width:15px; height:15px; flex-shrink:0;}
@@ -124,6 +141,9 @@
   #iconMoon{color:#9aa3e8;}
   .wallpaper-icon{color:var(--blue);}
   @media (max-width:480px){ .icon-btn .btn-label{display:none;} .icon-btn{padding:9px 12px;} }
+  /* Mobile build: no wallpaper picker, no theme chooser — core speed-test only */
+  html.is-mobile header .icon-group{display:none;} /* wallpaper + theme chooser only — the Quick/Full mode toggle is a different .icon-group, in <main>, and stays */
+  html.is-mobile #overlay-wallpaper{display:none !important;}
 
   /* ---------- Hero ---------- */
   main{max-width:1180px; margin:0 auto; padding:clamp(40px,7vw,84px) clamp(18px,4vw,44px) 100px;}
@@ -185,6 +205,23 @@
   .stat-tile .val{font-size:22px; font-weight:700; margin-top:6px; font-variant-numeric:tabular-nums; letter-spacing:-0.01em;}
   .stat-tile .val small{font-size:13px; color:var(--ink-1); font-weight:600; margin-left:3px;}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);}
+  .substat{font-size:11px; color:var(--ink-2); margin-top:3px; font-weight:500;}
+
+  /* Quick/Full test-length toggle — reuses the header icon-group look */
+  .mode-select-wrap{margin:0 0 18px; display:flex; justify-content:center;}
+  .mode-select{
+    appearance:none; -webkit-appearance:none; cursor:pointer; font:inherit;
+    font-size:13.5px; font-weight:600; color:var(--ink-0);
+    padding:9px 34px 9px 16px; border-radius:999px;
+    background:var(--glass) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23a9adb8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>') no-repeat right 12px center;
+    background-size:14px; border:1px solid var(--glass-border);
+    -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+    transition:background-color .2s ease, border-color .2s ease;
+  }
+  .mode-select:hover{background-color:rgba(127,127,127,0.12);}
+  .mode-select:focus-visible{outline:2px solid var(--blue); outline-offset:2px;}
+  .mode-select:disabled{opacity:.5; cursor:default;}
+  .mode-select option{background:var(--bg-1); color:var(--ink-0);}
 
   .conn-row{
     margin-top:16px; display:flex; flex-wrap:wrap; justify-content:center; gap:10px 28px;
@@ -220,6 +257,7 @@
     background:var(--glass); border:1px solid var(--glass-border);
   }
   .tier-badge .tdot{width:8px;height:8px;border-radius:50%;}
+  .tier-row .isp-wrap{border-bottom:none;} /* the pill itself is the affordance, skip the dotted underline here */
 
   .history-list{list-style:none; margin:12px 0 0; padding:0;}
   .history-list li{
@@ -229,6 +267,9 @@
   .history-list li:first-child{border-top:none;}
   .history-list li b{color:var(--ink-0); font-weight:700;}
   .history-empty{border-top:none;}
+  .spark{width:100%; height:34px; display:block; margin-top:2px;}
+  .spark polyline{fill:none; stroke:var(--cyan); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+  .spark circle{fill:var(--cyan);}
 
   .share-btn{
     appearance:none; cursor:pointer; font:inherit; display:inline-flex; align-items:center; gap:8px;
@@ -429,6 +470,13 @@
       </div>
     </div>
 
+    <div class="mode-select-wrap">
+      <select class="mode-select" id="modeSelect" aria-label="Test length">
+        <option value="full" selected>Full test</option>
+        <option value="quick">Quick test</option>
+      </select>
+    </div>
+
     <button class="go-btn" id="goBtn">Start Test</button>
 
     <div class="stats-row">
@@ -443,12 +491,17 @@
       <div class="glass stat-tile">
         <div class="lbl"><span class="dot"></span>Ping</div>
         <div class="val mono" id="pingVal">—<small>ms</small></div>
+        <div class="substat" id="jitterVal"></div>
       </div>
     </div>
 
     <div class="tier-row" id="tierRow" style="display:none;">
-      <span class="tier-badge" id="tierBadge"></span>
+      <span class="isp-wrap" tabindex="0">
+        <span class="tier-badge" id="tierBadge"></span>
+        <span class="isp-tooltip" id="tierTooltip"></span>
+      </span>
     </div>
+    <p class="conn-note" id="avgCompareNote" style="display:none;"></p>
 
     <div class="conn-row">
       <div>IP Address · <b id="ipVal">Detecting…</b></div>
@@ -459,6 +512,7 @@
         </span>
       </div>
       <div id="connTypeRow" style="display:none;">Network · <b id="connTypeVal">—</b></div>
+      <div id="serverRow" style="display:none;">Server · <b id="serverVal">—</b></div>
     </div>
     <p class="conn-note" id="connNote">Download, upload, and IP lookup all run as real network transfers from your browser.</p>
     <p class="conn-note" style="margin-top:2px;">Press <kbd class="kbd">S</kbd> anywhere on the page to start a test.</p>
@@ -475,6 +529,7 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
       </div>
       <h3>Test history</h3>
+      <svg class="spark" id="historySpark" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"></svg>
       <ul class="history-list" id="historyList"></ul>
     </div>
     <div class="glass tilt feat promo-tile">
@@ -526,7 +581,7 @@
   <div class="modal">
     <button class="close" data-close>✕</button>
     <h2>Get in touch</h2>
-    <p>Questions, feedback, or something's off? Send a note and your mail app will open with everything filled in.</p>
+    <p id="contactIntro">Questions, feedback, or something's off? Send a note — it goes straight to us, no mail app needed.</p>
     <form id="contactForm">
       <div class="field">
         <label for="cName">Name</label>
@@ -540,9 +595,13 @@
         <label for="cMsg">Message</label>
         <textarea id="cMsg" rows="4" required placeholder="What's on your mind?"></textarea>
       </div>
-      <button class="go-btn" type="submit">Send message</button>
-      <p class="send-note">Opens your default mail app — nothing is sent from here.</p>
+      <button class="go-btn" type="submit" id="contactSubmitBtn">Send message</button>
+      <p class="send-note" id="contactSendNote">Delivered directly to our inbox — nothing opens on your device.</p>
     </form>
+    <div id="contactSuccess" style="display:none; text-align:center;">
+      <p style="color:var(--ink-0); font-weight:600; margin-bottom:4px;">Message sent</p>
+      <p class="send-note">Thanks — we'll get back to you soon.</p>
+    </div>
   </div>
 </div>
 
@@ -606,6 +665,13 @@ document.addEventListener('keydown', e=>{
 });
 document.getElementById('logoHome').addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
 
+// ---- Mobile vs. desktop build ----
+// Set by the head script before first paint. Mobile keeps the theme's
+// automatic light/dark detection (still driven by system preference below)
+// but drops the manual toggle button and the wallpaper picker entirely —
+// core speed-test features only, per the lean mobile build.
+const isMobile = document.documentElement.classList.contains('is-mobile');
+
 // ---- Day / Night theme toggle ----
 const themeToggle = document.getElementById('themeToggle');
 const iconSun = document.getElementById('iconSun');
@@ -631,12 +697,22 @@ try{
 }
 applyTheme(initialTheme);
 
-themeToggle.addEventListener('click', ()=>{
-  const next = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
-  applyTheme(next);
-});
+// Desktop only: the button itself is hidden on mobile via CSS, but we also
+// skip wiring it up at all rather than leaving a dead listener on a hidden
+// element — mobile has no theme chooser, just the automatic light/dark above.
+if(!isMobile){
+  themeToggle.addEventListener('click', ()=>{
+    const next = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+    applyTheme(next);
+  });
+}
 
-// ---- Wallpaper picker ----
+// ---- Wallpaper picker (desktop only) ----
+// Mobile skips this whole block: no swatches are built, no picker listeners
+// are attached, and no wallpaper preference is read from storage. The CSS
+// gradient already baked into #wallpaperLayer stands as the fixed mobile
+// backdrop, so mobile still looks right with none of this code running.
+if(!isMobile){
 const WALLPAPERS = {
   aurora: { name:'Aurora', gradients:
     'radial-gradient(1300px 900px at 12% -5%, rgba(10,132,255,0.55), transparent 68%),'+
@@ -701,15 +777,65 @@ try{
   if(savedWp && WALLPAPERS[savedWp]) initialWallpaper = savedWp;
 }catch(e){ /* default stands */ }
 applyWallpaper(initialWallpaper);
+} // end desktop-only wallpaper picker block
 
-document.getElementById('contactForm').addEventListener('submit', e=>{
+// ---- Contact form: forwarded directly to danseacroft@icloud.com via ----
+// ---- FormSubmit (https://formsubmit.co) — a free form-relay service that ----
+// needs no backend or API key of our own. NOTE: FormSubmit requires a one-time
+// activation: the first real submission it relays makes it send an activation
+// link to danseacroft@icloud.com — click that once and every submission after
+// is forwarded automatically. Until activated, submissions are held, not lost.
+const contactForm = document.getElementById('contactForm');
+const contactSubmitBtn = document.getElementById('contactSubmitBtn');
+const contactSendNote = document.getElementById('contactSendNote');
+const contactSuccess = document.getElementById('contactSuccess');
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/danseacroft@icloud.com';
+
+contactForm.addEventListener('submit', async e=>{
   e.preventDefault();
   const name = document.getElementById('cName').value;
   const email = document.getElementById('cEmail').value;
   const msg = document.getElementById('cMsg').value;
-  const subject = encodeURIComponent('HypaSpeed contact — '+name);
-  const body = encodeURIComponent(msg+'\n\n— '+name+' ('+email+')');
-  window.location.href = `mailto:hello@hypaspeed.example?subject=${subject}&body=${body}`;
+
+  contactSubmitBtn.disabled = true;
+  contactSubmitBtn.textContent = 'Sending…';
+  contactSendNote.textContent = '';
+
+  try{
+    const res = await fetch(CONTACT_ENDPOINT, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify({
+        name, email, message: msg,
+        _subject: `HypaSpeed contact — ${name}`,
+        _template: 'table'
+      })
+    });
+    if(!res.ok) throw new Error('relay failed');
+
+    contactForm.style.display = 'none';
+    contactSuccess.style.display = 'block';
+    contactForm.reset();
+  }catch(err){
+    // Network/relay hiccup (or the endpoint's first-time activation step) —
+    // fall back to the mail app rather than losing the message.
+    contactSendNote.textContent = "Couldn't send directly — opening your mail app instead.";
+    const subject = encodeURIComponent('HypaSpeed contact — '+name);
+    const body = encodeURIComponent(msg+'\n\n— '+name+' ('+email+')');
+    window.location.href = `mailto:danseacroft@icloud.com?subject=${subject}&body=${body}`;
+  }finally{
+    contactSubmitBtn.disabled = false;
+    contactSubmitBtn.textContent = 'Send message';
+  }
+});
+
+// Reset the modal back to the form (rather than the success state) each time
+// it's reopened, so a second message isn't typed into a hidden form.
+document.querySelectorAll('[data-open="contact"]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    contactSuccess.style.display = 'none';
+    contactForm.style.display = 'block';
+  });
 });
 
 // ---- Speed test (real transfers via Cloudflare's public speed-test endpoints) ----
@@ -727,12 +853,27 @@ const gaugeStatus = document.getElementById('gaugeStatus');
 const dlVal = document.getElementById('dlVal');
 const ulVal = document.getElementById('ulVal');
 const pingVal = document.getElementById('pingVal');
+const jitterVal = document.getElementById('jitterVal');
 const ipVal = document.getElementById('ipVal');
 const ispVal = document.getElementById('ispVal');
 const ispTooltip = document.getElementById('ispTooltip');
 const connNote = document.getElementById('connNote');
+const serverRow = document.getElementById('serverRow');
+const serverVal = document.getElementById('serverVal');
+const avgCompareNote = document.getElementById('avgCompareNote');
 const CIRC = 754;
 const GAUGE_MAX = 200; // Mbps at full ring
+
+// ---- Quick / Full test-length dropdown ----
+// Quick skips the largest download chunk and halves the upload payload —
+// less data used, faster result, same measurement technique either way.
+let testMode = 'full';
+const modeSelect = document.getElementById('modeSelect');
+modeSelect.addEventListener('change', ()=>{ testMode = modeSelect.value; });
+
+// ---- Rough comparison baseline (static, no extra network call) ----
+// A broad, published-average figure for context only — not a live lookup.
+const AVG_DOWNLOAD_MBPS = 64;
 
 function setGauge(mbps){
   const clamped = Math.max(0, Math.min(mbps, GAUGE_MAX));
@@ -816,6 +957,17 @@ async function loadMeta(){
       lines.push('We don\'t have a profile for this specific provider, so this is the technical detail your connection reports rather than a company description.');
     }
     ispTooltip.innerHTML = lines.join('<br>');
+
+    // Which Cloudflare data center actually answered the test — useful
+    // context for why a result looks fast or slow (a distant server adds
+    // latency no ISP can fix). A few common codes get a friendly city name;
+    // anything else just shows the raw airport code, which is still meaningful.
+    const colo = meta.colo;
+    if(colo){
+      const COLO_CITIES = { LHR:'London', MAN:'Manchester', DUB:'Dublin', AMS:'Amsterdam', FRA:'Frankfurt', CDG:'Paris', MAD:'Madrid', JFK:'New York', EWR:'Newark', ORD:'Chicago', LAX:'Los Angeles', SJC:'San Jose', SEA:'Seattle', IAD:'Washington DC', ATL:'Atlanta', DFW:'Dallas', YYZ:'Toronto', SYD:'Sydney', SIN:'Singapore', NRT:'Tokyo', HKG:'Hong Kong' };
+      serverVal.textContent = COLO_CITIES[colo] ? `${COLO_CITIES[colo]} (${colo})` : colo;
+      serverRow.style.display = 'block';
+    }
   }catch(err){
     ipVal.textContent = 'Blocked in preview';
     ispVal.textContent = 'Blocked in preview';
@@ -823,7 +975,9 @@ async function loadMeta(){
   }
 }
 
-// --- Ping: median of a few tiny round trips ---
+// --- Ping: median of a few tiny round trips; jitter is the spread between ---
+// --- them (max-min) — a steadier connection has a tighter spread, which   ---
+// --- matters more than the median for calls and gaming.                  ---
 async function measurePing(){
   const samples = [];
   for(let i=0;i<4;i++){
@@ -831,15 +985,19 @@ async function measurePing(){
     try{
       await fetch(`${CF_BASE}/__down?bytes=0&cb=${Date.now()}`, {cache:'no-store'});
       samples.push(performance.now()-t0);
-    }catch(err){ return null; }
+    }catch(err){ return {median:null, jitter:null}; }
   }
-  samples.sort((a,b)=>a-b);
-  return samples[Math.floor(samples.length/2)];
+  const sorted = samples.slice().sort((a,b)=>a-b);
+  const median = sorted[Math.floor(sorted.length/2)];
+  const jitter = Math.max(...samples) - Math.min(...samples);
+  return {median, jitter};
 }
 
 // --- Download: stream increasingly large payloads, updating the gauge live ---
+// Quick mode drops the largest (25MB) chunk — enough samples for a stable
+// reading with a fraction of the data transferred.
 async function measureDownload(){
-  const sizes = [2e6, 8e6, 25e6]; // 2MB, 8MB, 25MB
+  const sizes = testMode==='quick' ? [2e6, 8e6] : [2e6, 8e6, 25e6];
   let totalBytes = 0;
   const start = performance.now();
   let lastMbps = 0;
@@ -862,9 +1020,10 @@ async function measureDownload(){
 }
 
 // --- Upload: XHR so we get real upload-progress events for the live gauge ---
+// Quick mode sends a smaller payload — less data, same technique.
 function measureUpload(){
   return new Promise(resolve=>{
-    const size = 12e6; // 12MB
+    const size = testMode==='quick' ? 5e6 : 12e6; // 5MB quick / 12MB full
     let payload;
     try{ payload = randomBuffer(size); }catch(e){ resolve({mbps:0, ok:false}); return; }
     const xhr = new XMLHttpRequest();
@@ -887,14 +1046,18 @@ function measureUpload(){
 
 async function runTest(){
   goBtn.disabled = true;
+  modeSelect.disabled = true;
   dlVal.innerHTML = '—<small>Mbps</small>';
   ulVal.innerHTML = '—<small>Mbps</small>';
   pingVal.innerHTML = '—<small>ms</small>';
+  jitterVal.textContent = '';
+  avgCompareNote.style.display = 'none';
   setGauge(0);
 
   gaugeStatus.textContent = 'Checking latency…';
-  const ping = await measurePing();
+  const {median: ping, jitter} = await measurePing();
   pingVal.innerHTML = ping!==null ? Math.max(1, Math.round(ping))+'<small>ms</small>' : '<span style="font-size:13px;">n/a</span>';
+  jitterVal.textContent = jitter!==null ? `±${Math.round(jitter)}ms jitter` : '';
 
   gaugeStatus.textContent = 'Testing download…';
   const dl = await measureDownload();
@@ -915,17 +1078,26 @@ async function runTest(){
   }
   goBtn.disabled = false;
   goBtn.textContent = 'Test Again';
+  modeSelect.disabled = false;
 
   lastResults = {
     download: dl.ok ? dl.mbps : null,
     upload: ul.ok ? ul.mbps : null,
-    ping: ping!==null ? Math.round(ping) : null
+    ping: ping!==null ? Math.round(ping) : null,
+    jitter: jitter!==null ? Math.round(jitter) : null
   };
   shareBtn.disabled = !(dl.ok || ul.ok);
 
   if(dl.ok){
     updateTierBadge(dl.mbps);
     recordHistory(dl.mbps, ul.ok ? ul.mbps : null, ping!==null ? Math.round(ping) : null);
+
+    // Static comparison line — no extra network call, just context for the number.
+    const diff = Math.round(((dl.mbps - AVG_DOWNLOAD_MBPS) / AVG_DOWNLOAD_MBPS) * 100);
+    avgCompareNote.textContent = diff >= 0
+      ? `${diff}% faster than a typical broadband connection (~${AVG_DOWNLOAD_MBPS} Mbps).`
+      : `${Math.abs(diff)}% slower than a typical broadband connection (~${AVG_DOWNLOAD_MBPS} Mbps).`;
+    avgCompareNote.style.display = 'block';
   }
 
   if(dl.ok && dl.mbps >= 50){
@@ -956,14 +1128,27 @@ function resultsText(){
   return `My HypaSpeed results: ${parts.join(' · ')}`;
 }
 
+// A link that re-opens this page with the result baked into the query
+// string (?d=&u=&p=), so whoever opens it sees the same numbers pre-filled
+// without either side needing an account or a server round-trip.
+function buildShareUrl(){
+  const r = lastResults || {};
+  const params = new URLSearchParams();
+  if(r.download!=null) params.set('d', r.download.toFixed(1));
+  if(r.upload!=null) params.set('u', r.upload.toFixed(1));
+  if(r.ping!=null) params.set('p', r.ping);
+  return `${location.origin}${location.pathname}?${params.toString()}`;
+}
+
 shareBtn.addEventListener('click', async ()=>{
   const text = resultsText();
+  const url = buildShareUrl();
   if(navigator.share){
-    try{ await navigator.share({ title:'HypaSpeed results', text }); return; }
+    try{ await navigator.share({ title:'HypaSpeed results', text, url }); return; }
     catch(err){ /* user cancelled or share failed — fall through to clipboard */ }
   }
   try{
-    await navigator.clipboard.writeText(text);
+    await navigator.clipboard.writeText(`${text}\n${url}`);
     shareBtnLabel.textContent = 'Copied!';
   }catch(err){
     shareBtnLabel.textContent = text;
@@ -1025,16 +1210,46 @@ function launchConfetti(){
 // ---- Tier badge: what this speed is actually good for ----
 const tierRow = document.getElementById('tierRow');
 const tierBadge = document.getElementById('tierBadge');
+const tierTooltip = document.getElementById('tierTooltip');
 
 function updateTierBadge(mbps){
-  let label, color;
-  if(mbps < 10){ label='Good for browsing & email'; color='#f5a623'; }
-  else if(mbps < 25){ label='Great for HD streaming'; color='var(--cyan)'; }
-  else if(mbps < 50){ label='Great for 4K streaming'; color='var(--blue)'; }
-  else { label='Built for 4K, gaming & multiple devices'; color='var(--mint)'; }
+  let label, color, detail;
+  if(mbps < 10){
+    label='Good for browsing & email'; color='#f5a623';
+    detail='Fine for web browsing, email, and music streaming. HD video and video calls may buffer or drop quality.';
+  } else if(mbps < 25){
+    label='Great for HD streaming'; color='var(--cyan)';
+    detail='Comfortable for one HD (1080p) stream, video calls, and browsing at the same time.';
+  } else if(mbps < 50){
+    label='Great for 4K streaming'; color='var(--blue)';
+    detail='Handles a 4K stream on its own, or several HD streams and calls across a household at once.';
+  } else {
+    label='Built for 4K, gaming & multiple devices'; color='var(--mint)';
+    detail='Plenty of headroom for multiple 4K streams, online gaming, and several devices working at once.';
+  }
   tierBadge.innerHTML = `<span class="tdot" style="background:${color};box-shadow:0 0 8px ${color};"></span>${label}`;
+  tierTooltip.innerHTML = `<b>${label}</b>${detail}`;
   tierRow.style.display = 'flex';
 }
+
+// ---- Shared result: someone can open this page with ?d=&u=&p= from a ----
+// friend's "Share results" link and see their numbers pre-filled, no ----
+// server or account involved — it's just read from the URL once, on load.
+(function showSharedResultIfAny(){
+  const params = new URLSearchParams(location.search);
+  if(!params.has('d')) return;
+  const d = parseFloat(params.get('d'));
+  if(isNaN(d)) return;
+  const u = params.has('u') ? parseFloat(params.get('u')) : null;
+  const p = params.has('p') ? parseInt(params.get('p'), 10) : null;
+  dlVal.innerHTML = d.toFixed(1)+'<small>Mbps</small>';
+  if(u!=null && !isNaN(u)) ulVal.innerHTML = u.toFixed(1)+'<small>Mbps</small>';
+  if(p!=null && !isNaN(p)) pingVal.innerHTML = p+'<small>ms</small>';
+  setGauge(d);
+  updateTierBadge(d);
+  gaugeStatus.textContent = 'Shared result';
+  connNote.textContent = "Someone shared this result with you — press Start Test to measure your own connection.";
+})();
 
 // ---- Recent test history: plain-text list in the "Test history" tile ----
 const historyList = document.getElementById('historyList');
@@ -1070,6 +1285,7 @@ function relativeTime(ts){
 function renderHistory(hist){
   if(!hist || !hist.length){
     historyList.innerHTML = '<li class="history-empty">No tests yet — run one above and it\'ll show up here.</li>';
+    historySpark.innerHTML = '';
     return;
   }
   const recent = hist.slice().reverse().slice(0,5);
@@ -1082,6 +1298,26 @@ function renderHistory(hist){
       ? `<li><b>${prefix}:</b> ${when}, ${h.download.toFixed(1)}Mbps down${upTxt}${pingTxt}</li>`
       : `<li><b>${prefix}:</b> ${h.download.toFixed(1)}Mbps down${upTxt}${pingTxt}</li>`;
   }).join('');
+  renderSparkline(hist);
+}
+
+// A tiny inline-SVG trend line of past download speeds — no charting
+// library, just a polyline plotted from the same numbers already in
+// localStorage. Skips drawing entirely with fewer than 2 points.
+const historySpark = document.getElementById('historySpark');
+function renderSparkline(hist){
+  const points = hist.slice(-8).map(h=>h.download);
+  if(points.length < 2){ historySpark.innerHTML = ''; return; }
+  const max = Math.max(...points), min = Math.min(...points);
+  const range = max - min || 1;
+  const coords = points.map((v,i)=>{
+    const x = (i/(points.length-1)) * 100;
+    const y = 32 - ((v-min)/range) * 28; // 3px top/bottom padding in a 34-tall viewBox
+    return [x,y];
+  });
+  const linePoints = coords.map(c=>c.join(',')).join(' ');
+  const [lastX,lastY] = coords[coords.length-1];
+  historySpark.innerHTML = `<polyline points="${linePoints}"/><circle cx="${lastX}" cy="${lastY}" r="2.6"/>`;
 }
 
 renderHistory(loadHistory());
