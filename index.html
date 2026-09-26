@@ -661,6 +661,48 @@ function randomBuffer(bytes){
   return buf;
 }
 
+// --- A short, factual line for well-known providers, matched against the ---
+// --- ASN organization string. Anything not on this list falls back to the ---
+// --- verifiable technical fields instead of a guessed description.       ---
+const KNOWN_PROVIDERS = [
+  { match:['bt-','british telecom','bt group'], desc:'BT is a British telecoms and broadband provider headquartered in London, UK.' },
+  { match:['virgin media'], desc:'Virgin Media is a British broadband, TV and mobile provider headquartered in Reading, UK.' },
+  { match:['sky uk','sky broadband','sky-uk'], desc:'Sky is a British broadcasting and broadband provider headquartered in London, UK.' },
+  { match:['talktalk'], desc:'TalkTalk is a British broadband and telecoms provider headquartered in Salford, UK.' },
+  { match:['vodafone'], desc:'Vodafone is a British multinational telecoms company headquartered in Newbury, UK, operating across Europe and Africa.' },
+  { match:['everything everywhere','ee limited'], desc:'EE is a British mobile and broadband provider headquartered in London, UK, owned by BT Group.' },
+  { match:['hutchison 3g','three uk'], desc:'Three is a British mobile network operator headquartered in Reading, UK.' },
+  { match:['telefonica uk','o2 uk'], desc:'O2 is a British mobile network operator headquartered in Slough, UK, part of Virgin Media O2.' },
+  { match:['plusnet'], desc:'Plusnet is a British broadband provider headquartered in Sheffield, UK, owned by BT Group.' },
+  { match:['zen internet'], desc:'Zen Internet is an independent British broadband provider headquartered in Rochdale, UK.' },
+  { match:['hyperoptic'], desc:'Hyperoptic is a British full-fibre broadband provider headquartered in London, UK.' },
+  { match:['community fibre'], desc:'Community Fibre is a British full-fibre broadband provider headquartered in London, UK.' },
+  { match:['comcast','xfinity'], desc:'Comcast, operating as Xfinity, is an American telecoms company headquartered in Philadelphia, Pennsylvania.' },
+  { match:['at&t','att-internet'], desc:'AT&T is an American multinational telecoms company headquartered in Dallas, Texas.' },
+  { match:['verizon'], desc:'Verizon is an American multinational telecoms company headquartered in New York City, New York.' },
+  { match:['t-mobile'], desc:'T-Mobile US is an American mobile network operator headquartered in Bellevue, Washington, majority-owned by Deutsche Telekom.' },
+  { match:['charter communications','spectrum'], desc:'Spectrum, operated by Charter Communications, is an American telecoms provider headquartered in Stamford, Connecticut.' },
+  { match:['deutsche telekom'], desc:'Deutsche Telekom is a German telecoms company headquartered in Bonn, Germany.' },
+  { match:['orange s.a','orange communications'], desc:'Orange is a French multinational telecoms company headquartered in Paris, France.' },
+  { match:['telefonica','movistar'], desc:'Telefónica is a Spanish multinational telecoms company headquartered in Madrid, Spain.' },
+  { match:['china telecom'], desc:'China Telecom is a Chinese state-owned telecoms company headquartered in Beijing, China.' },
+  { match:['ntt communications','nippon telegraph'], desc:'NTT is a Japanese multinational telecoms company headquartered in Tokyo, Japan.' },
+  { match:['telstra'], desc:'Telstra is an Australian telecoms company headquartered in Melbourne, Australia.' },
+  { match:['rogers communications'], desc:'Rogers Communications is a Canadian telecoms company headquartered in Toronto, Canada.' },
+  { match:['bell canada','bce inc'], desc:'Bell Canada is a Canadian telecoms company headquartered in Montreal, Canada.' },
+  { match:['amazon.com','amazon technologies'], desc:'This network belongs to Amazon Web Services, a cloud platform headquartered in Seattle, Washington — likely a VPN, proxy, or cloud server rather than a home connection.' },
+  { match:['microsoft corporation','microsoft azure'], desc:'This network belongs to Microsoft Azure, a cloud platform headquartered in Redmond, Washington — likely a VPN, proxy, or cloud server rather than a home connection.' },
+  { match:['cloudflare'], desc:'This network belongs to Cloudflare, a web infrastructure and security company headquartered in San Francisco, California.' },
+  { match:['digitalocean'], desc:'This network belongs to DigitalOcean, a cloud hosting provider headquartered in New York City — likely a VPN, proxy, or cloud server rather than a home connection.' }
+];
+
+function describeProvider(orgName){
+  if(!orgName) return null;
+  const needle = orgName.toLowerCase();
+  const hit = KNOWN_PROVIDERS.find(p => p.match.some(m => needle.includes(m)));
+  return hit ? hit.desc : null;
+}
+
 // --- IP / ISP lookup ---
 async function loadMeta(){
   try{
@@ -671,14 +713,20 @@ async function loadMeta(){
     const provider = meta.asOrganization || meta.asOrg || meta.isp;
     ispVal.textContent = provider ? `${provider}${meta.country ? ' · '+meta.country : ''}` : 'Unknown';
 
-    // Tooltip only ever shows real fields this lookup actually returned — no invented facts.
+    // Prefer a real, factual description for recognized providers. For anyone
+    // not on that list, fall back to the verifiable technical fields rather
+    // than guessing details about a company we can't confirm.
     const asn = meta.asn || meta.asnNumber;
+    const known = describeProvider(provider);
     const lines = [];
     if(provider) lines.push(`<b>${provider}</b>`);
-    if(asn) lines.push(`Network ASN${String(asn).startsWith('AS') ? '' : ' AS'}${asn}`);
-    if(meta.country) lines.push(`Region: ${meta.country}`);
-    if(meta.colo) lines.push(`Nearest edge node: ${meta.colo}`);
-    lines.push('This is what your connection identifies itself as to the network — not a description of the company itself.');
+    if(known){
+      lines.push(known);
+    } else {
+      if(asn) lines.push(`Network ASN${String(asn).startsWith('AS') ? '' : ' AS'}${asn}`);
+      if(meta.country) lines.push(`Region: ${meta.country}`);
+      lines.push('We don\'t have a profile for this specific provider, so this is the technical detail your connection reports rather than a company description.');
+    }
     ispTooltip.innerHTML = lines.join('<br>');
   }catch(err){
     ipVal.textContent = 'Blocked in preview';
@@ -904,8 +952,14 @@ function updateTierBadge(mbps){
 const historyList = document.getElementById('historyList');
 
 function loadHistory(){
-  try{ return JSON.parse(localStorage.getItem('hypaspeed-history') || '[]'); }
-  catch(e){ return []; }
+  try{
+    const raw = JSON.parse(localStorage.getItem('hypaspeed-history') || '[]');
+    if(!Array.isArray(raw)) return [];
+    // Defends against entries saved by an older version of this page (a plain
+    // number rather than {ts, download, upload, ping}), which would otherwise
+    // silently break rendering for anyone upgrading from an earlier download.
+    return raw.filter(h => h && typeof h === 'object' && typeof h.download === 'number' && !isNaN(h.download));
+  }catch(e){ return []; }
 }
 
 function recordHistory(download, upload, ping){
