@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy Policy &amp; Terms of Service — HypaSpeed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<style>
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0; background:#ffffff; color:#000000;
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column; align-items:center;
+    padding:clamp(24px,5vw,56px) 20px;
+  }
+
+  .home-btn{
+    appearance:none; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    font:inherit; font-size:14px; font-weight:600; color:#000000;
+    padding:10px 20px; border-radius:999px; border:1px solid #d8d8d8;
+    background:#ffffff; cursor:pointer; margin-bottom:28px;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .home-btn:hover{background:#f5f5f5; border-color:#bdbdbd;}
+  .home-btn:focus-visible{outline:2px solid #000000; outline-offset:2px;}
+  .home-btn svg{width:14px; height:14px;}
+
+  h1{
+    font-size:clamp(22px,3.2vw,28px); font-weight:700; letter-spacing:-0.01em;
+    margin:0 0 6px; text-align:center; color:#000000;
+  }
+  .updated{
+    font-size:13px; color:#666666; margin:0 0 24px; text-align:center;
+  }
+  .alpha-note{
+    max-width:640px; width:100%; margin:0 0 20px; padding:12px 16px;
+    background:#fafafa; border:1px solid #e2e2e2; border-radius:10px;
+    font-size:13px; line-height:1.55; color:#333333; text-align:left;
+  }
+  .alpha-note b{color:#000000;}
+
+  .section-label{
+    width:100%; max-width:640px;
+    font-size:12.5px; font-weight:700; color:#666666;
+    text-transform:uppercase; letter-spacing:0.04em;
+    margin:0 0 8px; text-align:left;
+  }
+  .policy-box + .section-label{margin-top:28px;}
+
+  /* The scrollable box: this is the only thing that scrolls — the outer
+     page itself stays put, per the brief. Each document gets its own box. */
+  .policy-box{
+    width:100%; max-width:640px; height:min(50vh,480px);
+    overflow-y:auto; overflow-x:hidden;
+    background:#ffffff; border:1px solid #dcdcdc; border-radius:14px;
+    padding:28px clamp(20px,4vw,36px);
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  .policy-box h2{
+    font-size:16px; font-weight:700; color:#000000; margin:26px 0 8px;
+  }
+  .policy-box h2:first-child{margin-top:0;}
+  .policy-box p, .policy-box li{
+    font-size:14px; line-height:1.65; color:#000000; margin:0 0 12px;
+  }
+  .policy-box ul{margin:0 0 12px; padding-left:20px;}
+  .policy-box strong{font-weight:700;}
+
+  /* A visible, plain scrollbar — this page intentionally skips the rest of
+     the site's styling, so the default browser scrollbar is left mostly
+     alone, just tidied up a little on WebKit browsers. */
+  .policy-box::-webkit-scrollbar{width:10px;}
+  .policy-box::-webkit-scrollbar-track{background:#f2f2f2; border-radius:8px;}
+  .policy-box::-webkit-scrollbar-thumb{background:#c4c4c4; border-radius:8px;}
+  .policy-box::-webkit-scrollbar-thumb:hover{background:#a8a8a8;}
+
+  footer{
+    margin-top:24px; font-size:12px; color:#999999; text-align:center;
+  }
+</style>
+</head>
+<body>
+
+  <a class="home-btn" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    Home
+  </a>
+
+  <h1>Privacy Policy &amp; Terms of Service</h1>
+  <p class="updated">Last updated: 26 September 2026</p>
+
+  <div class="alpha-note">
+    <b>Alpha notice:</b> HypaSpeed is currently in early alpha development. Both documents below are placeholders written for development purposes only — they do not reflect final legal review and should not be relied upon. Finished, legally-reviewed documents will replace these before any public launch.
+  </div>
+
+  <p class="section-label">Privacy Policy</p>
+  <div class="policy-box" tabindex="0" aria-label="Privacy policy, scrollable">
+
+    <h2>1. Overview</h2>
+    <p>HypaSpeed ("we", "us", "our") provides a browser-based internet speed test. This policy explains what information is collected when you use the site, why it's collected, and what choices you have. This is a draft document produced during early development and is subject to change.</p>
+
+    <h2>2. Information We Collect</h2>
+    <p>When you run a speed test, the following information is processed:</p>
+    <ul>
+      <li><strong>Network performance data</strong> — download speed, upload speed, ping, and jitter, measured directly by your browser during the test.</li>
+      <li><strong>IP address and network details</strong> — your public IP address, approximate ISP/network provider, country, and the Cloudflare data center that served your test, retrieved to display connection context.</li>
+      <li><strong>Device and connection type</strong> — where available from your browser, general information such as Wi-Fi/cellular/ethernet connection type.</li>
+      <li><strong>Contact form submissions</strong> — if you use the "Get in touch" form, we collect the name, email address, and message you provide.</li>
+    </ul>
+
+    <h2>3. How We Use This Information</h2>
+    <p>Information collected is used solely to:</p>
+    <ul>
+      <li>Run and display the results of your speed test;</li>
+      <li>Show connection context (such as ISP name and server location) alongside your results;</li>
+      <li>Respond to messages submitted through the contact form;</li>
+      <li>Improve the reliability and accuracy of the testing tool during development.</li>
+    </ul>
+    <p>We do not sell your information, and we do not use it for advertising or profiling.</p>
+
+    <h2>4. Local Storage</h2>
+    <p>HypaSpeed stores a small amount of information directly in your browser's local storage, including your recent test history, theme preference, and wallpaper choice. This data stays on your device, is never transmitted to us, and can be cleared at any time by clearing your browser's site data.</p>
+
+    <h2>5. Third-Party Services</h2>
+    <p>To operate, HypaSpeed relies on the following third-party services:</p>
+    <ul>
+      <li><strong>Cloudflare</strong> — used to measure download/upload throughput and to look up IP and network information. Cloudflare's own privacy practices apply to data processed through their speed-test infrastructure.</li>
+      <li><strong>FormSubmit</strong> — used to relay contact form submissions by email. Messages you submit are processed by FormSubmit before reaching us.</li>
+    </ul>
+
+    <h2>6. Data Retention</h2>
+    <p>Speed test results and IP lookups are not stored on our servers — they are displayed to you directly and are not retained by HypaSpeed beyond your session, except for the history kept locally in your own browser. Contact form messages are retained only as long as necessary to respond to your enquiry.</p>
+
+    <h2>7. Your Rights</h2>
+    <p>Depending on your location, you may have rights to access, correct, or request deletion of personal data we hold about you (such as a contact form submission). Since this is an alpha-stage placeholder policy, please treat any such request informally by getting in touch — a formal process will be documented in the final policy.</p>
+
+    <h2>8. Cookies</h2>
+    <p>HypaSpeed does not currently use tracking or advertising cookies. Only browser local storage (see Section 4) is used, which is not a cookie and is not shared with third parties.</p>
+
+    <h2>9. Changes to This Policy</h2>
+    <p>As HypaSpeed moves from alpha to a public release, this policy will be reviewed and replaced with a complete, finalized version. Continued use of the site after changes are posted constitutes acceptance of the revised policy.</p>
+
+    <h2>10. Contact</h2>
+    <p>Questions about this policy can be sent via the contact form on the homepage.</p>
+
+  </div>
+
+  <p class="section-label">Terms of Service</p>
+  <div class="policy-box" tabindex="0" aria-label="Terms of service, scrollable">
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using HypaSpeed (the "Service"), you agree to be bound by these Terms of Service. If you do not agree, please do not use the Service. HypaSpeed is currently in alpha development, and these terms are a placeholder draft, subject to change without notice.</p>
+
+    <h2>2. Description of Service</h2>
+    <p>HypaSpeed provides a free, browser-based tool for measuring internet connection download speed, upload speed, ping, and jitter. Results are provided for informational purposes only and are not guaranteed to be fully accurate, continuous, or free of error, particularly during this alpha development stage.</p>
+
+    <h2>3. No Warranty</h2>
+    <p>The Service is provided "as is" and "as available", without warranties of any kind, whether express or implied, including but not limited to accuracy, reliability, or fitness for a particular purpose. As an alpha-stage product, features may change, break, or be removed at any time without notice.</p>
+
+    <h2>4. Acceptable Use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Use the Service in any way that could damage, disable, or impair its operation, or the servers and networks it relies on;</li>
+      <li>Attempt to gain unauthorized access to any part of the Service;</li>
+      <li>Use automated means (bots, scripts, scrapers) to repeatedly run tests in a way that places excessive load on the Service or its third-party providers;</li>
+      <li>Use the Service for any unlawful purpose.</li>
+    </ul>
+
+    <h2>5. Third-Party Services</h2>
+    <p>HypaSpeed relies on third-party infrastructure (including Cloudflare, for network measurement, and FormSubmit, for contact form delivery) to operate. We are not responsible for the availability, accuracy, or performance of these third-party services, and your use of the Service is also subject to their respective terms.</p>
+
+    <h2>6. Intellectual Property</h2>
+    <p>The HypaSpeed name, design, and branding are the property of HypaSpeed. This placeholder document does not grant any license to use HypaSpeed's branding, code, or content outside of normal use of the Service.</p>
+
+    <h2>7. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, HypaSpeed shall not be liable for any indirect, incidental, or consequential damages arising from your use of, or inability to use, the Service, including reliance on any speed test result it produces.</p>
+
+    <h2>8. Changes to the Service and Terms</h2>
+    <p>As an alpha-stage product, HypaSpeed's features and these Terms may change frequently as development continues. A finalized version of these Terms will be published ahead of any public launch.</p>
+
+    <h2>9. Termination</h2>
+    <p>We reserve the right to suspend or discontinue the Service, in whole or in part, at any time, without notice, particularly during this early development phase.</p>
+
+    <h2>10. Contact</h2>
+    <p>Questions about these Terms can be sent via the contact form on the homepage.</p>
+
+  </div>
+
+  <footer>This is placeholder content for alpha development and is not final or legally-binding.</footer>
+
+</body>
+</html>
