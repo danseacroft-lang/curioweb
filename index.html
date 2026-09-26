@@ -177,6 +177,22 @@
   }
   .conn-row b{color:var(--ink-0); font-weight:600;}
   .conn-note{color:var(--ink-2); font-size:12px; margin-top:10px;}
+
+  .isp-wrap{position:relative; display:inline-block; cursor:help; border-bottom:1px dotted var(--ink-2);}
+  .isp-tooltip{
+    position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%) translateY(4px);
+    width:max-content; max-width:240px; padding:12px 14px; border-radius:14px; text-align:left;
+    background:var(--modal-bg); border:1px solid var(--glass-border);
+    -webkit-backdrop-filter:blur(24px); backdrop-filter:blur(24px);
+    box-shadow:0 20px 40px -16px rgba(0,0,0,0.5);
+    font-size:12.5px; line-height:1.55; font-weight:400; color:var(--ink-1);
+    opacity:0; pointer-events:none; transition:opacity .18s ease, transform .18s ease; z-index:50;
+  }
+  .isp-tooltip b{display:block; color:var(--ink-0); font-size:13px; margin-bottom:4px;}
+  .isp-wrap:hover .isp-tooltip, .isp-wrap:focus-visible .isp-tooltip{
+    opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto;
+  }
+  @media (max-width:480px){ .isp-tooltip{left:0; transform:translateX(0) translateY(4px);} .isp-wrap:hover .isp-tooltip, .isp-wrap:focus-visible .isp-tooltip{transform:translateX(0) translateY(0);} }
   .kbd{
     display:inline-block; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600;
     padding:1px 6px; border-radius:6px; background:var(--glass); border:1px solid var(--glass-border); color:var(--ink-1);
@@ -370,7 +386,12 @@
 
     <div class="conn-row">
       <div>IP Address · <b id="ipVal">Detecting…</b></div>
-      <div>Provider · <b id="ispVal">Detecting…</b></div>
+      <div>Provider ·
+        <span class="isp-wrap" tabindex="0">
+          <b id="ispVal">Detecting…</b>
+          <span class="isp-tooltip" id="ispTooltip">Looking up network details…</span>
+        </span>
+      </div>
       <div id="connTypeRow" style="display:none;">Network · <b id="connTypeVal">—</b></div>
     </div>
     <p class="conn-note" id="connNote">Download, upload, and IP lookup all run as real network transfers from your browser.</p>
@@ -620,6 +641,7 @@ const ulVal = document.getElementById('ulVal');
 const pingVal = document.getElementById('pingVal');
 const ipVal = document.getElementById('ipVal');
 const ispVal = document.getElementById('ispVal');
+const ispTooltip = document.getElementById('ispTooltip');
 const connNote = document.getElementById('connNote');
 const CIRC = 754;
 const GAUGE_MAX = 200; // Mbps at full ring
@@ -648,9 +670,20 @@ async function loadMeta(){
     ipVal.textContent = meta.clientIp || meta.clientIP || 'Unknown';
     const provider = meta.asOrganization || meta.asOrg || meta.isp;
     ispVal.textContent = provider ? `${provider}${meta.country ? ' · '+meta.country : ''}` : 'Unknown';
+
+    // Tooltip only ever shows real fields this lookup actually returned — no invented facts.
+    const asn = meta.asn || meta.asnNumber;
+    const lines = [];
+    if(provider) lines.push(`<b>${provider}</b>`);
+    if(asn) lines.push(`Network ASN${String(asn).startsWith('AS') ? '' : ' AS'}${asn}`);
+    if(meta.country) lines.push(`Region: ${meta.country}`);
+    if(meta.colo) lines.push(`Nearest edge node: ${meta.colo}`);
+    lines.push('This is what your connection identifies itself as to the network — not a description of the company itself.');
+    ispTooltip.innerHTML = lines.join('<br>');
   }catch(err){
     ipVal.textContent = 'Blocked in preview';
     ispVal.textContent = 'Blocked in preview';
+    ispTooltip.innerHTML = 'Network details aren\'t available in this preview sandbox — they\'ll show once this page is hosted for real.';
   }
 }
 
