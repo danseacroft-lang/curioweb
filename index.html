@@ -6,7 +6,11 @@
 <title>HypaSpeed — Internet Speed Test</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://speed.cloudflare.com">
+<!-- Fonts load non-blocking: the page paints immediately in the system-font
+     fallback stack below, then swaps to Inter/JetBrains Mono once fetched. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet"></noscript>
 <style>
   :root{
     --bg-0:#08080b; --bg-1:#0d0e13; --bg-2:#121319;
@@ -53,13 +57,12 @@
     --hairline: rgba(255,255,255,0.08); --input-bg: rgba(255,255,255,0.05); --input-border: rgba(255,255,255,0.14);
     --track: rgba(255,255,255,0.08); --title-a:#ffffff; --title-b:#aeb4c4;
   }
-  body{transition:color .4s ease;}
-  #wallpaperLayer{transition:background-color .4s ease, background-image .6s ease;}
   *{box-sizing:border-box;}
   html,body{height:100%;}
   html{scroll-padding-top:env(safe-area-inset-top,0px); -webkit-text-size-adjust:100%;}
   #wallpaperLayer{
     position:fixed; inset:0; z-index:-1; background-color:var(--bg-0); background-repeat:no-repeat;
+    transition:background-color .4s ease, background-image .6s ease;
     background-image:
       radial-gradient(1300px 900px at 12% -5%, rgba(10,132,255,0.55), transparent 68%),
       radial-gradient(1300px 950px at 105% 8%, rgba(138,92,255,0.50), transparent 65%),
@@ -67,7 +70,7 @@
   }
   body{
     margin:0; background:transparent;
-    color:var(--ink-0);
+    color:var(--ink-0); transition:color .4s ease;
     font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;
     -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     text-rendering:optimizeLegibility;
@@ -83,8 +86,8 @@
     display:flex; align-items:center; justify-content:space-between;
     padding:14px clamp(18px,4vw,44px);
     background:var(--header-bg);
-    -webkit-backdrop-filter:blur(20px) saturate(160%);
-    backdrop-filter:blur(20px) saturate(160%);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
+    backdrop-filter:blur(16px) saturate(160%);
     border-bottom:1px solid var(--hairline);
   }
   .brand{display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none;}
@@ -129,8 +132,8 @@
     position:relative; border-radius:var(--radius-lg);
     background:var(--glass);
     border:1px solid var(--glass-border);
-    -webkit-backdrop-filter:blur(24px) saturate(180%);
-    backdrop-filter:blur(24px) saturate(180%);
+    -webkit-backdrop-filter:blur(18px) saturate(180%);
+    backdrop-filter:blur(18px) saturate(180%);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 24px 48px -24px rgba(0,0,0,0.5);
     overflow:hidden;
   }
@@ -183,7 +186,7 @@
     position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%) translateY(4px);
     width:max-content; max-width:240px; padding:12px 14px; border-radius:14px; text-align:left;
     background:var(--modal-bg); border:1px solid var(--glass-border);
-    -webkit-backdrop-filter:blur(24px); backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px);
     box-shadow:0 20px 40px -16px rgba(0,0,0,0.5);
     font-size:12.5px; line-height:1.55; font-weight:400; color:var(--ink-1);
     opacity:0; pointer-events:none; transition:opacity .18s ease, transform .18s ease; z-index:50;
@@ -200,7 +203,7 @@
 
   .tier-row{margin-top:22px; display:flex; justify-content:center;}
   .tier-badge{
-    display:inline-flex; align-items:center; gap:7px; font-size:13.5px; font-weight:650;
+    display:inline-flex; align-items:center; gap:7px; font-size:13.5px; font-weight:700;
     padding:9px 18px; border-radius:999px; color:var(--ink-0);
     background:var(--glass); border:1px solid var(--glass-border);
   }
@@ -212,12 +215,12 @@
     padding:9px 0; border-top:1px solid var(--hairline);
   }
   .history-list li:first-child{border-top:none;}
-  .history-list li b{color:var(--ink-0); font-weight:650;}
+  .history-list li b{color:var(--ink-0); font-weight:700;}
   .history-empty{border-top:none;}
 
   .share-btn{
     appearance:none; cursor:pointer; font:inherit; display:inline-flex; align-items:center; gap:8px;
-    margin-top:20px; padding:11px 22px; border-radius:999px; font-size:14px; font-weight:650;
+    margin-top:20px; padding:11px 22px; border-radius:999px; font-size:14px; font-weight:700;
     color:var(--ink-0); background:var(--glass); border:1px solid var(--glass-border);
     transition:background .2s ease, transform .15s ease, opacity .2s ease;
   }
@@ -234,7 +237,7 @@
   @media (max-width:760px){.feat-grid{grid-template-columns:1fr;}}
   .feat{padding:26px 24px; border-radius:var(--radius-md);}
   .feat .icon{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
-  .feat h3{font-size:16.5px; font-weight:650; margin:0 0 6px; letter-spacing:-0.01em;}
+  .feat h3{font-size:16.5px; font-weight:700; margin:0 0 6px; letter-spacing:-0.01em;}
   .feat p{font-size:14px; color:var(--ink-1); line-height:1.55; margin:0;}
 
   footer{
@@ -256,13 +259,13 @@
     border-radius:26px; padding:34px 30px;
     background:var(--modal-bg);
     border:1px solid var(--glass-border);
-    -webkit-backdrop-filter:blur(34px) saturate(180%);
-    backdrop-filter:blur(34px) saturate(180%);
+    -webkit-backdrop-filter:blur(26px) saturate(180%);
+    backdrop-filter:blur(26px) saturate(180%);
     box-shadow:0 1px 0 rgba(255,255,255,0.15) inset, 0 40px 80px -20px rgba(0,0,0,0.7);
     transform:scale(.92) translateY(14px); transition:transform .32s cubic-bezier(.2,.9,.25,1);
   }
   .overlay.open .modal{transform:scale(1) translateY(0);}
-  .modal h2{font-size:22px; font-weight:750; margin:0 0 12px; letter-spacing:-0.02em;}
+  .modal h2{font-size:22px; font-weight:800; margin:0 0 12px; letter-spacing:-0.02em;}
   .modal p{color:var(--ink-1); font-size:14.5px; line-height:1.6; margin:0 0 12px;}
   .modal .close{
     position:absolute; top:16px; right:16px; width:30px; height:30px; border-radius:50%;
@@ -295,7 +298,7 @@
   }
   .wall-swatch.active .check{display:flex;}
   .wall-swatch .wname{
-    position:absolute; left:10px; bottom:8px; font-size:12.5px; font-weight:650; color:#fff;
+    position:absolute; left:10px; bottom:8px; font-size:12.5px; font-weight:700; color:#fff;
     text-shadow:0 1px 4px rgba(0,0,0,0.5);
   }
   .wall-swatch:focus-visible{outline:2px solid var(--blue); outline-offset:2px;}
@@ -328,11 +331,11 @@
   <nav class="links">
     <button data-open="about">About</button>
     <button data-open="contact">Contact</button>
-    <button class="icon-btn" id="wallpaperBtn" type="button" data-open="wallpaper" aria-haspopup="dialog">
+    <button class="icon-btn" id="wallpaperBtn" type="button" data-open="wallpaper" aria-haspopup="dialog" aria-label="Choose wallpaper">
       <svg class="wallpaper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="15" rx="3"/><circle cx="8.5" cy="9.5" r="1.6" fill="currentColor" stroke="none"/><path d="M21 15l-5.5-5-6 6M12.5 19l-3-3-6.5 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span class="btn-label">Wallpaper</span>
     </button>
-    <button class="icon-btn" id="themeToggle" type="button" aria-pressed="false">
+    <button class="icon-btn" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch between day and night theme">
       <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
       <svg id="iconMoon" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2Z"/></svg>
       <span class="btn-label" id="themeLabel">Night</span>
@@ -489,13 +492,18 @@
 </div>
 
 <script>
-// ---- Subtle tilt on .tilt elements ----
+// ---- Subtle tilt on .tilt elements (rAF-throttled to avoid layout thrash) ----
 document.querySelectorAll('.tilt').forEach(el=>{
+  let pending = null;
   el.addEventListener('mousemove', e=>{
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
-    el.style.setProperty('--ry', ((px-0.5)*5)+'deg');
-    el.style.setProperty('--rx', ((0.5-py)*5)+'deg');
+    if(pending) return;
+    pending = requestAnimationFrame(()=>{
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
+      el.style.setProperty('--ry', ((px-0.5)*5)+'deg');
+      el.style.setProperty('--rx', ((0.5-py)*5)+'deg');
+      pending = null;
+    });
   });
   el.addEventListener('mouseleave', ()=>{
     el.style.setProperty('--rx','0deg'); el.style.setProperty('--ry','0deg');
@@ -514,7 +522,12 @@ document.querySelectorAll('.overlay').forEach(ov=>{
   ov.querySelector('[data-close]').addEventListener('click', ()=>ov.classList.remove('open'));
 });
 document.addEventListener('keydown', e=>{
-  if(e.key==='Escape') document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));
+  if(e.key==='Escape'){ document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open')); return; }
+  const tag = (e.target && e.target.tagName) || '';
+  if(tag==='INPUT' || tag==='TEXTAREA') return;
+  if((e.key==='s' || e.key==='S') && !e.metaKey && !e.ctrlKey && !e.altKey && !goBtn.disabled){
+    runTest();
+  }
 });
 document.getElementById('logoHome').addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
 
@@ -1015,14 +1028,6 @@ if(netInfo){
   netInfo.addEventListener && netInfo.addEventListener('change', renderNetInfo);
 }
 
-// ---- Keyboard shortcut: press "S" anywhere to start a test ----
-document.addEventListener('keydown', e=>{
-  const tag = (e.target && e.target.tagName) || '';
-  if(tag==='INPUT' || tag==='TEXTAREA') return;
-  if((e.key==='s' || e.key==='S') && !e.metaKey && !e.ctrlKey && !e.altKey && !goBtn.disabled){
-    runTest();
-  }
-});
 </script>
 </body>
 </html>
