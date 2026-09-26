@@ -179,6 +179,20 @@
   .conn-row b{color:var(--ink-0); font-weight:600;}
   .conn-note{color:var(--ink-2); font-size:12px; margin-top:10px;}
 
+  .share-btn{
+    appearance:none; cursor:pointer; font:inherit; display:inline-flex; align-items:center; gap:8px;
+    margin-top:20px; padding:11px 22px; border-radius:999px; font-size:14px; font-weight:650;
+    color:var(--ink-0); background:var(--glass); border:1px solid var(--glass-border);
+    transition:background .2s ease, transform .15s ease, opacity .2s ease;
+  }
+  .share-btn svg{width:16px;height:16px;}
+  .share-btn:hover:not(:disabled){background:var(--glass-border); transform:translateY(-1px);}
+  .share-btn:disabled{opacity:.4; cursor:default;}
+
+  #confettiCanvas{position:fixed; inset:0; z-index:90; pointer-events:none;}
+
+  .celebrate-emoji{font-size:44px; line-height:1; margin-bottom:6px;}
+
   /* feature tiles */
   .feat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px;}
   @media (max-width:760px){.feat-grid{grid-template-columns:1fr;}}
@@ -259,6 +273,7 @@
 </head>
 <body>
 <div id="wallpaperLayer" aria-hidden="true"></div>
+<canvas id="confettiCanvas" aria-hidden="true"></canvas>
 
 <header>
   <div class="brand" id="logoHome">
@@ -334,6 +349,11 @@
       <div>Provider · <b id="ispVal">Detecting…</b></div>
     </div>
     <p class="conn-note" id="connNote">Download, upload, and IP lookup all run as real network transfers from your browser.</p>
+
+    <button class="share-btn" id="shareBtn" type="button" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6 15.4 6.4M8.6 13.4l6.8 4.2"/></svg>
+      <span id="shareBtnLabel">Share results</span>
+    </button>
   </section>
 
   <div class="feat-grid">
@@ -408,6 +428,16 @@
     <h2>Wallpaper</h2>
     <p>Set the backdrop behind the glass — it shows through every panel on the page.</p>
     <div class="wall-grid" id="wallGrid"></div>
+  </div>
+</div>
+
+<!-- Celebration modal -->
+<div class="overlay" id="overlay-celebrate">
+  <div class="modal" style="text-align:center;" role="dialog" aria-label="Great result">
+    <button class="close" data-close>✕</button>
+    <div class="celebrate-emoji">🎉</div>
+    <h2>Nice speed!</h2>
+    <p>Your speed results allow you to watch 4K movies, send emails, stream music and lots more!</p>
   </div>
 </div>
 
@@ -690,10 +720,107 @@ async function runTest(){
   }
   goBtn.disabled = false;
   goBtn.textContent = 'Test Again';
+
+  lastResults = {
+    download: dl.ok ? dl.mbps : null,
+    upload: ul.ok ? ul.mbps : null,
+    ping: ping!==null ? Math.round(ping) : null
+  };
+  shareBtn.disabled = !(dl.ok || ul.ok);
+
+  if(dl.ok && dl.mbps >= 50){
+    launchConfetti();
+    document.getElementById('overlay-celebrate').classList.add('open');
+    clearTimeout(celebrateTimer);
+    celebrateTimer = setTimeout(()=>{
+      document.getElementById('overlay-celebrate').classList.remove('open');
+    }, 10000);
+  }
 }
 
 goBtn.addEventListener('click', runTest);
 loadMeta();
+
+// ---- Share results ----
+let lastResults = null;
+let celebrateTimer = null;
+const shareBtn = document.getElementById('shareBtn');
+const shareBtnLabel = document.getElementById('shareBtnLabel');
+
+function resultsText(){
+  const r = lastResults || {};
+  const parts = [];
+  if(r.download!=null) parts.push(`↓ ${r.download.toFixed(1)} Mbps`);
+  if(r.upload!=null) parts.push(`↑ ${r.upload.toFixed(1)} Mbps`);
+  if(r.ping!=null) parts.push(`${r.ping} ms ping`);
+  return `My HypaSpeed results: ${parts.join(' · ')}`;
+}
+
+shareBtn.addEventListener('click', async ()=>{
+  const text = resultsText();
+  if(navigator.share){
+    try{ await navigator.share({ title:'HypaSpeed results', text }); return; }
+    catch(err){ /* user cancelled or share failed — fall through to clipboard */ }
+  }
+  try{
+    await navigator.clipboard.writeText(text);
+    shareBtnLabel.textContent = 'Copied!';
+  }catch(err){
+    shareBtnLabel.textContent = text;
+  }
+  setTimeout(()=>{ shareBtnLabel.textContent = 'Share results'; }, 2200);
+});
+
+// ---- Confetti ----
+function launchConfetti(){
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion) return;
+
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const colors = ['#0a84ff','#8a5cff','#33d1ff','#33e0a1','#f5a623'];
+  const count = 140;
+  const particles = [];
+  for(let i=0;i<count;i++){
+    particles.push({
+      x: Math.random()*canvas.width,
+      y: -20 - Math.random()*canvas.height*0.4,
+      w: 6+Math.random()*6,
+      h: 8+Math.random()*10,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      vy: 2+Math.random()*3,
+      vx: (Math.random()-0.5)*2,
+      rot: Math.random()*360,
+      vr: (Math.random()-0.5)*10
+    });
+  }
+
+  const start = performance.now();
+  const duration = 3400;
+
+  function frame(now){
+    const elapsed = now-start;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+    });
+    if(elapsed < duration){
+      requestAnimationFrame(frame);
+    } else {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
+  }
+  requestAnimationFrame(frame);
+}
 </script>
 </body>
 </html>
