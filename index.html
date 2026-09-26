@@ -12,7 +12,6 @@
     --bg-0:#08080b; --bg-1:#0d0e13; --bg-2:#121319;
     --glass: rgba(255,255,255,0.06);
     --glass-border: rgba(255,255,255,0.14);
-    --glass-hi: rgba(255,255,255,0.30);
     --ink-0:#f5f6f8; --ink-1:#a9adb8; --ink-2:#6d7180;
     --blue:#0a84ff; --violet:#8a5cff; --cyan:#33d1ff; --mint:#33e0a1;
     --header-bg: rgba(10,10,14,0.55);
@@ -60,11 +59,11 @@
   html,body{height:100%;}
   html{scroll-padding-top:env(safe-area-inset-top,0px); -webkit-text-size-adjust:100%;}
   #wallpaperLayer{
-    position:fixed; inset:0; z-index:-1; background-color:var(--bg-0);
+    position:fixed; inset:0; z-index:-1; background-color:var(--bg-0); background-repeat:no-repeat;
     background-image:
-      radial-gradient(900px 600px at 15% -10%, rgba(10,132,255,0.20), transparent 60%),
-      radial-gradient(900px 700px at 110% 10%, rgba(138,92,255,0.18), transparent 55%),
-      radial-gradient(700px 500px at 50% 120%, rgba(51,224,161,0.10), transparent 60%);
+      radial-gradient(1300px 900px at 12% -5%, rgba(10,132,255,0.55), transparent 68%),
+      radial-gradient(1300px 950px at 105% 8%, rgba(138,92,255,0.50), transparent 65%),
+      radial-gradient(1100px 800px at 50% 115%, rgba(51,224,161,0.35), transparent 68%);
   }
   body{
     margin:0; background:transparent;
@@ -130,8 +129,8 @@
     position:relative; border-radius:var(--radius-lg);
     background:var(--glass);
     border:1px solid var(--glass-border);
-    -webkit-backdrop-filter:blur(26px) saturate(160%);
-    backdrop-filter:blur(26px) saturate(160%);
+    -webkit-backdrop-filter:blur(24px) saturate(180%);
+    backdrop-filter:blur(24px) saturate(180%);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 24px 48px -24px rgba(0,0,0,0.5);
     overflow:hidden;
   }
@@ -191,11 +190,18 @@
   }
   .tier-badge .tdot{width:8px;height:8px;border-radius:50%;}
 
-  .history-row{margin-top:16px; display:flex; align-items:center; gap:12px; justify-content:center;}
-  .history-lbl{font-size:12px; color:var(--ink-2); font-weight:600; white-space:nowrap;}
-  #sparkline{width:120px; height:26px; overflow:visible;}
+  #sparkline{width:100%; height:34px; margin-top:2px;}
   #sparkline polyline{fill:none; stroke:var(--cyan); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
   #sparkline circle{fill:var(--cyan);}
+  .history-list{list-style:none; margin:12px 0 0; padding:0;}
+  .history-list li{
+    display:flex; justify-content:space-between; gap:10px; font-size:12.5px; color:var(--ink-1);
+    padding:7px 0; border-top:1px solid var(--hairline);
+  }
+  .history-list li:first-child{border-top:none;}
+  .history-list .h-time{color:var(--ink-2);}
+  .history-list .h-vals{color:var(--ink-0); font-weight:600; font-family:'JetBrains Mono',monospace; font-size:12px;}
+  .history-empty{font-size:14px; color:var(--ink-1); line-height:1.55; margin:0;}
 
   .share-btn{
     appearance:none; cursor:pointer; font:inherit; display:inline-flex; align-items:center; gap:8px;
@@ -366,11 +372,6 @@
       <span class="tier-badge" id="tierBadge"></span>
     </div>
 
-    <div class="history-row" id="historyRow" style="display:none;">
-      <span class="history-lbl">Recent tests</span>
-      <svg id="sparkline" viewBox="0 0 200 40" preserveAspectRatio="none"></svg>
-    </div>
-
     <div class="conn-row">
       <div>IP Address · <b id="ipVal">Detecting…</b></div>
       <div>Provider · <b id="ispVal">Detecting…</b></div>
@@ -386,12 +387,13 @@
   </section>
 
   <div class="feat-grid">
-    <div class="glass tilt feat">
+    <div class="glass tilt feat" id="historyTile">
       <div class="icon" style="background:linear-gradient(135deg,#0a84ff,#33d1ff);">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v13m0 0-4-4m4 4 4-4M5 19h14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
       </div>
-      <h3>Real throughput</h3>
-      <p>Download speed comes from live transfers in your browser, not a guess.</p>
+      <h3>Test history</h3>
+      <svg id="sparkline" viewBox="0 0 200 40" preserveAspectRatio="none"></svg>
+      <ul class="history-list" id="historyList"></ul>
     </div>
     <div class="glass tilt feat">
       <div class="icon" style="background:linear-gradient(135deg,#8a5cff,#0a84ff);">
@@ -533,34 +535,34 @@ themeToggle.addEventListener('click', ()=>{
 // ---- Wallpaper picker ----
 const WALLPAPERS = {
   aurora: { name:'Aurora', gradients:
-    'radial-gradient(900px 600px at 15% -10%, rgba(10,132,255,0.20), transparent 60%),'+
-    'radial-gradient(900px 700px at 110% 10%, rgba(138,92,255,0.18), transparent 55%),'+
-    'radial-gradient(700px 500px at 50% 120%, rgba(51,224,161,0.10), transparent 60%)',
+    'radial-gradient(1300px 900px at 12% -5%, rgba(10,132,255,0.55), transparent 68%),'+
+    'radial-gradient(1300px 950px at 105% 8%, rgba(138,92,255,0.50), transparent 65%),'+
+    'radial-gradient(1100px 800px at 50% 115%, rgba(51,224,161,0.35), transparent 68%)',
     swatch:'radial-gradient(circle at 20% 10%, #2f8bff, transparent 55%), radial-gradient(circle at 90% 20%, #8a5cff, transparent 55%), radial-gradient(circle at 50% 110%, #33e0a1, transparent 60%), #0b0c11' },
   sunset: { name:'Sunset', gradients:
-    'radial-gradient(900px 600px at 10% -10%, rgba(255,140,66,0.22), transparent 60%),'+
-    'radial-gradient(900px 700px at 110% 15%, rgba(255,68,120,0.20), transparent 55%),'+
-    'radial-gradient(700px 500px at 50% 120%, rgba(255,193,7,0.12), transparent 60%)',
+    'radial-gradient(1300px 900px at 8% -5%, rgba(255,140,66,0.55), transparent 68%),'+
+    'radial-gradient(1300px 950px at 105% 12%, rgba(255,68,120,0.50), transparent 65%),'+
+    'radial-gradient(1100px 800px at 50% 115%, rgba(255,193,7,0.35), transparent 68%)',
     swatch:'radial-gradient(circle at 15% 10%, #ff8c42, transparent 55%), radial-gradient(circle at 90% 25%, #ff4478, transparent 55%), radial-gradient(circle at 50% 110%, #ffc107, transparent 60%), #150c12' },
   meadow: { name:'Meadow', gradients:
-    'radial-gradient(900px 600px at 12% -10%, rgba(52,211,153,0.20), transparent 60%),'+
-    'radial-gradient(900px 700px at 105% 10%, rgba(45,212,191,0.20), transparent 55%),'+
-    'radial-gradient(700px 500px at 50% 120%, rgba(163,230,53,0.10), transparent 60%)',
+    'radial-gradient(1300px 900px at 10% -5%, rgba(52,211,153,0.50), transparent 68%),'+
+    'radial-gradient(1300px 950px at 100% 8%, rgba(45,212,191,0.48), transparent 65%),'+
+    'radial-gradient(1100px 800px at 50% 115%, rgba(163,230,53,0.32), transparent 68%)',
     swatch:'radial-gradient(circle at 20% 15%, #34d399, transparent 55%), radial-gradient(circle at 90% 20%, #2dd4bf, transparent 55%), radial-gradient(circle at 50% 110%, #a3e635, transparent 60%), #0a1210' },
   dusk: { name:'Dusk', gradients:
-    'radial-gradient(900px 600px at 15% -10%, rgba(99,60,180,0.28), transparent 60%),'+
-    'radial-gradient(900px 700px at 105% 15%, rgba(219,39,119,0.18), transparent 55%),'+
-    'radial-gradient(700px 500px at 50% 120%, rgba(30,41,99,0.30), transparent 60%)',
+    'radial-gradient(1300px 900px at 12% -5%, rgba(99,60,180,0.60), transparent 68%),'+
+    'radial-gradient(1300px 950px at 100% 12%, rgba(219,39,119,0.50), transparent 65%),'+
+    'radial-gradient(1100px 800px at 50% 115%, rgba(30,41,99,0.55), transparent 68%)',
     swatch:'radial-gradient(circle at 20% 10%, #633cb4, transparent 55%), radial-gradient(circle at 90% 25%, #db2777, transparent 55%), radial-gradient(circle at 50% 110%, #1e2963, transparent 60%), #08060f' },
   mono: { name:'Monochrome', gradients:
-    'radial-gradient(900px 600px at 15% -10%, rgba(255,255,255,0.10), transparent 60%),'+
-    'radial-gradient(900px 700px at 105% 15%, rgba(255,255,255,0.07), transparent 55%),'+
-    'radial-gradient(700px 500px at 50% 120%, rgba(255,255,255,0.05), transparent 60%)',
+    'radial-gradient(1300px 900px at 12% -5%, rgba(255,255,255,0.22), transparent 68%),'+
+    'radial-gradient(1300px 950px at 100% 12%, rgba(255,255,255,0.16), transparent 65%),'+
+    'radial-gradient(1100px 800px at 50% 115%, rgba(255,255,255,0.12), transparent 68%)',
     swatch:'radial-gradient(circle at 20% 10%, #6b7280, transparent 55%), radial-gradient(circle at 90% 25%, #9ca3af, transparent 55%), radial-gradient(circle at 50% 110%, #4b5563, transparent 60%), #0c0d10' },
   daybreak: { name:'Daybreak', gradients:
-    'radial-gradient(900px 600px at 12% -10%, rgba(125,211,252,0.35), transparent 60%),'+
-    'radial-gradient(900px 700px at 105% 10%, rgba(253,224,71,0.25), transparent 55%),'+
-    'radial-gradient(700px 500px at 50% 120%, rgba(251,207,232,0.30), transparent 60%)',
+    'radial-gradient(1300px 900px at 10% -5%, rgba(125,211,252,0.65), transparent 68%),'+
+    'radial-gradient(1300px 950px at 100% 8%, rgba(253,224,71,0.50), transparent 65%),'+
+    'radial-gradient(1100px 800px at 50% 115%, rgba(251,207,232,0.55), transparent 68%)',
     swatch:'radial-gradient(circle at 20% 10%, #7dd3fc, transparent 55%), radial-gradient(circle at 90% 25%, #fde047, transparent 55%), radial-gradient(circle at 50% 110%, #fbcfe8, transparent 60%), #eef2f6' }
 };
 
@@ -759,7 +761,7 @@ async function runTest(){
 
   if(dl.ok){
     updateTierBadge(dl.mbps);
-    recordHistory(dl.mbps);
+    recordHistory(dl.mbps, ul.ok ? ul.mbps : null, ping!==null ? Math.round(ping) : null);
   }
 
   if(dl.ok && dl.mbps >= 50){
@@ -870,44 +872,62 @@ function updateTierBadge(mbps){
   tierRow.style.display = 'flex';
 }
 
-// ---- Recent test history + sparkline ----
-const historyRow = document.getElementById('historyRow');
+// ---- Recent test history: sparkline + list, shown in the "Test history" tile ----
 const sparkline = document.getElementById('sparkline');
+const historyList = document.getElementById('historyList');
 
 function loadHistory(){
   try{ return JSON.parse(localStorage.getItem('hypaspeed-history') || '[]'); }
   catch(e){ return []; }
 }
 
-function recordHistory(mbps){
+function recordHistory(download, upload, ping){
   let hist = loadHistory();
-  hist.push(mbps);
+  hist.push({ ts:Date.now(), download, upload, ping });
   if(hist.length > 8) hist = hist.slice(-8);
-  try{ localStorage.setItem('hypaspeed-history', JSON.stringify(hist)); }catch(e){ /* not persisted */ }
-  drawSparkline(hist);
+  try{ localStorage.setItem('hypaspeed-history', JSON.stringify(hist)); }catch(e){ /* not persisted this session */ }
+  renderHistory(hist);
 }
 
-function drawSparkline(hist){
-  if(!hist || hist.length < 2){
-    historyRow.style.display = hist && hist.length ? 'flex' : 'none';
+function relativeTime(ts){
+  const mins = Math.round((Date.now()-ts)/60000);
+  if(mins < 1) return 'Just now';
+  if(mins < 60) return `${mins}m ago`;
+  const hrs = Math.round(mins/60);
+  if(hrs < 24) return `${hrs}h ago`;
+  return `${Math.round(hrs/24)}d ago`;
+}
+
+function renderHistory(hist){
+  if(!hist || !hist.length){
+    sparkline.innerHTML = '';
+    historyList.innerHTML = '<li class="history-empty" style="border-top:none;">No tests yet — run one above and it\'ll show up here.</li>';
     return;
   }
-  historyRow.style.display = 'flex';
-  const max = Math.max(...hist, 1);
-  const min = Math.min(...hist, 0);
+  const downloads = hist.map(h=>h.download);
+  const max = Math.max(...downloads, 1);
+  const min = Math.min(...downloads, 0);
   const range = Math.max(max-min, 1);
   const w = 200, h = 40, pad = 4;
-  const pts = hist.map((v,i)=>{
-    const x = pad + (i/(hist.length-1))*(w-pad*2);
-    const y = h-pad - ((v-min)/range)*(h-pad*2);
-    return [x,y];
-  });
-  const line = pts.map(p=>p.join(',')).join(' ');
-  const last = pts[pts.length-1];
-  sparkline.innerHTML = `<polyline points="${line}"/><circle cx="${last[0]}" cy="${last[1]}" r="3"/>`;
+  if(hist.length >= 2){
+    const pts = downloads.map((v,i)=>{
+      const x = pad + (i/(downloads.length-1))*(w-pad*2);
+      const y = h-pad - ((v-min)/range)*(h-pad*2);
+      return [x,y];
+    });
+    const line = pts.map(p=>p.join(',')).join(' ');
+    const last = pts[pts.length-1];
+    sparkline.innerHTML = `<polyline points="${line}"/><circle cx="${last[0]}" cy="${last[1]}" r="3"/>`;
+  } else {
+    sparkline.innerHTML = '';
+  }
+  historyList.innerHTML = hist.slice().reverse().slice(0,5).map(h=>{
+    const ul = h.upload!=null ? `↑${h.upload.toFixed(1)}` : '↑—';
+    return `<li><span class="h-time">${relativeTime(h.ts)}</span><span class="h-vals">↓${h.download.toFixed(1)} ${ul}</span></li>`;
+  }).join('');
 }
 
-drawSparkline(loadHistory());
+renderHistory(loadHistory());
 
 // ---- Network Information API badge (real-time, no network call needed) ----
 const connTypeRow = document.getElementById('connTypeRow');
